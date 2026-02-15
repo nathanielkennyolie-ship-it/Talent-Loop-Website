@@ -83,7 +83,7 @@
                 
                 <form id="assessmentForm">
                     <!-- Question 1 -->
-                    <div class="question-slide" data-question="1">
+                    <div class="question-slide active" data-question="1">
                         <h2 class="question-title">Which statement best describes your current job search status?</h2>
                         <div class="question-options">
                             <label class="option-card"><input type="radio" name="q1" value="active" required><span class="option-content"><span class="option-title">Actively Looking</span><span class="option-desc">I am actively applying and interviewing for a new role.</span></span></label>
@@ -186,17 +186,31 @@
                         <div class="priority-info">
                             <div class="priority-badge">⚡ Optional: Get Seen First</div>
                             <p class="priority-description">Our system matches thousands of candidates to jobs daily. <strong>Priority Verification</strong> places your profile at the top of the queue for our recruiters and partner companies.</p>
-                            <p class="verification-note">This service is managed by our trusted financial partner, <strong>Quicken®</strong>, to ensure secure identity verification.</p>
+                            <div class="priority-benefits">
+                                <h4>Benefits include:</h4>
+                                <ul>
+                                    <li>✔ Top placement in recruiter searches</li>
+                                    <li>✔ 5x faster response times</li>
+                                    <li>✔ Direct matching with hiring managers</li>
+                                </ul>
+                            </div>
+                            <p class="verification-note">This service is managed by our trusted financial partner, <strong>IdentityIQ®</strong>, to ensure secure identity verification.</p>
                         </div>
                         <h3 style="margin: 2rem 0 1.5rem; text-align:center;">Would you like to fast-track your application?</h3>
                         <div class="question-options verification-options">
                             <label class="option-card priority-option">
                                 <input type="radio" name="q10" value="yes-verify" required>
-                                <span class="option-content"><span class="option-title">Yes, verify me for Priority Status</span></span>
+                                <span class="option-content">
+                                    <span class="option-title">Yes, verify me for Priority Status</span>
+                                    <span class="option-desc">Continue to our partner, <strong>IdentityIQ®</strong>, for secure verification. This gives you top placement and a 5x faster response time.</span>
+                                </span>
                             </label>
                             <label class="option-card">
                                 <input type="radio" name="q10" value="no-standard">
-                                <span class="option-content"><span class="option-title">No, I'll use the standard application</span></span>
+                                <span class="option-content">
+                                    <span class="option-title">No, I'll use the standard application</span>
+                                    <span class="option-desc">Your application will be processed in the standard queue (typically 7-10 business days for review).</span>
+                                </span>
                             </label>
                         </div>
                     </div>
@@ -219,23 +233,37 @@
     </section>
 
     <!-- Opt-Out Warning Modal -->
-    <div id="optOutModal" class="modal-overlay">
+    <div id="optOutModal" class="modal-overlay" style="display: none;">
         <div class="modal-content">
-            <h3>Are You Sure?</h3>
-            <p>By opting out, your application will be placed in the standard queue and may take 7-10 business days to be reviewed. <strong>Priority candidates are seen 5x faster.</strong></p>
-            <p>This is your last chance to get priority status and fast-track your job search.</p>
+            <span class="close-modal" id="closeModal">&times;</span>
+            <div class="modal-header">
+                <div class="modal-icon">⚠️</div>
+                <h3 class="modal-title">Are You Absolutely Sure?</h3>
+            </div>
+            <p class="modal-body">
+                Standard applicants often wait <strong>7-10 business days</strong> for a review. By choosing Priority Verification, your profile gets reviewed by our team within <strong>24 hours</strong>.
+            </p>
+            <div class="modal-highlight">
+                <p><strong>Over 85% of verified candidates are matched with an opportunity.</strong></p>
+            </div>
             <div class="modal-actions">
-                <button id="confirmOptIn" class="btn btn-primary">Yes, I Want Priority!</button>
-                <button id="confirmOptOut" class="btn btn-secondary">No, Continue with Standard</button>
+                <button id="confirmOptOut" class="btn btn-secondary">No Thanks, I'll Wait</button>
+                <button id="confirmOptIn" class="btn btn-primary btn-large">Yes, Fast-Track My Application!</button>
             </div>
         </div>
     </div>
+
 
     <footer class="footer">
          <div class="container footer-grid">
             <div class="footer-col">
                 <div class="footer-logo logo"><img src="logo.png" alt="Talent Loop Logo" class="logo-image"> Talent Loop</div>
                 <p>Connecting talent with opportunity.</p>
+                <div class="social-links">
+                    <a href="#">FB</a>
+                    <a href="#">IN</a>
+                    <a href="#">TW</a>
+                </div>
             </div>
             <div class="footer-col">
                 <h4>Quick Links</h4>
