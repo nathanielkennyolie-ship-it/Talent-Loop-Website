@@ -1496,14 +1496,15 @@ a {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(26, 77, 125, 0.8);
+    backdrop-filter: blur(5px);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 2000;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    transition: opacity var(--transition-base), visibility var(--transition-base);
 }
 
 .modal-overlay.active {
@@ -1513,34 +1514,82 @@ a {
 
 .modal-content {
     background: white;
-    padding: 3rem;
+    padding: 2.5rem;
     border-radius: 16px;
-    max-width: 500px;
+    max-width: 550px;
     width: 90%;
-    text-align: center;
     box-shadow: var(--shadow-lg);
-    transform: translateY(20px);
-    transition: transform 0.3s ease;
+    transform: translateY(20px) scale(0.95);
+    transition: all var(--transition-base);
+    position: relative;
 }
 
 .modal-overlay.active .modal-content {
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
 }
 
-.modal-content h3 {
-    color: var(--primary-color);
-    margin-bottom: 1rem;
+.close-modal {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 2rem;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: color var(--transition-fast);
 }
 
-.modal-content p {
-    color: var(--text-secondary);
+.close-modal:hover {
+    color: var(--text-primary);
+}
+
+.modal-header {
+    text-align: center;
     margin-bottom: 1.5rem;
 }
 
+.modal-icon {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    color: var(--accent-color);
+}
+
+.modal-title {
+    font-size: 1.75rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.modal-body {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    text-align: center;
+}
+
+.modal-highlight {
+    background: var(--bg-lighter);
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    text-align: center;
+    border-left: 4px solid var(--accent-color);
+}
+
 .modal-actions {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 1rem;
-    justify-content: center;
+}
+
+.modal-actions .btn-secondary {
+    background: var(--bg-lighter);
+    color: var(--primary-color);
+    border-color: var(--border-color);
+}
+
+.modal-actions .btn-secondary:hover {
+    background: var(--border-color);
 }
 
 
@@ -1656,6 +1705,7 @@ a {
     }
 
     .modal-actions {
-        flex-direction: column;
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
     }
 }
