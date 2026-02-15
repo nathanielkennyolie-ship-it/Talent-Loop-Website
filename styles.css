@@ -523,6 +523,60 @@ a {
     box-shadow: 0 0 0 3px rgba(26, 77, 125, 0.1);
 }
 
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background: white;
+    padding: 3rem;
+    border-radius: 16px;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    box-shadow: var(--shadow-lg);
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-content {
+    transform: translateY(0);
+}
+
+.modal-content h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.modal-content p {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
 .footer {
     background: var(--primary-dark);
     color: white;
@@ -580,5 +634,8 @@ a {
 @media (max-width: 640px) {
     .btn {
         width: 100%;
+    }
+    .modal-actions {
+        flex-direction: column;
     }
 }
