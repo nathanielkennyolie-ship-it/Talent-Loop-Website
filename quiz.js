@@ -51,9 +51,8 @@ document.addEventListener('DOMContentLoaded', function() {
     async function initialize() {
         await initializeDropdowns();
         setupEventListeners();
-        // On assessment page, start at question 1, otherwise start at the beginning of the flow
-        if (assessmentContainer && window.location.pathname.includes('assessment.html')) {
-             showInitialForm();
+        if (window.location.pathname.includes('assessment.html')) {
+            showInitialForm();
         }
     }
     
@@ -130,6 +129,29 @@ document.addEventListener('DOMContentLoaded', function() {
             stateSelect.appendChild(placeholder);
         }
     }
+    
+    async function getRealAddressSuggestions(query) {
+        const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&addressdetails=1&limit=5&countrycodes=us`;
+        try {
+            const response = await fetch(url, { headers: { 'User-Agent': 'TalentLoopApp/1.0' } });
+            if (!response.ok) throw new Error('Network error');
+            const data = await response.json();
+            return data.map(item => {
+                const addr = item.address;
+                const fullStreet = `${addr.house_number || ''} ${addr.road || ''}`.trim();
+                return {
+                    street: fullStreet,
+                    city: addr.city || addr.town || addr.village || '',
+                    state: addr.state || '',
+                    postcode: addr.postcode || '',
+                    formatted: [fullStreet, addr.city, addr.state, addr.postcode].filter(Boolean).join(', ')
+                };
+            });
+        } catch (error) {
+            console.error('Error fetching address suggestions:', error);
+            return [];
+        }
+    }
 
     // ================================
     // EVENT LISTENERS (The Core Logic)
@@ -157,8 +179,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (nextBtn) {
             nextBtn.addEventListener('click', function() {
                 if (validateQuestion(currentQuestion)) {
-                    currentQuestion++;
-                    showQuestion(currentQuestion);
+                    showQuestion(currentQuestion + 1);
                 } else {
                     alert('Please select an answer.');
                 }
@@ -182,23 +203,18 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        // *** THIS IS THE KEY FIX ***
-        // Listen to changes on ALL radio buttons
         document.querySelectorAll('.option-card input[type="radio"]').forEach(radio => {
             radio.addEventListener('change', function() {
                 const questionNumber = parseInt(this.closest('.question-slide').dataset.question, 10);
                 const value = this.value;
 
-                // Store the answer immediately
                 answers[`q${questionNumber}`] = value;
 
-                // If user selects "No" on the last question, show the modal
                 if (questionNumber === totalQuestions && value === 'no-standard') {
                     showModal();
-                    return; // Stop and wait for modal interaction
+                    return; 
                 }
 
-                // Auto-advance to the next question for Q1-9
                 if (questionNumber < totalQuestions) {
                     setTimeout(() => {
                         showQuestion(currentQuestion + 1);
@@ -221,13 +237,54 @@ document.addEventListener('DOMContentLoaded', function() {
             completeAssessment();
         });
         if (confirmOptInBtn) confirmOptInBtn.addEventListener('click', () => {
-            // Change the answer to "Yes" and submit
             const yesRadio = document.querySelector('input[name="q10"][value="yes-verify"]');
             if(yesRadio) yesRadio.checked = true;
             answers.q10 = 'yes-verify';
             hideModal();
             completeAssessment();
         });
+
+        if (addressInput) {
+            addressInput.addEventListener('input', async function() {
+                const query = this.value;
+                if (query.length < 3) {
+                    if (addressSuggestions) addressSuggestions.style.display = 'none';
+                    return;
+                }
+                const suggestions = await getRealAddressSuggestions(query);
+                if (addressSuggestions) {
+                    addressSuggestions.innerHTML = suggestions.map(s => 
+                        `<div class="suggestion-item" data-address='${JSON.stringify(s)}'>${s.formatted}</div>`
+                    ).join('');
+                    addressSuggestions.style.display = 'block';
+                }
+            });
+
+            if (addressSuggestions) {
+                addressSuggestions.addEventListener('click', function(e) {
+                    if (e.target.matches('.suggestion-item')) {
+                        const addr = JSON.parse(e.target.dataset.address);
+                        addressInput.value = addr.street;
+                        cityInput.value = addr.city;
+                        zipCodeInput.value = addr.postcode;
+                        if (countrySelect.querySelector('[value="United States"]')) {
+                             countrySelect.value = "United States";
+                             populateStates("United States");
+                             if (stateSelect.querySelector(`[value="${addr.state}"`)) {
+                                 stateSelect.value = addr.state;
+                             }
+                        }
+                        addressSuggestions.style.display = 'none';
+                    }
+                });
+            }
+
+            document.addEventListener('click', (e) => {
+                if (addressSuggestions && !addressInput.contains(e.target)) {
+                    addressSuggestions.style.display = 'none';
+                }
+            });
+        }
     }
 
     // ================================
@@ -257,6 +314,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function validateQuestion(questionNumber) {
         const slide = document.querySelector(`[data-question="${questionNumber}"]`);
         if (!slide) return false;
+        if (answers[`q${questionNumber}`]) return true;
         const radios = slide.querySelectorAll('input[type="radio"]:checked');
         return radios.length > 0;
     }
