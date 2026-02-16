@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const totalQuestions = 10;
     const answers = {};
     let contactInfo = {};
-    const IDENTITY_IQ_URL = 'https://identityiq.sjv.io/OemEbP'; // Changed from QUICKEN_URL
+    const IDENTITY_IQ_URL = 'https://identityiq.sjv.io/OemEbP'; 
     const statesByCountry = {
         'United States': ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming']
     };
@@ -51,8 +51,13 @@ document.addEventListener('DOMContentLoaded', function() {
     async function initialize() {
         await initializeDropdowns();
         setupEventListeners();
-        showQuestion(1);
-        // Hide all but the first form on page load
+        // On assessment page, start at question 1, otherwise start at the beginning of the flow
+        if (assessmentContainer && window.location.pathname.includes('assessment.html')) {
+             showInitialForm();
+        }
+    }
+    
+    function showInitialForm() {
         if(personalInfoForm) personalInfoForm.style.display = 'block';
         if(assessmentIntro) assessmentIntro.style.display = 'none';
         if(assessmentContainer) assessmentContainer.style.display = 'none';
@@ -71,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const countries = await response.json();
             countries.sort((a, b) => a.name.common.localeCompare(b.name.common));
             
-            countrySelect.innerHTML = '<option value="">Select a Country</option>'; // Add a placeholder
+            countrySelect.innerHTML = '<option value="">Select a Country</option>'; 
             countries.forEach(country => {
                 let option = document.createElement('option');
                 option.value = country.name.common;
@@ -89,14 +94,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             } catch (ipError) {
                 console.error('IP-based country detection error:', ipError);
-                countrySelect.value = 'United States'; // Default to US on IP lookup failure
+                countrySelect.value = 'United States';
             }
             
             populateStates(countrySelect.value);
 
         } catch (error) {
             console.error('Error initializing dropdowns:', error);
-            countrySelect.innerHTML = '<option value="United States">United States</option>'; // Fallback
+            countrySelect.innerHTML = '<option value="United States">United States</option>';
             populateStates('United States');
         }
     }
@@ -126,31 +131,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    async function getRealAddressSuggestions(query) {
-        const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&addressdetails=1&limit=5&countrycodes=us`;
-        try {
-            const response = await fetch(url, { headers: { 'User-Agent': 'TalentLoopApp/1.0' } });
-            if (!response.ok) throw new Error('Network error');
-            const data = await response.json();
-            return data.map(item => {
-                const addr = item.address;
-                const fullStreet = `${addr.house_number || ''} ${addr.road || ''}`.trim();
-                return {
-                    street: fullStreet,
-                    city: addr.city || addr.town || addr.village || '',
-                    state: addr.state || '',
-                    postcode: addr.postcode || '',
-                    formatted: [fullStreet, addr.city, addr.state, addr.postcode].filter(Boolean).join(', ')
-                };
-            });
-        } catch (error) {
-            console.error('Error fetching address suggestions:', error);
-            return [];
-        }
-    }
-
     // ================================
-    // EVENT LISTENERS
+    // EVENT LISTENERS (The Core Logic)
     // ================================
     function setupEventListeners() {
         if (contactInfoForm) {
@@ -185,33 +167,41 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (prevBtn) {
             prevBtn.addEventListener('click', function() {
-                currentQuestion--;
-                showQuestion(currentQuestion);
+                showQuestion(currentQuestion - 1);
             });
         }
 
         if (assessmentForm) {
             assessmentForm.addEventListener('submit', function(e) {
                 e.preventDefault();
-                if (!validateQuestion(totalQuestions)) {
-                    alert('Please make a selection for the final question.');
-                    return;
-                }
-                if (answers.q10 === 'no-standard') {
-                    showModal();
-                } else {
+                if (validateQuestion(totalQuestions)) {
                     completeAssessment();
+                } else {
+                    alert('Please make a selection for the final question.');
                 }
             });
         }
 
-        document.querySelectorAll('input[type="radio"]').forEach(radio => {
+        // *** THIS IS THE KEY FIX ***
+        // Listen to changes on ALL radio buttons
+        document.querySelectorAll('.option-card input[type="radio"]').forEach(radio => {
             radio.addEventListener('change', function() {
                 const questionNumber = parseInt(this.closest('.question-slide').dataset.question, 10);
-                if (validateQuestion(questionNumber) && questionNumber < totalQuestions) {
+                const value = this.value;
+
+                // Store the answer immediately
+                answers[`q${questionNumber}`] = value;
+
+                // If user selects "No" on the last question, show the modal
+                if (questionNumber === totalQuestions && value === 'no-standard') {
+                    showModal();
+                    return; // Stop and wait for modal interaction
+                }
+
+                // Auto-advance to the next question for Q1-9
+                if (questionNumber < totalQuestions) {
                     setTimeout(() => {
-                        currentQuestion++;
-                        showQuestion(currentQuestion);
+                        showQuestion(currentQuestion + 1);
                     }, 300); 
                 }
             });
@@ -228,59 +218,30 @@ document.addEventListener('DOMContentLoaded', function() {
         if (closeModalBtn) closeModalBtn.addEventListener('click', hideModal);
         if (confirmOptOutBtn) confirmOptOutBtn.addEventListener('click', () => {
             hideModal();
-            completeAssessment(); 
+            completeAssessment();
         });
         if (confirmOptInBtn) confirmOptInBtn.addEventListener('click', () => {
-            document.querySelector('input[name="q10"][value="yes-verify"]').checked = true;
+            // Change the answer to "Yes" and submit
+            const yesRadio = document.querySelector('input[name="q10"][value="yes-verify"]');
+            if(yesRadio) yesRadio.checked = true;
             answers.q10 = 'yes-verify';
             hideModal();
             completeAssessment();
         });
-
-        // Address autocomplete listeners
-        if (addressInput) {
-            addressInput.addEventListener('input', async function() {
-                const query = this.value;
-                if (query.length < 3) {
-                    addressSuggestions.style.display = 'none';
-                    return;
-                }
-                const suggestions = await getRealAddressSuggestions(query);
-                addressSuggestions.innerHTML = suggestions.map(s => 
-                    `<div class="suggestion-item" data-address='${JSON.stringify(s)}'>${s.formatted}</div>`
-                ).join('');
-                addressSuggestions.style.display = 'block';
-            });
-
-            addressSuggestions.addEventListener('click', function(e) {
-                if (e.target.matches('.suggestion-item')) {
-                    const addr = JSON.parse(e.target.dataset.address);
-                    addressInput.value = addr.street;
-                    cityInput.value = addr.city;
-                    zipCodeInput.value = addr.postcode;
-                    countrySelect.value = "United States"; // Autocomplete is US-only for now
-                    populateStates("United States");
-                    stateSelect.value = addr.state;
-                    addressSuggestions.style.display = 'none';
-                }
-            });
-
-            document.addEventListener('click', (e) => {
-                if (addressSuggestions && !addressInput.contains(e.target)) {
-                    addressSuggestions.style.display = 'none';
-                }
-            });
-        }
     }
 
     // ================================
-    // ASSESSMENT FLOW
+    // ASSESSMENT FLOW & UI
     // ================================
 
     function showQuestion(num) {
+        currentQuestion = num;
         document.querySelectorAll('.question-slide').forEach(s => s.classList.remove('active'));
         const slide = document.querySelector(`[data-question="${num}"]`);
-        if (slide) slide.classList.add('active');
+        if (slide) {
+            slide.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
         if (prevBtn) prevBtn.style.display = num === 1 ? 'none' : 'inline-block';
         if (nextBtn) nextBtn.style.display = num === totalQuestions ? 'none' : 'inline-block';
@@ -290,18 +251,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function updateProgress() {
-        if (progressFill) progressFill.style.width = ((currentQuestion -1) / (totalQuestions -1) * 100) + '%';
+        if (progressFill) progressFill.style.width = ((currentQuestion -1) / (totalQuestions) * 100) + '%';
     }
 
     function validateQuestion(questionNumber) {
         const slide = document.querySelector(`[data-question="${questionNumber}"]`);
         if (!slide) return false;
-        const radios = slide.querySelectorAll('input[type="radio"]');
-        const isAnswered = Array.from(radios).some(r => r.checked);
-        if (isAnswered) {
-            answers[`q${questionNumber}`] = slide.querySelector('input[type="radio"]:checked').value;
-        }
-        return isAnswered;
+        const radios = slide.querySelectorAll('input[type="radio"]:checked');
+        return radios.length > 0;
     }
 
     function completeAssessment() {
