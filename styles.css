@@ -1678,6 +1678,105 @@ a {
     font-size: 1.25rem;
 }
 
+/* ================================
+   Blog Post Specific Styles
+   ================================ */
+
+.blog-post-container {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 140px 20px 80px;
+}
+
+.post-header {
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.post-meta {
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.post-title {
+    font-size: 2.75rem; /* Reduced from 3.5rem */
+    line-height: 1.2;
+    color: var(--primary-color);
+}
+
+.post-content {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+}
+
+.post-content h2 {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+}
+
+.post-content h3 {
+    font-size: 1.65rem;
+    color: var(--primary-color);
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.post-content h4 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+}
+
+.post-content p {
+    margin-bottom: 1.75rem;
+}
+
+.post-content ul,
+.post-content ol {
+    margin-bottom: 1.75rem;
+    padding-left: 2rem;
+}
+
+.post-content li {
+    margin-bottom: 0.75rem;
+}
+
+.post-content blockquote {
+    margin: 2.5rem 0;
+    padding: 2rem;
+    background: var(--bg-lighter);
+    border-left: 5px solid var(--accent-color);
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    border-radius: 0 8px 8px 0;
+}
+
+.post-content .callout {
+    background: rgba(212, 165, 116, 0.08);
+    border: 1px solid var(--accent-color);
+    padding: 2rem;
+    margin: 3rem 0;
+    border-radius: 12px;
+}
+
+.post-content .callout p {
+    margin-bottom: 1rem;
+}
+
+.post-content .callout ol {
+    margin-bottom: 0;
+}
+
+
 
 /* ================================
    Animations
@@ -1766,6 +1865,14 @@ a {
     
     .question-title {
         font-size: 1.5rem;
+    }
+
+    .post-title {
+        font-size: 2.25rem;
+    }
+
+    .post-content {
+        font-size: 1.05rem;
     }
 }
 
