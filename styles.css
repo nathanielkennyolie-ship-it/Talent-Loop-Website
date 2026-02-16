@@ -1592,6 +1592,92 @@ a {
     background: var(--border-color);
 }
 
+/* ================================
+   Testimonials Page
+   ================================ */
+
+.testimonials-section {
+    padding: var(--section-padding) 0;
+    background: var(--bg-lighter);
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+.testimonial-card {
+    background: var(--bg-white);
+    padding: 2.5rem;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+}
+
+.testimonial-quote {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    flex-grow: 1;
+    font-style: italic;
+    position: relative;
+    padding-left: 2.5rem;
+}
+
+.testimonial-quote::before {
+    content: '“';
+    position: absolute;
+    left: 0;
+    top: -0.5rem;
+    font-size: 4rem;
+    color: var(--accent-color);
+    font-family: var(--font-display);
+    opacity: 0.8;
+}
+
+.testimonial-footer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: auto; /* Pushes footer to the bottom */
+}
+
+.testimonial-author-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.testimonial-author-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.testimonial-author-info h4 {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.25rem;
+}
+
+.testimonial-author-info p {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    margin-bottom: 0;
+}
+
+.testimonial-rating {
+    margin-top: 1rem;
+    color: var(--accent-color);
+    font-size: 1.25rem;
+}
+
 
 /* ================================
    Animations
