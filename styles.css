@@ -2129,3 +2129,49 @@ a {
     color: #495057;
     margin-bottom: 0;
 }
+/* CAR Formula Styling */
+.car-formula-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    background-color: #f0f7ff;
+    border-left: 5px solid #007bff;
+    padding: 2rem;
+    margin: 2.5rem 0;
+    border-radius: 8px;
+}
+
+.car-step {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.car-letter {
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    background-color: #007bff;
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.car-text h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: #0056b3;
+    margin: 0 0 0.25rem 0;
+}
+
+.car-text p {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.1rem;
+    color: #333;
+    margin: 0;
+}
