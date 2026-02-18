@@ -2,10 +2,9 @@
 body {
     font-family: 'DM Sans', sans-serif;
     line-height: 1.6;
-    color: #333;
-    background-color: #fff;
+    color: #495057;
+    background-color: #FDFDFD;
     margin: 0;
-    padding: 0;
 }
 
 .container {
@@ -15,13 +14,13 @@ body {
 }
 
 a {
-    color: #333;
+    color: #007BFF;
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 a:hover {
-    color: #555;
+    color: #0056b3;
 }
 
 /* Navbar */
@@ -72,13 +71,18 @@ a:hover {
     margin-left: 2rem;
 }
 
-.nav-menu a.active {
-    font-weight: 700;
-    border-bottom: 2px solid #333;
+.nav-menu a {
+    color: #333;
+    font-weight: 500;
+}
+
+.nav-menu a.active,
+.nav-menu a:hover {
+    color: #007BFF;
 }
 
 .cta-link {
-    background-color: #333;
+    background-color: #007BFF;
     color: #fff !important;
     padding: 0.5rem 1rem;
     border-radius: 5px;
@@ -86,13 +90,8 @@ a:hover {
 }
 
 .cta-link:hover {
-    background-color: #555;
+    background-color: #0056b3;
     color: #fff !important;
-}
-
-.hamburger {
-    display: none;
-    cursor: pointer;
 }
 
 /* Hero Section */
@@ -123,7 +122,7 @@ a:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
 .hero-content {
@@ -133,7 +132,7 @@ a:hover {
 
 .hero-title {
     font-family: 'Playfair Display', serif;
-    font-size: 4.5rem;
+    font-size: 5rem;
     font-weight: 800;
     margin-bottom: 1rem;
     line-height: 1.2;
@@ -144,11 +143,11 @@ a:hover {
 }
 
 .accent {
-    color: #fff; /* Changed from green */
+    color: #28A745;
 }
 
 .hero-subtitle {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     font-weight: 400;
     max-width: 600px;
     margin: 0 auto 2rem;
@@ -156,23 +155,23 @@ a:hover {
 
 .btn {
     text-decoration: none;
-    padding: 0.8rem 1.8rem;
+    padding: 1rem 2rem;
     border-radius: 5px;
-    font-weight: 600;
+    font-weight: 700;
     transition: all 0.3s ease;
     margin: 0 0.5rem;
     display: inline-block;
 }
 
 .btn-primary {
-    background-color: #fff;
-    color: #333;
-    border: 2px solid #fff;
+    background-color: #007BFF;
+    color: #fff;
+    border: 2px solid #007BFF;
 }
 
 .btn-primary:hover {
-    background-color: transparent;
-    color: #fff;
+    background-color: #0056b3;
+    border-color: #0056b3;
 }
 
 .btn-secondary {
@@ -186,25 +185,24 @@ a:hover {
     color: #000;
 }
 
-/* General Section Styling */
-.section {
-    padding: 5rem 0;
+/* Sections */
+.features, .stats, .cta-section {
+    padding: 6rem 0;
 }
 
 .section-header {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
 }
 
 .section-header h2 {
     font-family: 'Playfair Display', serif;
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
+    font-size: 3rem;
+    margin-bottom: 1rem;
 }
 
-/* Features Section */
 .features {
-    background-color: #f8f9fa;
+    background-color: #fff;
 }
 
 .feature-grid {
@@ -218,38 +216,67 @@ a:hover {
 }
 
 .feature-icon {
-    font-size: 2.5rem;
+    font-size: 3rem;
     margin-bottom: 1rem;
+    color: #007BFF;
+}
+
+/* Stats Section */
+.stats {
+    background-color: #f8f9fa;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #007BFF;
+}
+
+.stat-label {
+    font-size: 1.1rem;
+    color: #6c757d;
+}
+
+/* CTA Section */
+.cta-section {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
 }
 
 /* Footer */
 .footer {
     background-color: #333;
-    color: #f8f9fa;
+    color: #fff;
     padding: 4rem 0 2rem;
 }
 
-/* THIS IS THE FIX FOR THE FAINT FOOTER LOGO */
 .footer .logo-text {
-    color: #fff;
-}
-
-.footer p {
-    color: rgba(255, 255, 255, 0.7);
+    color: #fff; /* Fix for faint text */
 }
 
 .footer-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
     margin-bottom: 2rem;
 }
 
+.footer p {
+    color: rgba(255, 255, 255, 0.8);
+}
+
 .footer-col h4 {
     font-family: 'Playfair Display', serif;
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     margin-bottom: 1rem;
-    color: #fff;
 }
 
 .footer-col ul {
@@ -257,12 +284,8 @@ a:hover {
     padding: 0;
 }
 
-.footer-col ul li {
-    margin-bottom: 0.5rem;
-}
-
 .footer-col a {
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .footer-col a:hover {
@@ -275,12 +298,11 @@ a:hover {
     border-top: 1px solid #444;
 }
 
-.footer-bottom p {
-    color: rgba(255, 255, 255, 0.7);
-    margin: 0;
-}
-
 .social-links a {
     margin: 0 0.5rem;
+    color: rgba(255,255,255,0.8);
     font-size: 1.2rem;
+}
+.social-links a:hover {
+    color: #fff;
 }
