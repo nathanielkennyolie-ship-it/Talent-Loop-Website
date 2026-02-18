@@ -223,7 +223,7 @@ a:hover {
 
 /* Stats Section */
 .stats {
-    background-color: #f8f9fa;
+    background-color: #fff; /* Removed light grey background */
 }
 
 .stats-grid {
@@ -236,7 +236,7 @@ a:hover {
 .stat-number {
     font-size: 3.5rem;
     font-weight: 700;
-    color: #007BFF;
+    color: #D95F02; /* Changed to Dark Orange */
 }
 
 .stat-label {
@@ -246,8 +246,8 @@ a:hover {
 
 /* CTA Section */
 .cta-section {
-    background-color: #333;
-    color: #fff;
+    background-color: #fff; /* Removed grey background */
+    color: #495057; /* Changed to dark text */
     text-align: center;
 }
 
