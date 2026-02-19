@@ -223,7 +223,7 @@ a:hover {
 
 /* Stats Section */
 .stats {
-    background-color: #fff; /* Removed light grey background */
+    background-color: #D95F02; /* Set background to Dark Orange */
 }
 
 .stats-grid {
@@ -236,24 +236,24 @@ a:hover {
 .stat-number {
     font-size: 3.5rem;
     font-weight: 700;
-    color: #D95F02; /* Changed to Dark Orange */
+    color: #000000; /* Set number color to Black */
 }
 
 .stat-label {
     font-size: 1.1rem;
-    color: #6c757d;
+    color: #fff; /* Set label color to white for contrast */
 }
 
 /* CTA Section */
 .cta-section {
-    background-color: #fff; /* Removed grey background */
-    color: #495057; /* Changed to dark text */
+    background-color: #fff;
+    color: #495057;
     text-align: center;
 }
 
 /* Footer */
 .footer {
-    background-color: #333;
+    background-color: #007BFF; /* Changed to Blue */
     color: #fff;
     padding: 4rem 0 2rem;
 }
@@ -270,13 +270,14 @@ a:hover {
 }
 
 .footer p {
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .footer-col h4 {
     font-family: 'Playfair Display', serif;
     font-size: 1.25rem;
     margin-bottom: 1rem;
+    color: #fff;
 }
 
 .footer-col ul {
@@ -285,7 +286,7 @@ a:hover {
 }
 
 .footer-col a {
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .footer-col a:hover {
@@ -295,12 +296,12 @@ a:hover {
 .footer-bottom {
     text-align: center;
     padding-top: 2rem;
-    border-top: 1px solid #444;
+    border-top: 1px solid rgba(255, 255, 255, 0.2); /* Lighter border for blue background */
 }
 
 .social-links a {
     margin: 0 0.5rem;
-    color: rgba(255,255,255,0.8);
+    color: rgba(255,255,255,0.9);
     font-size: 1.2rem;
 }
 .social-links a:hover {
