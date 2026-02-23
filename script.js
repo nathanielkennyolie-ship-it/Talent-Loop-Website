@@ -1,17 +1,16 @@
 // ================================
 // Talent Loop - Main JavaScript
-// FRESH START - GUARANTEED WORKING
 // ================================
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Script loaded!'); // Debug
-    
+    console.log('Script loaded!');
+
     // ================================
     // MOBILE NAVIGATION
     // ================================
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('navMenu');
-    
+
     if (hamburger && navMenu) {
         hamburger.addEventListener('click', function() {
             navMenu.classList.toggle('active');
@@ -27,68 +26,62 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    
+
     // ================================
-    // STAT COUNTER ANIMATION - SIMPLE & WORKING
+    // STAT COUNTER ANIMATION
+    // FIX: Old code used strict bounding-rect check requiring ALL 4 edges
+    // inside viewport simultaneously — nearly impossible for a full-width
+    // section. Replaced with IntersectionObserver at threshold:0.3 so
+    // animation fires as soon as 30% of the stats section is visible.
     // ================================
     function startCounter(element) {
-        const target = parseInt(element.getAttribute('data-target'));
-        const duration = 2000; // 2 seconds
-        const increment = target / (duration / 50); // Update every 50ms
+        const target    = parseInt(element.getAttribute('data-target'));
+        const label     = element.parentElement.querySelector('.stat-label').textContent;
+        const duration  = 2000;
+        const framerate = 50;
+        const increment = target / (duration / framerate);
         let current = 0;
-        
+
+        const needsPercent = label.includes('Rate') || label.includes('rate');
+        const needsHours   = label.toLowerCase().includes('hour');
+
         const timer = setInterval(() => {
             current += increment;
             if (current >= target) {
                 current = target;
                 clearInterval(timer);
             }
-            
-            // Check if it needs % sign
-            const label = element.parentElement.querySelector('.stat-label').textContent;
-            const needsPercent = label.includes('Rate') || label.includes('rate');
-            
-            element.textContent = Math.floor(current).toLocaleString() + (needsPercent ? '%' : '');
-        }, 50);
+            let suffix = needsPercent ? '%' : needsHours ? 'h' : '+';
+            element.textContent = Math.floor(current).toLocaleString() + suffix;
+        }, framerate);
     }
-    
-    // Check if stats are visible
-    function checkStatsVisible() {
-        const statsSection = document.querySelector('.stats');
-        if (!statsSection) return;
-        
-        const rect = statsSection.getBoundingClientRect();
-        const isVisible = (
-            rect.top >= 0 &&
-            rect.left >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        ) || (rect.top < window.innerHeight && rect.bottom > 0);
-        
-        if (isVisible && !statsSection.classList.contains('animated')) {
-            statsSection.classList.add('animated');
-            const statNumbers = statsSection.querySelectorAll('.stat-number');
-            statNumbers.forEach(stat => {
-                startCounter(stat);
+
+    const statsSection = document.querySelector('.stats');
+    if (statsSection) {
+        const counterObserver = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.querySelectorAll('.stat-number[data-target]').forEach(startCounter);
+                    obs.unobserve(entry.target);
+                }
             });
-        }
+        }, { threshold: 0.3 });
+
+        counterObserver.observe(statsSection);
     }
-    
-    // Listen for scroll
-    window.addEventListener('scroll', checkStatsVisible);
-    // Check on load
-    setTimeout(checkStatsVisible, 500);
-    
+
     // ================================
     // NAVBAR SCROLL EFFECT
     // ================================
     window.addEventListener('scroll', function() {
         const navbar = document.querySelector('.navbar');
         if (navbar) {
-            navbar.style.boxShadow = window.scrollY > 100 ? '0 4px 16px rgba(0, 0, 0, 0.1)' : 'none';
+            navbar.style.boxShadow = window.scrollY > 100
+                ? '0 4px 16px rgba(0,0,0,0.1)'
+                : '0 2px 4px rgba(0,0,0,0.05)';
         }
     });
-    
+
     // ================================
     // CONTACT FORM
     // ================================
@@ -96,10 +89,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            const formData = new FormData(contactForm);
-            const data = Object.fromEntries(formData.entries());
-            console.log('Form submitted:', data);
-            
             const successMsg = document.getElementById('formSuccess');
             if (successMsg) {
                 successMsg.style.display = 'block';
@@ -109,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    
+
     // ================================
     // SMOOTH SCROLL
     // ================================
@@ -119,20 +108,18 @@ document.addEventListener('DOMContentLoaded', function() {
             if (href !== '#' && href !== '') {
                 e.preventDefault();
                 const target = document.querySelector(href);
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         });
     });
-    
+
     // ================================
     // FADE-IN ANIMATION
     // ================================
     const fadeElements = document.querySelectorAll('.feature-card, .blog-card, .value-item, .team-member');
     if (fadeElements.length > 0) {
         const fadeObserver = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
+            entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = '1';
                     entry.target.style.transform = 'translateY(0)';
@@ -140,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         }, { threshold: 0.1 });
-        
+
         fadeElements.forEach(element => {
             element.style.opacity = '0';
             element.style.transform = 'translateY(30px)';
