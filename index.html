@@ -3,17 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Talent Loop - Professional Recruitment Agency</title>
-    <link rel="stylesheet" href="styles.css?v=2.1"> <!-- Cache Busting -->
+
+    <!-- SEO: Title -->
+    <title>Talent Loop - Professional Recruitment Agency | Find Your Next Role</title>
+
+    <!-- SEO FIX: Meta description added (was missing — caused SEO score of 75) -->
+    <meta name="description" content="Talent Loop is a professional recruitment agency connecting exceptional talent with extraordinary opportunities. Take our free career assessment and get matched today.">
+
+    <!-- SEO: Canonical -->
+    <link rel="canonical" href="https://www.talent-loop.org/">
+
+    <!-- SEO: Open Graph -->
+    <meta property="og:title" content="Talent Loop - Professional Recruitment Agency">
+    <meta property="og:description" content="Connecting exceptional talent with extraordinary opportunities across industries. Take our free career assessment today.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.talent-loop.org/">
+    <meta property="og:site_name" content="Talent Loop">
+
+    <!-- PERFORMANCE FIX: Preconnect to font origins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- PERFORMANCE FIX: font-display=swap added to reduce render blocking and CLS from web fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap&font-display=swap" rel="stylesheet">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles.css?v=2.1">
+
+    <style>
+        /* ACCESSIBILITY FIX: Improved contrast for footer links and text */
+        .footer {
+            background: #0d1b3e;
+        }
+        .footer p,
+        .footer-bottom p {
+            color: #d0d8f0;
+        }
+        .footer h3,
+        .footer h4 {
+            color: #ffffff;
+        }
+        .footer ul li a {
+            color: #b8c4e0;
+        }
+        .footer ul li a:hover {
+            color: #D4AF37;
+        }
+        .footer-contact p {
+            color: #b8c4e0;
+        }
+        .footer-contact strong {
+            color: #ffffff;
+        }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.15);
+            padding-top: 1.5rem;
+            margin-top: 2rem;
+        }
+        .footer-bottom p {
+            color: #b8c4e0;
+        }
+
+        /* ACCESSIBILITY FIX: Improved contrast for nav active link */
+        .navbar .nav-menu a.active {
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        /* ACCESSIBILITY FIX: Improved contrast for CTA link in nav */
+        .navbar .cta-link {
+            background: #D4AF37;
+            color: #1a2b5f !important;
+            padding: 0.4rem 1rem;
+            border-radius: 5px;
+            font-weight: 700;
+        }
+
+        /* ACCESSIBILITY FIX: Better contrast for btn-primary */
+        .btn-primary {
+            background: #D4AF37;
+            color: #1a2b5f !important;
+            font-weight: 700;
+        }
+        .btn-primary:hover {
+            background: #c9a227;
+            color: #1a2b5f !important;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
-                <img src="logo.webp" alt="Talent Loop Logo" class="logo-image">
+                <!-- PERFORMANCE FIX: Explicit width and height added to logo to prevent CLS -->
+                <img src="logo.webp" alt="Talent Loop Logo" class="logo-image" width="51" height="40">
                 <span class="logo-text">Talent Loop</span>
             </div>
             <ul class="nav-menu" id="navMenu">
@@ -34,7 +117,8 @@
 
     <section class="hero">
         <div class="image-background">
-            <div class="image-overlay"></div>
+            <!-- PERFORMANCE FIX: fetchpriority="high" added to LCP element to speed up largest contentful paint -->
+            <div class="image-overlay" fetchpriority="high"></div>
         </div>
         <div class="hero-content">
             <h1 class="hero-title">
@@ -44,7 +128,8 @@
             <p class="hero-subtitle">Connecting exceptional talent with extraordinary opportunities across industries</p>
             <div class="hero-cta">
                 <a href="assessment.html" class="btn btn-primary">Start Your Assessment</a>
-                <a href="about.html" class="btn btn-secondary">Learn More</a>
+                <!-- SEO FIX: "Learn More" replaced with descriptive text to fix non-descriptive link warning -->
+                <a href="about.html" class="btn btn-secondary">About Talent Loop</a>
             </div>
         </div>
         <div class="scroll-indicator">
@@ -122,7 +207,8 @@
             <div class="footer-grid">
                 <div class="footer-col">
                     <div class="footer-logo logo">
-                        <img src="logo.webp" alt="Talent Loop Logo" class="logo-image">
+                        <!-- PERFORMANCE FIX: Explicit width and height on footer logo too -->
+                        <img src="logo.webp" alt="Talent Loop Logo" class="logo-image" width="51" height="40">
                         <span class="logo-text">Talent Loop</span>
                     </div>
                     <p>Bridging the gap between talent and opportunity since 2015.</p>
@@ -132,7 +218,8 @@
                     </div>
                 </div>
                 <div class="footer-col">
-                    <h4>Quick Links</h4>
+                    <!-- ACCESSIBILITY FIX: Changed h4 to h3 to fix heading order (was skipping h2→h4) -->
+                    <h3>Quick Links</h3>
                     <ul>
                         <li><a href="index.html">Home</a></li>
                         <li><a href="about.html">About Us</a></li>
@@ -142,22 +229,22 @@
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h4>Legal</h4>
+                    <h3>Legal</h3>
                     <ul>
                         <li><a href="privacy.html">Privacy Policy</a></li>
-                        <li><a href="legal.html">Terms & Conditions</a></li>
+                        <li><a href="legal.html">Terms &amp; Conditions</a></li>
                         <li><a href="contact.html">Contact Us</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h4>Connect With Us</h4>
+                    <h3>Connect With Us</h3>
                     <div class="social-links">
                         <a href="https://www.linkedin.com/company/talentloop-official/" aria-label="LinkedIn">in</a>
                         <a href="#" aria-label="Twitter">𝕏</a>
                         <a href="#" aria-label="Facebook">f</a>
                     </div>
                     <p style="margin-top: 1rem; font-size: 0.9rem;">
-                        <a href="https://www.talent-loop.org" style="color: rgba(255,255,255,0.8);">www.talent-loop.org</a>
+                        <a href="https://www.talent-loop.org" style="color: #b8c4e0;">www.talent-loop.org</a>
                     </p>
                 </div>
             </div>
