@@ -1,0 +1,12 @@
+# robots.txt for talent-loop.org
+# Generated for Talent Loop - Professional Recruitment Agency
+
+User-agent: *
+Allow: /
+
+# Block access to any admin or private directories if added in future
+Disallow: /admin/
+Disallow: /private/
+
+# Sitemap location
+Sitemap: https://www.talent-loop.org/sitemap.xml
