@@ -3,119 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog & Career Resources - Talent Loop</title>
-    <meta name="description" content="Explore career advice, job search tips, interview strategies, and workplace insights from Talent Loop's recruitment experts.">
+    <title>Thriving in a Hybrid Work Environment - Talent Loop</title>
     <link rel="stylesheet" href="styles.css?v=2.1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        .blog-hero {
-            background: linear-gradient(135deg, #1a2b5f 0%, #0d1b3e 100%);
-            color: white;
-            padding: 5rem 2rem 3rem;
-            text-align: center;
-        }
-        .blog-hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-        .blog-hero p {
-            font-size: 1.1rem;
-            opacity: 0.85;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        .blog-index {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-        }
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 2rem;
-        }
-        .blog-card {
-            background: #fff;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-        }
-        .blog-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.14);
-        }
-        .blog-card-image {
-            width: 100%;
-            height: 210px;
-            object-fit: cover;
-        }
-        .blog-card-body {
-            padding: 1.5rem;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        .blog-card-meta {
-            font-size: 0.82rem;
-            color: #888;
-            margin-bottom: 0.6rem;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-        }
-        .blog-card-meta span {
-            color: #1a2b5f;
-            font-weight: 600;
-        }
-        .blog-card h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.25rem;
-            color: #1a2b5f;
-            margin-bottom: 0.75rem;
-            line-height: 1.4;
-        }
-        .blog-card p {
-            font-size: 0.95rem;
-            color: #555;
-            line-height: 1.7;
-            flex: 1;
-            margin-bottom: 1.25rem;
-        }
-        .read-more-btn {
-            display: inline-block;
-            background: #1a2b5f;
-            color: #fff;
-            padding: 0.55rem 1.25rem;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            text-decoration: none;
-            align-self: flex-start;
-            transition: background 0.2s ease;
-        }
-        .read-more-btn:hover {
-            background: #D4AF37;
-            color: #1a2b5f;
-        }
-        @media (max-width: 600px) {
-            .blog-hero h1 { font-size: 2rem; }
-            .blog-grid { grid-template-columns: 1fr; }
-        }
-    </style>
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
-                <svg class="logo-svg" width="40" height="40" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M60 10C87.6142 10 110 32.3858 110 60C110 87.6142 87.6142 110 60 110C32.3858 110 10 87.6142 10 60C10 32.3858 32.3858 10 60 10Z" stroke="#007BFF" stroke-width="12"/>
-                  <path d="M60 30C76.5685 30 90 43.4315 90 60C90 76.5685 76.5685 90 60 90C43.4315 90 30 76.5685 30 60C30 43.4315 43.4315 30 60 30Z" stroke="#28A745" stroke-width="12"/>
-                </svg>
+                <img src="logo.webp" alt="Talent Loop Logo" class="logo-image">
                 <span class="logo-text">Talent Loop</span>
             </div>
             <ul class="nav-menu" id="navMenu">
@@ -134,91 +32,47 @@
         </div>
     </nav>
 
-    <section class="blog-hero">
-        <h1>Career Resources & Insights</h1>
-        <p>Expert advice on job searching, interviews, salary negotiation, and career development — all from our recruitment specialists.</p>
-    </section>
-
-    <main class="blog-index">
-        <div class="blog-grid">
-
-            <!-- Post 1 -->
-            <article class="blog-card">
-                <img class="blog-card-image" src="interview-panel-featured.jpg" alt="Candidate in a panel job interview with two interviewers">
-                <div class="blog-card-body">
-                    <div class="blog-card-meta">February 2026 &nbsp;|&nbsp; <span>Interview Tips</span></div>
-                    <h2>Mastering the Art of the Job Interview: The Ultimate Guide to Interview Success in 2026</h2>
-                    <p>Learn proven strategies, common interview questions, the STAR method, and expert tips to confidently ace your next interview and land your dream job.</p>
-                    <a href="blog_post_1.html" class="read-more-btn">Read Article →</a>
+    <main class="blog-post-container">
+        <article class="blog-post">
+            <header class="post-header">
+                <div class="post-meta">
+                    <span>January 20, 2026</span> | <span>Work Culture</span>
                 </div>
-            </article>
+                <h1 class="post-title">Thriving in a Hybrid Work Environment</h1>
+                <p class="post-subtitle"><em>Practical strategies for maintaining productivity and work-life balance in hybrid settings.</em></p>
+                <p class="post-tags"><em>Hybrid Work | Remote Work | Work-Life Balance | Productivity</em></p>
+            </header>
 
-            <!-- Post 2 -->
-            <article class="blog-card">
-                <img class="blog-card-image" src="hidden-job-market-unadvertised-opportunities-2024.jpg" alt="Professional discovering hidden job market opportunities through networking">
-                <div class="blog-card-body">
-                    <div class="blog-card-meta">June 2024 &nbsp;|&nbsp; <span>Career Advice</span></div>
-                    <h2>The Hidden Job Market: Your Ultimate Guide to Unlocking Unadvertised Career Opportunities</h2>
-                    <p>Up to 70% of jobs are never advertised. Discover how to tap into the hidden job market through strategic networking and recruiter partnerships.</p>
-                    <a href="blog_post_2.html" class="read-more-btn">Read Article →</a>
-                </div>
-            </article>
+            <div class="post-content">
+                <p>The rise of hybrid work models offers unprecedented flexibility, but it also presents new challenges. To thrive in a hybrid environment, it's essential to be intentional about how you structure your time, communicate with your team, and create boundaries between your personal and professional life. This guide offers practical strategies to help you succeed.</p>
+                <hr>
 
-            <!-- Post 3 -->
-            <article class="blog-card">
-                <img class="blog-card-image" src="linkedin-profile-optimization-job-search-2024.jpg" alt="LinkedIn profile optimization for job search">
-                <div class="blog-card-body">
-                    <div class="blog-card-meta">June 2024 &nbsp;|&nbsp; <span>Career Advice</span></div>
-                    <h2>LinkedIn Profile Optimization: How to Get Found by Recruiters and Land More Interviews</h2>
-                    <p>Your LinkedIn profile is your digital first impression. Learn how to optimize every section to attract recruiters and unlock more career opportunities.</p>
-                    <a href="blog_post_3.html" class="read-more-btn">Read Article →</a>
-                </div>
-            </article>
+                <h2>1. Establish a Routine</h2>
+                <p>When your work environment is constantly changing, a consistent routine can provide a sense of stability. Try to start and end your workday at the same time, whether you're at home or in the office. This will help you stay focused and avoid burnout.</p>
+                
+                <h2>2. Optimize Your Home Office</h2>
+                <p>If you're working from home part of the time, it's crucial to have a dedicated workspace that is comfortable, organized, and free from distractions. Invest in a good chair, a quality monitor, and other ergonomic equipment to ensure your comfort and productivity.</p>
 
-            <!-- Post 4 -->
-            <article class="blog-card">
-                <img class="blog-card-image" src="professional-networking-strategies-job-search.jpg" alt="Business professionals networking at an industry event">
-                <div class="blog-card-body">
-                    <div class="blog-card-meta">January 28, 2026 &nbsp;|&nbsp; <span>Compensation</span></div>
-                    <h2>How to Negotiate Your Salary: A Complete Guide</h2>
-                    <p>Master the art of salary negotiation with proven strategies, real-world scripts, and expert tactics to ensure you're always paid what you're worth.</p>
-                    <a href="blog_post_4.html" class="read-more-btn">Read Article →</a>
-                </div>
-            </article>
+                <h2>3. Over-Communicate with Your Team</h2>
+                <p>In a hybrid setting, clear and consistent communication is more important than ever. Make sure your team knows your work schedule, your availability, and the best way to reach you. Utilize collaboration tools like Slack, Microsoft Teams, and video conferencing to stay connected.</p>
 
-            <!-- Post 5 -->
-            <article class="blog-card">
-                <img class="blog-card-image" src="personal-branding-strategy-job-seekers-infographic.jpg" alt="In-demand skills for 2026 career development">
-                <div class="blog-card-body">
-                    <div class="blog-card-meta">January 25, 2026 &nbsp;|&nbsp; <span>Skills</span></div>
-                    <h2>Top 5 In-Demand Skills for 2026</h2>
-                    <p>Stay ahead of the curve by developing the critical skills that employers are actively seeking — from AI literacy to emotional intelligence and beyond.</p>
-                    <a href="blog_post_5.html" class="read-more-btn">Read Article →</a>
-                </div>
-            </article>
+                <h2>4. Set Clear Boundaries</h2>
+                <p>The lines between work and home can easily blur in a hybrid model. To protect your work-life balance, it's essential to set clear boundaries. When your workday is over, log off completely and resist the urge to check emails or notifications.</p>
+                
+                <h2>5. Be Flexible and Adaptable</h2>
+                <p>The hybrid work model is still evolving, and what works today may not work tomorrow. Be prepared to adapt to new technologies, processes, and expectations. A flexible mindset will help you navigate the challenges and embrace the opportunities of this new way of working.</p>
+                <hr>
 
-            <!-- Post 6 -->
-            <article class="blog-card">
-                <img class="blog-card-image" src="recruiter-partnership-career-development-job-search.jpg" alt="Professional working in a hybrid office environment">
-                <div class="blog-card-body">
-                    <div class="blog-card-meta">January 20, 2026 &nbsp;|&nbsp; <span>Work Culture</span></div>
-                    <h2>Thriving in a Hybrid Work Environment</h2>
-                    <p>The hybrid model is here to stay. Discover practical strategies for maintaining productivity, communication, and work-life balance across both settings.</p>
-                    <a href="blog_post_6.html" class="read-more-btn">Read Article →</a>
-                </div>
-            </article>
-
-        </div>
+                <p>By implementing these strategies, you can not only survive but thrive in a hybrid work environment, enjoying the benefits of both in-office collaboration and remote flexibility.</p>
+            </div>
+        </article>
     </main>
 
     <footer class="footer">
         <div class="container footer-grid">
            <div class="footer-col">
                <div class="footer-logo logo">
-                    <svg class="logo-svg" width="40" height="40" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M60 10C87.6142 10 110 32.3858 110 60C110 87.6142 87.6142 110 60 110C32.3858 110 10 87.6142 10 60C10 32.3858 32.3858 10 60 10Z" stroke="#007BFF" stroke-width="12"/>
-                      <path d="M60 30C76.5685 30 90 43.4315 90 60C90 76.5685 76.5685 90 60 90C43.4315 90 30 76.5685 30 60C30 43.4315 43.4315 30 60 30Z" stroke="#28A745" stroke-width="12"/>
-                    </svg>
+                    <img src="logo.webp" alt="Talent Loop Logo" class="logo-image">
                    <span class="logo-text">Talent Loop</span>
                 </div>
                <p>Connecting talent with opportunity.</p>
@@ -229,7 +83,7 @@
                </div>
            </div>
            <div class="footer-col">
-               <h3>Quick Links</h3>
+               <h4>Quick Links</h4>
                <ul>
                    <li><a href="index.html">Home</a></li>
                    <li><a href="about.html">About Us</a></li>
@@ -239,16 +93,16 @@
                </ul>
            </div>
            <div class="footer-col">
-               <h3>Legal</h3>
+               <h4>Legal</h4>
                <ul>
                    <li><a href="privacy.html">Privacy Policy</a></li>
                    <li><a href="legal.html">Terms of Service</a></li>
                </ul>
            </div>
            <div class="footer-col">
-               <h3>Contact Us</h3>
-               <p>contact@talent-loop.org</p>
-               <p>careers@talent-loop.org</p>
+               <h4>Contact Us</h4>
+               <p>info@talentloop.com</p>
+               <p>123 Main Street, New York, NY</p>
            </div>
        </div>
        <div class="footer-bottom">
