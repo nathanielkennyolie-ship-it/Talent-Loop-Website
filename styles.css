@@ -382,3 +382,258 @@ a:hover {
 .social-links a:hover {
     color: #fff;
 }
+
+
+/* =========================================
+   IMAGE SIZING FIXES - Team & Testimonials
+   Prevents large source images from 
+   rendering at full size on screen
+   ========================================= */
+
+/* Team member photos — circular, constrained to 120x120 */
+.member-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 1.25rem;
+    border: 3px solid #007BFF;
+    flex-shrink: 0;
+}
+
+.member-image img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+}
+
+/* Testimonial author photos — circular, constrained to 56x56 */
+.testimonial-author-img {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 2px solid #007BFF;
+}
+
+.testimonial-author-img img {
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+}
+
+/* Team grid layout */
+.team-section {
+    margin-bottom: 4rem;
+    text-align: center;
+}
+
+.team-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 2rem;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+}
+
+.team-member {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    padding: 2rem 1.5rem;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.team-member:hover { transform: translateY(-5px); }
+
+.team-member h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 0.25rem;
+}
+
+.member-title {
+    color: #007BFF;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.member-bio {
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* Testimonials layout */
+.testimonials-section {
+    padding: 5rem 0;
+    background: #f8f9fa;
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+.testimonial-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+}
+
+.testimonial-card:hover { transform: translateY(-4px); }
+
+.testimonial-rating {
+    color: #f5a623;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.testimonial-quote {
+    color: #555;
+    font-style: italic;
+    font-size: 0.98rem;
+    line-height: 1.7;
+    flex-grow: 1;
+    margin-bottom: 1.5rem;
+}
+
+.testimonial-footer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 1.25rem;
+}
+
+.testimonial-author-info h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.2rem;
+}
+
+.testimonial-author-info p {
+    font-size: 0.85rem;
+    color: #777;
+    margin: 0;
+}
+
+/* About page sections */
+.about-content { padding: 5rem 0; }
+
+.content-block {
+    max-width: 800px;
+    margin: 0 auto 3rem;
+}
+
+.content-block h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.mission-vision {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.mv-card {
+    background: #f8f9fa;
+    border-left: 4px solid #007BFF;
+    padding: 2rem;
+    border-radius: 8px;
+}
+
+.mv-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: #007BFF;
+    margin-bottom: 1rem;
+}
+
+.values-section {
+    margin-bottom: 4rem;
+    text-align: center;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+}
+
+.value-item {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+    transition: transform 0.3s ease;
+}
+
+.value-item:hover { transform: translateY(-5px); }
+
+.value-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+
+.value-item h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+/* Page hero (About, Testimonials, etc.) */
+.page-hero {
+    background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
+    color: #fff;
+    padding: 5rem 0;
+    text-align: center;
+}
+
+.page-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.page-subtitle {
+    font-size: 1.2rem;
+    color: rgba(255,255,255,0.9);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Responsive fixes for about/testimonials */
+@media (max-width: 768px) {
+    .mission-vision { grid-template-columns: 1fr; }
+    .team-grid { grid-template-columns: repeat(2, 1fr); }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .page-title { font-size: 2rem; }
+}
+
+@media (max-width: 480px) {
+    .team-grid { grid-template-columns: 1fr; }
+}
