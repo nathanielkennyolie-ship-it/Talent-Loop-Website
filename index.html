@@ -24,13 +24,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <!-- PERFORMANCE FIX: font-display=swap added to reduce render blocking and CLS from web fonts -->
-    <!-- PERFORMANCE FIX: Async font loading — eliminates 780ms render block -->
-    <!-- Load fonts without blocking page render using media="print" trick -->
+    <!-- PERFORMANCE FIX: Async font loading — eliminates render block -->
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
-    <!-- Fallback font stack prevents invisible text while fonts load (fixes CLS) -->
     <style>
         body { font-family: Georgia, 'Times New Roman', serif; }
         .logo-text, h1, h2, h3, h4, h5, h6,
@@ -40,77 +37,27 @@
         }
     </style>
 
-    <!-- PERFORMANCE FIX: Preload LCP hero image — tells browser to fetch it immediately -->
-    <link rel="preload" as="image" fetchpriority="high" href="hero-bg.webp">
+    <!-- PERFORMANCE FIX: Preload LCP hero image (Unsplash URL used in CSS) -->
+    <link rel="preload" as="image" fetchpriority="high" href="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=60&w=1920&fm=webp&auto=format&fit=crop">
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="styles.css?v=2.1">
 
     <style>
-        /* ACCESSIBILITY FIX: Improved contrast for footer links and text */
-        .footer {
-            background: #0d1b3e;
-        }
-        .footer p,
-        .footer-bottom p {
-            color: #d0d8f0;
-        }
-        .footer h3,
-        .footer h4 {
-            color: #ffffff;
-        }
-        .footer ul li a {
-            color: #b8c4e0;
-        }
-        .footer ul li a:hover {
-            color: #D4AF37;
-        }
-        .footer-contact p {
-            color: #b8c4e0;
-        }
-        .footer-contact strong {
-            color: #ffffff;
-        }
-        .footer-bottom {
-            border-top: 1px solid rgba(255,255,255,0.15);
-            padding-top: 1.5rem;
-            margin-top: 2rem;
-        }
-        .footer-bottom p {
-            color: #b8c4e0;
-        }
-
-        /* ACCESSIBILITY FIX: Improved contrast for nav active link */
-        .navbar .nav-menu a.active {
-            color: #ffffff;
-            font-weight: 700;
-        }
-
-        /* ACCESSIBILITY FIX: Improved contrast for CTA link in nav */
-        .navbar .cta-link {
-            background: #D4AF37;
-            color: #1a2b5f !important;
-            padding: 0.4rem 1rem;
-            border-radius: 5px;
-            font-weight: 700;
-        }
-
-
-        /* PERFORMANCE FIX: Compressed Unsplash URL — reduces hero image from ~448KB to ~60KB */
-        .image-background {
-            background-image: url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=60&w=1920&fm=webp&auto=format&fit=crop') !important;
-        }
-
-        /* ACCESSIBILITY FIX: Better contrast for btn-primary */
-        .btn-primary {
-            background: #D4AF37;
-            color: #1a2b5f !important;
-            font-weight: 700;
-        }
-        .btn-primary:hover {
-            background: #c9a227;
-            color: #1a2b5f !important;
-        }
+        .footer { background: #0d1b3e; }
+        .footer p, .footer-bottom p { color: #d0d8f0; }
+        .footer h3, .footer h4 { color: #ffffff; }
+        .footer ul li a { color: #b8c4e0; }
+        .footer ul li a:hover { color: #D4AF37; }
+        .footer-contact p { color: #b8c4e0; }
+        .footer-contact strong { color: #ffffff; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.15); padding-top: 1.5rem; margin-top: 2rem; }
+        .footer-bottom p { color: #b8c4e0; }
+        .navbar .nav-menu a.active { color: #ffffff; font-weight: 700; }
+        .navbar .cta-link { background: #D4AF37; color: #1a2b5f !important; padding: 0.4rem 1rem; border-radius: 5px; font-weight: 700; }
+        .image-background { background-image: url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=60&w=1920&fm=webp&auto=format&fit=crop') !important; }
+        .btn-primary { background: #D4AF37; color: #1a2b5f !important; font-weight: 700; }
+        .btn-primary:hover { background: #c9a227; color: #1a2b5f !important; }
     </style>
 </head>
 <body>
@@ -118,7 +65,6 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
-                <!-- PERFORMANCE FIX: Explicit width and height added to logo to prevent CLS -->
                 <img src="logo.webp" alt="Talent Loop Logo" class="logo-image" width="51" height="40">
                 <span class="logo-text">Talent Loop</span>
             </div>
@@ -151,7 +97,6 @@
             <p class="hero-subtitle">Connecting exceptional talent with extraordinary opportunities across industries</p>
             <div class="hero-cta">
                 <a href="assessment.html" class="btn btn-primary">Start Your Assessment</a>
-                <!-- SEO FIX: "Learn More" replaced with descriptive text to fix non-descriptive link warning -->
                 <a href="about.html" class="btn btn-secondary">About Talent Loop</a>
             </div>
         </div>
@@ -224,15 +169,13 @@
             </div>
         </div>
     </section>
-
-    </main><!-- end main -->
+    </main>
 
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
                     <div class="footer-logo logo">
-                        <!-- PERFORMANCE FIX: Explicit width and height on footer logo too -->
                         <img src="logo.webp" alt="Talent Loop Logo" class="logo-image" width="51" height="40">
                         <span class="logo-text">Talent Loop</span>
                     </div>
@@ -243,7 +186,6 @@
                     </div>
                 </div>
                 <div class="footer-col">
-                    <!-- ACCESSIBILITY FIX: Changed h4 to h3 to fix heading order (was skipping h2→h4) -->
                     <h3>Quick Links</h3>
                     <ul>
                         <li><a href="index.html">Home</a></li>
