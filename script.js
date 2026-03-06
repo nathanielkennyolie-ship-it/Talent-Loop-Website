@@ -29,21 +29,32 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ================================
     // STAT COUNTER ANIMATION
-    // FIX: Old code used strict bounding-rect check requiring ALL 4 edges
-    // inside viewport simultaneously — nearly impossible for a full-width
-    // section. Replaced with IntersectionObserver at threshold:0.3 so
-    // animation fires as soon as 30% of the stats section is visible.
     // ================================
-    function startCounter(element) {
-        const target    = parseInt(element.getAttribute('data-target'));
-        const label     = element.parentElement.querySelector('.stat-label').textContent;
-        const duration  = 2000;
-        const framerate = 50;
-        const increment = target / (duration / framerate);
-        let current = 0;
+    function getSuffix(labelText) {
+        const t = labelText.toLowerCase();
+        if (t.includes('rate'))  return '%';
+        if (t.includes('hour'))  return 'h';
+        return '+';
+    }
 
-        const needsPercent = label.includes('Rate') || label.includes('rate');
-        const needsHours   = label.toLowerCase().includes('hour');
+    function startCounter(el) {
+        // Find the label — look in the parent .stat-item
+        const statItem  = el.closest('.stat-item');
+        const labelEl   = statItem ? statItem.querySelector('.stat-label') : null;
+        const labelText = labelEl ? labelEl.textContent : '';
+        const suffix    = getSuffix(labelText);
+        const target    = parseInt(el.getAttribute('data-target'), 10);
+
+        if (isNaN(target)) return;
+
+        const duration  = 2000; // ms
+        const frameRate = 16;   // ~60fps
+        const steps     = duration / frameRate;
+        const increment = target / steps;
+        let current     = 0;
+
+        // Set initial display so user sees something immediately
+        el.textContent = '0' + suffix;
 
         const timer = setInterval(() => {
             current += increment;
@@ -51,23 +62,27 @@ document.addEventListener('DOMContentLoaded', function() {
                 current = target;
                 clearInterval(timer);
             }
-            let suffix = needsPercent ? '%' : needsHours ? 'h' : '+';
-            element.textContent = Math.floor(current).toLocaleString() + suffix;
-        }, framerate);
+            el.textContent = Math.floor(current).toLocaleString() + suffix;
+        }, frameRate);
     }
 
+    // Use IntersectionObserver — fires when 30% of .stats section is visible
     const statsSection = document.querySelector('.stats');
     if (statsSection) {
         const counterObserver = new IntersectionObserver((entries, obs) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.querySelectorAll('.stat-number[data-target]').forEach(startCounter);
+                    const counters = entry.target.querySelectorAll('.stat-number[data-target]');
+                    console.log('Stats visible — found', counters.length, 'counters');
+                    counters.forEach(startCounter);
                     obs.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.3 });
 
         counterObserver.observe(statsSection);
+    } else {
+        console.warn('No .stats section found on this page');
     }
 
     // ================================
