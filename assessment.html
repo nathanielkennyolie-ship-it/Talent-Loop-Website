@@ -10,6 +10,83 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Affiliate Section Styles */
+        .affiliate-section {
+            margin-top: 2.5rem;
+            padding: 2rem;
+            background: #f8f9ff;
+            border-radius: 12px;
+            border: 1px solid #e0e4f0;
+        }
+        .affiliate-section h3 {
+            font-size: 1.3rem;
+            color: #1a2340;
+            margin-bottom: 0.5rem;
+            font-family: 'Playfair Display', serif;
+        }
+        .affiliate-section p {
+            color: #555;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+        .affiliate-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+        }
+        .affiliate-card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 1.25rem;
+            border: 1px solid #e0e4f0;
+            text-align: center;
+            transition: box-shadow 0.2s;
+        }
+        .affiliate-card:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+        }
+        .affiliate-card .card-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .affiliate-card h4 {
+            font-size: 1rem;
+            color: #1a2340;
+            margin-bottom: 0.4rem;
+        }
+        .affiliate-card p {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        .affiliate-card .btn-affiliate {
+            display: inline-block;
+            background: #2c4ecf;
+            color: #fff;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+        .affiliate-card .btn-affiliate:hover {
+            background: #1a3ab8;
+        }
+        .affiliate-card .btn-affiliate.green {
+            background: #1a8a4a;
+        }
+        .affiliate-card .btn-affiliate.green:hover {
+            background: #146b39;
+        }
+        .affiliate-disclosure {
+            font-size: 0.78rem;
+            color: #999;
+            margin-top: 1rem;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar">
@@ -224,10 +301,55 @@
                 </form>
             </div>
 
+            <!-- ASSESSMENT COMPLETE SECTION WITH AFFILIATE PLACEMENTS -->
             <div class="assessment-complete" id="assessmentComplete" style="display: none;">
                 <div class="success-icon">✓</div>
                 <h2>Assessment Complete!</h2>
                 <div id="completionMessage"></div>
+
+                <!-- AFFILIATE SECTION -->
+                <div class="affiliate-section">
+                    <h3>🚀 Your Next Steps to Landing the Job</h3>
+                    <p>While our team reviews your profile, make sure your application stands out. Here are the tools top candidates are using right now:</p>
+                    <div class="affiliate-cards">
+
+                        <!-- LiveCareer US -->
+                        <div class="affiliate-card">
+                            <div class="card-icon">📄</div>
+                            <h4>Build a Job-Winning Resume</h4>
+                            <p>Create a professional resume in minutes with LiveCareer's AI-powered builder. Used by 10 million+ job seekers.</p>
+                            <a href="https://trkta.com/?a=665&c=7&s1=assessment" target="_blank" rel="nofollow sponsored" class="btn-affiliate">Build My Resume →</a>
+                        </div>
+
+                        <!-- LiveCareer Cover Letter -->
+                        <div class="affiliate-card">
+                            <div class="card-icon">✉️</div>
+                            <h4>Write a Standout Cover Letter</h4>
+                            <p>Most candidates skip the cover letter. Don't be one of them. Stand out with a professional cover letter in minutes.</p>
+                            <a href="https://trkta.com/?a=665&c=698&s1=assessment" target="_blank" rel="nofollow sponsored" class="btn-affiliate">Create Cover Letter →</a>
+                        </div>
+
+                        <!-- FlexJobs -->
+                        <div class="affiliate-card">
+                            <div class="card-icon">💼</div>
+                            <h4>Find Flexible & Remote Jobs</h4>
+                            <p>Access thousands of hand-screened remote, part-time and flexible jobs. Use code <strong>FLEXLIFE</strong> to save up to 30%.</p>
+                            <a href="https://trkta.com/?a=665&c=776&s1=assessment" target="_blank" rel="nofollow sponsored" class="btn-affiliate green">Browse FlexJobs →</a>
+                        </div>
+
+                        <!-- ResumeLab -->
+                        <div class="affiliate-card">
+                            <div class="card-icon">⭐</div>
+                            <h4>Get a Resume Score</h4>
+                            <p>Find out how your resume ranks against ATS filters and get expert recommendations to improve it instantly.</p>
+                            <a href="https://trkta.com/?a=665&c=435&s1=assessment" target="_blank" rel="nofollow sponsored" class="btn-affiliate">Score My Resume →</a>
+                        </div>
+
+                    </div>
+                    <p class="affiliate-disclosure">* Talent Loop may earn a commission if you sign up through these links, at no extra cost to you. We only recommend tools we believe will genuinely help your job search.</p>
+                </div>
+                <!-- END AFFILIATE SECTION -->
+
                 <a href="index.html" class="btn btn-primary" style="margin-top: 2rem;">Return to Home</a>
             </div>
         </div>
@@ -253,7 +375,6 @@
             </div>
         </div>
     </div>
-
 
     <footer class="footer">
         <div class="container">
