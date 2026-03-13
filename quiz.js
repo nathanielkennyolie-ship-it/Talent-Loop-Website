@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const totalQuestions = 10;
     const answers = {};
     let contactInfo = {};
-    const QUICKEN_URL = 'https://quicken.sjv.io/OemEbP';  // ✅ Updated to Quicken
+    const LIVECAREER_URL = 'https://trkta.com/?a=665&c=7&s1=assessment';
     const statesByCountry = {
         'United States': ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming']
     };
@@ -332,20 +332,20 @@ document.addEventListener('DOMContentLoaded', function() {
         }));
 
         if (answers.q10 === 'yes-verify') {
-            window.open(QUICKEN_URL, '_blank');  // ✅ Now opens Quicken
+            window.open(LIVECAREER_URL, '_blank');
             msg.innerHTML = `
                 <div class="priority-badge">⚡ Priority Status Activated!</div>
                 <p style="margin-top: 1.5rem; font-size: 1.2rem;"><strong>Congratulations!</strong> Your profile is in the priority queue.</p>
                 <div style="background: #e7f3ff; padding: 2rem; border-radius: 12px; margin: 2rem 0; border-left: 4px solid var(--primary-color);">
                     <h3 style="color: var(--primary-color); margin-bottom: 1rem;">Next Steps:</h3>
                     <ol style="text-align: left; margin-left: 1.5rem; line-height: 1.8;">
-                        <li>A new window has opened for our trusted partner, <strong>Quicken®</strong>.</li>
-                        <li>Complete the simple sign-up to finalize your priority status.</li>
+                        <li>A new window has opened for <strong>LiveCareer</strong> — the resume builder used by 10 million+ professionals.</li>
+                        <li>Build or update your resume to strengthen your application.</li>
                         <li>Once complete, expect priority matches from our team within <strong>24 hours</strong>.</li>
                     </ol>
                 </div>
                 <p><strong>Didn't see the window?</strong> 
-                <a href="${QUICKEN_URL}" target="_blank" style="color: var(--primary-color); text-decoration: underline;">Click here to continue to Quicken®</a></p>
+                <a href="${LIVECAREER_URL}" target="_blank" rel="nofollow sponsored" style="color: var(--primary-color); text-decoration: underline;">Click here to open LiveCareer</a></p>
             `;
         } else {
             msg.innerHTML = `
