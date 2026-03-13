@@ -44,9 +44,7 @@
             font-family: 'Courier New', Courier, monospace;
             font-size: 0.95rem;
         }
-        .blog-post-content figure {
-            margin: 2.5rem 0;
-        }
+        .blog-post-content figure { margin: 2.5rem 0; }
         .blog-post-content img {
             max-width: 100%;
             height: auto;
@@ -62,7 +60,7 @@
         }
         .video-container {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 ratio */
+            padding-bottom: 56.25%;
             height: 0;
             overflow: hidden;
             max-width: 100%;
@@ -91,6 +89,7 @@
             font-family: "Playfair Display", serif;
             font-size: 1.8rem;
             margin-bottom: 1rem;
+            border-bottom: none;
         }
         .blog-post-content .cta-section p {
             color: rgba(255,255,255,0.92);
@@ -108,7 +107,7 @@
             background-color: #c9a227;
             border-color: #c9a227;
         }
-         .author-box {
+        .author-box {
             margin-top: 4rem;
             padding: 2rem;
             background-color: #f9f9f9;
@@ -129,14 +128,59 @@
             font-size: 1.05rem;
         }
         .pre-interview-checklist li::before {
-            content: '\f0c8'; /* Font Awesome checkbox icon */
+            content: '\f0c8';
             font-family: 'Font Awesome 5 Free';
-            font-weight: 400; /* Regular weight for an empty box */
+            font-weight: 400;
             position: absolute;
             left: 0;
             top: 5px;
             color: var(--primary-color);
             font-size: 1.2rem;
+        }
+        /* Affiliate Box Styles */
+        .affiliate-box {
+            background: #f0f4ff;
+            border: 1px solid #c8d4f8;
+            border-left: 4px solid #2c4ecf;
+            border-radius: 10px;
+            padding: 1.5rem 2rem;
+            margin: 2.5rem 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.2rem;
+        }
+        .affiliate-box .aff-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+        .affiliate-box .aff-content h4 {
+            margin: 0 0 0.4rem 0;
+            font-size: 1.1rem;
+            color: #1a2340;
+            font-family: 'Playfair Display', serif;
+        }
+        .affiliate-box .aff-content p {
+            margin: 0 0 0.8rem 0;
+            font-size: 0.95rem;
+            color: #444;
+        }
+        .affiliate-box .aff-btn {
+            display: inline-block;
+            background: #2c4ecf;
+            color: #fff !important;
+            padding: 0.5rem 1.2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 700;
+            transition: background 0.2s;
+        }
+        .affiliate-box .aff-btn:hover { background: #1a3ab8; }
+        .affiliate-disclosure-note {
+            font-size: 0.78rem;
+            color: #999;
+            margin-top: 0.5rem;
+            font-style: italic;
         }
     </style>
 </head>
@@ -227,13 +271,24 @@
             <pre>
 <strong>Situation:</strong> While working as a customer service manager at XYZ Corp, I received an escalation from a high-value client threatening to cancel their $50K annual contract due to recurring billing errors.
 
-<strong>Task:</strong> My goal was to resolve the issue within 24 hours and and retain the client.
+<strong>Task:</strong> My goal was to resolve the issue within 24 hours and retain the client.
 
 <strong>Action:</strong> I immediately contacted the client, listened to their concerns, audited their account to find the root cause, and presented a resolution plan that included a small discount and a dedicated account manager.
 
 <strong>Result:</strong> We not only retained the client, but they increased their contract by 30% the following year. I also created a new escalation protocol that reduced similar issues by 60% company-wide.
             </pre>
             <p>Prepare 8-10 STAR stories covering leadership, problem-solving, teamwork, conflict resolution, and failure.</p>
+
+            <!-- AFFILIATE BOX 1 — After STAR Method section -->
+            <div class="affiliate-box">
+                <div class="aff-icon">📄</div>
+                <div class="aff-content">
+                    <h4>Is Your Resume Interview-Ready?</h4>
+                    <p>A great interview starts before you walk in the door. Make sure your resume gets you there — build a professional, ATS-optimised resume in minutes with LiveCareer.</p>
+                    <a href="https://trkta.com/?a=665&c=7&s1=blog1" target="_blank" rel="nofollow sponsored" class="aff-btn">Build My Resume with LiveCareer →</a>
+                    <p class="affiliate-disclosure-note">* Affiliate link — we may earn a commission at no extra cost to you. See our <a href="privacy.html">affiliate disclosure</a>.</p>
+                </div>
+            </div>
 
             <h4>5. Prepare Intelligent Questions: Show Strategic Thinking</h4>
             <p>Asking thoughtful questions shows your preparation and strategic thinking. Categories of powerful questions include:</p>
@@ -311,6 +366,17 @@ Best regards,
 [LinkedIn Profile]
             </pre>
 
+            <!-- AFFILIATE BOX 2 — After thank-you email section -->
+            <div class="affiliate-box">
+                <div class="aff-icon">✉️</div>
+                <div class="aff-content">
+                    <h4>Don't Forget Your Cover Letter</h4>
+                    <p>A compelling cover letter dramatically increases your chances of landing an interview. Create a professional, tailored cover letter in minutes with LiveCareer's cover letter builder.</p>
+                    <a href="https://trkta.com/?a=665&c=698&s1=blog1" target="_blank" rel="nofollow sponsored" class="aff-btn">Build My Cover Letter →</a>
+                    <p class="affiliate-disclosure-note">* Affiliate link — we may earn a commission at no extra cost to you. See our <a href="privacy.html">affiliate disclosure</a>.</p>
+                </div>
+            </div>
+
             <h3>The Follow-Up Strategy: Patience with Purpose</h3>
             <p>If you don't hear back by the date they provided (or after a week), send a brief, professional follow-up email. If there's still no response after another week, it's generally best to focus your energy on other opportunities.</p>
 
@@ -347,12 +413,12 @@ Best regards,
                 <li>Prepare 8-10 STAR stories.</li>
                 <li>Draft 10 thoughtful questions to ask.</li>
                 <li>Choose and prepare a professional outfit.</li>
-                <li>Get good sleep and and visualize success.</li>
+                <li>Get good sleep and visualize success.</li>
                 <li>Send a personalized thank-you email within 24 hours.</li>
             </ul>
 
             <div class="cta-section">
-                <h2>Ready to Take Your Career to the next Level?</h2>
+                <h2>Ready to Take Your Career to the Next Level?</h2>
                 <p>At Talent Loop, we specialize in connecting exceptional candidates with outstanding opportunities. Our comprehensive career assessment helps match your skills and goals with positions where you'll thrive.</p>
                 <a href="assessment.html" class="btn btn-primary">Take Our Free Career Assessment</a>
             </div>
@@ -364,7 +430,7 @@ Best regards,
         </div>
     </div>
 
-     <footer class="footer">
+    <footer class="footer">
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
@@ -417,5 +483,6 @@ Best regards,
         </div>
     </footer>
 
+    <script src="script.js?v=2.1"></script>
 </body>
 </html>
