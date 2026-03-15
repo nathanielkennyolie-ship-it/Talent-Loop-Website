@@ -67,42 +67,66 @@ document.addEventListener('DOMContentLoaded', function() {
     // DROPDOWN & ADDRESS LOGIC
     // ================================
 
-    async function initializeDropdowns() {
+    function initializeDropdowns() {
         if (!countrySelect) return;
-        try {
-            const response = await fetch('https://restcountries.com/v3.1/all');
-            if (!response.ok) throw new Error('Country data fetch failed');
-            const countries = await response.json();
-            countries.sort((a, b) => a.name.common.localeCompare(b.name.common));
-            
-            countrySelect.innerHTML = '<option value="">Select a Country</option>'; 
-            countries.forEach(country => {
-                let option = document.createElement('option');
-                option.value = country.name.common;
-                option.textContent = country.name.common;
-                countrySelect.appendChild(option);
-            });
 
-            try {
-                const ipResponse = await fetch('https://get.geojs.io/v1/ip/country.json');
-                if (!ipResponse.ok) throw new Error('IP-based country detection failed');
-                const ipData = await ipResponse.json();
-                const userCountry = ipData.name;
-                if (userCountry && countrySelect.querySelector(`[value="${userCountry}"`)) {
-                    countrySelect.value = userCountry;
+        const allCountries = [
+            "Afghanistan","Albania","Algeria","Andorra","Angola","Antigua and Barbuda",
+            "Argentina","Armenia","Australia","Austria","Azerbaijan","Bahamas","Bahrain",
+            "Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bhutan","Bolivia",
+            "Bosnia and Herzegovina","Botswana","Brazil","Brunei","Bulgaria","Burkina Faso",
+            "Burundi","Cabo Verde","Cambodia","Cameroon","Canada","Central African Republic",
+            "Chad","Chile","China","Colombia","Comoros","Congo (Brazzaville)",
+            "Congo (Kinshasa)","Costa Rica","Croatia","Cuba","Cyprus","Czech Republic",
+            "Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt",
+            "El Salvador","Equatorial Guinea","Eritrea","Estonia","Eswatini","Ethiopia",
+            "Fiji","Finland","France","Gabon","Gambia","Georgia","Germany","Ghana",
+            "Greece","Grenada","Guatemala","Guinea","Guinea-Bissau","Guyana","Haiti",
+            "Honduras","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland",
+            "Israel","Italy","Jamaica","Japan","Jordan","Kazakhstan","Kenya","Kiribati",
+            "Kuwait","Kyrgyzstan","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya",
+            "Liechtenstein","Lithuania","Luxembourg","Madagascar","Malawi","Malaysia",
+            "Maldives","Mali","Malta","Marshall Islands","Mauritania","Mauritius","Mexico",
+            "Micronesia","Moldova","Monaco","Mongolia","Montenegro","Morocco","Mozambique",
+            "Myanmar","Namibia","Nauru","Nepal","Netherlands","New Zealand","Nicaragua",
+            "Niger","Nigeria","North Korea","North Macedonia","Norway","Oman","Pakistan",
+            "Palau","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines",
+            "Poland","Portugal","Qatar","Romania","Russia","Rwanda",
+            "Saint Kitts and Nevis","Saint Lucia","Saint Vincent and the Grenadines",
+            "Samoa","San Marino","Sao Tome and Principe","Saudi Arabia","Senegal","Serbia",
+            "Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","Solomon Islands",
+            "Somalia","South Africa","South Korea","South Sudan","Spain","Sri Lanka",
+            "Sudan","Suriname","Sweden","Switzerland","Syria","Taiwan","Tajikistan",
+            "Tanzania","Thailand","Timor-Leste","Togo","Tonga","Trinidad and Tobago",
+            "Tunisia","Turkey","Turkmenistan","Tuvalu","Uganda","Ukraine",
+            "United Arab Emirates","United Kingdom","United States","Uruguay","Uzbekistan",
+            "Vanuatu","Vatican City","Venezuela","Vietnam","Yemen","Zambia","Zimbabwe"
+        ];
+
+        countrySelect.innerHTML = '<option value="">Select a Country</option>';
+        allCountries.forEach(name => {
+            const option = document.createElement('option');
+            option.value = name;
+            option.textContent = name;
+            countrySelect.appendChild(option);
+        });
+
+        // Try to auto-detect user's country via IP
+        fetch('https://get.geojs.io/v1/ip/country.json')
+            .then(r => r.ok ? r.json() : Promise.reject())
+            .then(data => {
+                if (data.name && countrySelect.querySelector(`[value="${data.name}"]`)) {
+                    countrySelect.value = data.name;
+                } else {
+                    countrySelect.value = 'United States';
                 }
-            } catch (ipError) {
-                console.error('IP-based country detection error:', ipError);
+            })
+            .catch(() => {
                 countrySelect.value = 'United States';
-            }
-            
-            populateStates(countrySelect.value);
-
-        } catch (error) {
-            console.error('Error initializing dropdowns:', error);
-            countrySelect.innerHTML = '<option value="United States">United States</option>';
-            populateStates('United States');
-        }
+            })
+            .finally(() => {
+                populateStates(countrySelect.value);
+            });
     }
 
     function populateStates(country) {
