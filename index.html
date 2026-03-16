@@ -34,9 +34,10 @@
         }
     </style>
 
-    <!-- FIX: Preload hero image with correct mobile size hint -->
-    <link rel="preload" as="image" fetchpriority="high" href="hero-bg.webp"
-          imagesrcset="hero-bg.webp 1x"
+    <!-- Preload correct hero image per device — mobile gets 52KB, desktop gets 122KB -->
+    <link rel="preload" as="image" fetchpriority="high"
+          href="hero-bg.webp"
+          imagesrcset="hero-bg-mobile.webp 768w, hero-bg.webp 1280w"
           imagesizes="100vw">
 
     <link rel="stylesheet" href="styles.css?v=2.2">
@@ -53,7 +54,10 @@
         .footer-bottom p { color: #b8c4e0; }
         .navbar .nav-menu a.active { color: #ffffff; font-weight: 700; }
         .navbar .cta-link { background: #D4AF37; color: #1a2b5f !important; padding: 0.4rem 1rem; border-radius: 5px; font-weight: 700; }
-        .image-background { background-image: url('hero-bg.webp') !important; }
+        .image-background { background-image: url('hero-bg-mobile.webp') !important; }
+        @media (min-width: 769px) {
+            .image-background { background-image: url('hero-bg.webp') !important; }
+        }
         .btn-primary { background: #D4AF37; color: #1a2b5f !important; font-weight: 700; }
         .btn-primary:hover { background: #c9a227; color: #1a2b5f !important; }
     </style>
@@ -184,10 +188,10 @@
                     </div>
                     <p>Bridging the gap between talent and opportunity since 2015.</p>
                     <div class="footer-contact">
-                        <p><strong>General:</strong> <a href="mailto:info@talent-loop.org">info@talent-loop.org</a></p>
-                        <p><strong>Job Seekers:</strong> <a href="mailto:jobs@talent-loop.org">jobs@talent-loop.org</a></p>
-                        <p><strong>Employers:</strong> <a href="mailto:careers@talent-loop.org">careers@talent-loop.org</a></p>
-                        <p><strong>Partners:</strong> <a href="mailto:partners@talent-loop.org">partners@talent-loop.org</a></p>
+                        <p><strong>General:</strong> <a href="/cdn-cgi/l/email-protection#640d0a020b24100508010a1049080b0b144a0b1603"><span class="__cf_email__" data-cfemail="751c1b131a35011419101b0158191a1a055b1a0712">[email&#160;protected]</span></a></p>
+                        <p><strong>Job Seekers:</strong> <a href="/cdn-cgi/l/email-protection#0963666b7a497d68656c677d246566667927667b6e"><span class="__cf_email__" data-cfemail="adc7c2cfdeedd9ccc1c8c3d980c1c2c2dd83c2dfca">[email&#160;protected]</span></a></p>
+                        <p><strong>Employers:</strong> <a href="/cdn-cgi/l/email-protection#6c0f0d1e09091e1f2c180d00090218410003031c42031e0b"><span class="__cf_email__" data-cfemail="e88b899a8d8d9a9ba89c89848d869cc584878798c6879a8f">[email&#160;protected]</span></a></p>
+                        <p><strong>Partners:</strong> <a href="/cdn-cgi/l/email-protection#3b4b5a494f555e49487b4f5a575e554f165754544b1554495c"><span class="__cf_email__" data-cfemail="e3938291978d869190a397828f868d97ce8f8c8c93cd8c9184">[email&#160;protected]</span></a></p>
                     </div>
                 </div>
                 <div class="footer-col">
@@ -213,20 +217,4 @@
                     <h4>Connect With Us</h4>
                     <div class="social-links">
                         <a href="https://www.linkedin.com/company/talentloop-official/" aria-label="LinkedIn">in</a>
-                        <a href="https://x.com/talent_loop/" aria-label="Twitter" target="_blank">𝕏</a>
-                        <a href="#" aria-label="Facebook">f</a>
-                    </div>
-                    <p style="margin-top: 1rem; font-size: 0.9rem;">
-                        <a href="https://talent-loop.org" style="color: #b8c4e0;">www.talent-loop.org</a>
-                    </p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Talent Loop. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="script.js?v=2.1"></script>
-</body>
-</html>
+                        <a href="https://x.com/talent_loop/" aria-label="Twitter" target="_blank
