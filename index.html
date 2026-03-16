@@ -18,12 +18,13 @@
     <meta property="og:url" content="https://talent-loop.org/">
     <meta property="og:site_name" content="Talent Loop">
 
+    <!-- FIX: Single preconnect + single font load (removed duplicate preload that was loading fonts twice) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
 
+    <!-- FIX: Critical font fallback rendered immediately — no FOIT -->
     <style>
         body { font-family: Georgia, 'Times New Roman', serif; }
         .logo-text, h1, h2, h3, h4, h5, h6,
@@ -33,8 +34,12 @@
         }
     </style>
 
-    <link rel="preload" as="image" fetchpriority="high" href="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=60&w=1920&fm=webp&auto=format&fit=crop">
-    <link rel="stylesheet" href="styles.css?v=2.1">
+    <!-- FIX: Preload hero image with correct mobile size hint -->
+    <link rel="preload" as="image" fetchpriority="high" href="hero-bg.webp"
+          imagesrcset="hero-bg.webp 1x"
+          imagesizes="100vw">
+
+    <link rel="stylesheet" href="styles.css?v=2.2">
 
     <style>
         .footer { background: #0d1b3e; }
@@ -48,7 +53,7 @@
         .footer-bottom p { color: #b8c4e0; }
         .navbar .nav-menu a.active { color: #ffffff; font-weight: 700; }
         .navbar .cta-link { background: #D4AF37; color: #1a2b5f !important; padding: 0.4rem 1rem; border-radius: 5px; font-weight: 700; }
-        .image-background { background-image: url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=60&w=1920&fm=webp&auto=format&fit=crop') !important; }
+        .image-background { background-image: url('hero-bg.webp') !important; }
         .btn-primary { background: #D4AF37; color: #1a2b5f !important; font-weight: 700; }
         .btn-primary:hover { background: #c9a227; color: #1a2b5f !important; }
     </style>
@@ -59,6 +64,7 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
+                <!-- FIX: explicit width and height prevents layout shift -->
                 <img src="logo.webp" alt="Talent Loop Logo" class="logo-image" width="51" height="40">
                 <span class="logo-text">Talent Loop</span>
             </div>
@@ -172,7 +178,8 @@
             <div class="footer-grid">
                 <div class="footer-col">
                     <div class="footer-logo logo">
-                        <img src="logo.webp" alt="Talent Loop Logo" class="logo-image">
+                        <!-- FIX: explicit width/height on footer logo too -->
+                        <img src="logo.webp" alt="Talent Loop Logo" class="logo-image" width="51" height="40" loading="lazy">
                         <span class="logo-text">Talent Loop</span>
                     </div>
                     <p>Bridging the gap between talent and opportunity since 2015.</p>
