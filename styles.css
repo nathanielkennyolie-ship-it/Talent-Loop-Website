@@ -53,6 +53,7 @@ a:hover {
 
 .logo-image {
     height: 40px;
+    width: 51px;
     margin-right: 0.5rem;
 }
 
@@ -143,6 +144,9 @@ a:hover {
     background-image: url('hero-bg.webp');
     background-size: cover;
     background-position: center;
+    /* FIX: GPU compositing hint for faster paint */
+    will-change: transform;
+    transform: translateZ(0);
 }
 
 .image-overlay {
@@ -298,8 +302,10 @@ a:hover {
     background-image: url('https://images.unsplash.com/photo-1497366811353-6870744d04b2?q=60&w=1920&fm=webp&auto=format&fit=crop');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
+    /* FIX: was background-attachment: fixed — causes massive mobile repaint */
+    background-attachment: scroll;
     z-index: -1;
+    will-change: transform;
 }
 
 .features::after {
@@ -336,8 +342,10 @@ a:hover {
     background-image: url('https://images.unsplash.com/photo-1557682250-33bd709cbe85?q=60&w=1920&fm=webp&auto=format&fit=crop');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
+    /* FIX: was background-attachment: fixed */
+    background-attachment: scroll;
     z-index: -1;
+    will-change: transform;
 }
 
 .stats::after {
@@ -400,8 +408,10 @@ a:hover {
     background-image: url('https://images.unsplash.com/photo-1497366811353-6870744d04b2?q=60&w=1920&fm=webp&auto=format&fit=crop');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
+    /* FIX: was background-attachment: fixed */
+    background-attachment: scroll;
     z-index: -1;
+    will-change: transform;
 }
 
 .cta-section::after {
@@ -1380,6 +1390,16 @@ a:hover {
     .contact-form-container { padding: 1.5rem; }
     .modal-content { padding: 1.75rem 1.5rem; }
     .modal-actions { flex-direction: column; }
+
+    /* FIX: Completely disable fixed backgrounds on mobile
+       background-attachment:fixed forces full-page repaints on scroll
+       which destroys LCP and Speed Index on mobile */
+    .features::before,
+    .stats::before,
+    .cta-section::before {
+        background-attachment: scroll;
+        background-size: cover;
+    }
 }
 
 @media (max-width: 480px) {
