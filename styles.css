@@ -141,12 +141,10 @@ a:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('hero-bg.webp') !important;
-    background-size: cover;
-    background-position: center;
-    /* FIX: GPU compositing hint for faster paint */
+    /* Background image handled by <picture> element in HTML */
     will-change: transform;
     transform: translateZ(0);
+    overflow: hidden;
 }
 
 .image-overlay {
@@ -1335,10 +1333,7 @@ a:hover {
    RESPONSIVE
    ================================ */
 @media (max-width: 768px) {
-    /* FIX: Serve smaller hero image on mobile — 47 KB vs 607 KB */
-    .image-background {
-        background-image: url('hero-bg-mobile.webp') !important;
-    }
+    /* Hero image served by <picture> element — see index.html */
 
     /* Mobile nav */
     .hamburger {
