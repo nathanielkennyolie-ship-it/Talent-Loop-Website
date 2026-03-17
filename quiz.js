@@ -40,6 +40,47 @@ document.addEventListener('DOMContentLoaded', function() {
     const answers = {};
     let contactInfo = {};
     const LIVECAREER_URL = 'https://trkta.com/?a=665&c=7&s1=assessment';
+
+    // ================================
+    // MAILCHIMP INTEGRATION
+    // Audience ID: 8838ed494e | Server: us12
+    // ================================
+    async function addToMailchimp(contact, isPriority) {
+        const MC_U      = '54d3d5c75eaf726af589fa9d637c09eb';
+        const MC_LIST   = '8838ed494e';
+        const MC_SERVER = 'us12';
+
+        try {
+            const callbackName = 'mc_cb_' + Date.now();
+            const params = new URLSearchParams({
+                u:       MC_U,
+                id:      MC_LIST,
+                EMAIL:   contact.email      || '',
+                FNAME:   contact.firstName  || '',
+                LNAME:   contact.lastName   || '',
+                PHONE:   contact.phone      || '',
+                PSTATUS: isPriority ? 'Priority' : 'Standard',
+                b_:      '',
+                subscribe: 'Subscribe'
+            });
+
+            await new Promise((resolve) => {
+                window[callbackName] = function(data) {
+                    console.log('Mailchimp:', data.result, data.msg);
+                    delete window[callbackName];
+                    if (s && s.parentNode) s.parentNode.removeChild(s);
+                    resolve(data);
+                };
+                const s = document.createElement('script');
+                s.src = 'https://' + MC_SERVER + '.list-manage.com/subscribe/post-json?' + params.toString() + '&c=' + callbackName;
+                document.head.appendChild(s);
+                setTimeout(() => resolve({ result: 'timeout' }), 6000);
+            });
+        } catch (err) {
+            console.warn('Mailchimp (non-blocking):', err);
+        }
+    }
+
     const statesByCountry = {
         'United States': ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming']
     };
@@ -347,6 +388,10 @@ document.addEventListener('DOMContentLoaded', function() {
         assessmentContainer.style.display = 'none';
         assessmentComplete.style.display = 'block';
         const msg = document.getElementById('completionMessage');
+
+        // Send lead to Mailchimp immediately (non-blocking)
+        const isPriority = answers.q10 === 'yes-verify';
+        addToMailchimp(contactInfo, isPriority);
 
         localStorage.setItem('talent_loop_assessment', JSON.stringify({
             timestamp: new Date().toISOString(),
