@@ -141,7 +141,7 @@ a:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('hero-bg.webp');
+    background-image: url('hero-bg.webp') !important;
     background-size: cover;
     background-position: center;
     /* FIX: GPU compositing hint for faster paint */
@@ -1335,6 +1335,11 @@ a:hover {
    RESPONSIVE
    ================================ */
 @media (max-width: 768px) {
+    /* FIX: Serve smaller hero image on mobile — 47 KB vs 607 KB */
+    .image-background {
+        background-image: url('hero-bg-mobile.webp') !important;
+    }
+
     /* Mobile nav */
     .hamburger {
         display: flex;
