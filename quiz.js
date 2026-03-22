@@ -86,12 +86,26 @@ document.addEventListener('DOMContentLoaded', function() {
             email:      contact.email      || ''
         };
 
-        // Email 1 — send immediately
+        // Email 1 — send via Make.com immediately (delay_hours: 0)
         try {
-            await emailjs.send('service_indy5vg', 'template_wzwgl1d', params);
-            console.log('Email 1 sent successfully');
+            await fetch('https://hook.us2.make.com/owpg2ykinc0zpi2lhclu9beqzchsgq2n', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    to_email:    params.to_email,
+                    first_name:  params.first_name,
+                    last_name:   params.last_name,
+                    phone:       params.phone,
+                    country:     params.country,
+                    status:      params.status,
+                    email:       params.email,
+                    template_id: 'template_wzwgl1d',
+                    email_type:  'email_1_immediate'
+                })
+            });
+            console.log('Email 1 queued via Make.com');
         } catch (err) {
-            console.warn('Email 1 failed (non-blocking):', err);
+            console.warn('Email 1 Make.com failed (non-blocking):', err);
         }
 
         // Email 2 — triggered via Make.com after 24 hour delay
