@@ -42,44 +42,83 @@ document.addEventListener('DOMContentLoaded', function() {
     const LIVECAREER_URL = 'https://trkta.com/?a=665&c=7&s1=assessment';
 
     // ================================
-    // MAILCHIMP INTEGRATION
-    // Audience ID: 8838ed494e | Server: us12
+    // EMAILJS INTEGRATION
+    // Service: service_indy5vg
+    // Template 1 (immediate): template_wzwgl1d
+    // Template 2 (24hr delay): template_57x777t
     // ================================
-    async function addToMailchimp(contact, isPriority) {
-        const MC_U      = '54d3d5c75eaf726af589fa9d637c09eb';
-        const MC_LIST   = '8838ed494e';
-        const MC_SERVER = 'us12';
+    function initEmailJS() {
+        // Retry init up to 10 times with 500ms intervals
+        // in case SDK hasn't loaded yet when DOMContentLoaded fires
+        let attempts = 0;
+        const tryInit = setInterval(() => {
+            attempts++;
+            if (typeof emailjs !== 'undefined') {
+                emailjs.init('bxxx6SAVqvCeW_bdO');
+                console.log('EmailJS initialised successfully');
+                clearInterval(tryInit);
+            } else if (attempts >= 10) {
+                console.warn('EmailJS SDK failed to load after 10 attempts');
+                clearInterval(tryInit);
+            }
+        }, 500);
+    }
 
+    async function sendAssessmentEmails(contact, isPriority) {
+        // Wait for EmailJS to be ready (up to 5 seconds)
+        let waited = 0;
+        while (typeof emailjs === 'undefined' && waited < 5000) {
+            await new Promise(r => setTimeout(r, 200));
+            waited += 200;
+        }
+        if (typeof emailjs === 'undefined') {
+            console.warn('EmailJS not loaded after waiting — skipping email send');
+            return;
+        }
+
+        const params = {
+            to_email:   contact.email      || '',
+            first_name: contact.firstName  || 'there',
+            last_name:  contact.lastName   || '',
+            phone:      contact.phone      || '',
+            country:    contact.country    || '',
+            status:     isPriority ? 'Priority Verified' : 'Standard',
+            email:      contact.email      || ''
+        };
+
+        // Email 1 — send immediately
         try {
-            const callbackName = 'mc_cb_' + Date.now();
-            const params = new URLSearchParams({
-                u:       MC_U,
-                id:      MC_LIST,
-                EMAIL:   contact.email      || '',
-                FNAME:   contact.firstName  || '',
-                LNAME:   contact.lastName   || '',
-                PHONE:   contact.phone      || '',
-                PSTATUS: isPriority ? 'Priority' : 'Standard',
-                b_:      '',
-                subscribe: 'Subscribe'
-            });
-
-            await new Promise((resolve) => {
-                window[callbackName] = function(data) {
-                    console.log('Mailchimp:', data.result, data.msg);
-                    delete window[callbackName];
-                    if (s && s.parentNode) s.parentNode.removeChild(s);
-                    resolve(data);
-                };
-                const s = document.createElement('script');
-                s.src = 'https://' + MC_SERVER + '.list-manage.com/subscribe/post-json?' + params.toString() + '&c=' + callbackName;
-                document.head.appendChild(s);
-                setTimeout(() => resolve({ result: 'timeout' }), 6000);
-            });
+            await emailjs.send('service_indy5vg', 'template_wzwgl1d', params);
+            console.log('Email 1 sent successfully');
         } catch (err) {
-            console.warn('Mailchimp (non-blocking):', err);
+            console.warn('Email 1 failed (non-blocking):', err);
+        }
+
+        // Email 2 — triggered via Make.com after 24 hour delay
+        // Sends contact data to Make.com webhook which waits 24hrs then fires Email 2
+        try {
+            await fetch('https://hook.us2.make.com/owpg2ykinc0zpi2lhclu9beqzchsgq2n', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    to_email:   params.to_email,
+                    first_name: params.first_name,
+                    last_name:  params.last_name,
+                    phone:      params.phone,
+                    country:    params.country,
+                    status:     params.status,
+                    email:      params.email,
+                    service_id:  'service_indy5vg',
+                    template_id: 'template_57x777t',
+                    public_key:  'bxxx6SAVqvCeW_bdO'
+                })
+            });
+            console.log('Make.com webhook triggered — Email 2 scheduled for 24hrs');
+        } catch (err) {
+            console.warn('Make.com webhook failed (non-blocking):', err);
         }
     }
+
 
     const statesByCountry = {
         'United States': ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming']
@@ -90,6 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // ================================
 
     async function initialize() {
+        initEmailJS();
         await initializeDropdowns();
         setupEventListeners();
         if (window.location.pathname.includes('assessment.html')) {
@@ -389,9 +429,9 @@ document.addEventListener('DOMContentLoaded', function() {
         assessmentComplete.style.display = 'block';
         const msg = document.getElementById('completionMessage');
 
-        // Send lead to Mailchimp immediately (non-blocking)
+        // Send emails via EmailJS (non-blocking)
         const isPriority = answers.q10 === 'yes-verify';
-        addToMailchimp(contactInfo, isPriority);
+        sendAssessmentEmails(contactInfo, isPriority);
 
         localStorage.setItem('talent_loop_assessment', JSON.stringify({
             timestamp: new Date().toISOString(),
