@@ -87,6 +87,8 @@
             text-align: center;
         }
     </style>
+    <!-- EmailJS SDK — loaded early in head for reliability -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <nav class="navbar">
@@ -430,6 +432,8 @@
     </footer>
 
     <script src="script.js?v=2.1"></script>
+    <!-- EmailJS SDK — must load before quiz.js -->
+    
     <script src="quiz.js?v=2.1"></script>
 </body>
 </html>
