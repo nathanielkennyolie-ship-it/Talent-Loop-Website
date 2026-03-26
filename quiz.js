@@ -41,20 +41,13 @@ document.addEventListener('DOMContentLoaded', function() {
     let contactInfo = {};
     const LIVECAREER_URL = 'https://trkta.com/?a=665&c=7&s1=assessment';
 
-    // N8N Webhook Configuration with CORS Proxy
-    // Railway blocks preflight OPTIONS requests, so we use a CORS proxy
-    const CORS_PROXY_URL = 'https://corsproxy.io/?';
+    // N8N Webhook Configuration - DIRECT URL (no CORS proxy)
     const N8N_WEBHOOK_URL = 'https://n8n-production-52b4.up.railway.app/webhook/talent-loop-assessment';
 
     // ================================
     // EMAILJS INTEGRATION
-    // Service: service_indy5vg
-    // Template 1 (immediate): template_wzwgl1d
-    // Template 2 (24hr delay): template_57x777t
     // ================================
     function initEmailJS() {
-        // Retry init up to 10 times with 500ms intervals
-        // in case SDK hasn't loaded yet when DOMContentLoaded fires
         let attempts = 0;
         const tryInit = setInterval(() => {
             attempts++;
@@ -70,15 +63,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     async function sendAssessmentEmails(contact, isPriority) {
-        // Wait for EmailJS to be ready (up to 5 seconds)
+        // Wait for EmailJS
         let waited = 0;
         while (typeof emailjs === 'undefined' && waited < 5000) {
             await new Promise(r => setTimeout(r, 200));
             waited += 200;
         }
         if (typeof emailjs === 'undefined') {
-            console.warn('EmailJS not loaded after waiting — skipping email send');
-            return;
+            console.warn('EmailJS not loaded after waiting');
         }
 
         const params = {
@@ -91,56 +83,46 @@ document.addEventListener('DOMContentLoaded', function() {
             email:      contact.email      || ''
         };
 
-        // Email 1 — send via N8N immediately (delay_hours: 0)
-        // Using CORS proxy to bypass Railway's preflight blocking
+        // Email 1 - Immediate (DIRECT to N8N, no CORS proxy)
         try {
-            await fetch(CORS_PROXY_URL + encodeURIComponent(N8N_WEBHOOK_URL), {
+            console.log('Sending Email 1 to N8N...');
+            const response = await fetch(N8N_WEBHOOK_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    to_email:    params.to_email,
-                    first_name:  params.first_name,
-                    last_name:   params.last_name,
-                    phone:       params.phone,
-                    country:     params.country,
-                    status:      params.status,
-                    email:       params.email,
+                    ...params,
                     template_id: 'template_wzwgl1d',
-                    email_type:  'email_1_immediate'
+                    email_type: 'email_1_immediate'
                 })
             });
-            console.log('Email 1 queued via N8N');
+            console.log('Email 1 response status:', response.status);
+            const responseText = await response.text();
+            console.log('Email 1 response body:', responseText);
         } catch (err) {
-            console.warn('Email 1 N8N failed (non-blocking):', err);
+            console.warn('Email 1 N8N failed:', err);
         }
 
-        // Email 2 — triggered via N8N after 24 hour delay
-        // Sends contact data to N8N webhook which waits 24hrs then fires Email 2
-        // Using CORS proxy to bypass Railway's preflight blocking
+        // Email 2 - Delayed (DIRECT to N8N, no CORS proxy)
         try {
-            await fetch(CORS_PROXY_URL + encodeURIComponent(N8N_WEBHOOK_URL), {
+            console.log('Sending Email 2 to N8N...');
+            const response = await fetch(N8N_WEBHOOK_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    to_email:   params.to_email,
-                    first_name: params.first_name,
-                    last_name:  params.last_name,
-                    phone:      params.phone,
-                    country:    params.country,
-                    status:     params.status,
-                    email:      params.email,
+                    ...params,
                     service_id:  'service_indy5vg',
                     template_id: 'template_57x777t',
                     public_key:  'bxxx6SAVqvCeW_bdO',
                     email_type:  'email_2_delayed'
                 })
             });
-            console.log('N8N webhook triggered — Email 2 scheduled for 24hrs');
+            console.log('Email 2 response status:', response.status);
+            const responseText = await response.text();
+            console.log('Email 2 response body:', responseText);
         } catch (err) {
-            console.warn('N8N webhook failed (non-blocking):', err);
+            console.warn('Email 2 N8N failed:', err);
         }
     }
-
 
     const statesByCountry = {
         'United States': ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming']
@@ -214,7 +196,6 @@ document.addEventListener('DOMContentLoaded', function() {
             countrySelect.appendChild(option);
         });
 
-        // Try to auto-detect user's country via IP
         fetch('https://get.geojs.io/v1/ip/country.json')
             .then(r => r.ok ? r.json() : Promise.reject())
             .then(data => {
@@ -281,7 +262,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ================================
-    // EVENT LISTENERS (The Core Logic)
+    // EVENT LISTENERS
     // ================================
     function setupEventListeners() {
         if (contactInfoForm) {
@@ -334,7 +315,6 @@ document.addEventListener('DOMContentLoaded', function() {
             radio.addEventListener('change', function() {
                 const questionNumber = parseInt(this.closest('.question-slide').dataset.question, 10);
                 const value = this.value;
-
                 answers[`q${questionNumber}`] = value;
 
                 if (questionNumber === totalQuestions && value === 'no-standard') {
@@ -451,7 +431,6 @@ document.addEventListener('DOMContentLoaded', function() {
         assessmentComplete.style.display = 'block';
         const msg = document.getElementById('completionMessage');
 
-        // Send emails via N8N (non-blocking)
         const isPriority = answers.q10 === 'yes-verify';
         sendAssessmentEmails(contactInfo, isPriority);
 
@@ -459,10 +438,10 @@ document.addEventListener('DOMContentLoaded', function() {
             timestamp: new Date().toISOString(),
             contactInfo: contactInfo,
             answers: answers,
-            status: answers.q10 === 'yes-verify' ? 'priority' : 'standard'
+            status: isPriority ? 'priority' : 'standard'
         }));
 
-        if (answers.q10 === 'yes-verify') {
+        if (isPriority) {
             window.open(LIVECAREER_URL, '_blank');
             msg.innerHTML = `
                 <div class="priority-badge">⚡ Priority Status Activated!</div>
