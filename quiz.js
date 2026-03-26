@@ -41,6 +41,11 @@ document.addEventListener('DOMContentLoaded', function() {
     let contactInfo = {};
     const LIVECAREER_URL = 'https://trkta.com/?a=665&c=7&s1=assessment';
 
+    // N8N Webhook Configuration with CORS Proxy
+    // Railway blocks preflight OPTIONS requests, so we use a CORS proxy
+    const CORS_PROXY_URL = 'https://corsproxy.io/?';
+    const N8N_WEBHOOK_URL = 'https://n8n-production-52b4.up.railway.app/webhook/talent-loop-assessment';
+
     // ================================
     // EMAILJS INTEGRATION
     // Service: service_indy5vg
@@ -86,9 +91,10 @@ document.addEventListener('DOMContentLoaded', function() {
             email:      contact.email      || ''
         };
 
-        // Email 1 — send via Make.com immediately (delay_hours: 0)
+        // Email 1 — send via N8N immediately (delay_hours: 0)
+        // Using CORS proxy to bypass Railway's preflight blocking
         try {
-            await fetch('https://n8n-production-52b4.up.railway.app/webhook/talent-loop-assessment', {
+            await fetch(CORS_PROXY_URL + encodeURIComponent(N8N_WEBHOOK_URL), {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -103,15 +109,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     email_type:  'email_1_immediate'
                 })
             });
-            console.log('Email 1 queued via Make.com');
+            console.log('Email 1 queued via N8N');
         } catch (err) {
-            console.warn('Email 1 Make.com failed (non-blocking):', err);
+            console.warn('Email 1 N8N failed (non-blocking):', err);
         }
 
-        // Email 2 — triggered via Make.com after 24 hour delay
-        // Sends contact data to Make.com webhook which waits 24hrs then fires Email 2
+        // Email 2 — triggered via N8N after 24 hour delay
+        // Sends contact data to N8N webhook which waits 24hrs then fires Email 2
+        // Using CORS proxy to bypass Railway's preflight blocking
         try {
-            await fetch('https://n8n-production-52b4.up.railway.app/webhook/talent-loop-assessment', {
+            await fetch(CORS_PROXY_URL + encodeURIComponent(N8N_WEBHOOK_URL), {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -124,12 +131,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     email:      params.email,
                     service_id:  'service_indy5vg',
                     template_id: 'template_57x777t',
-                    public_key:  'bxxx6SAVqvCeW_bdO'
+                    public_key:  'bxxx6SAVqvCeW_bdO',
+                    email_type:  'email_2_delayed'
                 })
             });
-            console.log('Make.com webhook triggered — Email 2 scheduled for 24hrs');
+            console.log('N8N webhook triggered — Email 2 scheduled for 24hrs');
         } catch (err) {
-            console.warn('Make.com webhook failed (non-blocking):', err);
+            console.warn('N8N webhook failed (non-blocking):', err);
         }
     }
 
@@ -150,7 +158,7 @@ document.addEventListener('DOMContentLoaded', function() {
             showInitialForm();
         }
     }
-    
+
     function showInitialForm() {
         if(personalInfoForm) personalInfoForm.style.display = 'block';
         if(assessmentIntro) assessmentIntro.style.display = 'none';
@@ -248,7 +256,7 @@ document.addEventListener('DOMContentLoaded', function() {
             stateSelect.appendChild(placeholder);
         }
     }
-    
+
     async function getRealAddressSuggestions(query) {
         const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&addressdetails=1&limit=5&countrycodes=us`;
         try {
@@ -389,7 +397,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         if (countrySelect.querySelector('[value="United States"]')) {
                              countrySelect.value = "United States";
                              populateStates("United States");
-                             if (stateSelect.querySelector(`[value="${addr.state}"`)) {
+                             if (stateSelect.querySelector(`[value="${addr.state}"]`)) {
                                  stateSelect.value = addr.state;
                              }
                         }
@@ -443,7 +451,7 @@ document.addEventListener('DOMContentLoaded', function() {
         assessmentComplete.style.display = 'block';
         const msg = document.getElementById('completionMessage');
 
-        // Send emails via EmailJS (non-blocking)
+        // Send emails via N8N (non-blocking)
         const isPriority = answers.q10 === 'yes-verify';
         sendAssessmentEmails(contactInfo, isPriority);
 
