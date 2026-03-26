@@ -40,99 +40,42 @@ document.addEventListener('DOMContentLoaded', function() {
     const answers = {};
     let contactInfo = {};
     const LIVECAREER_URL = 'https://trkta.com/?a=665&c=7&s1=assessment';
+    
+    // N8N Webhook URL - Replace with your production URL when ready
+    const N8N_WEBHOOK_URL = 'https://n8n-production-52b4.up.railway.app/webhook/talent-loop-assessment';
 
     // ================================
-    // EMAILJS INTEGRATION
-    // Service: service_indy5vg
-    // Template 1 (immediate): template_wzwgl1d
-    // Template 2 (24hr delay): template_57x777t
+    // N8N INTEGRATION
+    // Sends data to n8n automation workflow
     // ================================
-    function initEmailJS() {
-        // Retry init up to 10 times with 500ms intervals
-        // in case SDK hasn't loaded yet when DOMContentLoaded fires
-        let attempts = 0;
-        const tryInit = setInterval(() => {
-            attempts++;
-            if (typeof emailjs !== 'undefined') {
-                emailjs.init('bxxx6SAVqvCeW_bdO');
-                console.log('EmailJS initialised successfully');
-                clearInterval(tryInit);
-            } else if (attempts >= 10) {
-                console.warn('EmailJS SDK failed to load after 10 attempts');
-                clearInterval(tryInit);
-            }
-        }, 500);
-    }
-
-    async function sendAssessmentEmails(contact, isPriority) {
-        // Wait for EmailJS to be ready (up to 5 seconds)
-        let waited = 0;
-        while (typeof emailjs === 'undefined' && waited < 5000) {
-            await new Promise(r => setTimeout(r, 200));
-            waited += 200;
-        }
-        if (typeof emailjs === 'undefined') {
-            console.warn('EmailJS not loaded after waiting — skipping email send');
-            return;
-        }
-
+    async function sendToN8N(contact, isPriority) {
         const params = {
-            to_email:   contact.email      || '',
-            first_name: contact.firstName  || 'there',
-            last_name:  contact.lastName   || '',
-            phone:      contact.phone      || '',
-            country:    contact.country    || '',
-            status:     isPriority ? 'Priority Verified' : 'Standard',
-            email:      contact.email      || ''
+            name: contact.firstName + ' ' + contact.lastName,
+            email: contact.email,
+            q10_answer: isPriority ? 'Yes' : 'No',
+            timestamp: new Date().toISOString(),
+            firstName: contact.firstName,
+            lastName: contact.lastName,
+            phone: contact.phone || '',
+            country: contact.country || ''
         };
 
-        // Email 1 — send via Make.com immediately (delay_hours: 0)
         try {
-            await fetch('https://hook.us2.make.com/owpg2ykinc0zpi2lhclu9beqzchsgq2n', {
+            const response = await fetch(N8N_WEBHOOK_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    to_email:    params.to_email,
-                    first_name:  params.first_name,
-                    last_name:   params.last_name,
-                    phone:       params.phone,
-                    country:     params.country,
-                    status:      params.status,
-                    email:       params.email,
-                    template_id: 'template_wzwgl1d',
-                    email_type:  'email_1_immediate'
-                })
+                body: JSON.stringify(params)
             });
-            console.log('Email 1 queued via Make.com');
+            
+            if (response.ok) {
+                console.log('Data sent to n8n successfully');
+            } else {
+                console.warn('n8n webhook returned error:', response.status);
+            }
         } catch (err) {
-            console.warn('Email 1 Make.com failed (non-blocking):', err);
-        }
-
-        // Email 2 — triggered via Make.com after 24 hour delay
-        // Sends contact data to Make.com webhook which waits 24hrs then fires Email 2
-        try {
-            await fetch('https://hook.us2.make.com/owpg2ykinc0zpi2lhclu9beqzchsgq2n', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    to_email:   params.to_email,
-                    first_name: params.first_name,
-                    last_name:  params.last_name,
-                    phone:      params.phone,
-                    country:    params.country,
-                    status:     params.status,
-                    email:      params.email,
-                    service_id:  'service_indy5vg',
-                    template_id: 'template_57x777t',
-                    public_key:  'bxxx6SAVqvCeW_bdO'
-                })
-            });
-            console.log('Make.com webhook triggered — Email 2 scheduled for 24hrs');
-        } catch (err) {
-            console.warn('Make.com webhook failed (non-blocking):', err);
+            console.warn('n8n webhook failed (non-blocking):', err);
         }
     }
-
 
     const statesByCountry = {
         'United States': ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming']
@@ -143,7 +86,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // ================================
 
     async function initialize() {
-        initEmailJS();
         await initializeDropdowns();
         setupEventListeners();
         if (window.location.pathname.includes('assessment.html')) {
@@ -443,9 +385,9 @@ document.addEventListener('DOMContentLoaded', function() {
         assessmentComplete.style.display = 'block';
         const msg = document.getElementById('completionMessage');
 
-        // Send emails via EmailJS (non-blocking)
+        // Send data to n8n automation
         const isPriority = answers.q10 === 'yes-verify';
-        sendAssessmentEmails(contactInfo, isPriority);
+        sendToN8N(contactInfo, isPriority);
 
         localStorage.setItem('talent_loop_assessment', JSON.stringify({
             timestamp: new Date().toISOString(),
