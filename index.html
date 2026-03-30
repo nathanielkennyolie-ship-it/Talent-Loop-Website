@@ -18,13 +18,11 @@
     <meta property="og:url" content="https://talent-loop.org/">
     <meta property="og:site_name" content="Talent Loop">
 
-    <!-- FIX: Single preconnect + single font load (removed duplicate preload that was loading fonts twice) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
 
-    <!-- FIX: Critical font fallback rendered immediately — no FOIT -->
     <style>
         body { font-family: Georgia, 'Times New Roman', serif; }
         .logo-text, h1, h2, h3, h4, h5, h6,
@@ -34,7 +32,6 @@
         }
     </style>
 
-    <!-- Preload correct hero image per device — mobile gets 52KB, desktop gets 122KB -->
     <link rel="preload" as="image" fetchpriority="high"
           href="hero-bg.webp"
           imagesrcset="hero-bg-mobile.webp 768w, hero-bg.webp 1280w"
@@ -54,7 +51,6 @@
         .footer-bottom p { color: #b8c4e0; }
         .navbar .nav-menu a.active { color: #ffffff; font-weight: 700; }
         .navbar .cta-link { background: #D4AF37; color: #1a2b5f !important; padding: 0.4rem 1rem; border-radius: 5px; font-weight: 700; }
-        /* Hero background handled in styles.css */
         .btn-primary { background: #D4AF37; color: #1a2b5f !important; font-weight: 700; }
         .btn-primary:hover { background: #c9a227; color: #1a2b5f !important; }
     </style>
@@ -65,18 +61,17 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
-                <!-- FIX: explicit width and height prevents layout shift -->
                 <img src="logo.webp" alt="Talent Loop Logo" class="logo-image" width="51" height="40">
                 <span class="logo-text">Talent Loop</span>
             </div>
             <ul class="nav-menu" id="navMenu">
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="testimonials.html">Testimonials</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="jobs.html">Jobs</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="assessment.html" class="cta-link">Take Assessment</a></li>
+                <li><a href="/" class="active">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/testimonials">Testimonials</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/jobs">Jobs</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/assessment" class="cta-link">Take Assessment</a></li>
             </ul>
             <div class="hamburger" id="hamburger">
                 <span></span>
@@ -106,8 +101,8 @@
                 </h1>
                 <p class="hero-subtitle">Connecting exceptional talent with extraordinary opportunities across industries</p>
                 <div class="hero-cta">
-                    <a href="assessment.html" class="btn btn-primary">Start Your Assessment</a>
-                    <a href="about.html" class="btn btn-secondary">About Talent Loop</a>
+                    <a href="/assessment" class="btn btn-primary">Start Your Assessment</a>
+                    <a href="/about" class="btn btn-secondary">About Talent Loop</a>
                 </div>
             </div>
             <div class="scroll-indicator">
@@ -175,7 +170,7 @@
                 <div class="cta-content">
                     <h2>Ready to Take the Next Step?</h2>
                     <p>Complete our comprehensive assessment to unlock premium opportunities and get priority status with verified credentials.</p>
-                    <a href="assessment.html" class="btn btn-primary btn-large">Begin Assessment</a>
+                    <a href="/assessment" class="btn btn-primary btn-large">Begin Assessment</a>
                 </div>
             </div>
         </section>
@@ -187,7 +182,6 @@
             <div class="footer-grid">
                 <div class="footer-col">
                     <div class="footer-logo logo">
-                        <!-- FIX: explicit width/height on footer logo too -->
                         <img src="logo.webp" alt="Talent Loop Logo" class="logo-image" width="51" height="40" loading="lazy">
                         <span class="logo-text">Talent Loop</span>
                     </div>
@@ -202,20 +196,20 @@
                 <div class="footer-col">
                     <h4>Quick Links</h4>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="testimonials.html">Testimonials</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="assessment.html">Assessment</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/testimonials">Testimonials</a></li>
+                        <li><a href="/blog">Blog</a></li>
+                        <li><a href="/assessment">Assessment</a></li>
+                        <li><a href="/contact">Contact Us</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4>Legal</h4>
                     <ul>
-                        <li><a href="privacy.html">Privacy Policy</a></li>
-                        <li><a href="legal.html">Terms &amp; Conditions</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="/privacy">Privacy Policy</a></li>
+                        <li><a href="/legal">Terms &amp; Conditions</a></li>
+                        <li><a href="/contact">Contact Us</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
