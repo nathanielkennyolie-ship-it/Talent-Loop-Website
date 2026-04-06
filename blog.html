@@ -3,90 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="canonical" href="https://talent-loop.org/assessment">
-    <title>Career Assessment - Talent Loop</title>
+    <link rel="canonical" href="https://talent-loop.org/blog">
+    <title>Blog & Career Resources - Talent Loop</title>
+    <meta name="description" content="Explore career advice, job search tips, interview strategies, and workplace insights from Talent Loop's recruitment experts.">
     <link rel="stylesheet" href="styles.css?v=2.1">
-    <link rel="stylesheet" href="address_autocomplete.css?v=2.1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        .affiliate-section {
-            margin-top: 2.5rem;
-            padding: 2rem;
-            background: #f8f9ff;
-            border-radius: 12px;
-            border: 1px solid #e0e4f0;
-        }
-        .affiliate-section h3 {
-            font-size: 1.3rem;
-            color: #1a2340;
-            margin-bottom: 0.5rem;
-            font-family: 'Playfair Display', serif;
-        }
-        .affiliate-section p {
-            color: #555;
-            font-size: 0.95rem;
-            margin-bottom: 1.5rem;
-        }
-        .affiliate-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1rem;
-        }
-        .affiliate-card {
-            background: #fff;
-            border-radius: 10px;
-            padding: 1.25rem;
-            border: 1px solid #e0e4f0;
+        .blog-hero {
+            background: linear-gradient(135deg, #1a2b5f 0%, #0d1b3e 100%);
+            color: white;
+            padding: 5rem 2rem 3rem;
             text-align: center;
-            transition: box-shadow 0.2s;
         }
-        .affiliate-card:hover {
-            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-        }
-        .affiliate-card .card-icon {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-        .affiliate-card h4 {
-            font-size: 1rem;
-            color: #1a2340;
-            margin-bottom: 0.4rem;
-        }
-        .affiliate-card p {
-            font-size: 0.85rem;
-            color: #666;
+        .blog-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
             margin-bottom: 1rem;
         }
-        .affiliate-card .btn-affiliate {
-            display: inline-block;
-            background: #2c4ecf;
-            color: #fff;
-            padding: 0.6rem 1.2rem;
-            border-radius: 6px;
+        .blog-hero p {
+            font-size: 1.1rem;
+            opacity: 0.85;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .blog-index {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+        .blog-card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.14);
+        }
+        .blog-card-image-link {
+            display: block;
+            overflow: hidden;
+        }
+        .blog-card-image {
+            width: 100%;
+            height: 210px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+            display: block;
+        }
+        .blog-card-image-link:hover .blog-card-image {
+            transform: scale(1.04);
+        }
+        .blog-card-body {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .blog-card-meta {
+            font-size: 0.82rem;
+            color: #888;
+            margin-bottom: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .blog-card-meta span {
+            color: #1a2b5f;
+            font-weight: 600;
+        }
+        .blog-card h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            color: #1a2b5f;
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+        }
+        .blog-card h2 a {
+            color: #1a2b5f;
             text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .blog-card h2 a:hover {
+            color: #007BFF;
+        }
+        .blog-card p {
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.7;
+            flex: 1;
+            margin-bottom: 1.25rem;
+        }
+        .read-more-btn {
+            display: inline-block;
+            background: #1a2b5f;
+            color: #fff;
+            padding: 0.55rem 1.25rem;
+            border-radius: 6px;
             font-size: 0.9rem;
             font-weight: 600;
-            transition: background 0.2s;
+            text-decoration: none;
+            align-self: flex-start;
+            transition: background 0.2s ease;
         }
-        .affiliate-card .btn-affiliate:hover {
-            background: #1a3ab8;
+        .read-more-btn:hover {
+            background: #D4AF37;
+            color: #1a2b5f;
         }
-        .affiliate-card .btn-affiliate.green {
-            background: #1a8a4a;
-        }
-        .affiliate-card .btn-affiliate.green:hover {
-            background: #146b39;
-        }
-        .affiliate-disclosure {
-            font-size: 0.78rem;
-            color: #999;
-            margin-top: 1rem;
-            text-align: center;
+        @media (max-width: 600px) {
+            .blog-hero h1 { font-size: 2rem; }
+            .blog-grid { grid-template-columns: 1fr; }
         }
     </style>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" crossorigin="anonymous"></script>
 <base target="_blank">
 </head>
 <body>
@@ -99,11 +137,11 @@
             <ul class="nav-menu" id="navMenu">
                 <li><a href="/">Home</a></li>
                 <li><a href="/about">About Us</a></li>
-                <li><a href="/testimonials">Testimonials</a></li>
-                <li><a href="/blog">Blog</a></li>
                 <li><a href="/jobs">Jobs</a></li>
+                        <li><a href="/testimonials">Testimonials</a></li>
+                <li><a href="/blog" class="active">Blog</a></li>
                 <li><a href="/contact">Contact</a></li>
-                <li><a href="/assessment" class="cta-link active">Take Assessment</a></li>
+                <li><a href="/assessment" class="cta-link">Take Assessment</a></li>
             </ul>
             <div class="hamburger" id="hamburger">
                 <span></span>
@@ -113,270 +151,88 @@
         </div>
     </nav>
 
-    <section class="assessment-section">
-        <div class="container">
-
-            <div class="personal-info-form" id="personalInfoForm">
-                <h1 class="page-title">Let's Get Started</h1>
-                <p class="intro-text">Please provide your contact information before beginning the assessment.</p>
-                <form id="contactInfoForm" class="contact-info-form">
-                    <div class="form-row">
-                        <div class="form-group"><label for="firstName">First Name *</label><input type="text" id="firstName" name="firstName" placeholder="John" required></div>
-                        <div class="form-group"><label for="lastName">Last Name *</label><input type="text" id="lastName" name="lastName" placeholder="Doe" required></div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group"><label for="email">Email Address *</label><input type="email" id="email" name="email" placeholder="john.doe@example.com" required></div>
-                        <div class="form-group"><label for="phone">Phone Number *</label><input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567" required></div>
-                    </div>
-                    <div class="form-group" style="position: relative;">
-                        <label for="address">Street Address *</label>
-                        <input type="text" id="address" name="address" placeholder="Start typing your address..." required autocomplete="off">
-                        <div id="addressSuggestions" class="address-suggestions"></div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group"><label for="city">City *</label><input type="text" id="city" name="city" placeholder="New York" required></div>
-                        <div class="form-group"><label for="zipCode">ZIP/Postal Code *</label><input type="text" id="zipCode" name="zipCode" placeholder="10001" required></div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group"><label for="country">Country *</label><select id="country" name="country" required></select></div>
-                        <div class="form-group"><label for="state">State/Province *</label><select id="state" name="state" required disabled><option value="">Select Country First</option></select></div>
-                    </div>
-                    <div class="form-group"><label for="resume">Upload Resume (Optional)</label><input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx"><small>Accepted formats: PDF, DOC, DOCX (Max 5MB)</small></div>
-                    <button type="submit" class="btn btn-primary btn-large">Continue to Assessment</button>
-                </form>
-            </div>
-
-            <div class="assessment-intro" id="assessmentIntro" style="display: none;">
-                <h1 class="page-title">Career Assessment</h1>
-                <p class="intro-text">This comprehensive evaluation will help us understand your skills, experience, and career goals to match you with the perfect opportunities.</p>
-                <div class="assessment-benefits">
-                    <div class="benefit-item"><div class="benefit-icon">1</div><div class="benefit-text"><h3>Personalized Matches</h3><p>Get job recommendations tailored to you.</p></div></div>
-                    <div class="benefit-item"><div class="benefit-icon">2</div><div class="benefit-text"><h3>Understand Your Strengths</h3><p>Identify your key skills and areas for growth.</p></div></div>
-                    <div class="benefit-item"><div class="benefit-icon">3</div><div class="benefit-text"><h3>Fast-Track Your Search</h3><p>Our data helps recruiters find you faster.</p></div></div>
-                </div>
-                <button class="btn btn-primary btn-large" id="startAssessment">Start Assessment</button>
-            </div>
-
-            <div class="assessment-container" id="assessmentContainer" style="display: none;">
-                <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-                <p class="progress-text">Question <span id="currentQuestion">1</span> of 10</p>
-
-                <form id="assessmentForm">
-                    <!-- Question 1 -->
-                    <div class="question-slide active" data-question="1">
-                        <h2 class="question-title">Which statement best describes your current job search status?</h2>
-                        <div class="question-options">
-                            <label class="option-card"><input type="radio" name="q1" value="active" required><span class="option-content"><span class="option-title">Actively Looking</span><span class="option-desc">I am actively applying and interviewing for a new role.</span></span></label>
-                            <label class="option-card"><input type="radio" name="q1" value="passive"><span class="option-content"><span class="option-title">Passively Browsing</span><span class="option-desc">I am open to new opportunities but not actively searching.</span></span></label>
-                            <label class="option-card"><input type="radio" name="q1" value="employed"><span class="option-content"><span class="option-title">Employed & Satisfied</span><span class="option-desc">I am happy in my current role but like to keep my options open.</span></span></label>
-                            <label class="option-card"><input type="radio" name="q1" value="student"><span class="option-content"><span class="option-title">Student / Just Graduated</span><span class="option-desc">I am looking to start my career.</span></span></label>
-                        </div>
-                    </div>
-
-                    <!-- Question 2 -->
-                    <div class="question-slide" data-question="2">
-                        <h2 class="question-title">How many years of professional experience do you have in your primary field?</h2>
-                        <div class="question-options">
-                            <label class="option-card"><input type="radio" name="q2" value="0-2" required><span class="option-content"><span class="option-title">0-2 Years</span></span></label>
-                            <label class="option-card"><input type="radio" name="q2" value="3-5"><span class="option-content"><span class="option-title">3-5 Years</span></span></label>
-                            <label class="option-card"><input type="radio" name="q2" value="6-10"><span class="option-content"><span class="option-title">6-10 Years</span></span></label>
-                            <label class="option-card"><input type="radio" name="q2" value="10+"><span class="option-content"><span class="option-title">10+ Years</span></span></label>
-                        </div>
-                    </div>
-
-                    <!-- Question 3 -->
-                    <div class="question-slide" data-question="3">
-                        <h2 class="question-title">Which industry are you most interested in?</h2>
-                        <div class="question-options">
-                            <label class="option-card"><input type="radio" name="q3" value="tech" required><span class="option-content"><span class="option-title">Technology & IT</span></span></label>
-                            <label class="option-card"><input type="radio" name="q3" value="healthcare"><span class="option-content"><span class="option-title">Healthcare & Medical</span></span></label>
-                            <label class="option-card"><input type="radio" name="q3" value="finance"><span class="option-content"><span class="option-title">Finance & Accounting</span></span></label>
-                            <label class="option-card"><input type="radio" name="q3" value="creative"><span class="option-content"><span class="option-title">Creative & Marketing</span></span></label>
-                             <label class="option-card"><input type="radio" name="q3" value="other"><span class="option-content"><span class="option-title">Other</span></span></label>
-                        </div>
-                    </div>
-
-                    <!-- Question 4 -->
-                    <div class="question-slide" data-question="4">
-                        <h2 class="question-title">What is your ideal work environment?</h2>
-                        <div class="question-options">
-                            <label class="option-card"><input type="radio" name="q4" value="remote" required><span class="option-content"><span class="option-title">Fully Remote</span><span class="option-desc">I want to work from home full-time.</span></span></label>
-                            <label class="option-card"><input type="radio" name="q4" value="hybrid"><span class="option-content"><span class="option-title">Hybrid</span><span class="option-desc">A mix of in-office and remote work.</span></span></label>
-                            <label class="option-card"><input type="radio" name="q4" value="in-office"><span class="option-content"><span class="option-title">In-Office</span><span class="option-desc">I prefer working at a company office.</span></span></label>
-                        </div>
-                    </div>
-
-                    <!-- Question 5 -->
-                    <div class="question-slide" data-question="5">
-                        <h2 class="question-title">What is your desired job level?</h2>
-                        <div class="question-options">
-                            <label class="option-card"><input type="radio" name="q5" value="entry" required><span class="option-content"><span class="option-title">Entry-Level / Intern</span></span></label>
-                            <label class="option-card"><input type="radio" name="q5" value="mid"><span class="option-content"><span class="option-title">Mid-Level</span></span></label>
-                            <label class="option-card"><input type="radio" name="q5" value="senior"><span class="option-content"><span class="option-title">Senior / Lead</span></span></label>
-                            <label class="option-card"><input type="radio" name="q5" value="executive"><span class="option-content"><span class="option-title">Manager / Executive</span></span></label>
-                        </div>
-                    </div>
-
-                    <!-- Question 6 -->
-                    <div class="question-slide" data-question="6">
-                        <h2 class="question-title">What is your target annual salary (USD)?</h2>
-                        <div class="question-options">
-                            <label class="option-card"><input type="radio" name="q6" value="<60k" required><span class="option-content"><span class="option-title">Under $60,000</span></span></label>
-                            <label class="option-card"><input type="radio" name="q6" value="60-90k"><span class="option-content"><span class="option-title">$60,000 - $90,000</span></span></label>
-                            <label class="option-card"><input type="radio" name="q6" value="90-120k"><span class="option-content"><span class="option-title">$90,000 - $120,000</span></span></label>
-                            <label class="option-card"><input type="radio" name="q6" value="120k+"><span class="option-content"><span class="option-title">Over $120,000</span></span></label>
-                        </div>
-                    </div>
-
-                    <!-- Question 7 -->
-                     <div class="question-slide" data-question="7">
-                        <h2 class="question-title">How soon are you looking to start a new position?</h2>
-                        <div class="question-options">
-                            <label class="option-card"><input type="radio" name="q7" value="immediately" required><span class="option-content"><span class="option-title">Immediately</span></span></label>
-                            <label class="option-card"><input type="radio" name="q7" value="1-2_weeks"><span class="option-content"><span class="option-title">In 1-2 weeks</span></span></label>
-                            <label class="option-card"><input type="radio" name="q7" value="1_month"><span class="option-content"><span class="option-title">In the next month</span></span></label>
-                             <label class="option-card"><input type="radio" name="q7" value="flexible"><span class="option-content"><span class="option-title">Flexible timeline</span></span></label>
-                        </div>
-                    </div>
-
-                     <!-- Question 8 -->
-                     <div class="question-slide" data-question="8">
-                        <h2 class="question-title">Are you open to relocating?</h2>
-                        <div class="question-options">
-                            <label class="option-card"><input type="radio" name="q8" value="yes" required><span class="option-content"><span class="option-title">Yes, anywhere</span></span></label>
-                            <label class="option-card"><input type="radio" name="q8" value="yes_specific"><span class="option-content"><span class="option-title">Yes, to specific locations</span></span></label>
-                            <label class="option-card"><input type="radio" name="q8" value="no"><span class="option-content"><span class="option-title">No, I want to stay in my current area</span></span></label>
-                        </div>
-                    </div>
-
-                    <!-- Question 9 -->
-                    <div class="question-slide" data-question="9">
-                        <h2 class="question-title">How did you hear about Talent Loop?</h2>
-                        <div class="question-options">
-                            <label class="option-card"><input type="radio" name="q9" value="social" required><span class="option-content"><span class="option-title">Social Media (LinkedIn, Facebook, etc.)</span></span></label>
-                            <label class="option-card"><input type="radio" name="q9" value="search"><span class="option-content"><span class="option-title">Search Engine (Google, Bing, etc.)</span></span></label>
-                            <label class="option-card"><input type="radio" name="q9" value="referral"><span class="option-content"><span class="option-title">Friend or Colleague</span></span></label>
-                            <label class="option-card"><input type="radio" name="q9" value="other"><span class="option-content"><span class="option-title">Other</span></span></label>
-                        </div>
-                    </div>
-
-                    <!-- Question 10 - Priority Verification -->
-                    <div class="question-slide" data-question="10">
-                        <h2 class="question-title">Fast-Track Your Application with Priority Verification</h2>
-                        <div class="priority-info">
-                            <div class="priority-badge">⚡ Optional: Get Seen First</div>
-                            <p class="priority-description">Our system matches thousands of candidates to jobs daily. <strong>Priority Verification</strong> places your profile at the top of the queue for our recruiters and partner companies.</p>
-                            <div class="priority-benefits">
-                                <h4>Benefits include:</h4>
-                                <ul>
-                                    <li>✔ Top placement in recruiter searches</li>
-                                    <li>✔ 5x faster response times</li>
-                                    <li>✔ Direct matching with hiring managers</li>
-                                </ul>
-                            </div>
-                            <p class="verification-note">This service is powered by <strong>LiveCareer</strong>, the leading resume builder trusted by 10 million+ job seekers worldwide.</p>
-                        </div>
-                        <h3 style="margin: 2rem 0 1.5rem; text-align:center;">Would you like to fast-track your application?</h3>
-                        <div class="question-options verification-options">
-                            <label class="option-card priority-option">
-                                <input type="radio" name="q10" value="yes-verify" required>
-                                <span class="option-content">
-                                    <span class="option-title">Yes, verify me for Priority Status</span>
-                                    <span class="option-desc">Continue to <strong>LiveCareer</strong> to build a professional resume and fast-track your application. This gives you top placement and a 5x faster response time.</span>
-                                </span>
-                            </label>
-                            <label class="option-card">
-                                <input type="radio" name="q10" value="no-standard">
-                                <span class="option-content">
-                                    <span class="option-title">No, I'll use the standard application</span>
-                                    <span class="option-desc">Your application will be processed in the standard queue (typically 7-10 business days for review).</span>
-                                </span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="question-navigation">
-                        <button type="button" class="btn btn-secondary" id="prevBtn" style="display: none;">← Previous</button>
-                        <button type="button" class="btn btn-primary" id="nextBtn">Next →</button>
-                        <button type="submit" class="btn btn-primary" id="submitBtn" style="display: none;">Complete Assessment</button>
-                    </div>
-                </form>
-            </div>
-
-            <!-- ASSESSMENT COMPLETE SECTION WITH AFFILIATE PLACEMENTS -->
-            <div class="assessment-complete" id="assessmentComplete" style="display: none;">
-                <div class="success-icon">✓</div>
-                <h2>Assessment Complete!</h2>
-                <div id="completionMessage"></div>
-
-                <!-- AFFILIATE SECTION -->
-                <div class="affiliate-section">
-                    <h3>🚀 Your Next Steps to Landing the Job</h3>
-                    <p>While our team reviews your profile, make sure your application stands out. Here are the tools top candidates are using right now:</p>
-                    <div class="affiliate-cards">
-
-                        <!-- LiveCareer US -->
-                        <div class="affiliate-card">
-                            <div class="card-icon">📄</div>
-                            <h4>Build a Job-Winning Resume</h4>
-                            <p>Create a professional resume in minutes with LiveCareer's AI-powered builder. Used by 10 million+ job seekers.</p>
-                            <a href="https://trkta.com/?a=665&c=7&s1=assessment" target="_blank" rel="nofollow sponsored" class="btn-affiliate">Build My Resume →</a>
-                        </div>
-
-                        <!-- LiveCareer Cover Letter -->
-                        <div class="affiliate-card">
-                            <div class="card-icon">✉️</div>
-                            <h4>Write a Standout Cover Letter</h4>
-                            <p>Most candidates skip the cover letter. Don't be one of them. Stand out with a professional cover letter in minutes.</p>
-                            <a href="https://trkta.com/?a=665&c=698&s1=assessment" target="_blank" rel="nofollow sponsored" class="btn-affiliate">Create Cover Letter →</a>
-                        </div>
-
-                        <!-- FlexJobs -->
-                        <div class="affiliate-card">
-                            <div class="card-icon">💼</div>
-                            <h4>Find Flexible & Remote Jobs</h4>
-                            <p>Access thousands of hand-screened remote, part-time and flexible jobs. Use code <strong>FLEXLIFE</strong> to save up to 30%.</p>
-                            <a href="https://trkta.com/?a=665&c=776&s1=assessment" target="_blank" rel="nofollow sponsored" class="btn-affiliate green">Browse FlexJobs →</a>
-                        </div>
-
-                        <!-- ResumeLab -->
-                        <div class="affiliate-card">
-                            <div class="card-icon">⭐</div>
-                            <h4>Get a Resume Score</h4>
-                            <p>Find out how your resume ranks against ATS filters and get expert recommendations to improve it instantly.</p>
-                            <a href="https://trkta.com/?a=665&c=435&s1=assessment" target="_blank" rel="nofollow sponsored" class="btn-affiliate">Score My Resume →</a>
-                        </div>
-
-                    </div>
-                    <p class="affiliate-disclosure">* Talent Loop may earn a commission if you sign up through these links, at no extra cost to you. We only recommend tools we believe will genuinely help your job search.</p>
-                </div>
-                <!-- END AFFILIATE SECTION -->
-
-                <a href="/" class="btn btn-primary" style="margin-top: 2rem;">Return to Home</a>
-            </div>
-        </div>
+    <section class="blog-hero">
+        <h1>Career Resources & Insights</h1>
+        <p>Expert advice on job searching, interviews, salary negotiation, and career development — all from our recruitment specialists.</p>
     </section>
 
-    <!-- Opt-Out Warning Modal -->
-    <div id="optOutModal" class="modal-overlay">
-        <div class="modal-content">
-            <span class="close-modal" id="closeModal">&times;</span>
-            <div class="modal-header">
-                <div class="modal-icon">⚠️</div>
-                <h3 class="modal-title">Are You Absolutely Sure?</h3>
-            </div>
-            <p class="modal-body">
-                Standard applicants often wait <strong>7-10 business days</strong> for a review. By choosing Priority Verification, your profile gets reviewed by our team within <strong>24 hours</strong>.
-            </p>
-            <div class="modal-highlight">
-                <p><strong>Over 85% of verified candidates are matched with an opportunity.</strong></p>
-            </div>
-            <div class="modal-actions">
-                <button id="confirmOptOut" class="btn btn-secondary">No Thanks, I'll Wait</button>
-                <button id="confirmOptIn" class="btn btn-primary btn-large">Yes, Fast-Track My Application!</button>
-            </div>
+    <main class="blog-index">
+        <div class="blog-grid">
+
+            <article class="blog-card">
+                <a href="/blog-post-1" class="blog-card-image-link">
+                    <img class="blog-card-image" src="interview-panel-featured.webp" alt="Candidate in a panel job interview with two interviewers">
+                </a>
+                <div class="blog-card-body">
+                    <div class="blog-card-meta">February 2026 &nbsp;|&nbsp; <span>Interview Tips</span></div>
+                    <h2><a href="/blog-post-1">Mastering the Art of the Job Interview: The Ultimate Guide to Interview Success in 2026</a></h2>
+                    <p>Learn proven strategies, common interview questions, the STAR method, and expert tips to confidently ace your next interview and land your dream job.</p>
+                    <a href="/blog-post-1" class="read-more-btn">Read Article →</a>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <a href="/blog-post-2" class="blog-card-image-link">
+                    <img class="blog-card-image" src="hidden-job-market-unadvertised-opportunities-2024.webp" alt="Professional discovering hidden job market opportunities through networking">
+                </a>
+                <div class="blog-card-body">
+                    <div class="blog-card-meta">June 2024 &nbsp;|&nbsp; <span>Career Advice</span></div>
+                    <h2><a href="/blog-post-2">The Hidden Job Market: Your Ultimate Guide to Unlocking Unadvertised Career Opportunities</a></h2>
+                    <p>Up to 70% of jobs are never advertised. Discover how to tap into the hidden job market through strategic networking and recruiter partnerships.</p>
+                    <a href="/blog-post-2" class="read-more-btn">Read Article →</a>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <a href="/blog-post-3" class="blog-card-image-link">
+                    <img class="blog-card-image" src="linkedin-profile-optimization-job-search-2024.webp" alt="LinkedIn profile optimization for job search">
+                </a>
+                <div class="blog-card-body">
+                    <div class="blog-card-meta">June 2024 &nbsp;|&nbsp; <span>Career Advice</span></div>
+                    <h2><a href="/blog-post-3">LinkedIn Profile Optimization: How to Get Found by Recruiters and Land More Interviews</a></h2>
+                    <p>Your LinkedIn profile is your digital first impression. Learn how to optimize every section to attract recruiters and unlock more career opportunities.</p>
+                    <a href="/blog-post-3" class="read-more-btn">Read Article →</a>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <a href="/blog-post-4" class="blog-card-image-link">
+                    <img class="blog-card-image" src="salary-negotiation-job-offer-2026.webp" alt="Professional confidently negotiating salary with hiring manager">
+                </a>
+                <div class="blog-card-body">
+                    <div class="blog-card-meta">January 28, 2026 &nbsp;|&nbsp; <span>Compensation</span></div>
+                    <h2><a href="/blog-post-4">How to Negotiate Your Salary: A Complete Guide</a></h2>
+                    <p>Master the art of salary negotiation with proven strategies, real-world scripts, and expert tactics to ensure you're always paid what you're worth.</p>
+                    <a href="/blog-post-4" class="read-more-btn">Read Article →</a>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <a href="/blog-post-5" class="blog-card-image-link">
+                    <img class="blog-card-image" src="in-demand-skills-2026-career.webp" alt="In-demand skills for 2026 career development">
+                </a>
+                <div class="blog-card-body">
+                    <div class="blog-card-meta">January 25, 2026 &nbsp;|&nbsp; <span>Skills</span></div>
+                    <h2><a href="/blog-post-5">Top 5 In-Demand Skills for 2026</a></h2>
+                    <p>Stay ahead of the curve by developing the critical skills that employers are actively seeking — from AI literacy to emotional intelligence and beyond.</p>
+                    <a href="/blog-post-5" class="read-more-btn">Read Article →</a>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <a href="/blog-post-6" class="blog-card-image-link">
+                    <img class="blog-card-image" src="hybrid-work-environment-2026.webp" alt="Professional working in a hybrid office environment">
+                </a>
+                <div class="blog-card-body">
+                    <div class="blog-card-meta">January 20, 2026 &nbsp;|&nbsp; <span>Work Culture</span></div>
+                    <h2><a href="/blog-post-6">Thriving in a Hybrid Work Environment</a></h2>
+                    <p>The hybrid model is here to stay. Discover practical strategies for maintaining productivity, communication, and work-life balance across both settings.</p>
+                    <a href="/blog-post-6" class="read-more-btn">Read Article →</a>
+                </div>
+            </article>
+
         </div>
-    </div>
+    </main>
 
     <footer class="footer">
         <div class="container">
@@ -432,7 +288,5 @@
         </div>
     </footer>
 
-    <script src="script.js?v=2.1"></script>
-    <script src="quiz.js?v=2.1"></script>
 </body>
 </html>
