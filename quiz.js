@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const totalQuestions = 10;
     const answers = {};
     let contactInfo = {};
-    const LIVECAREER_URL = 'https://trkta.com/?a=665&c=7&s1=assessment';
+    const AMERICANCAREERGUIDE_URL = 'https://www.mz1ay3ch.com/CDCH2K3/DTBLSPG/?source_id=talent-loop&sub1=assessment';
 
     // N8N Webhook Configuration - DIRECT URL (no CORS proxy)
     const N8N_WEBHOOK_URL = 'https://n8n-production-52b4.up.railway.app/webhook/talent-loop-assessment';
@@ -442,20 +442,20 @@ document.addEventListener('DOMContentLoaded', function() {
         }));
 
         if (isPriority) {
-            window.open(LIVECAREER_URL, '_blank');
+            window.open(AMERICANCAREERGUIDE_URL, '_blank');
             msg.innerHTML = `
                 <div class="priority-badge">⚡ Priority Status Activated!</div>
                 <p style="margin-top: 1.5rem; font-size: 1.2rem;"><strong>Congratulations!</strong> Your profile is in the priority queue.</p>
                 <div style="background: #e7f3ff; padding: 2rem; border-radius: 12px; margin: 2rem 0; border-left: 4px solid var(--primary-color);">
                     <h3 style="color: var(--primary-color); margin-bottom: 1rem;">Next Steps:</h3>
                     <ol style="text-align: left; margin-left: 1.5rem; line-height: 1.8;">
-                        <li>A new window has opened for <strong>LiveCareer</strong> — the resume builder used by 10 million+ professionals.</li>
-                        <li>Build or update your resume to strengthen your application.</li>
+                        <li>A new window has opened for <strong>TheAmericanCareerGuide-Super Jobs</strong> — discover top job opportunities matched to your profile.</li>
+                        <li>Browse and apply to positions that fit your skills and goals.</li>
                         <li>Once complete, expect priority matches from our team within <strong>24 hours</strong>.</li>
                     </ol>
                 </div>
                 <p><strong>Didn't see the window?</strong> 
-                <a href="${LIVECAREER_URL}" target="_blank" rel="nofollow sponsored" style="color: var(--primary-color); text-decoration: underline;">Click here to open LiveCareer</a></p>
+                <a href="${AMERICANCAREERGUIDE_URL}" target="_blank" rel="nofollow sponsored" style="color: var(--primary-color); text-decoration: underline;">Click here to open TheAmericanCareerGuide-Super Jobs</a></p>
             `;
         } else {
             msg.innerHTML = `
