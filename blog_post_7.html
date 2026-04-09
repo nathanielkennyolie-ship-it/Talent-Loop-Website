@@ -76,9 +76,9 @@
     }
     .hero h1 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-size: clamp(1.8rem, 4vw, 3rem);
       font-weight: 900;
-      line-height: 1.1;
+      line-height: 1.15;
       color: #ffffff;
       margin-bottom: 20px;
     }
@@ -444,6 +444,34 @@
       .hero { padding: 56px 18px 52px; }
       .article-body { padding: 40px 18px 60px; }
       .cta-box { padding: 24px 20px; }
+      .featured-image img { height: 250px; }
+    }
+
+    /* ── FULL WIDTH FEATURED IMAGE ── */
+    .featured-image {
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      padding: 0;
+      display: block;
+    }
+    .featured-image img {
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      border: none;
+    }
+    .featured-image figcaption {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+      padding: 20px 24px;
+      background: var(--surface);
+      margin: 0;
+      font-style: italic;
+      border-bottom: 1px solid var(--border);
     }
   </style>
 
@@ -496,7 +524,7 @@
   <figure class="featured-image">
     <img src="netflix-headquarters-featured.webp" 
          alt="Netflix Headquarters in Los Gatos, California">
-    <figcaption>Netflix Headquarters in Los Gatos, California — the global hub of streaming innovation</figcaption>
+    <figcaption>Inside Netflix headquarters: Modern meeting spaces designed for collaboration and creativity</figcaption>
   </figure>
 
   <!-- Author Bar -->
