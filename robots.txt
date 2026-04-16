@@ -1,5 +1,5 @@
 User-agent: *
-Allow: /
+Disallow:
 
 # Block AI training crawlers
 User-agent: GPTBot
@@ -14,4 +14,4 @@ Disallow: /
 User-agent: anthropic-ai
 Disallow: /
 
-Sitemap: https://www.talent-loop.org/sitemap.xml
+Sitemap: https://talent-loop.org/sitemap.xml
