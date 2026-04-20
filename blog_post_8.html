@@ -88,9 +88,84 @@
         .post-img.float-right img { height: 230px; }
         .cf::after { content: ''; display: table; clear: both; }
 
-        /* VIDEO */
-        .video-wrap { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 10px; margin: 1.8em 0 0.5em; background: #0d1b3e; box-shadow: 0 8px 30px rgba(0,0,0,0.15); }
-        .video-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; border-radius: 10px; }
+        /* =====================================================
+           VIDEO EMBED — FIXED
+           Uses a click-to-load approach so CSP is never
+           triggered until the user intentionally plays.
+           The thumbnail is always visible, fixing the
+           "blank box" problem caused by iframe lazy-loading.
+        ===================================================== */
+        .video-wrap {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 10px;
+            margin: 1.8em 0 0.5em;
+            background: #0d1b3e;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            cursor: pointer;
+        }
+        .video-wrap iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+            border-radius: 10px;
+        }
+        /* Thumbnail overlay shown BEFORE user clicks */
+        .video-wrap .yt-thumb {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            transition: opacity 0.3s ease;
+            z-index: 2;
+        }
+        .video-wrap .yt-thumb::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.25);
+            border-radius: 10px;
+        }
+        /* Play button */
+        .video-wrap .yt-play {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 72px;
+            height: 72px;
+            background: rgba(255,0,0,0.9);
+            border-radius: 50%;
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            transition: background 0.2s, transform 0.2s;
+        }
+        .video-wrap:hover .yt-play {
+            background: #ff0000;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        .video-wrap .yt-play::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 13px 0 13px 26px;
+            border-color: transparent transparent transparent #fff;
+            margin-left: 6px;
+        }
+        /* Once loaded, hide the overlay */
+        .video-wrap.loaded .yt-thumb,
+        .video-wrap.loaded .yt-play { display: none; }
 
         /* AUTHOR */
         .author-card { display: flex; align-items: center; gap: 14px; background: #f7f7f7; border: 1px solid #e2e2e2; border-radius: 10px; padding: 14px 20px; margin-bottom: 36px; }
@@ -229,6 +304,7 @@
             .post-wrap { padding: 0 16px 60px; }
             .post-img.float-right { float: none; width: 100%; margin: 1.5em 0 0.5em; }
             .post-img img { height: 220px; }
+            .video-wrap .yt-play { width: 54px; height: 54px; }
         }
     </style>
 </head>
@@ -342,9 +418,10 @@
             <div class="stat-block"><span class="sn">3.7/5</span><span class="sl">Glassdoor Rating</span></div>
         </div>
 
-        <!-- VIDEO: Amazon company overview -->
-        <div class="video-wrap">
-            <iframe src="https://www.youtube.com/embed/a9__D53WsUs" title="Amazon — Who We Are" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        <!-- VIDEO 1: Amazon company overview -->
+        <div class="video-wrap" data-videoid="a9__D53WsUs" data-title="Amazon — Who We Are">
+            <div class="yt-thumb" style="background-image: url('https://img.youtube.com/vi/a9__D53WsUs/maxresdefault.jpg');"></div>
+            <div class="yt-play" aria-label="Play video"></div>
         </div>
         <p class="media-caption">Amazon's own overview of what the company actually builds and why — useful context before diving into the hiring side of things.</p>
 
@@ -372,9 +449,10 @@
 
         <p>If you're trying to work out where your skills fit best right now: AWS and Amazon Advertising are the two divisions with the most active hiring pipelines and the most aggressive compensation packages. If your background touches cloud technology, data, or digital advertising in any way, those are your highest-leverage entry points into the organisation.</p>
 
-        <!-- VIDEO: AWS explained / Amazon divisions overview -->
-        <div class="video-wrap">
-            <iframe src="https://www.youtube.com/embed/M988_fsOSWo" title="Amazon Web Services (AWS) Explained" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        <!-- VIDEO 2: AWS explained -->
+        <div class="video-wrap" data-videoid="M988_fsOSWo" data-title="Amazon Web Services (AWS) Explained">
+            <div class="yt-thumb" style="background-image: url('https://img.youtube.com/vi/M988_fsOSWo/maxresdefault.jpg');"></div>
+            <div class="yt-play" aria-label="Play video"></div>
         </div>
         <p class="media-caption">A clear breakdown of what AWS actually does and why it's become Amazon's most powerful revenue engine — and its most aggressive hiring division.</p>
 
@@ -406,9 +484,10 @@
             <div class="lp-card"><div class="ln">Earn Trust</div><div class="ld">Be direct, benchmark yourself against the best, and don't confuse internal comfort with actual performance.</div></div>
         </div>
 
-        <!-- VIDEO: Leadership Principles deep dive -->
-        <div class="video-wrap">
-            <iframe src="https://www.youtube.com/embed/CDs6O2JMFv0" title="Amazon Leadership Principles Explained In Depth" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        <!-- VIDEO 3: Leadership Principles deep dive -->
+        <div class="video-wrap" data-videoid="CDs6O2JMFv0" data-title="Amazon Leadership Principles Explained In Depth">
+            <div class="yt-thumb" style="background-image: url('https://img.youtube.com/vi/CDs6O2JMFv0/maxresdefault.jpg');"></div>
+            <div class="yt-play" aria-label="Play video"></div>
         </div>
         <p class="media-caption">A thorough walkthrough of how Amazon's Leadership Principles work in practice — worth watching before you write a single answer for your interview prep.</p>
 
@@ -448,9 +527,10 @@
 
         <p>Outside of cash and stock, the benefits package is solid: comprehensive medical, dental, and vision, a 401(k) with company match, paid parental leave, and mental health support. The one that gets genuinely underappreciated is Career Choice — a programme that prepays up to 95% of tuition for in-demand fields, even ones with no obvious application to Amazon's own business. That last detail tells you something about how the company thinks about talent over the long run.</p>
 
-        <!-- VIDEO: Amazon compensation breakdown -->
-        <div class="video-wrap">
-            <iframe src="https://www.youtube.com/embed/3Yp1dAKZfSQ" title="Amazon Compensation Package Explained — Base Salary, RSUs, Sign-On Bonus" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        <!-- VIDEO 4: Amazon compensation breakdown -->
+        <div class="video-wrap" data-videoid="3Yp1dAKZfSQ" data-title="Amazon Compensation Package Explained">
+            <div class="yt-thumb" style="background-image: url('https://img.youtube.com/vi/3Yp1dAKZfSQ/maxresdefault.jpg');"></div>
+            <div class="yt-play" aria-label="Play video"></div>
         </div>
         <p class="media-caption">A clear breakdown of how Amazon structures pay — base salary cap, GSU vesting schedules, sign-on bonuses, and how to read a total comp offer correctly.</p>
 
@@ -472,17 +552,19 @@
 
         <p><strong>Stage 4 — The Loop.</strong> Four to six back-to-back interviews, each covering different Leadership Principles. At least one interviewer will be a <strong>Bar Raiser</strong> — an independently certified Amazon interviewer whose sole mandate is to protect the overall quality of hires. The Bar Raiser has full veto power over the final decision regardless of what the rest of the panel recommends. Their one question is essentially: does this person raise the bar at Amazon, or are they just good enough?</p>
 
-        <!-- VIDEO: Bar Raiser explained -->
-        <div class="video-wrap">
-            <iframe src="https://www.youtube.com/embed/Ikgybz6N1rg" title="Amazon Bar Raiser Interview Process Explained" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        <!-- VIDEO 5: Bar Raiser explained -->
+        <div class="video-wrap" data-videoid="Ikgybz6N1rg" data-title="Amazon Bar Raiser Interview Process Explained">
+            <div class="yt-thumb" style="background-image: url('https://img.youtube.com/vi/Ikgybz6N1rg/maxresdefault.jpg');"></div>
+            <div class="yt-play" aria-label="Play video"></div>
         </div>
         <p class="media-caption">Former Amazon recruiters break down the Bar Raiser process — what it actually is, how to recognise it in the room, and what those interviewers are really listening for.</p>
 
         <p>The single most common failure mode: using "we" instead of "I." Amazon interviewers are specifically listening for individual contribution. If you built something as part of a team, you need to articulate your specific decisions, your specific actions, and your specific measurable impact. Before you interview, prepare 8 to 10 stories from your career that map clearly to Leadership Principles, and know which principle each one covers.</p>
 
-        <!-- VIDEO: STAR method for Amazon -->
-        <div class="video-wrap">
-            <iframe src="https://www.youtube.com/embed/0V2IQNqnLEk" title="How to Answer Amazon Interview Questions Using the STAR Method" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        <!-- VIDEO 6: STAR method for Amazon -->
+        <div class="video-wrap" data-videoid="0V2IQNqnLEk" data-title="How to Answer Amazon Interview Questions Using the STAR Method">
+            <div class="yt-thumb" style="background-image: url('https://img.youtube.com/vi/0V2IQNqnLEk/maxresdefault.jpg');"></div>
+            <div class="yt-play" aria-label="Play video"></div>
         </div>
         <p class="media-caption">A practical walkthrough of the STAR method applied specifically to Amazon LP-based questions — concrete examples and common mistakes covered.</p>
 
@@ -529,9 +611,10 @@
 
         <p>One piece of context that often gets left out: an Amazon tenure is extraordinarily transferable, even when it ends earlier than planned. Employees who leave after two or three years consistently report that the LP framework, the operational rigour, and the exposure to complex problems at massive scale made them measurably more competitive in their next role. Many high-performers deliberately structure an Amazon stint as a two-year accelerator — go in, hit your targets, exit with a credential that opens doors at virtually any employer in the world. That's a legitimate strategy, and it's worth factoring into your thinking.</p>
 
-        <!-- VIDEO: Day in the life at Amazon -->
-        <div class="video-wrap">
-            <iframe src="https://www.youtube.com/embed/KXX9yQjRfpQ" title="Day in the Life at Amazon — Software Engineer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        <!-- VIDEO 7: Day in the life at Amazon -->
+        <div class="video-wrap" data-videoid="KXX9yQjRfpQ" data-title="Day in the Life at Amazon — Software Engineer">
+            <div class="yt-thumb" style="background-image: url('https://img.youtube.com/vi/KXX9yQjRfpQ/maxresdefault.jpg');"></div>
+            <div class="yt-play" aria-label="Play video"></div>
         </div>
         <p class="media-caption">A day-in-the-life from an Amazon software engineer — gives you an honest feel for how work actually flows before you commit to applying.</p>
 
@@ -639,6 +722,7 @@
 
 <script src="script.js?v=2.1"></script>
 <script>
+    // ─── Hamburger menu ───────────────────────────────────────────
     const hamburger = document.getElementById('hamburger');
     const navMenu   = document.getElementById('navMenu');
     if (hamburger && navMenu) {
@@ -656,6 +740,35 @@
             navMenu.style.zIndex           = '99';
         });
     }
+
+    // ─── Click-to-load YouTube embeds ────────────────────────────
+    // Shows a YouTube thumbnail + play button. Only injects the
+    // iframe (and triggers the YouTube request) when the user clicks.
+    // This fixes blank-video issues caused by lazy-loading, CSP, or
+    // browser restrictions on auto-loading third-party iframes.
+    document.querySelectorAll('.video-wrap[data-videoid]').forEach(function(wrap) {
+        wrap.addEventListener('click', function() {
+            if (wrap.classList.contains('loaded')) return;
+            var videoId = wrap.dataset.videoid;
+            var title   = wrap.dataset.title || 'YouTube video';
+            var iframe  = document.createElement('iframe');
+            iframe.src  = 'https://www.youtube-nocookie.com/embed/' + videoId
+                        + '?autoplay=1&rel=0&modestbranding=1';
+            iframe.title           = title;
+            iframe.allow           = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen';
+            iframe.allowFullscreen = true;
+            iframe.referrerPolicy  = 'strict-origin-when-cross-origin';
+            iframe.style.position  = 'absolute';
+            iframe.style.top       = '0';
+            iframe.style.left      = '0';
+            iframe.style.width     = '100%';
+            iframe.style.height    = '100%';
+            iframe.style.border    = '0';
+            iframe.style.borderRadius = '10px';
+            wrap.appendChild(iframe);
+            wrap.classList.add('loaded');
+        });
+    });
 </script>
 </body>
 </html>
