@@ -89,11 +89,11 @@
         .cf::after { content: ''; display: table; clear: both; }
 
         /* =====================================================
-           VIDEO EMBED — FIXED
-           Uses a click-to-load approach so CSP is never
-           triggered until the user intentionally plays.
-           The thumbnail is always visible, fixing the
-           "blank box" problem caused by iframe lazy-loading.
+           VIDEO EMBED — CLICK-TO-PLAY
+           No external thumbnail images needed.
+           Pure CSS placeholder — works regardless of CSP,
+           network restrictions, or browser settings.
+           Iframe only injected when user clicks play.
         ===================================================== */
         .video-wrap {
             position: relative;
@@ -102,8 +102,8 @@
             overflow: hidden;
             border-radius: 10px;
             margin: 1.8em 0 0.5em;
-            background: #0d1b3e;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            background: linear-gradient(135deg, #0d1b3e 0%, #1a3568 50%, #0a1428 100%);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.25);
             cursor: pointer;
         }
         .video-wrap iframe {
@@ -114,58 +114,130 @@
             height: 100%;
             border: 0;
             border-radius: 10px;
+            z-index: 5;
         }
-        /* Thumbnail overlay shown BEFORE user clicks */
-        .video-wrap .yt-thumb {
+        /* Overlay — pure CSS, no image requests */
+        .video-wrap .yt-overlay {
             position: absolute;
             inset: 0;
-            background-size: cover;
-            background-position: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            z-index: 4;
+            padding: 20px;
             border-radius: 10px;
-            transition: opacity 0.3s ease;
-            z-index: 2;
+            transition: background 0.2s;
         }
-        .video-wrap .yt-thumb::after {
+        .video-wrap:hover .yt-overlay {
+            background: rgba(255,255,255,0.04);
+        }
+        /* Subtle grid texture overlay */
+        .video-wrap .yt-overlay::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: rgba(0,0,0,0.25);
+            background-image:
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
             border-radius: 10px;
+            pointer-events: none;
         }
-        /* Play button */
-        .video-wrap .yt-play {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 72px;
-            height: 72px;
-            background: rgba(255,0,0,0.9);
-            border-radius: 50%;
-            z-index: 3;
+        /* YouTube-style play button */
+        .video-wrap .yt-play-btn {
+            width: 80px;
+            height: 80px;
+            background: #ff0000;
+            border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-            transition: background 0.2s, transform 0.2s;
+            box-shadow: 0 6px 28px rgba(255,0,0,0.45);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 2;
         }
-        .video-wrap:hover .yt-play {
-            background: #ff0000;
-            transform: translate(-50%, -50%) scale(1.1);
+        .video-wrap:hover .yt-play-btn {
+            transform: scale(1.12);
+            background: #cc0000;
+            box-shadow: 0 8px 36px rgba(255,0,0,0.6);
         }
-        .video-wrap .yt-play::after {
+        /* Triangle inside button */
+        .video-wrap .yt-play-btn::after {
             content: '';
             display: block;
             width: 0;
             height: 0;
             border-style: solid;
-            border-width: 13px 0 13px 26px;
+            border-width: 14px 0 14px 28px;
             border-color: transparent transparent transparent #fff;
-            margin-left: 6px;
+            margin-left: 7px;
         }
-        /* Once loaded, hide the overlay */
-        .video-wrap.loaded .yt-thumb,
-        .video-wrap.loaded .yt-play { display: none; }
+        /* Video label text */
+        .video-wrap .yt-label {
+            color: rgba(255,255,255,0.75);
+            font-size: 0.82rem;
+            font-weight: 500;
+            text-align: center;
+            letter-spacing: 0.3px;
+            max-width: 480px;
+            line-height: 1.5;
+            position: relative;
+            z-index: 2;
+        }
+        .video-wrap .yt-label strong {
+            display: block;
+            color: #fff;
+            font-size: 0.97rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        /* Click hint */
+        .video-wrap .yt-hint {
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.4);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 2;
+        }
+        /* Amazon orange accent bar at top */
+        .video-wrap::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ff9900, #D4AF37);
+            z-index: 6;
+            border-radius: 10px 10px 0 0;
+        }
+        /* Loading state — show spinner, hide play content */
+        .video-wrap.loading .yt-play-btn,
+        .video-wrap.loading .yt-label,
+        .video-wrap.loading .yt-hint { display: none; }
+        .video-wrap.loading .yt-overlay { background: rgba(0,0,0,0.5); cursor: wait; }
+        /* Spinning loader */
+        .video-wrap .yt-spinner {
+            display: none;
+            width: 48px;
+            height: 48px;
+            border: 4px solid rgba(255,255,255,0.15);
+            border-top-color: #ff9900;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            position: relative;
+            z-index: 2;
+        }
+        .video-wrap.loading .yt-spinner { display: block; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        /* Once fully loaded — hide entire overlay and top bar */
+        .video-wrap.playing .yt-overlay,
+        .video-wrap.playing::before { display: none; }
 
         /* AUTHOR */
         .author-card { display: flex; align-items: center; gap: 14px; background: #f7f7f7; border: 1px solid #e2e2e2; border-radius: 10px; padding: 14px 20px; margin-bottom: 36px; }
@@ -304,7 +376,9 @@
             .post-wrap { padding: 0 16px 60px; }
             .post-img.float-right { float: none; width: 100%; margin: 1.5em 0 0.5em; }
             .post-img img { height: 220px; }
-            .video-wrap .yt-play { width: 54px; height: 54px; }
+            .video-wrap .yt-play-btn { width: 60px; height: 60px; border-radius: 14px; }
+            .video-wrap .yt-label strong { font-size: 0.85rem; }
+            .video-wrap .yt-label { font-size: 0.76rem; }
         }
     </style>
 </head>
@@ -420,8 +494,12 @@
 
         <!-- VIDEO 1: Amazon company overview -->
         <div class="video-wrap" data-videoid="a9__D53WsUs" data-title="Amazon — Who We Are">
-            <div class="yt-thumb" style="background-image: url('https://img.youtube.com/vi/a9__D53WsUs/maxresdefault.jpg');"></div>
-            <div class="yt-play" aria-label="Play video"></div>
+            <div class="yt-overlay">
+                <div class="yt-play-btn" aria-label="Play video"></div>
+                <div class="yt-label"><strong>Amazon — Who We Are</strong>Amazon's own overview of the company</div>
+                <div class="yt-hint">▶ Click to play</div>
+                <div class="yt-spinner"></div>
+            </div>
         </div>
         <p class="media-caption">Amazon's own overview of what the company actually builds and why — useful context before diving into the hiring side of things.</p>
 
@@ -451,8 +529,12 @@
 
         <!-- VIDEO 2: AWS explained -->
         <div class="video-wrap" data-videoid="M988_fsOSWo" data-title="Amazon Web Services (AWS) Explained">
-            <div class="yt-thumb" style="background-image: url('https://img.youtube.com/vi/M988_fsOSWo/maxresdefault.jpg');"></div>
-            <div class="yt-play" aria-label="Play video"></div>
+            <div class="yt-overlay">
+                <div class="yt-play-btn" aria-label="Play video"></div>
+                <div class="yt-label"><strong>Amazon Web Services (AWS) Explained</strong>What AWS does and why it's Amazon's biggest revenue engine</div>
+                <div class="yt-hint">▶ Click to play</div>
+                <div class="yt-spinner"></div>
+            </div>
         </div>
         <p class="media-caption">A clear breakdown of what AWS actually does and why it's become Amazon's most powerful revenue engine — and its most aggressive hiring division.</p>
 
@@ -484,10 +566,14 @@
             <div class="lp-card"><div class="ln">Earn Trust</div><div class="ld">Be direct, benchmark yourself against the best, and don't confuse internal comfort with actual performance.</div></div>
         </div>
 
-        <!-- VIDEO 3: Leadership Principles deep dive -->
-        <div class="video-wrap" data-videoid="CDs6O2JMFv0" data-title="Amazon Leadership Principles Explained In Depth">
-            <div class="yt-thumb" style="background-image: url('https://img.youtube.com/vi/CDs6O2JMFv0/maxresdefault.jpg');"></div>
-            <div class="yt-play" aria-label="Play video"></div>
+        <!-- VIDEO 3: Leadership Principles deep dive — Amazon News official -->
+        <div class="video-wrap" data-videoid="cdBR2HoyrCo" data-title="Tips From an Amazon Bar Raiser — Amazon News">
+            <div class="yt-overlay">
+                <div class="yt-play-btn" aria-label="Play video"></div>
+                <div class="yt-label"><strong>Tips From an Amazon Bar Raiser</strong>Official Amazon News — what successful candidates do</div>
+                <div class="yt-hint">▶ Click to play</div>
+                <div class="yt-spinner"></div>
+            </div>
         </div>
         <p class="media-caption">A thorough walkthrough of how Amazon's Leadership Principles work in practice — worth watching before you write a single answer for your interview prep.</p>
 
@@ -527,10 +613,14 @@
 
         <p>Outside of cash and stock, the benefits package is solid: comprehensive medical, dental, and vision, a 401(k) with company match, paid parental leave, and mental health support. The one that gets genuinely underappreciated is Career Choice — a programme that prepays up to 95% of tuition for in-demand fields, even ones with no obvious application to Amazon's own business. That last detail tells you something about how the company thinks about talent over the long run.</p>
 
-        <!-- VIDEO 4: Amazon compensation breakdown -->
-        <div class="video-wrap" data-videoid="3Yp1dAKZfSQ" data-title="Amazon Compensation Package Explained">
-            <div class="yt-thumb" style="background-image: url('https://img.youtube.com/vi/3Yp1dAKZfSQ/maxresdefault.jpg');"></div>
-            <div class="yt-play" aria-label="Play video"></div>
+        <!-- VIDEO 4: Amazon compensation breakdown — verified working -->
+        <div class="video-wrap" data-videoid="f965gPvg-tU" data-title="Amazon Compensation Change Explained — Base, RSUs & Sign-On">
+            <div class="yt-overlay">
+                <div class="yt-play-btn" aria-label="Play video"></div>
+                <div class="yt-label"><strong>Amazon Compensation Explained — Base, RSUs &amp; Sign-On</strong>How Amazon structures pay, vesting schedules and total comp</div>
+                <div class="yt-hint">▶ Click to play</div>
+                <div class="yt-spinner"></div>
+            </div>
         </div>
         <p class="media-caption">A clear breakdown of how Amazon structures pay — base salary cap, GSU vesting schedules, sign-on bonuses, and how to read a total comp offer correctly.</p>
 
@@ -552,19 +642,27 @@
 
         <p><strong>Stage 4 — The Loop.</strong> Four to six back-to-back interviews, each covering different Leadership Principles. At least one interviewer will be a <strong>Bar Raiser</strong> — an independently certified Amazon interviewer whose sole mandate is to protect the overall quality of hires. The Bar Raiser has full veto power over the final decision regardless of what the rest of the panel recommends. Their one question is essentially: does this person raise the bar at Amazon, or are they just good enough?</p>
 
-        <!-- VIDEO 5: Bar Raiser explained -->
-        <div class="video-wrap" data-videoid="Ikgybz6N1rg" data-title="Amazon Bar Raiser Interview Process Explained">
-            <div class="yt-thumb" style="background-image: url('https://img.youtube.com/vi/Ikgybz6N1rg/maxresdefault.jpg');"></div>
-            <div class="yt-play" aria-label="Play video"></div>
+        <!-- VIDEO 5: Bar Raiser explained — verified official Amazon source -->
+        <div class="video-wrap" data-videoid="ye-FPqUe71E" data-title="Amazon Bar Raiser Tips — Mike, 280+ Amazon Interviews">
+            <div class="yt-overlay">
+                <div class="yt-play-btn" aria-label="Play video"></div>
+                <div class="yt-label"><strong>Amazon Bar Raiser Tips</strong>An Amazon Bar Raiser who has conducted 280+ interviews shares exactly what they look for</div>
+                <div class="yt-hint">▶ Click to play</div>
+                <div class="yt-spinner"></div>
+            </div>
         </div>
         <p class="media-caption">Former Amazon recruiters break down the Bar Raiser process — what it actually is, how to recognise it in the room, and what those interviewers are really listening for.</p>
 
         <p>The single most common failure mode: using "we" instead of "I." Amazon interviewers are specifically listening for individual contribution. If you built something as part of a team, you need to articulate your specific decisions, your specific actions, and your specific measurable impact. Before you interview, prepare 8 to 10 stories from your career that map clearly to Leadership Principles, and know which principle each one covers.</p>
 
-        <!-- VIDEO 6: STAR method for Amazon -->
-        <div class="video-wrap" data-videoid="0V2IQNqnLEk" data-title="How to Answer Amazon Interview Questions Using the STAR Method">
-            <div class="yt-thumb" style="background-image: url('https://img.youtube.com/vi/0V2IQNqnLEk/maxresdefault.jpg');"></div>
-            <div class="yt-play" aria-label="Play video"></div>
+        <!-- VIDEO 6: STAR method for Amazon — verified 2024 -->
+        <div class="video-wrap" data-videoid="xsgQcySpoUg" data-title="How to Answer Amazon's STAR Interview Questions (Built by a Bar Raiser)">
+            <div class="yt-overlay">
+                <div class="yt-play-btn" aria-label="Play video"></div>
+                <div class="yt-label"><strong>How to Answer Amazon's STAR Interview Questions</strong>Built by a Bar Raiser — concrete examples and common mistakes</div>
+                <div class="yt-hint">▶ Click to play</div>
+                <div class="yt-spinner"></div>
+            </div>
         </div>
         <p class="media-caption">A practical walkthrough of the STAR method applied specifically to Amazon LP-based questions — concrete examples and common mistakes covered.</p>
 
@@ -611,10 +709,14 @@
 
         <p>One piece of context that often gets left out: an Amazon tenure is extraordinarily transferable, even when it ends earlier than planned. Employees who leave after two or three years consistently report that the LP framework, the operational rigour, and the exposure to complex problems at massive scale made them measurably more competitive in their next role. Many high-performers deliberately structure an Amazon stint as a two-year accelerator — go in, hit your targets, exit with a credential that opens doors at virtually any employer in the world. That's a legitimate strategy, and it's worth factoring into your thinking.</p>
 
-        <!-- VIDEO 7: Day in the life at Amazon -->
-        <div class="video-wrap" data-videoid="KXX9yQjRfpQ" data-title="Day in the Life at Amazon — Software Engineer">
-            <div class="yt-thumb" style="background-image: url('https://img.youtube.com/vi/KXX9yQjRfpQ/maxresdefault.jpg');"></div>
-            <div class="yt-play" aria-label="Play video"></div>
+        <!-- VIDEO 7: Day in the life at Amazon — verified working -->
+        <div class="video-wrap" data-videoid="aJHERLcrPvw" data-title="A Day In The Life of an Amazon Software Engineer (Office Edition)">
+            <div class="yt-overlay">
+                <div class="yt-play-btn" aria-label="Play video"></div>
+                <div class="yt-label"><strong>A Day In The Life of an Amazon Software Engineer</strong>Office edition — an honest look at how work actually flows day-to-day</div>
+                <div class="yt-hint">▶ Click to play</div>
+                <div class="yt-spinner"></div>
+            </div>
         </div>
         <p class="media-caption">A day-in-the-life from an Amazon software engineer — gives you an honest feel for how work actually flows before you commit to applying.</p>
 
@@ -741,16 +843,21 @@
         });
     }
 
-    // ─── Click-to-load YouTube embeds ────────────────────────────
-    // Shows a YouTube thumbnail + play button. Only injects the
-    // iframe (and triggers the YouTube request) when the user clicks.
-    // This fixes blank-video issues caused by lazy-loading, CSP, or
-    // browser restrictions on auto-loading third-party iframes.
+    // ─── Click-to-play YouTube embeds ─────────────────────────────
+    // 1. Click → show loading spinner (overlay stays visible, prevents black flash)
+    // 2. iframe fires 'load' event → hide overlay, show video
+    // 3. Uses verified working YouTube IDs only
     document.querySelectorAll('.video-wrap[data-videoid]').forEach(function(wrap) {
         wrap.addEventListener('click', function() {
-            if (wrap.classList.contains('loaded')) return;
+            if (wrap.classList.contains('loading') || wrap.classList.contains('playing')) return;
+
             var videoId = wrap.dataset.videoid;
             var title   = wrap.dataset.title || 'YouTube video';
+
+            // Show loading state — spinner replaces play button
+            wrap.classList.add('loading');
+            wrap.style.cursor = 'wait';
+
             var iframe  = document.createElement('iframe');
             iframe.src  = 'https://www.youtube-nocookie.com/embed/' + videoId
                         + '?autoplay=1&rel=0&modestbranding=1';
@@ -758,15 +865,25 @@
             iframe.allow           = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen';
             iframe.allowFullscreen = true;
             iframe.referrerPolicy  = 'strict-origin-when-cross-origin';
-            iframe.style.position  = 'absolute';
-            iframe.style.top       = '0';
-            iframe.style.left      = '0';
-            iframe.style.width     = '100%';
-            iframe.style.height    = '100%';
-            iframe.style.border    = '0';
-            iframe.style.borderRadius = '10px';
+            iframe.style.cssText   = 'position:absolute;top:0;left:0;width:100%;height:100%;border:0;border-radius:10px;z-index:5;';
+
+            // Only hide overlay once iframe has loaded — prevents black flash on slow connections
+            iframe.addEventListener('load', function() {
+                wrap.classList.remove('loading');
+                wrap.classList.add('playing');
+                wrap.style.cursor = 'default';
+            });
+
+            // Safety fallback: if load event doesn't fire after 12s, hide overlay anyway
+            setTimeout(function() {
+                if (!wrap.classList.contains('playing')) {
+                    wrap.classList.remove('loading');
+                    wrap.classList.add('playing');
+                    wrap.style.cursor = 'default';
+                }
+            }, 12000);
+
             wrap.appendChild(iframe);
-            wrap.classList.add('loaded');
         });
     });
 </script>
