@@ -89,11 +89,15 @@
         .cf::after { content: ''; display: table; clear: both; }
 
         /* =====================================================
-           VIDEO EMBED — CLICK-TO-PLAY
-           No external thumbnail images needed.
-           Pure CSS placeholder — works regardless of CSP,
-           network restrictions, or browser settings.
+           VIDEO EMBED — CLICK-TO-PLAY WITH THUMBNAIL
+           Three-layer approach:
+           1. Dark gradient base (always visible, no requests)
+           2. YouTube thumbnail injected by JS if available
+              (graceful fallback if CDN blocked)
+           3. Overlay with play button + title on top
            Iframe only injected when user clicks play.
+           Loading spinner stays visible until iframe fires
+           its load event — prevents black flash on slow net.
         ===================================================== */
         .video-wrap {
             position: relative;
@@ -105,18 +109,32 @@
             background: linear-gradient(135deg, #0d1b3e 0%, #1a3568 50%, #0a1428 100%);
             box-shadow: 0 8px 30px rgba(0,0,0,0.25);
             cursor: pointer;
+            transition: box-shadow 0.2s;
         }
-        .video-wrap iframe {
+        .video-wrap:hover {
+            box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+        }
+        /* Thumbnail image layer — injected by JS, sits below overlay */
+        .video-wrap .yt-thumb-img {
             position: absolute;
-            top: 0;
-            left: 0;
+            inset: 0;
             width: 100%;
             height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            z-index: 1;
+            display: block;
+        }
+        /* iframe layer */
+        .video-wrap iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             border: 0;
             border-radius: 10px;
             z-index: 5;
         }
-        /* Overlay — pure CSS, no image requests */
+        /* Overlay sits above thumbnail, below iframe */
         .video-wrap .yt-overlay {
             position: absolute;
             inset: 0;
@@ -124,17 +142,22 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 18px;
+            gap: 16px;
             z-index: 4;
             padding: 20px;
             border-radius: 10px;
+            background: rgba(0,0,0,0.32);
             transition: background 0.2s;
         }
-        .video-wrap:hover .yt-overlay {
-            background: rgba(255,255,255,0.04);
+        /* When thumbnail loaded — lighter scrim so image shows through */
+        .video-wrap.has-thumb .yt-overlay {
+            background: rgba(0,0,0,0.28);
         }
-        /* Subtle grid texture overlay */
-        .video-wrap .yt-overlay::before {
+        .video-wrap:hover .yt-overlay {
+            background: rgba(0,0,0,0.18);
+        }
+        /* Without thumbnail — keep grid texture on dark bg */
+        .video-wrap:not(.has-thumb) .yt-overlay::before {
             content: '';
             position: absolute;
             inset: 0;
@@ -145,61 +168,59 @@
             border-radius: 10px;
             pointer-events: none;
         }
-        /* YouTube-style play button */
+        /* YouTube-style red play button */
         .video-wrap .yt-play-btn {
-            width: 80px;
-            height: 80px;
-            background: #ff0000;
-            border-radius: 18px;
+            width: 76px;
+            height: 76px;
+            background: rgba(255,0,0,0.92);
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 6px 28px rgba(255,0,0,0.45);
-            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+            transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
             flex-shrink: 0;
             position: relative;
             z-index: 2;
         }
         .video-wrap:hover .yt-play-btn {
-            transform: scale(1.12);
-            background: #cc0000;
-            box-shadow: 0 8px 36px rgba(255,0,0,0.6);
+            transform: scale(1.1);
+            background: #ff0000;
+            box-shadow: 0 6px 32px rgba(255,0,0,0.55);
         }
-        /* Triangle inside button */
         .video-wrap .yt-play-btn::after {
             content: '';
             display: block;
-            width: 0;
-            height: 0;
+            width: 0; height: 0;
             border-style: solid;
-            border-width: 14px 0 14px 28px;
+            border-width: 13px 0 13px 26px;
             border-color: transparent transparent transparent #fff;
-            margin-left: 7px;
+            margin-left: 6px;
         }
-        /* Video label text */
+        /* Title + subtitle */
         .video-wrap .yt-label {
-            color: rgba(255,255,255,0.75);
-            font-size: 0.82rem;
+            color: rgba(255,255,255,0.9);
+            font-size: 0.84rem;
             font-weight: 500;
             text-align: center;
-            letter-spacing: 0.3px;
-            max-width: 480px;
+            max-width: 500px;
             line-height: 1.5;
             position: relative;
             z-index: 2;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.7);
         }
         .video-wrap .yt-label strong {
             display: block;
             color: #fff;
-            font-size: 0.97rem;
+            font-size: 1rem;
             font-weight: 700;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.8);
         }
-        /* Click hint */
         .video-wrap .yt-hint {
-            font-size: 0.72rem;
-            color: rgba(255,255,255,0.4);
-            letter-spacing: 1px;
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.5);
+            letter-spacing: 1.2px;
             text-transform: uppercase;
             position: relative;
             z-index: 2;
@@ -208,36 +229,41 @@
         .video-wrap::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             height: 3px;
             background: linear-gradient(90deg, #ff9900, #D4AF37);
             z-index: 6;
             border-radius: 10px 10px 0 0;
         }
-        /* Loading state — show spinner, hide play content */
+        /* ── LOADING STATE ── spinner replaces play content */
         .video-wrap.loading .yt-play-btn,
         .video-wrap.loading .yt-label,
         .video-wrap.loading .yt-hint { display: none; }
-        .video-wrap.loading .yt-overlay { background: rgba(0,0,0,0.5); cursor: wait; }
-        /* Spinning loader */
+        .video-wrap.loading .yt-overlay {
+            background: rgba(0,0,0,0.55);
+            cursor: wait;
+        }
         .video-wrap .yt-spinner {
             display: none;
-            width: 48px;
-            height: 48px;
-            border: 4px solid rgba(255,255,255,0.15);
+            width: 46px; height: 46px;
+            border: 4px solid rgba(255,255,255,0.12);
             border-top-color: #ff9900;
             border-radius: 50%;
-            animation: spin 0.8s linear infinite;
+            animation: yt-spin 0.75s linear infinite;
             position: relative;
             z-index: 2;
         }
         .video-wrap.loading .yt-spinner { display: block; }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        /* Once fully loaded — hide entire overlay and top bar */
+        @keyframes yt-spin { to { transform: rotate(360deg); } }
+        /* ── PLAYING STATE ── hide overlay entirely */
         .video-wrap.playing .yt-overlay,
         .video-wrap.playing::before { display: none; }
+        /* Mobile */
+        @media (max-width: 600px) {
+            .video-wrap .yt-play-btn { width: 58px; height: 58px; border-radius: 12px; }
+            .video-wrap .yt-label strong { font-size: 0.88rem; }
+            .video-wrap .yt-label { font-size: 0.76rem; }
+        }
 
         /* AUTHOR */
         .author-card { display: flex; align-items: center; gap: 14px; background: #f7f7f7; border: 1px solid #e2e2e2; border-radius: 10px; padding: 14px 20px; margin-bottom: 36px; }
@@ -376,9 +402,7 @@
             .post-wrap { padding: 0 16px 60px; }
             .post-img.float-right { float: none; width: 100%; margin: 1.5em 0 0.5em; }
             .post-img img { height: 220px; }
-            .video-wrap .yt-play-btn { width: 60px; height: 60px; border-radius: 14px; }
-            .video-wrap .yt-label strong { font-size: 0.85rem; }
-            .video-wrap .yt-label { font-size: 0.76rem; }
+
         }
     </style>
 </head>
@@ -843,45 +867,82 @@
         });
     }
 
-    // ─── Click-to-play YouTube embeds ─────────────────────────────
-    // 1. Click → show loading spinner (overlay stays visible, prevents black flash)
-    // 2. iframe fires 'load' event → hide overlay, show video
-    // 3. Uses verified working YouTube IDs only
+    // ─── Video embeds: thumbnail + click-to-play ─────────────────
+    // Step 1: On page load, attempt to fetch each video's YouTube
+    //         thumbnail. If it loads successfully (not blocked by CSP
+    //         or network), inject it as a background image so the
+    //         player looks rich. If it fails, the dark gradient CSS
+    //         fallback stays — no broken images, ever.
+    // Step 2: On click, show loading spinner, inject iframe, wait
+    //         for iframe load event before hiding overlay.
+
     document.querySelectorAll('.video-wrap[data-videoid]').forEach(function(wrap) {
+        var videoId = wrap.dataset.videoid;
+
+        // ── THUMBNAIL ATTEMPT ──────────────────────────────────────
+        // Try maxresdefault first (1280×720), fall back to hqdefault (480×360)
+        function tryThumb(quality) {
+            var img = new Image();
+            img.onload = function() {
+                // Only accept if image is not the 120×90 "no thumbnail" placeholder
+                // YouTube returns a 120×90 grey image for missing thumbs
+                if (img.naturalWidth > 120) {
+                    var thumbEl = document.createElement('img');
+                    thumbEl.src = img.src;
+                    thumbEl.className = 'yt-thumb-img';
+                    thumbEl.alt = wrap.dataset.title || '';
+                    thumbEl.loading = 'lazy';
+                    // Insert before the overlay so it sits underneath
+                    wrap.insertBefore(thumbEl, wrap.querySelector('.yt-overlay'));
+                    wrap.classList.add('has-thumb');
+                } else if (quality === 'maxresdefault') {
+                    tryThumb('hqdefault'); // fall back to lower quality
+                }
+            };
+            img.onerror = function() {
+                if (quality === 'maxresdefault') {
+                    tryThumb('hqdefault'); // try lower res on error
+                }
+                // hqdefault failure → gradient fallback stays, nothing to do
+            };
+            img.src = 'https://img.youtube.com/vi/' + videoId + '/' + quality + '.jpg';
+        }
+        tryThumb('maxresdefault');
+
+        // ── CLICK TO PLAY ──────────────────────────────────────────
         wrap.addEventListener('click', function() {
             if (wrap.classList.contains('loading') || wrap.classList.contains('playing')) return;
 
-            var videoId = wrap.dataset.videoid;
-            var title   = wrap.dataset.title || 'YouTube video';
-
-            // Show loading state — spinner replaces play button
+            // Switch to loading state — shows spinner, keeps overlay visible
             wrap.classList.add('loading');
             wrap.style.cursor = 'wait';
 
-            var iframe  = document.createElement('iframe');
-            iframe.src  = 'https://www.youtube-nocookie.com/embed/' + videoId
-                        + '?autoplay=1&rel=0&modestbranding=1';
+            var title  = wrap.dataset.title || 'YouTube video';
+            var iframe = document.createElement('iframe');
+            iframe.src = 'https://www.youtube-nocookie.com/embed/' + videoId
+                       + '?autoplay=1&rel=0&modestbranding=1';
             iframe.title           = title;
             iframe.allow           = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen';
             iframe.allowFullscreen = true;
             iframe.referrerPolicy  = 'strict-origin-when-cross-origin';
             iframe.style.cssText   = 'position:absolute;top:0;left:0;width:100%;height:100%;border:0;border-radius:10px;z-index:5;';
 
-            // Only hide overlay once iframe has loaded — prevents black flash on slow connections
+            // Hide overlay only once YouTube has actually loaded — prevents black flash
             iframe.addEventListener('load', function() {
                 wrap.classList.remove('loading');
                 wrap.classList.add('playing');
                 wrap.style.cursor = 'default';
             });
 
-            // Safety fallback: if load event doesn't fire after 12s, hide overlay anyway
+            // Safety fallback: if load event never fires (e.g. network timeout),
+            // give up and show whatever YouTube has loaded after 15 seconds
             setTimeout(function() {
                 if (!wrap.classList.contains('playing')) {
                     wrap.classList.remove('loading');
                     wrap.classList.add('playing');
                     wrap.style.cursor = 'default';
                 }
-            }, 12000);
+            }, 15000);
 
             wrap.appendChild(iframe);
         });
