@@ -13,3 +13,9 @@
 /contact.html       /contact        301
 /assessment.html    /assessment     301
 /testimonials.html  /testimonials   301
+
+# Blog posts 7 & 8 — clean URL slugs
+/blog_post_7        /blog/working-at-netflix-career-guide  301
+/blog_post_7.html   /blog/working-at-netflix-career-guide  301
+/blog_post_8        /blog/working-at-amazon-us-2026        301
+/blog_post_8.html   /blog/working-at-amazon-us-2026        301
