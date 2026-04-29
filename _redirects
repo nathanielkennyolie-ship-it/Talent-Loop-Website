@@ -1,50 +1,64 @@
 # ── Old numbered blog_post slugs → new /blog/ folder URLs ──────────────────
-/blog_post_1            /blog/job-interview-tips-2026                   301
-/blog_post_1.html       /blog/job-interview-tips-2026                   301
-/blog-post-1            /blog/job-interview-tips-2026                   301
-/blog-post-1.html       /blog/job-interview-tips-2026                   301
+/blog_post_1            /blog/job-interview-tips-2026                   301!
+/blog_post_1.html       /blog/job-interview-tips-2026                   301!
+/blog-post-1            /blog/job-interview-tips-2026                   301!
+/blog-post-1.html       /blog/job-interview-tips-2026                   301!
 
-/blog_post_2            /blog/hidden-job-market-guide                   301
-/blog_post_2.html       /blog/hidden-job-market-guide                   301
-/blog-post-2            /blog/hidden-job-market-guide                   301
-/blog-post-2.html       /blog/hidden-job-market-guide                   301
+/blog_post_2            /blog/hidden-job-market-guide                   301!
+/blog_post_2.html       /blog/hidden-job-market-guide                   301!
+/blog-post-2            /blog/hidden-job-market-guide                   301!
+/blog-post-2.html       /blog/hidden-job-market-guide                   301!
 
-/blog_post_3            /blog/linkedin-profile-optimization-recruiters  301
-/blog_post_3.html       /blog/linkedin-profile-optimization-recruiters  301
-/blog-post-3            /blog/linkedin-profile-optimization-recruiters  301
-/blog-post-3.html       /blog/linkedin-profile-optimization-recruiters  301
+/blog_post_3            /blog/linkedin-profile-optimization-recruiters  301!
+/blog_post_3.html       /blog/linkedin-profile-optimization-recruiters  301!
+/blog-post-3            /blog/linkedin-profile-optimization-recruiters  301!
+/blog-post-3.html       /blog/linkedin-profile-optimization-recruiters  301!
 
-/blog_post_4            /blog/salary-negotiation-guide-2026             301
-/blog_post_4.html       /blog/salary-negotiation-guide-2026             301
-/blog-post-4            /blog/salary-negotiation-guide-2026             301
-/blog-post-4.html       /blog/salary-negotiation-guide-2026             301
+/blog_post_4            /blog/salary-negotiation-guide-2026             301!
+/blog_post_4.html       /blog/salary-negotiation-guide-2026             301!
+/blog-post-4            /blog/salary-negotiation-guide-2026             301!
+/blog-post-4.html       /blog/salary-negotiation-guide-2026             301!
 
-/blog_post_5            /blog/in-demand-skills-2026                     301
-/blog_post_5.html       /blog/in-demand-skills-2026                     301
-/blog-post-5            /blog/in-demand-skills-2026                     301
-/blog-post-5.html       /blog/in-demand-skills-2026                     301
+/blog_post_5            /blog/in-demand-skills-2026                     301!
+/blog_post_5.html       /blog/in-demand-skills-2026                     301!
+/blog-post-5            /blog/in-demand-skills-2026                     301!
+/blog-post-5.html       /blog/in-demand-skills-2026                     301!
 
-/blog_post_6            /blog/hybrid-work-guide-2026                    301
-/blog_post_6.html       /blog/hybrid-work-guide-2026                    301
-/blog-post-6            /blog/hybrid-work-guide-2026                    301
-/blog-post-6.html       /blog/hybrid-work-guide-2026                    301
+/blog_post_6            /blog/hybrid-work-guide-2026                    301!
+/blog_post_6.html       /blog/hybrid-work-guide-2026                    301!
+/blog-post-6            /blog/hybrid-work-guide-2026                    301!
+/blog-post-6.html       /blog/hybrid-work-guide-2026                    301!
 
-/blog_post_7            /blog/working-at-netflix-career-guide           301
-/blog_post_7.html       /blog/working-at-netflix-career-guide           301
-/blog-post-7            /blog/working-at-netflix-career-guide           301
-/blog-post-7.html       /blog/working-at-netflix-career-guide           301
+/blog_post_7            /blog/working-at-netflix-career-guide           301!
+/blog_post_7.html       /blog/working-at-netflix-career-guide           301!
+/blog-post-7            /blog/working-at-netflix-career-guide           301!
+/blog-post-7.html       /blog/working-at-netflix-career-guide           301!
 
-/blog_post_8            /blog/working-at-amazon-us-2026                 301
-/blog_post_8.html       /blog/working-at-amazon-us-2026                 301
-/blog-post-8            /blog/working-at-amazon-us-2026                 301
-/blog-post-8.html       /blog/working-at-amazon-us-2026                 301
+/blog_post_8            /blog/working-at-amazon-us-2026                 301!
+/blog_post_8.html       /blog/working-at-amazon-us-2026                 301!
+/blog-post-8            /blog/working-at-amazon-us-2026                 301!
+/blog-post-8.html       /blog/working-at-amazon-us-2026                 301!
 
 # ── Static pages: strip .html extension ─────────────────────────────────────
-/legal.html             /legal                                          301
-/privacy.html           /privacy                                        301
-/about.html             /about                                          301
-/jobs.html              /jobs                                           301
-/blog.html              /blog                                           301
-/contact.html           /contact                                        301
-/assessment.html        /assessment                                     301
-/testimonials.html      /testimonials                                   301
+/legal.html             /legal                                          301!
+/privacy.html           /privacy                                        301!
+/about.html             /about                                          301!
+/jobs.html              /jobs                                           301!
+/blog.html              /blog                                           301!
+/contact.html           /contact                                        301!
+/assessment.html        /assessment                                     301!
+/testimonials.html      /testimonials                                   301!
+
+# ── Job detail pages ──────────────────────────────────────────────────────────
+/jobs/remote-customer-support-specialist       /jobs/remote-customer-support-specialist-2026       301!
+/jobs/remote-data-entry-clerk                  /jobs/remote-data-entry-clerk-part-time-2026        301!
+/jobs/social-media-manager-remote              /jobs/social-media-manager-remote-2026              301!
+/jobs/remote-sales-development-rep             /jobs/remote-sales-development-rep-saas-2026        301!
+/jobs/live-chat-support-agent                  /jobs/live-chat-support-agent-remote-2026           301!
+/jobs/junior-web-developer-remote              /jobs/junior-web-developer-remote-2026              301!
+/jobs/virtual-administrative-assistant         /jobs/virtual-administrative-assistant-remote-2026  301!
+/jobs/content-writer-seo-specialist            /jobs/content-writer-seo-specialist-remote-2026     301!
+/jobs/remote-bookkeeper                        /jobs/remote-bookkeeper-part-time-2026              301!
+/jobs/remote-account-manager                   /jobs/remote-account-manager-b2b-2026               301!
+/jobs/remote-it-support-technician             /jobs/remote-it-support-technician-2026             301!
+/jobs/bilingual-customer-success-rep           /jobs/bilingual-customer-success-rep-remote-2026    301!
