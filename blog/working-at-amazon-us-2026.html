@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,6 +19,9 @@
   <meta name="twitter:title" content="Working at Amazon US in 2026: Culture, Salaries & How to Get Hired" />
   <meta name="twitter:description" content="Honest guide to Amazon culture, pay, Bar Raiser interviews, and which divisions are hiring in 2026." />
   <meta name="twitter:image" content="https://talent-loop.org/amazon-spheres-seattle.webp" />
+
+  <!-- FIX: Preload hero image to reduce LCP on mobile -->
+  <link rel="preload" as="image" href="https://talent-loop.org/amazon-spheres-seattle.webp" fetchpriority="high">
 
   <script type="application/ld+json">
   {
@@ -153,22 +155,25 @@
     .nav-menu li a.active { color: #fff; font-weight: 700; }
     .cta-link { background: #D4AF37 !important; color: #1a2b5f !important; font-weight: 800 !important; border-radius: 5px; }
     .cta-link:hover { background: #c9a227 !important; }
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    /* FIX: hamburger button needs accessible role — handled in HTML */
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
     .hamburger span { display: block; width: 25px; height: 2px; background: #fff; border-radius: 2px; }
     .breadcrumb-bar { background: #f7f7f7; border-bottom: 1px solid #e2e2e2; padding: 11px 24px; }
     .breadcrumb-inner { max-width: 860px; margin: 0 auto; font-size: 0.82rem; color: #666; }
-    .breadcrumb-inner a { color: #666; text-decoration: none; }
+    .breadcrumb-inner a { color: #555; text-decoration: underline; text-underline-offset: 2px; }
     .breadcrumb-inner a:hover { color: #D4AF37; }
     .breadcrumb-inner span { margin: 0 6px; }
     .post-wrap { max-width: 860px; margin: 0 auto; padding: 0 24px 80px; }
     .post-label { display: inline-block; background: #D4AF37; color: #1a2b5f; font-size: 0.72rem; font-weight: 800; letter-spacing: 1.3px; text-transform: uppercase; padding: 4px 13px; border-radius: 4px; margin-top: 40px; margin-bottom: 18px; }
     .post-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(1.85rem, 4vw, 2.7rem); font-weight: 800; line-height: 1.2; color: #0d1b3e; margin-bottom: 14px; }
-    .post-subtitle { font-size: 1.08rem; color: #555; line-height: 1.65; margin-bottom: 22px; font-style: italic; border-left: 3px solid #D4AF37; padding-left: 16px; }
-    .post-meta { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; font-size: 0.84rem; color: #777; margin-bottom: 28px; padding-bottom: 22px; border-bottom: 2px solid #e2e2e2; }
+    /* FIX: post-subtitle italic border-left — ensure sufficient contrast on text */
+    .post-subtitle { font-size: 1.08rem; color: #444; line-height: 1.65; margin-bottom: 22px; font-style: italic; border-left: 3px solid #D4AF37; padding-left: 16px; }
+    .post-meta { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; font-size: 0.84rem; color: #555; margin-bottom: 28px; padding-bottom: 22px; border-bottom: 2px solid #e2e2e2; }
     .post-hero { width: 100%; border-radius: 10px; overflow: hidden; margin-bottom: 10px; height: 440px; position: relative; background: #0d1b3e; }
     .post-hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .post-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(13,27,62,0.5) 0%, transparent 55%); }
-    .media-caption { font-size: 0.79rem; color: #999; text-align: center; font-style: italic; margin: 0 0 28px; }
+    /* FIX: media-caption — boosted from #999 to #666 for contrast ratio compliance */
+    .media-caption { font-size: 0.79rem; color: #666; text-align: center; font-style: italic; margin: 0 0 28px; }
     .post-img { width: 100%; border-radius: 10px; overflow: hidden; margin: 1.8em 0 0.5em; }
     .post-img img { width: 100%; height: 340px; object-fit: cover; display: block; border-radius: 10px; transition: transform .4s ease; }
     .post-img img:hover { transform: scale(1.015); }
@@ -182,12 +187,14 @@
     .video-wrap .yt-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; z-index: 4; padding: 20px; border-radius: 10px; background: rgba(0,0,0,0.32); transition: background 0.2s; }
     .video-wrap.has-thumb .yt-overlay { background: rgba(0,0,0,0.28); }
     .video-wrap:hover .yt-overlay { background: rgba(0,0,0,0.18); }
-    .video-wrap .yt-play-btn { width: 76px; height: 76px; background: rgba(255,0,0,0.92); border-radius: 16px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 24px rgba(0,0,0,0.5); transition: transform 0.18s ease, background 0.18s ease; flex-shrink: 0; position: relative; z-index: 2; }
+    .video-wrap .yt-play-btn { width: 76px; height: 76px; background: rgba(255,0,0,0.92); border-radius: 16px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 24px rgba(0,0,0,0.5); transition: transform 0.18s ease, background 0.18s ease; flex-shrink: 0; position: relative; z-index: 2; border: none; cursor: pointer; }
     .video-wrap:hover .yt-play-btn { transform: scale(1.1); background: #ff0000; box-shadow: 0 6px 32px rgba(255,0,0,0.55); }
     .video-wrap .yt-play-btn::after { content: ''; display: block; width: 0; height: 0; border-style: solid; border-width: 13px 0 13px 26px; border-color: transparent transparent transparent #fff; margin-left: 6px; }
-    .video-wrap .yt-label { color: rgba(255,255,255,0.9); font-size: 0.84rem; font-weight: 500; text-align: center; max-width: 500px; line-height: 1.5; position: relative; z-index: 2; text-shadow: 0 1px 4px rgba(0,0,0,0.7); }
+    /* FIX: yt-label color boosted from rgba(255,255,255,0.9) to #fff for contrast */
+    .video-wrap .yt-label { color: #fff; font-size: 0.84rem; font-weight: 500; text-align: center; max-width: 500px; line-height: 1.5; position: relative; z-index: 2; text-shadow: 0 1px 4px rgba(0,0,0,0.7); }
     .video-wrap .yt-label strong { display: block; color: #fff; font-size: 1rem; font-weight: 700; margin-bottom: 3px; text-shadow: 0 2px 6px rgba(0,0,0,0.8); }
-    .video-wrap .yt-hint { font-size: 0.7rem; color: rgba(255,255,255,0.5); letter-spacing: 1.2px; text-transform: uppercase; position: relative; z-index: 2; }
+    /* FIX: yt-hint color boosted from rgba(255,255,255,0.5) — kept as decorative helper text, acceptable */
+    .video-wrap .yt-hint { font-size: 0.7rem; color: rgba(255,255,255,0.75); letter-spacing: 1.2px; text-transform: uppercase; position: relative; z-index: 2; }
     .video-wrap::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #ff9900, #D4AF37); z-index: 6; border-radius: 10px 10px 0 0; }
     .video-wrap.loading .yt-play-btn, .video-wrap.loading .yt-label, .video-wrap.loading .yt-hint { display: none; }
     .video-wrap.loading .yt-overlay { background: rgba(0,0,0,0.55); cursor: wait; }
@@ -198,52 +205,63 @@
     .author-card { display: flex; align-items: center; gap: 16px; background: #f7f7f7; border: 1px solid #e2e2e2; border-radius: 10px; padding: 16px 20px; margin-bottom: 36px; }
     .author-photo { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid #D4AF37; }
     .author-info .name { font-weight: 700; font-size: 0.95rem; color: #0d1b3e; }
-    .author-info .title { font-size: 0.8rem; color: #D4AF37; font-weight: 600; margin-bottom: 2px; }
-    .author-info .bio { font-size: 0.78rem; color: #888; line-height: 1.45; }
+    /* FIX: author title color was #D4AF37 on #f7f7f7 bg — insufficient contrast. Darkened to #8a6e00 */
+    .author-info .title { font-size: 0.8rem; color: #8a6e00; font-weight: 600; margin-bottom: 2px; }
+    /* FIX: author bio color #888 on #f7f7f7 — boosted to #666 for 4.5:1 compliance */
+    .author-info .bio { font-size: 0.78rem; color: #666; line-height: 1.45; }
     .post-body { font-size: 1rem; line-height: 1.85; }
     .post-body p { margin-bottom: 1.3em; }
+    /* FIX: h2 heading hierarchy — changed all to h2, keeping styles */
     .post-body h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.55rem; font-weight: 700; color: #0d1b3e; margin: 2.4em 0 0.7em; padding-top: 1em; border-top: 2px solid #e2e2e2; line-height: 1.3; }
     .post-body h2.first-h2 { border-top: none; padding-top: 0; margin-top: 0; }
     .post-body strong { color: #0d1b3e; font-weight: 700; }
     .post-body ul, .post-body ol { margin: 0 0 1.3em 1.4em; }
     .post-body li { margin-bottom: 0.45em; }
+    /* FIX: body links — color was #1a5fa0, add underline always (was only offset) for color-blind users */
     .post-body a { color: #1a5fa0; text-decoration: underline; text-underline-offset: 3px; }
-    .post-body a:hover { color: #D4AF37; }
+    .post-body a:hover { color: #0d3d70; }
     .post-body blockquote { border-left: 4px solid #D4AF37; margin: 1.8em 0; padding: 14px 22px; background: #fffbf0; border-radius: 0 10px 10px 0; font-style: italic; font-size: 1.02rem; color: #1a2b5f; }
-    .post-body blockquote cite { display: block; margin-top: 9px; font-size: 0.81rem; font-style: normal; color: #888; font-weight: 500; }
+    .post-body blockquote cite { display: block; margin-top: 9px; font-size: 0.81rem; font-style: normal; color: #555; font-weight: 500; }
     .stats-bar { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: #e2e2e2; border: 1px solid #e2e2e2; border-radius: 10px; overflow: hidden; margin: 2em 0; }
     .stat-block { background: #f7f7f7; text-align: center; padding: 18px 8px; }
-    .stat-block .sn { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: #D4AF37; display: block; }
-    .stat-block .sl { font-size: 0.73rem; color: #888; text-transform: uppercase; letter-spacing: 0.6px; font-weight: 500; }
+    .stat-block .sn { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: #8a6e00; display: block; }
+    /* FIX: stat label color #888 on #f7f7f7 — boosted to #666 */
+    .stat-block .sl { font-size: 0.73rem; color: #666; text-transform: uppercase; letter-spacing: 0.6px; font-weight: 500; }
     .toc-box { background: #f7f7f7; border: 1px solid #e2e2e2; border-radius: 10px; padding: 22px 26px; margin: 2em 0; }
-    .toc-box h4 { font-family: 'Playfair Display', serif; font-size: 1rem; color: #0d1b3e; margin-bottom: 12px; font-weight: 700; }
+    /* FIX: toc h2 — was h4, changed to h2 in HTML for proper heading hierarchy */
+    .toc-box .toc-heading { font-family: 'Playfair Display', serif; font-size: 1rem; color: #0d1b3e; margin-bottom: 12px; font-weight: 700; }
     .toc-box ol { margin: 0; padding-left: 18px; }
     .toc-box ol li { margin-bottom: 6px; font-size: 0.91rem; }
-    .toc-box ol li a { color: #0d1b3e; text-decoration: none; font-weight: 500; }
-    .toc-box ol li a:hover { color: #D4AF37; text-decoration: underline; }
+    .toc-box ol li a { color: #0d1b3e; text-decoration: underline; text-underline-offset: 2px; font-weight: 500; }
+    .toc-box ol li a:hover { color: #8a6e00; }
     .cta-box { background: linear-gradient(135deg, #0d1b3e 0%, #1a3a5c 100%); border-radius: 10px; padding: 28px 32px; margin: 2em 0; color: #fff; }
     .cta-box .cta-label { font-size: 0.71rem; text-transform: uppercase; letter-spacing: 1.4px; color: #D4AF37; font-weight: 700; margin-bottom: 7px; }
-    .cta-box h3 { font-family: 'Playfair Display', serif; font-size: 1.28rem; color: #fff; margin-bottom: 8px; }
-    .cta-box p { color: rgba(255,255,255,0.8); font-size: 0.93rem; margin-bottom: 18px; }
+    /* FIX: cta-box h2 — was h3, updated to h2 in HTML */
+    .cta-box h2 { font-family: 'Playfair Display', serif; font-size: 1.28rem; color: #fff; margin-bottom: 8px; border: none !important; padding: 0 !important; margin-top: 0 !important; }
+    .cta-box p { color: rgba(255,255,255,0.9); font-size: 0.93rem; margin-bottom: 18px; }
     .btn-gold { display: inline-block; background: #D4AF37; color: #1a2b5f; text-decoration: none; font-weight: 800; padding: 12px 24px; border-radius: 7px; font-size: 0.95rem; transition: background .18s, transform .15s; }
-    .btn-gold:hover { background: #c9a227; transform: translateY(-1px); color: #1a2b5f; }
+    .btn-gold:hover { background: #c9a227; transform: translateY(-1px); color: #1a2b5f; text-decoration: none; }
     .dept-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(192px,1fr)); gap: 11px; margin: 1.3em 0 1.8em; }
     .dept-card { background: #f7f7f7; border: 1px solid #e2e2e2; border-radius: 10px; padding: 15px 17px; border-top: 3px solid #D4AF37; }
     .dept-card .di { font-size: 1.3rem; margin-bottom: 6px; }
     .dept-card .dn { font-weight: 700; font-size: 0.88rem; color: #0d1b3e; margin-bottom: 4px; }
-    .dept-card .dd { font-size: 0.78rem; color: #666; line-height: 1.5; }
+    /* FIX: dept-card desc color #666 on #f7f7f7 — 4.5:1 compliant */
+    .dept-card .dd { font-size: 0.78rem; color: #555; line-height: 1.5; }
     .lp-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(165px,1fr)); gap: 9px; margin: 1.3em 0 1.8em; }
     .lp-card { background: #f7f7f7; border: 1px solid #e2e2e2; border-radius: 8px; padding: 12px 15px; }
-    .lp-card .ln { font-weight: 700; font-size: 0.84rem; color: #c9a227; margin-bottom: 3px; }
-    .lp-card .ld { font-size: 0.78rem; color: #666; line-height: 1.45; }
+    /* FIX: LP card name was #c9a227 on #f7f7f7 — insufficient. Changed to #8a6e00 for compliance */
+    .lp-card .ln { font-weight: 700; font-size: 0.84rem; color: #8a6e00; margin-bottom: 3px; }
+    /* FIX: LP desc #666 → #555 for better ratio */
+    .lp-card .ld { font-size: 0.78rem; color: #555; line-height: 1.45; }
     .salary-table { width: 100%; border-collapse: collapse; margin: 1.3em 0 1.8em; font-size: 0.91rem; }
+    .salary-table caption { text-align: left; font-size: 0.82rem; color: #555; padding-bottom: 8px; }
     .salary-table th { background: #0d1b3e; color: #fff; padding: 11px 15px; text-align: left; font-size: 0.81rem; font-weight: 600; }
-    .salary-table td { padding: 10px 15px; border-bottom: 1px solid #e2e2e2; }
+    .salary-table td { padding: 10px 15px; border-bottom: 1px solid #e2e2e2; color: #2d2d2d; }
     .salary-table tr:nth-child(even) td { background: #f7f7f7; }
     .salary-table tr:hover td { background: #fffbf0; }
     .inline-cta { background: #f7f7f7; border: 1px solid #e2e2e2; border-left: 4px solid #D4AF37; border-radius: 0 10px 10px 0; padding: 15px 20px; margin: 1.8em 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
     .inline-cta p { margin: 0; font-weight: 600; font-size: 0.93rem; color: #0d1b3e; }
-    .inline-cta p span { color: #777; font-weight: 400; font-size: 0.83rem; display: block; margin-top: 3px; }
+    .inline-cta p span { color: #555; font-weight: 400; font-size: 0.83rem; display: block; margin-top: 3px; }
     .inline-cta a { display: inline-block; background: #D4AF37; color: #1a2b5f; text-decoration: none; font-weight: 800; padding: 10px 20px; border-radius: 7px; font-size: 0.87rem; white-space: nowrap; transition: background .18s; }
     .inline-cta a:hover { background: #c9a227; }
     .fit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 1.3em 0 1.8em; }
@@ -251,28 +269,32 @@
     .fit-box.green { border-top: 3px solid #2d9d51; }
     .fit-box.amber { border-top: 3px solid #e07b00; }
     .fit-box .ft { font-weight: 700; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.7px; margin-bottom: 10px; }
-    .fit-box.green .ft { color: #2d9d51; }
-    .fit-box.amber .ft { color: #c06800; }
+    .fit-box.green .ft { color: #1e7a3c; }
+    .fit-box.amber .ft { color: #8a4d00; }
     .fit-box ul { margin: 0; padding-left: 15px; }
     .fit-box ul li { font-size: 0.85rem; color: #2d2d2d; margin-bottom: 5px; }
     .faq-section { margin: 2.8em 0; }
     .faq-section h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.55rem; font-weight: 700; color: #0d1b3e; margin-bottom: 1em; padding-top: 1em; border-top: 2px solid #e2e2e2; }
     .faq-item { border: 1px solid #e2e2e2; border-radius: 10px; margin-bottom: 12px; overflow: hidden; }
-    .faq-q { background: #f7f7f7; padding: 16px 20px; font-weight: 700; font-size: 0.97rem; color: #0d1b3e; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
-    .faq-q .faq-icon { font-size: 1.3rem; color: #D4AF37; font-weight: 400; flex-shrink: 0; margin-left: 12px; transition: transform 0.25s ease; }
+    .faq-q { background: #f7f7f7; padding: 16px 20px; font-weight: 700; font-size: 0.97rem; color: #0d1b3e; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; border: none; width: 100%; text-align: left; }
+    /* FIX: faq-icon color was #D4AF37 on #f7f7f7 bg — changed to #8a6e00 for contrast */
+    .faq-q .faq-icon { font-size: 1.3rem; color: #8a6e00; font-weight: 400; flex-shrink: 0; margin-left: 12px; transition: transform 0.25s ease; }
     .faq-q.open .faq-icon { transform: rotate(45deg); }
-    .faq-a { padding: 0 20px; font-size: 0.94rem; line-height: 1.75; color: #444; border-top: 1px solid #e2e2e2; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; }
+    .faq-a { padding: 0 20px; font-size: 0.94rem; line-height: 1.75; color: #333; border-top: 1px solid #e2e2e2; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; }
     .faq-a.open { max-height: 600px; padding: 16px 20px; }
     .final-cta { background: linear-gradient(135deg, #0d1b3e 0%, #1a3a5c 100%); border-radius: 10px; padding: 38px; text-align: center; margin: 2.8em 0 0; }
-    .final-cta h2 { font-family: 'Playfair Display', serif; font-size: 1.7rem; color: #fff; margin-bottom: 10px; border: none !important; padding: 0 !important; }
-    .final-cta p { color: rgba(255,255,255,0.84); font-size: 1.01rem; margin-bottom: 20px; }
+    /* FIX: final-cta h2 — was styled via .post-body h2 override which added border. Ensured override */
+    .final-cta h2 { font-family: 'Playfair Display', serif; font-size: 1.7rem; color: #fff; margin-bottom: 10px; border: none !important; padding: 0 !important; margin-top: 0 !important; }
+    .final-cta p { color: rgba(255,255,255,0.9); font-size: 1.01rem; margin-bottom: 20px; }
     .final-cta .btn-gold { font-size: 1rem; padding: 14px 32px; }
     .related-box { background: #f7f7f7; border: 1px solid #e2e2e2; border-radius: 10px; padding: 24px 28px; margin: 2.8em 0; }
-    .related-box h3 { font-family: 'Playfair Display', serif; font-size: 1.06rem; color: #0d1b3e; margin-bottom: 14px; }
+    /* FIX: related-box heading — was h3 after h2s; ensure correct nesting in markup */
+    .related-box h2 { font-family: 'Playfair Display', serif; font-size: 1.06rem; color: #0d1b3e; margin-bottom: 14px; border: none !important; padding: 0 !important; margin-top: 0 !important; }
     .related-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(182px,1fr)); gap: 11px; }
     .related-item { background: #fff; border: 1px solid #e2e2e2; border-radius: 9px; padding: 14px 16px; text-decoration: none; transition: box-shadow .2s, transform .15s; display: block; }
     .related-item:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.09); transform: translateY(-2px); }
-    .related-item .ri-label { font-size: 0.69rem; text-transform: uppercase; letter-spacing: 1px; color: #c9a227; font-weight: 700; margin-bottom: 4px; }
+    /* FIX: ri-label color was #c9a227 on white — insufficient contrast. Changed to #8a6e00 */
+    .related-item .ri-label { font-size: 0.69rem; text-transform: uppercase; letter-spacing: 1px; color: #8a6e00; font-weight: 700; margin-bottom: 4px; }
     .related-item .ri-title { font-weight: 600; font-size: 0.85rem; color: #0d1b3e; line-height: 1.4; }
     .footer { background: #0d1b3e; }
     .footer .container { max-width: 1160px; margin: 0 auto; padding: 50px 24px 28px; }
@@ -290,7 +312,7 @@
     .footer-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
     .footer-bottom { border-top: 1px solid rgba(255,255,255,0.15); padding-top: 1.5rem; margin-top: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
     .footer-bottom p { color: #b8c4e0; font-size: 0.79rem; margin: 0; }
-    .footer-bottom a { color: rgba(255,255,255,0.48); text-decoration: none; }
+    .footer-bottom a { color: rgba(255,255,255,0.75); text-decoration: underline; }
     .footer-bottom a:hover { color: #D4AF37; }
     .social-links { display: flex; gap: 8px; margin-top: 14px; }
     .social-links a { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; background: rgba(255,255,255,0.1); color: #fff; border-radius: 6px; text-decoration: none; font-size: 0.8rem; font-weight: 700; transition: background .18s; }
@@ -305,6 +327,7 @@
 
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
+<!-- FIX: hamburger changed from div to button for accessible keyboard/ARIA interaction -->
 <nav class="navbar" aria-label="Main navigation">
   <div class="nav-container">
     <a href="/" class="logo">
@@ -316,21 +339,24 @@
       <li><a href="/about">About Us</a></li>
       <li><a href="/jobs">Jobs</a></li>
       <li><a href="/testimonials">Testimonials</a></li>
-      <li><a href="/blog" class="active">Blog</a></li>
+      <li><a href="/blog" class="active" aria-current="page">Blog</a></li>
       <li><a href="/contact">Contact</a></li>
       <li><a href="/assessment" class="cta-link">Take Assessment</a></li>
     </ul>
-    <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    <!-- FIX: Changed div.hamburger to button for native keyboard + screen reader support. Removed prohibited aria-expanded on non-interactive div -->
+    <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navMenu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 
-<div class="breadcrumb-bar">
+<nav aria-label="Breadcrumb" class="breadcrumb-bar">
   <div class="breadcrumb-inner">
-    <a href="/">Home</a><span>›</span>
-    <a href="/blog">Career Blog</a><span>›</span>
-    Working at Amazon US 2026
+    <a href="/">Home</a><span aria-hidden="true">›</span>
+    <a href="/blog">Career Blog</a><span aria-hidden="true">›</span>
+    <span aria-current="page">Working at Amazon US 2026</span>
   </div>
-</div>
+</nav>
 
 <main id="main-content">
 <div class="post-wrap">
@@ -345,23 +371,24 @@
     <span>✍️ By <a href="/about#nathaniel-kenny-olie" style="color:#1a5fa0; text-decoration:underline;">Nathaniel Kenny Olie</a></span>
   </div>
 
-  <!-- FIXED: /images/ removed from path -->
+  <!-- FIX: fetchpriority="high" + loading="eager" confirmed. width/height set for layout stability (CLS) -->
   <div class="post-hero">
     <img src="https://talent-loop.org/amazon-spheres-seattle.webp"
          alt="Amazon Spheres headquarters building in Seattle Washington — working at Amazon US 2026"
          loading="eager" fetchpriority="high" width="860" height="440">
-    <div class="post-hero-overlay"></div>
+    <div class="post-hero-overlay" aria-hidden="true"></div>
   </div>
   <p class="media-caption">Amazon's Spheres in Seattle — the home base of one of the most demanding and career-defining employers in the world.</p>
 
   <div class="author-card" id="nathaniel-kenny-olie">
+    <!-- FIX: loading="lazy" + explicit width/height on author photo -->
     <img src="https://talent-loop.org/Kenny.webp"
          alt="Nathaniel Kenny Olie — CEO and Founder of Talent Loop"
          class="author-photo" width="56" height="56" loading="lazy">
     <div class="author-info">
       <div class="title">CEO &amp; Founder · Talent Loop</div>
       <div class="name"><a href="/about#nathaniel-kenny-olie" style="color:#0d1b3e; text-decoration:none;">Nathaniel Kenny Olie</a></div>
-      <div class="bio">15+ years in HR and recruitment. Dedicated to helping professionals make confident, well-informed career decisions. · <a href="/about" style="color:#1a5fa0;">Full profile</a></div>
+      <div class="bio">15+ years in HR and recruitment. Dedicated to helping professionals make confident, well-informed career decisions. · <a href="/about" style="color:#1a5fa0; text-decoration:underline;">Full profile</a></div>
     </div>
   </div>
 
@@ -373,15 +400,19 @@
 
     <div class="cta-box">
       <div class="cta-label">Ready to Explore Roles?</div>
-      <h3>Browse Live Amazon US Openings Right Now</h3>
+      <!-- FIX: was h3, changed to h2 for correct heading hierarchy after h1 -->
+      <h2>Browse Live Amazon US Openings Right Now</h2>
       <p>Our jobs board surfaces active Amazon opportunities across every division — from AWS and Advertising to Prime Video and Health. The best roles move fast, so don't wait around.</p>
+      <!-- FIX: descriptive link text — was "View Amazon Jobs →", updated for SEO audit fix -->
       <a href="https://www.mz1ay3ch.com/CDCH2K3/CM8KX4C/?source_id=Talent%20Loop%20&sub1=BlogPost8"
-         class="btn-gold" target="_blank" rel="nofollow sponsored noopener noreferrer">View Amazon Jobs →</a>
+         class="btn-gold" target="_blank" rel="nofollow sponsored noopener noreferrer"
+         aria-label="Browse live Amazon US job openings on our jobs board">Browse Live Amazon US Job Openings →</a>
     </div>
-    <p style="font-size:0.82rem; color:#888; margin-top:-24px; margin-bottom:32px;"><em>Disclosure: Some links in this article are affiliate links. Talent Loop may earn a commission if you register through them, at no cost to you.</em></p>
+    <p style="font-size:0.82rem; color:#555; margin-top:-24px; margin-bottom:32px;"><em>Disclosure: Some links in this article are affiliate links. Talent Loop may earn a commission if you register through them, at no cost to you.</em></p>
 
-    <nav class="toc-box" aria-label="Table of Contents">
-      <h4>📋 What's in This Guide</h4>
+    <!-- FIX: TOC nav — was using h4 inside, changed to h2 for heading sequence. Styled via .toc-heading class -->
+    <nav class="toc-box" aria-label="Article contents">
+      <h2 class="toc-heading">📋 What's in This Guide</h2>
       <ol>
         <li><a href="#story">How a Garage Startup Became Global Infrastructure</a></li>
         <li><a href="#depts">The Divisions at Amazon US — and Which to Target</a></li>
@@ -396,7 +427,7 @@
 
     <h2 id="story" class="first-h2">How a Garage Startup Became Global Infrastructure</h2>
 
-    <!-- FIXED: /images/ removed -->
+    <!-- FIX: All below-fold images have loading="lazy" + explicit width/height for CLS elimination -->
     <div class="post-img">
       <img src="https://talent-loop.org/amazon-seattle-campus-towers.webp"
            alt="Amazon Seattle campus modern office towers and skyline view"
@@ -410,19 +441,20 @@
 
     <p>The practical upshot for job seekers: with over <strong>1.5 million employees</strong> globally and continuous hiring across engineering, product, operations, marketing, legal, finance, and data, this is one of the few employers where the scale of what they're actually building can honestly match the ambition of the people wanting to join it. See our <a href="/jobs">live jobs board</a> to browse current openings.</p>
 
-    <div class="stats-bar">
-      <div class="stat-block"><span class="sn">1.5M+</span><span class="sl">Employees</span></div>
-      <div class="stat-block"><span class="sn">$638B</span><span class="sl">Annual Revenue</span></div>
-      <div class="stat-block"><span class="sn">16</span><span class="sl">Leadership Principles</span></div>
-      <div class="stat-block"><span class="sn">3.7/5</span><span class="sl">Glassdoor Rating</span></div>
+    <div class="stats-bar" role="list" aria-label="Amazon at a glance">
+      <div class="stat-block" role="listitem"><span class="sn">1.5M+</span><span class="sl">Employees</span></div>
+      <div class="stat-block" role="listitem"><span class="sn">$638B</span><span class="sl">Annual Revenue</span></div>
+      <div class="stat-block" role="listitem"><span class="sn">16</span><span class="sl">Leadership Principles</span></div>
+      <div class="stat-block" role="listitem"><span class="sn">3.7/5</span><span class="sl">Glassdoor Rating</span></div>
     </div>
 
-    <div class="video-wrap" data-videoid="a9__D53WsUs" data-title="Amazon — Who We Are">
+    <!-- FIX: YouTube facade — thumbnails lazy-loaded via JS, no third-party iframe until user clicks -->
+    <div class="video-wrap" data-videoid="a9__D53WsUs" data-title="Amazon — Who We Are" role="button" tabindex="0" aria-label="Play video: Amazon — Who We Are">
       <div class="yt-overlay">
-        <div class="yt-play-btn" aria-label="Play Amazon company overview video"></div>
+        <button class="yt-play-btn" aria-label="Play Amazon company overview video"></button>
         <div class="yt-label"><strong>Amazon — Who We Are</strong>Amazon's own overview of the company</div>
-        <div class="yt-hint">▶ Click to play</div>
-        <div class="yt-spinner"></div>
+        <div class="yt-hint" aria-hidden="true">▶ Click to play</div>
+        <div class="yt-spinner" aria-hidden="true"></div>
       </div>
     </div>
     <p class="media-caption">Amazon's own overview of what the company actually builds and why — useful context before diving into the hiring side of things.</p>
@@ -431,7 +463,6 @@
 
     <p>One of the most common mistakes I see job seekers make with Amazon is treating it as a single employer. It isn't. It's closer to ten substantially different businesses operating under the same set of principles, and the division you land in will shape almost everything about your day-to-day experience — the pace, the culture on the ground, your compensation ceiling, the kinds of problems you're working on, and how quickly you can move up.</p>
 
-    <!-- FIXED: /images/ removed -->
     <div class="post-img float-right cf">
       <img src="https://talent-loop.org/aws-cloud-data-centre-infrastructure.webp"
            alt="AWS Amazon Web Services cloud computing data centre server infrastructure"
@@ -439,33 +470,32 @@
     </div>
 
     <div class="dept-grid">
-      <div class="dept-card"><div class="di">☁️</div><div class="dn">Amazon Web Services (AWS)</div><div class="dd">The highest-paying division. Cloud infrastructure, AI/ML platforms, enterprise sales. Engineers, solutions architects, and PMs consistently in demand.</div></div>
-      <div class="dept-card"><div class="di">📦</div><div class="dn">Retail &amp; Operations</div><div class="dd">The original business — e-commerce, fulfilment, logistics. Enormous operational scale and a clear path to senior operations leadership.</div></div>
-      <div class="dept-card"><div class="di">📊</div><div class="dn">Amazon Advertising</div><div class="dd">The US's third-largest ad platform, growing fast. Strong comp in product, data science, and account management roles.</div></div>
-      <div class="dept-card"><div class="di">🎬</div><div class="dn">Prime Video &amp; Studios</div><div class="dd">Content, technology, and marketing for a global entertainment business competing with Netflix for talent as much as viewers.</div></div>
-      <div class="dept-card"><div class="di">🤖</div><div class="dn">Alexa &amp; Devices</div><div class="dd">Echo, Kindle, Ring, Blink. Hardware, voice AI, and smart home infrastructure — fast-moving and high-visibility.</div></div>
-      <div class="dept-card"><div class="di">🏥</div><div class="dn">Amazon Health</div><div class="dd">One Medical and Amazon Pharmacy — a rapidly expanding bet on disrupting US healthcare. Actively hiring.</div></div>
-      <div class="dept-card"><div class="di">🚀</div><div class="dn">Project Kuiper</div><div class="dd">Amazon's satellite internet constellation. One of its boldest long bets, with ongoing aerospace and software engineering roles.</div></div>
-      <div class="dept-card"><div class="di">🏬</div><div class="dn">Amazon Fresh &amp; Whole Foods</div><div class="dd">Physical retail and grocery tech — where Amazon's logistics muscle meets brick-and-mortar commerce head-on.</div></div>
+      <div class="dept-card"><div class="di" aria-hidden="true">☁️</div><div class="dn">Amazon Web Services (AWS)</div><div class="dd">The highest-paying division. Cloud infrastructure, AI/ML platforms, enterprise sales. Engineers, solutions architects, and PMs consistently in demand.</div></div>
+      <div class="dept-card"><div class="di" aria-hidden="true">📦</div><div class="dn">Retail &amp; Operations</div><div class="dd">The original business — e-commerce, fulfilment, logistics. Enormous operational scale and a clear path to senior operations leadership.</div></div>
+      <div class="dept-card"><div class="di" aria-hidden="true">📊</div><div class="dn">Amazon Advertising</div><div class="dd">The US's third-largest ad platform, growing fast. Strong comp in product, data science, and account management roles.</div></div>
+      <div class="dept-card"><div class="di" aria-hidden="true">🎬</div><div class="dn">Prime Video &amp; Studios</div><div class="dd">Content, technology, and marketing for a global entertainment business competing with Netflix for talent as much as viewers.</div></div>
+      <div class="dept-card"><div class="di" aria-hidden="true">🤖</div><div class="dn">Alexa &amp; Devices</div><div class="dd">Echo, Kindle, Ring, Blink. Hardware, voice AI, and smart home infrastructure — fast-moving and high-visibility.</div></div>
+      <div class="dept-card"><div class="di" aria-hidden="true">🏥</div><div class="dn">Amazon Health</div><div class="dd">One Medical and Amazon Pharmacy — a rapidly expanding bet on disrupting US healthcare. Actively hiring.</div></div>
+      <div class="dept-card"><div class="di" aria-hidden="true">🚀</div><div class="dn">Project Kuiper</div><div class="dd">Amazon's satellite internet constellation. One of its boldest long bets, with ongoing aerospace and software engineering roles.</div></div>
+      <div class="dept-card"><div class="di" aria-hidden="true">🏬</div><div class="dn">Amazon Fresh &amp; Whole Foods</div><div class="dd">Physical retail and grocery tech — where Amazon's logistics muscle meets brick-and-mortar commerce head-on.</div></div>
     </div>
 
     <div class="cf"></div>
 
     <p>If you're trying to work out where your skills fit best right now: AWS and Amazon Advertising are the two divisions with the most active hiring pipelines and the most aggressive compensation packages. If your background touches cloud technology, data, or digital advertising in any way, those are your highest-leverage entry points. <a href="/assessment">Take our free career assessment</a> to find out which Amazon division matches your profile.</p>
 
-    <div class="video-wrap" data-videoid="M988_fsOSWo" data-title="Amazon Web Services (AWS) Explained">
+    <div class="video-wrap" data-videoid="M988_fsOSWo" data-title="Amazon Web Services (AWS) Explained" role="button" tabindex="0" aria-label="Play video: Amazon Web Services (AWS) Explained">
       <div class="yt-overlay">
-        <div class="yt-play-btn" aria-label="Play AWS explained video"></div>
+        <button class="yt-play-btn" aria-label="Play AWS explained video"></button>
         <div class="yt-label"><strong>Amazon Web Services (AWS) Explained</strong>What AWS does and why it's Amazon's biggest revenue engine</div>
-        <div class="yt-hint">▶ Click to play</div>
-        <div class="yt-spinner"></div>
+        <div class="yt-hint" aria-hidden="true">▶ Click to play</div>
+        <div class="yt-spinner" aria-hidden="true"></div>
       </div>
     </div>
     <p class="media-caption">A clear breakdown of what AWS actually does and why it's become Amazon's most powerful revenue engine — and its most aggressive hiring division.</p>
 
     <h2 id="culture">The Culture: Leadership Principles Aren't Optional</h2>
 
-    <!-- FIXED: /images/ removed -->
     <div class="post-img">
       <img src="https://talent-loop.org/amazon-office-open-plan-workspace.webp"
            alt="Modern open-plan Amazon office workspace showing deep-work culture and direct accountability"
@@ -488,12 +518,12 @@
       <div class="lp-card"><div class="ln">Earn Trust</div><div class="ld">Be direct, benchmark yourself against the best, and don't confuse internal comfort with actual performance.</div></div>
     </div>
 
-    <div class="video-wrap" data-videoid="cdBR2HoyrCo" data-title="Tips From an Amazon Bar Raiser">
+    <div class="video-wrap" data-videoid="cdBR2HoyrCo" data-title="Tips From an Amazon Bar Raiser" role="button" tabindex="0" aria-label="Play video: Tips From an Amazon Bar Raiser">
       <div class="yt-overlay">
-        <div class="yt-play-btn" aria-label="Play Amazon Bar Raiser tips video"></div>
+        <button class="yt-play-btn" aria-label="Play Amazon Bar Raiser tips video"></button>
         <div class="yt-label"><strong>Tips From an Amazon Bar Raiser</strong>Official Amazon News — what successful candidates do</div>
-        <div class="yt-hint">▶ Click to play</div>
-        <div class="yt-spinner"></div>
+        <div class="yt-hint" aria-hidden="true">▶ Click to play</div>
+        <div class="yt-spinner" aria-hidden="true"></div>
       </div>
     </div>
     <p class="media-caption">A thorough walkthrough of how Amazon's Leadership Principles work in practice — worth watching before you write a single answer for your interview prep.</p>
@@ -507,7 +537,6 @@
 
     <h2 id="salary">What Amazon Actually Pays in 2026</h2>
 
-    <!-- FIXED: /images/ removed -->
     <div class="post-img float-right cf">
       <img src="https://talent-loop.org/salary-negotiation-compensation-planning.webp"
            alt="Salary negotiation and compensation planning — Amazon pay structure RSU vesting 2026"
@@ -521,8 +550,8 @@
     <div class="cf"></div>
 
     <table class="salary-table">
-      <caption style="text-align:left; font-size:0.82rem; color:#888; padding-bottom:8px;">Amazon US total compensation by role, 2026. Sources: Levels.fyi, Glassdoor, public disclosures.</caption>
-      <thead><tr><th>Role</th><th>Typical Total Compensation (US, 2026)</th></tr></thead>
+      <caption>Amazon US total compensation by role, 2026. Sources: Levels.fyi, Glassdoor, public disclosures.</caption>
+      <thead><tr><th scope="col">Role</th><th scope="col">Typical Total Compensation (US, 2026)</th></tr></thead>
       <tbody>
         <tr><td>Software Engineer SDE I (Entry Level)</td><td>$130,000 – $175,000</td></tr>
         <tr><td>Software Engineer SDE II</td><td>$175,000 – $280,000</td></tr>
@@ -537,19 +566,18 @@
 
     <p>Outside of cash and stock, the benefits package is solid: comprehensive medical, dental, and vision, a 401(k) with company match, paid parental leave, and mental health support. The one that gets genuinely underappreciated is Career Choice — a programme that prepays up to 95% of tuition for in-demand fields, even ones with no obvious application to Amazon's own business.</p>
 
-    <div class="video-wrap" data-videoid="f965gPvg-tU" data-title="Amazon Compensation Explained — Base, RSUs &amp; Sign-On">
+    <div class="video-wrap" data-videoid="f965gPvg-tU" data-title="Amazon Compensation Explained — Base, RSUs & Sign-On" role="button" tabindex="0" aria-label="Play video: Amazon Compensation Explained — Base, RSUs and Sign-On">
       <div class="yt-overlay">
-        <div class="yt-play-btn" aria-label="Play Amazon compensation explained video"></div>
+        <button class="yt-play-btn" aria-label="Play Amazon compensation explained video"></button>
         <div class="yt-label"><strong>Amazon Compensation Explained — Base, RSUs &amp; Sign-On</strong>How Amazon structures pay, vesting schedules and total comp</div>
-        <div class="yt-hint">▶ Click to play</div>
-        <div class="yt-spinner"></div>
+        <div class="yt-hint" aria-hidden="true">▶ Click to play</div>
+        <div class="yt-spinner" aria-hidden="true"></div>
       </div>
     </div>
     <p class="media-caption">A clear breakdown of how Amazon structures pay — base salary cap, GSU vesting schedules, sign-on bonuses, and how to read a total comp offer correctly.</p>
 
     <h2 id="hiring">The Hiring Process: Bar Raisers, STAR, and Where People Slip Up</h2>
 
-    <!-- FIXED: /images/ removed -->
     <div class="post-img">
       <img src="https://talent-loop.org/amazon-job-interview-hiring-process.webp"
            alt="Professional job interview — Amazon hiring process Bar Raiser STAR method preparation"
@@ -567,31 +595,30 @@
 
     <p><strong>Stage 4 — The Loop.</strong> Four to six back-to-back interviews, each covering different Leadership Principles. At least one interviewer will be a <strong>Bar Raiser</strong> — an independently certified Amazon interviewer whose sole mandate is to protect the overall quality of hires. The Bar Raiser has full veto power over the final decision regardless of what the rest of the panel recommends.</p>
 
-    <div class="video-wrap" data-videoid="ye-FPqUe71E" data-title="Amazon Bar Raiser Tips">
+    <div class="video-wrap" data-videoid="ye-FPqUe71E" data-title="Amazon Bar Raiser Tips" role="button" tabindex="0" aria-label="Play video: Amazon Bar Raiser Tips">
       <div class="yt-overlay">
-        <div class="yt-play-btn" aria-label="Play Amazon Bar Raiser interview tips video"></div>
+        <button class="yt-play-btn" aria-label="Play Amazon Bar Raiser interview tips video"></button>
         <div class="yt-label"><strong>Amazon Bar Raiser Tips</strong>An Amazon Bar Raiser who has conducted 280+ interviews shares exactly what they look for</div>
-        <div class="yt-hint">▶ Click to play</div>
-        <div class="yt-spinner"></div>
+        <div class="yt-hint" aria-hidden="true">▶ Click to play</div>
+        <div class="yt-spinner" aria-hidden="true"></div>
       </div>
     </div>
     <p class="media-caption">Former Amazon recruiters break down the Bar Raiser process — what it actually is, how to recognise it in the room, and what those interviewers are really listening for.</p>
 
     <p>The single most common failure mode: using "we" instead of "I." Amazon interviewers are specifically listening for individual contribution. Before you interview, prepare 8 to 10 stories from your career that map clearly to Leadership Principles, and know which principle each one covers. Our <a href="/blog">career blog</a> has preparation guides for other top employers too.</p>
 
-    <div class="video-wrap" data-videoid="xsgQcySpoUg" data-title="How to Answer Amazon's STAR Interview Questions">
+    <div class="video-wrap" data-videoid="xsgQcySpoUg" data-title="How to Answer Amazon's STAR Interview Questions" role="button" tabindex="0" aria-label="Play video: How to Answer Amazon's STAR Interview Questions">
       <div class="yt-overlay">
-        <div class="yt-play-btn" aria-label="Play STAR interview method for Amazon video"></div>
+        <button class="yt-play-btn" aria-label="Play STAR interview method for Amazon video"></button>
         <div class="yt-label"><strong>How to Answer Amazon's STAR Interview Questions</strong>Built by a Bar Raiser — concrete examples and common mistakes</div>
-        <div class="yt-hint">▶ Click to play</div>
-        <div class="yt-spinner"></div>
+        <div class="yt-hint" aria-hidden="true">▶ Click to play</div>
+        <div class="yt-spinner" aria-hidden="true"></div>
       </div>
     </div>
     <p class="media-caption">A practical walkthrough of the STAR method applied specifically to Amazon LP-based questions — concrete examples and common mistakes covered.</p>
 
     <h2 id="fit">Is Amazon Actually the Right Move for You?</h2>
 
-    <!-- FIXED: /images/ removed -->
     <div class="post-img float-right cf">
       <img src="https://talent-loop.org/team-working-modern-professional-office.webp"
            alt="Team working together in modern professional office environment — is Amazon the right fit"
@@ -631,12 +658,12 @@
 
     <p>Not sure if Amazon is right for you? Read our <a href="/blog/working-at-netflix-career-guide">Working at Netflix guide</a> for a different kind of high-performance culture, or <a href="/assessment">take our free assessment</a> to get matched to the employer that fits your profile.</p>
 
-    <div class="video-wrap" data-videoid="aJHERLcrPvw" data-title="A Day In The Life of an Amazon Software Engineer">
+    <div class="video-wrap" data-videoid="aJHERLcrPvw" data-title="A Day In The Life of an Amazon Software Engineer" role="button" tabindex="0" aria-label="Play video: A Day In The Life of an Amazon Software Engineer">
       <div class="yt-overlay">
-        <div class="yt-play-btn" aria-label="Play day in the life Amazon software engineer video"></div>
+        <button class="yt-play-btn" aria-label="Play day in the life Amazon software engineer video"></button>
         <div class="yt-label"><strong>A Day In The Life of an Amazon Software Engineer</strong>Office edition — an honest look at how work actually flows day-to-day</div>
-        <div class="yt-hint">▶ Click to play</div>
-        <div class="yt-spinner"></div>
+        <div class="yt-hint" aria-hidden="true">▶ Click to play</div>
+        <div class="yt-spinner" aria-hidden="true"></div>
       </div>
     </div>
     <p class="media-caption">A day-in-the-life from an Amazon software engineer — gives you an honest feel for how work actually flows before you commit to applying.</p>
@@ -644,32 +671,33 @@
     <section class="faq-section" id="faq">
       <h2>Frequently Asked Questions: Working at Amazon US</h2>
       <div class="faq-item" itemscope itemtype="https://schema.org/Question">
-        <div class="faq-q" itemprop="name">What is it like to work at Amazon US in 2026?<span class="faq-icon">+</span></div>
-        <div class="faq-a" itemscope itemtype="https://schema.org/Answer" itemprop="acceptedAnswer">
+        <!-- FIX: faq-q changed from div to button for keyboard accessibility and ARIA compliance -->
+        <button class="faq-q" itemprop="name" aria-expanded="false">What is it like to work at Amazon US in 2026?<span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-a" itemscope itemtype="https://schema.org/Answer" itemprop="acceptedAnswer" role="region">
           <span itemprop="text">Working at Amazon US in 2026 is high-accountability and high-autonomy. Amazon operates through 16 Leadership Principles that govern every hiring decision, performance review, and day-to-day meeting. Employees who are self-motivated, data-driven, and comfortable with ownership thrive. Those who need heavy structure or frequent direction typically find the environment challenging. Glassdoor rates Amazon 3.7 out of 5 in 2026.</span>
         </div>
       </div>
       <div class="faq-item" itemscope itemtype="https://schema.org/Question">
-        <div class="faq-q" itemprop="name">What does Amazon pay software engineers in 2026?<span class="faq-icon">+</span></div>
-        <div class="faq-a" itemscope itemtype="https://schema.org/Answer" itemprop="acceptedAnswer">
+        <button class="faq-q" itemprop="name" aria-expanded="false">What does Amazon pay software engineers in 2026?<span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-a" itemscope itemtype="https://schema.org/Answer" itemprop="acceptedAnswer" role="region">
           <span itemprop="text">In 2026, Amazon software engineers earn between $130,000 and $400,000+ in total compensation depending on level. SDE I (entry level) earns $130,000–$175,000, SDE II earns $175,000–$280,000, and Senior SDE (SDE III) earns $240,000–$400,000. Base salary is capped at approximately $175,000 for most roles; above that, compensation shifts to RSUs (GSUs) on a back-loaded vesting schedule.</span>
         </div>
       </div>
       <div class="faq-item" itemscope itemtype="https://schema.org/Question">
-        <div class="faq-q" itemprop="name">What is Amazon's Bar Raiser interview process?<span class="faq-icon">+</span></div>
-        <div class="faq-a" itemscope itemtype="https://schema.org/Answer" itemprop="acceptedAnswer">
+        <button class="faq-q" itemprop="name" aria-expanded="false">What is Amazon's Bar Raiser interview process?<span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-a" itemscope itemtype="https://schema.org/Answer" itemprop="acceptedAnswer" role="region">
           <span itemprop="text">Amazon's Bar Raiser is an independently certified interviewer present in every hiring loop whose sole job is to protect hiring quality. They have full veto power over a hire regardless of the rest of the panel. The Bar Raiser evaluates whether the candidate raises the overall bar at Amazon, not just meets the role's minimum requirements. All questions are behavioural and mapped to Amazon's 16 Leadership Principles using the STAR format.</span>
         </div>
       </div>
       <div class="faq-item" itemscope itemtype="https://schema.org/Question">
-        <div class="faq-q" itemprop="name">Which Amazon division is best to apply to in 2026?<span class="faq-icon">+</span></div>
-        <div class="faq-a" itemscope itemtype="https://schema.org/Answer" itemprop="acceptedAnswer">
+        <button class="faq-q" itemprop="name" aria-expanded="false">Which Amazon division is best to apply to in 2026?<span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-a" itemscope itemtype="https://schema.org/Answer" itemprop="acceptedAnswer" role="region">
           <span itemprop="text">In 2026, AWS (Amazon Web Services) and Amazon Advertising have the most active hiring pipelines and the most competitive compensation packages. AWS is the highest-paying division, with engineers, solutions architects, and product managers consistently in demand. Amazon Advertising is growing fast as the third-largest digital ad platform in the US. Amazon Health (One Medical and Amazon Pharmacy) is also actively expanding its workforce.</span>
         </div>
       </div>
       <div class="faq-item" itemscope itemtype="https://schema.org/Question">
-        <div class="faq-q" itemprop="name">How long does the Amazon hiring process take?<span class="faq-icon">+</span></div>
-        <div class="faq-a" itemscope itemtype="https://schema.org/Answer" itemprop="acceptedAnswer">
+        <button class="faq-q" itemprop="name" aria-expanded="false">How long does the Amazon hiring process take?<span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-a" itemscope itemtype="https://schema.org/Answer" itemprop="acceptedAnswer" role="region">
           <span itemprop="text">Amazon's hiring process typically takes four to six weeks from application to offer. It consists of four stages: an online assessment, a recruiter screen (~30 minutes), one or two phone/video interviews, and the Loop — four to six back-to-back interviews with a Bar Raiser present. Preparation specific to Amazon's 16 Leadership Principles and the STAR format is essential.</span>
         </div>
       </div>
@@ -677,7 +705,6 @@
 
     <h2 id="final">Before You Apply: A Few Final Thoughts</h2>
 
-    <!-- FIXED: /images/ removed -->
     <div class="post-img">
       <img src="https://talent-loop.org/amazon-fulfilment-warehouse-logistics.webp"
            alt="Amazon fulfilment warehouse showing logistics and operational scale of the company"
@@ -693,13 +720,16 @@
 
     <div class="final-cta">
       <h2>Ready to Find Your Amazon Role?</h2>
-      <p>Our <a href="/jobs" style="color:#D4AF37;">jobs board</a> has live Amazon US openings across every division. High-demand roles fill fast — the right opportunity could be live right now.</p>
+      <p>Our <a href="/jobs" style="color:#D4AF37; text-decoration:underline;">jobs board</a> has live Amazon US openings across every division. High-demand roles fill fast — the right opportunity could be live right now.</p>
+      <!-- FIX: descriptive link text -->
       <a href="https://www.mz1ay3ch.com/CDCH2K3/CM8KX4C/?source_id=Talent%20Loop%20&sub1=BlogPost8"
-         class="btn-gold" target="_blank" rel="nofollow sponsored noopener noreferrer">Explore Amazon Opportunities →</a>
+         class="btn-gold" target="_blank" rel="nofollow sponsored noopener noreferrer"
+         aria-label="Explore live Amazon US job opportunities on our jobs board">Explore Live Amazon Opportunities →</a>
     </div>
 
+    <!-- FIX: related-box heading changed from h3 to h2 for correct hierarchy -->
     <div class="related-box">
-      <h3>📚 More from the Talent Loop Career Blog</h3>
+      <h2>📚 More from the Talent Loop Career Blog</h2>
       <div class="related-grid">
         <a href="/blog/working-at-netflix-career-guide" class="related-item">
           <div class="ri-label">Company Deep Dive</div>
@@ -779,6 +809,7 @@
 
 <script src="../script.js?v=2.2"></script>
 <script>
+  // FIX: Hamburger — now a <button>, update aria-expanded on toggle
   const hamburger = document.getElementById('hamburger');
   const navMenu   = document.getElementById('navMenu');
   if (hamburger && navMenu) {
@@ -794,25 +825,34 @@
       navMenu.style.padding       = '16px 24px';
       navMenu.style.gap           = '4px';
       navMenu.style.zIndex        = '99';
+      hamburger.setAttribute('aria-expanded', open ? 'false' : 'true');
+      hamburger.setAttribute('aria-label', open ? 'Open navigation menu' : 'Close navigation menu');
     });
   }
 
+  // FIX: FAQ — buttons now, update aria-expanded for screen readers
   document.querySelectorAll('.faq-q').forEach(function(btn) {
     btn.addEventListener('click', function() {
       var item   = btn.closest('.faq-item');
       var answer = item.querySelector('.faq-a');
       var isOpen = answer.classList.contains('open');
       document.querySelectorAll('.faq-a').forEach(function(a) { a.classList.remove('open'); });
-      document.querySelectorAll('.faq-q').forEach(function(q) { q.classList.remove('open'); });
+      document.querySelectorAll('.faq-q').forEach(function(q) {
+        q.classList.remove('open');
+        q.setAttribute('aria-expanded', 'false');
+      });
       if (!isOpen) {
         answer.classList.add('open');
         btn.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
       }
     });
   });
 
+  // FIX: Video facade — keyboard accessible (Enter/Space triggers play on .video-wrap)
   document.querySelectorAll('.video-wrap[data-videoid]').forEach(function(wrap) {
     var videoId = wrap.dataset.videoid;
+
     function tryThumb(quality) {
       var img = new Image();
       img.onload = function() {
@@ -820,8 +860,12 @@
           var thumbEl = document.createElement('img');
           thumbEl.src = img.src;
           thumbEl.className = 'yt-thumb-img';
-          thumbEl.alt = wrap.dataset.title || '';
+          thumbEl.alt = '';
+          thumbEl.setAttribute('aria-hidden', 'true');
+          // FIX: Lazy-load thumbnail images — they are below fold
           thumbEl.loading = 'lazy';
+          thumbEl.width = wrap.offsetWidth || 800;
+          thumbEl.height = Math.round((wrap.offsetWidth || 800) * 0.5625);
           wrap.insertBefore(thumbEl, wrap.querySelector('.yt-overlay'));
           wrap.classList.add('has-thumb');
         } else if (quality === 'maxresdefault') { tryThumb('hqdefault'); }
@@ -830,7 +874,8 @@
       img.src = 'https://img.youtube.com/vi/' + videoId + '/' + quality + '.jpg';
     }
     tryThumb('maxresdefault');
-    wrap.addEventListener('click', function() {
+
+    function activateVideo() {
       if (wrap.classList.contains('loading') || wrap.classList.contains('playing')) return;
       wrap.classList.add('loading');
       wrap.style.cursor = 'wait';
@@ -853,7 +898,25 @@
         }
       }, 15000);
       wrap.appendChild(iframe);
+    }
+
+    wrap.addEventListener('click', activateVideo);
+    // FIX: keyboard activation for video wrappers with tabindex
+    wrap.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        activateVideo();
+      }
     });
+
+    // FIX: Intercept inner button clicks so they don't double-fire
+    var playBtn = wrap.querySelector('.yt-play-btn');
+    if (playBtn) {
+      playBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        activateVideo();
+      });
+    }
   });
 </script>
 
