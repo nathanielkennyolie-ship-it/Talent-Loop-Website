@@ -1,180 +1,110 @@
-This XML file does not appear to have any style information associated with it. The document tree is shown below.
+<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<!--  Core pages  -->
-<url>
-<loc>https://talent-loop.org/</loc>
-<lastmod>2026-04-29</lastmod>
-<changefreq>weekly</changefreq>
-<priority>1.0</priority>
-</url>
-<url>
-<loc>https://talent-loop.org/about</loc>
-<lastmod>2026-04-29</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.8</priority>
-</url>
-<url>
-<loc>https://talent-loop.org/jobs</loc>
-<lastmod>2026-04-29</lastmod>
-<changefreq>weekly</changefreq>
-<priority>0.9</priority>
-</url>
-<url>
-<loc>https://talent-loop.org/blog</loc>
-<lastmod>2026-04-29</lastmod>
-<changefreq>weekly</changefreq>
-<priority>0.9</priority>
-</url>
-<url>
-<loc>https://talent-loop.org/assessment</loc>
-<lastmod>2026-04-29</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.9</priority>
-</url>
-<url>
-<loc>https://talent-loop.org/testimonials</loc>
-<lastmod>2026-04-29</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.7</priority>
-</url>
-<url>
-<loc>https://talent-loop.org/contact</loc>
-<lastmod>2026-04-29</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.7</priority>
-</url>
-<url>
-<loc>https://talent-loop.org/privacy</loc>
-<lastmod>2026-04-29</lastmod>
-<changefreq>yearly</changefreq>
-<priority>0.4</priority>
-</url>
-<url>
-<loc>https://talent-loop.org/legal</loc>
-<lastmod>2026-04-29</lastmod>
-<changefreq>yearly</changefreq>
-<priority>0.4</priority>
-</url>
-<!--  Blog posts — all now under /blog/  -->
-<url>
-<loc>https://talent-loop.org/blog/job-interview-tips-2026</loc>
-<lastmod>2026-04-29</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.8</priority>
-</url>
-<url>
-<loc>https://talent-loop.org/blog/hidden-job-market-guide</loc>
-<lastmod>2026-04-29</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.8</priority>
-</url>
-<url>
-<loc>https://talent-loop.org/blog/linkedin-profile-optimization-recruiters</loc>
-<lastmod>2026-04-29</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.8</priority>
-</url>
-<url>
-<loc>https://talent-loop.org/blog/salary-negotiation-guide-2026</loc>
-<lastmod>2026-04-29</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.8</priority>
-</url>
-<url>
-<loc>https://talent-loop.org/blog/in-demand-skills-2026</loc>
-<lastmod>2026-04-29</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.8</priority>
-</url>
-<url>
-<loc>https://talent-loop.org/blog/hybrid-work-guide-2026</loc>
-<lastmod>2026-04-29</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.8</priority>
-</url>
-<url>
-<loc>https://talent-loop.org/blog/working-at-netflix-career-guide</loc>
-<lastmod>2026-04-29</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.8</priority>
-</url>
-<url>
-<loc>https://talent-loop.org/blog/working-at-amazon-us-2026</loc>
-<lastmod>2026-04-29</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.8</priority>
-</url>
-<!--  Job detail pages  -->
-<url>
-<loc>https://talent-loop.org/jobs/remote-customer-support-specialist-2026</loc>
-<lastmod>2026-04-29</lastmod>
-<changefreq>weekly</changefreq>
-<priority>0.8</priority>
-</url>
-<url>
-<loc>https://talent-loop.org/jobs/remote-data-entry-clerk-part-time-2026</loc>
-<lastmod>2026-04-29</lastmod>
-<changefreq>weekly</changefreq>
-<priority>0.8</priority>
-</url>
-<url>
-<loc>https://talent-loop.org/jobs/social-media-manager-remote-2026</loc>
-<lastmod>2026-04-29</lastmod>
-<changefreq>weekly</changefreq>
-<priority>0.8</priority>
-</url>
-<url>
-<loc>https://talent-loop.org/jobs/remote-sales-development-rep-saas-2026</loc>
-<lastmod>2026-04-29</lastmod>
-<changefreq>weekly</changefreq>
-<priority>0.8</priority>
-</url>
-<url>
-<loc>https://talent-loop.org/jobs/live-chat-support-agent-remote-2026</loc>
-<lastmod>2026-04-29</lastmod>
-<changefreq>weekly</changefreq>
-<priority>0.8</priority>
-</url>
-<url>
-<loc>https://talent-loop.org/jobs/junior-web-developer-remote-2026</loc>
-<lastmod>2026-04-29</lastmod>
-<changefreq>weekly</changefreq>
-<priority>0.8</priority>
-</url>
-<url>
-<loc>https://talent-loop.org/jobs/virtual-administrative-assistant-remote-2026</loc>
-<lastmod>2026-04-29</lastmod>
-<changefreq>weekly</changefreq>
-<priority>0.8</priority>
-</url>
-<url>
-<loc>https://talent-loop.org/jobs/content-writer-seo-specialist-remote-2026</loc>
-<lastmod>2026-04-29</lastmod>
-<changefreq>weekly</changefreq>
-<priority>0.8</priority>
-</url>
-<url>
-<loc>https://talent-loop.org/jobs/remote-bookkeeper-part-time-2026</loc>
-<lastmod>2026-04-29</lastmod>
-<changefreq>weekly</changefreq>
-<priority>0.8</priority>
-</url>
-<url>
-<loc>https://talent-loop.org/jobs/remote-account-manager-b2b-2026</loc>
-<lastmod>2026-04-29</lastmod>
-<changefreq>weekly</changefreq>
-<priority>0.8</priority>
-</url>
-<url>
-<loc>https://talent-loop.org/jobs/remote-it-support-technician-2026</loc>
-<lastmod>2026-04-29</lastmod>
-<changefreq>weekly</changefreq>
-<priority>0.8</priority>
-</url>
-<url>
-<loc>https://talent-loop.org/jobs/bilingual-customer-success-rep-remote-2026</loc>
-<lastmod>2026-04-29</lastmod>
-<changefreq>weekly</changefreq>
-<priority>0.8</priority>
-</url>
+
+  <!--  Core pages  -->
+  <url>
+    <loc>https://talent-loop.org/</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://talent-loop.org/about</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://talent-loop.org/jobs</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://talent-loop.org/blog</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://talent-loop.org/assessment</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://talent-loop.org/testimonials</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://talent-loop.org/contact</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://talent-loop.org/privacy</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://talent-loop.org/legal</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <!--  Blog posts  -->
+  <url>
+    <loc>https://talent-loop.org/blog/job-interview-tips-2026</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://talent-loop.org/blog/hidden-job-market-guide</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://talent-loop.org/blog/linkedin-profile-optimization-recruiters</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://talent-loop.org/blog/salary-negotiation-guide-2026</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://talent-loop.org/blog/in-demand-skills-2026</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://talent-loop.org/blog/hybrid-work-guide-2026</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://talent-loop.org/blog/working-at-netflix-career-guide</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://talent-loop.org/blog/working-at-amazon-us-2026</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
 </urlset>
