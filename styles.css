@@ -151,32 +151,8 @@ a:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.55);
-    z-index: 1;
-}
-
-/* ================================
-   HERO VIDEO BACKGROUND
-   ================================ */
-.hero-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    z-index: 0;
-    display: block;
-}
-
-/* Accessibility: respect user's motion preference */
-@media (prefers-reduced-motion: reduce) {
-    .hero-video {
-        display: none;
-    }
-    /* poster image on the <video> won't show when display:none,
-       so the overlay + hero background colour handle the fallback */
+    background-color: rgba(0,0,0,0.6);
+    z-index: -1;
 }
 
 .hero-content {
@@ -323,6 +299,7 @@ a:hover {
     background-image: url('https://images.unsplash.com/photo-1497366811353-6870744d04b2?q=60&w=1920&fm=webp&auto=format&fit=crop');
     background-size: cover;
     background-position: center;
+    /* FIX: was background-attachment: fixed — causes massive mobile repaint */
     background-attachment: scroll;
     z-index: -1;
     will-change: transform;
@@ -362,6 +339,7 @@ a:hover {
     background-image: url('https://images.unsplash.com/photo-1557682250-33bd709cbe85?q=60&w=1920&fm=webp&auto=format&fit=crop');
     background-size: cover;
     background-position: center;
+    /* FIX: was background-attachment: fixed */
     background-attachment: scroll;
     z-index: -1;
     will-change: transform;
@@ -427,6 +405,7 @@ a:hover {
     background-image: url('https://images.unsplash.com/photo-1497366811353-6870744d04b2?q=60&w=1920&fm=webp&auto=format&fit=crop');
     background-size: cover;
     background-position: center;
+    /* FIX: was background-attachment: fixed */
     background-attachment: scroll;
     z-index: -1;
     will-change: transform;
@@ -1353,6 +1332,8 @@ a:hover {
    RESPONSIVE
    ================================ */
 @media (max-width: 768px) {
+    /* Hero image served by <picture> element — see index.html */
+
     /* Mobile nav */
     .hamburger {
         display: flex;
@@ -1409,7 +1390,9 @@ a:hover {
     .modal-content { padding: 1.75rem 1.5rem; }
     .modal-actions { flex-direction: column; }
 
-    /* Disable fixed backgrounds on mobile for performance */
+    /* FIX: Completely disable fixed backgrounds on mobile
+       background-attachment:fixed forces full-page repaints on scroll
+       which destroys LCP and Speed Index on mobile */
     .features::before,
     .stats::before,
     .cta-section::before {
