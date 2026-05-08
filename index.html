@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -86,12 +85,10 @@
         }
     </style>
 
-    <link rel="preload" as="image" fetchpriority="high"
-          href="hero-bg.webp"
-          imagesrcset="hero-bg-mobile.webp 768w, hero-bg.webp 1280w"
-          imagesizes="100vw">
+    <!-- UPDATED: preload poster image as video fallback; removed old picture preload -->
+    <link rel="preload" as="image" fetchpriority="high" href="hero-bg.webp">
 
-    <link rel="stylesheet" href="styles.css?v=2.2">
+    <link rel="stylesheet" href="styles.css?v=2.3">
 
     <style>
         .footer { background: #0d1b3e; }
@@ -141,15 +138,28 @@
 
         <section class="hero">
             <div class="image-background">
-                <picture style="position:absolute;top:0;left:0;width:100%;height:100%;display:block;z-index:0;">
-                    <source media="(max-width: 768px)" srcset="hero-bg-mobile.webp">
-                    <source media="(min-width: 769px)" srcset="hero-bg.webp">
-                    <img src="hero-bg.webp" alt="" aria-hidden="true"
-                         style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block;"
-                         fetchpriority="high" loading="eager">
-                </picture>
-                <div class="image-overlay" style="position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:1;"></div>
+
+                <!-- UPDATED: Video background replacing static <picture> element -->
+                <video
+                    class="hero-video"
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                    preload="auto"
+                    poster="hero-bg.webp"
+                    aria-hidden="true">
+                    <!--
+                        Replace the src value below with your chosen video:
+                        - Self-hosted: upload hero-video.mp4 to your repo root
+                        - Pexels CDN:  right-click a playing Pexels video → Copy video address → paste URL here
+                    -->
+                    <source src="hero-video.mp4" type="video/mp4">
+                </video>
+
+                <div class="image-overlay" style="position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.55);z-index:1;"></div>
             </div>
+
             <div class="hero-content">
                 <h1 class="hero-title">
                     <span class="sr-only">Talent Loop — </span>
