@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Talent Loop - Professional Recruitment Agency | Find Your Next Role</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- Ensure external fonts are loaded if required by your project -->
 </head>
 <body>
-    <a href="#main-content" class="skip-link" style="position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;">Skip to main content</a>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     
     <nav class="navbar">
         <div class="container nav-container">
@@ -33,11 +32,14 @@
     <main id="main-content">
         <section class="hero">
             <div class="image-background">
-                <video autoplay muted loop playsinline poster="assets/images/hero-fallback.jpg">
-                    <source src="assets/videos/corporate-office-loop.mp4" type="video/mp4">
-                    <source src="assets/videos/corporate-office-loop.webm" type="video/webm">
+                <!-- Video will be added here when you upload corporate-office-loop.mp4 -->
+                <!-- 
+                <video autoplay muted loop playsinline poster="hero-fallback.jpg">
+                    <source src="corporate-office-loop.mp4" type="video/mp4">
+                    <source src="corporate-office-loop.webm" type="video/webm">
                     Your browser does not support HTML5 video.
                 </video>
+                -->
             </div>
             <div class="image-overlay"></div>
             <div class="hero-content">
@@ -92,19 +94,19 @@
             <div class="container">
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-number">0</div>
+                        <div class="stat-number" data-target="1500">0</div>
                         <div class="stat-label">Successful Placements</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-number">0</div>
+                        <div class="stat-number" data-target="500">0</div>
                         <div class="stat-label">Partner Companies</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-number">0</div>
+                        <div class="stat-number" data-target="98">0</div>
                         <div class="stat-label">Satisfaction Rate</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-number">0</div>
+                        <div class="stat-number" data-target="48">0</div>
                         <div class="stat-label">Average Hours to Match</div>
                     </div>
                 </div>
@@ -152,7 +154,7 @@
                     <h4>Legal</h4>
                     <ul>
                         <li><a href="/privacy">Privacy Policy</a></li>
-                        <li><a href="/legal">Terms &amp; Conditions</a></li>
+                        <li><a href="/legal">Terms & Conditions</a></li>
                     </ul>
                 </div>
                 <div class="footer-col footer-contact">
@@ -168,5 +170,68 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        if (hamburger) {
+            hamburger.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+            });
+        }
+
+        // Counter Animation
+        const counters = document.querySelectorAll('.stat-number');
+        const speed = 200;
+
+        const animateCounters = () => {
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText;
+                const inc = target / speed;
+
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + inc);
+                    setTimeout(animateCounters, 20);
+                } else {
+                    counter.innerText = target;
+                }
+            });
+        };
+
+        // Trigger counters when stats section is in viewport
+        const statsSection = document.querySelector('.stats');
+        let counted = false;
+
+        const observerOptions = {
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !counted) {
+                    animateCounters();
+                    counted = true;
+                }
+            });
+        }, observerOptions);
+
+        if (statsSection) {
+            observer.observe(statsSection);
+        }
+
+        // Smooth scroll for scroll indicator
+        const scrollIndicator = document.querySelector('.scroll-indicator');
+        if (scrollIndicator) {
+            scrollIndicator.addEventListener('click', () => {
+                window.scrollTo({
+                    top: window.innerHeight,
+                    behavior: 'smooth'
+                });
+            });
+        }
+    </script>
 </body>
 </html>
