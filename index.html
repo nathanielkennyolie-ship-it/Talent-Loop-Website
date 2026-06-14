@@ -73,8 +73,8 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght=600;700;800&family=DM+Sans:wght=400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght=600;700;800&family=DM+Sans:wght=400;500;600;700&display=swap" rel="stylesheet"></noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
 
     <style>
         body { font-family: Georgia, 'Times New Roman', serif; }
@@ -90,7 +90,7 @@
           imagesrcset="hero-bg-mobile.webp 768w, hero-bg.webp 1280w"
           imagesizes="100vw">
 
-    <link rel="stylesheet" href="styles.css?v=2.2">
+    <link rel="stylesheet" href="styles.css?v=2.3">
 
     <style>
         .footer { background: #0d1b3e; }
@@ -108,7 +108,7 @@
         .btn-primary:hover { background: #c9a227; color: #1a2b5f !important; }
         .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 
-        /* ── Video Hero Background ── */
+        /* Video Hero Background */
         .hero {
             position: relative;
             overflow: hidden;
@@ -135,9 +135,6 @@
             z-index: 1;
             background: transparent;
         }
-        .hero-video-bg.loaded {
-            z-index: 1;
-        }
         .hero .image-overlay {
             position: absolute;
             top: 0;
@@ -154,6 +151,48 @@
         .hero .scroll-indicator {
             position: relative;
             z-index: 3;
+        }
+
+        /* Video Section Backgrounds (Features & CTA) */
+        .section-video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            z-index: 0;
+        }
+        .section-fallback-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+        /* Lighter overlay for Features section (clearer video visibility) */
+        .features .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(13,27,62,0.55) 0%, rgba(26,43,95,0.50) 50%, rgba(13,27,62,0.60) 100%);
+            z-index: 0;
+        }
+        /* Lighter overlay for CTA section (clearer video visibility) */
+        .cta-section .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(13,27,62,0.45) 0%, rgba(26,43,95,0.40) 50%, rgba(13,27,62,0.50) 100%);
+            z-index: 0;
         }
     </style>
 
@@ -217,6 +256,17 @@
         </section>
 
         <section class="features">
+            <!-- Fallback Background Image -->
+            <div class="section-fallback-bg" style="background-image: url('https://images.unsplash.com/photo-1497366811353-6870744d04b2?q=60&w=1920&fm=webp&auto=format&fit=crop');"></div>
+            <!-- Video Background -->
+            <video class="section-video-bg"
+                   id="featuresVideo"
+                   autoplay loop muted playsinline
+                   preload="auto"
+                   poster="https://images.unsplash.com/photo-1497366811353-6870744d04b2?q=60&w=1920&fm=webp&auto=format&fit=crop">
+                <source src="https://videos.pexels.com/video-files/3994361/3994361-hd_1920_1080_24fps.mp4" type="video/mp4">
+            </video>
+            <div class="video-overlay"></div>
             <div class="container">
                 <div class="section-header">
                     <h2>Why Choose Talent Loop</h2>
@@ -271,6 +321,17 @@
         </section>
 
         <section class="cta-section">
+            <!-- Fallback Background Image -->
+            <div class="section-fallback-bg" style="background-image: url('https://images.unsplash.com/photo-1557682250-33bd709cbe85?q=60&w=1920&fm=webp&auto=format&fit=crop');"></div>
+            <!-- Video Background -->
+            <video class="section-video-bg"
+                   id="ctaVideo"
+                   autoplay loop muted playsinline
+                   preload="auto"
+                   poster="https://images.unsplash.com/photo-1557682250-33bd709cbe85?q=60&w=1920&fm=webp&auto=format&fit=crop">
+                <source src="https://videos.pexels.com/video-files/3130032/3130032-hd_1920_1080_24fps.mp4" type="video/mp4">
+            </video>
+            <div class="video-overlay"></div>
             <div class="container">
                 <div class="cta-content">
                     <h2>Ready to Take the Next Step?</h2>
@@ -322,7 +383,7 @@
                     <h4>Connect With Us</h4>
                     <div class="social-links">
                         <a href="https://www.linkedin.com/company/talentloop-official/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">in</a>
-                        <a href="https://x.com/talent_loop/" aria-label="Twitter / X" target="_blank" rel="noopener noreferrer">𝕏</a>
+                        <a href="https://x.com/talent_loop/" aria-label="Twitter / X" target="_blank" rel="noopener noreferrer">X</a>
                         <a href="https://www.instagram.com/talent.loop.officials/" aria-label="Instagram" target="_blank" rel="noopener noreferrer">ig</a>
                     </div>
                     <p style="margin-top: 1rem; font-size: 0.9rem;">
@@ -337,67 +398,76 @@
     </footer>
 
     <script src="script.js?v=2.1"></script>
-    <!-- Hero Video Fallback Script -->
+    <!-- Video Fallback Script for All Sections -->
     <script>
         (function() {
-            var video = document.getElementById('heroVideo');
-            var fallbackBg = document.querySelector('.hero-fallback-bg');
-            var videoTimeout;
-            var videoLoaded = false;
+            // Helper function to setup video with fallback
+            function setupVideoWithFallback(videoId) {
+                var video = document.getElementById(videoId);
+                if (!video) return;
 
-            function showFallback() {
-                if (!videoLoaded) {
-                    video.style.display = 'none';
-                }
-            }
+                var videoTimeout;
+                var videoLoaded = false;
 
-            // Set a timeout to show fallback if video doesn't load within 10 seconds
-            videoTimeout = setTimeout(showFallback, 10000);
-
-            // Listen for successful video load and play
-            video.addEventListener('loadeddata', function() {
-                videoLoaded = true;
-                clearTimeout(videoTimeout);
-                video.classList.add('loaded');
-            });
-
-            video.addEventListener('playing', function() {
-                videoLoaded = true;
-                clearTimeout(videoTimeout);
-                video.classList.add('loaded');
-            });
-
-            // Handle video errors
-            video.addEventListener('error', function() {
-                clearTimeout(videoTimeout);
-                showFallback();
-            });
-
-            // Handle stalled video (network issues)
-            video.addEventListener('stalled', function() {
-                setTimeout(function() {
+                function showFallback() {
                     if (!videoLoaded) {
-                        showFallback();
+                        video.style.display = 'none';
                     }
-                }, 3000);
-            });
+                }
 
-            // Check if video can play through
-            video.addEventListener('canplaythrough', function() {
-                videoLoaded = true;
-                clearTimeout(videoTimeout);
-                video.classList.add('loaded');
-            });
+                // Set a timeout to show fallback if video doesn't load within 10 seconds
+                videoTimeout = setTimeout(showFallback, 10000);
 
-            // Force play attempt (handles autoplay restrictions)
-            var playPromise = video.play();
-            if (playPromise !== undefined) {
-                playPromise.catch(function(error) {
-                    // Autoplay was prevented, show fallback
+                // Listen for successful video load and play
+                video.addEventListener('loadeddata', function() {
+                    videoLoaded = true;
+                    clearTimeout(videoTimeout);
+                    video.classList.add('loaded');
+                });
+
+                video.addEventListener('playing', function() {
+                    videoLoaded = true;
+                    clearTimeout(videoTimeout);
+                    video.classList.add('loaded');
+                });
+
+                // Handle video errors
+                video.addEventListener('error', function() {
                     clearTimeout(videoTimeout);
                     showFallback();
                 });
+
+                // Handle stalled video (network issues)
+                video.addEventListener('stalled', function() {
+                    setTimeout(function() {
+                        if (!videoLoaded) {
+                            showFallback();
+                        }
+                    }, 3000);
+                });
+
+                // Check if video can play through
+                video.addEventListener('canplaythrough', function() {
+                    videoLoaded = true;
+                    clearTimeout(videoTimeout);
+                    video.classList.add('loaded');
+                });
+
+                // Force play attempt (handles autoplay restrictions)
+                var playPromise = video.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(function(error) {
+                        // Autoplay was prevented, show fallback
+                        clearTimeout(videoTimeout);
+                        showFallback();
+                    });
+                }
             }
+
+            // Setup all videos
+            setupVideoWithFallback('heroVideo');
+            setupVideoWithFallback('featuresVideo');
+            setupVideoWithFallback('ctaVideo');
         })();
     </script>
 </body>
