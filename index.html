@@ -90,7 +90,7 @@
           imagesrcset="hero-bg-mobile.webp 768w, hero-bg.webp 1280w"
           imagesizes="100vw">
 
-    <link rel="stylesheet" href="styles.css?v=2.3">
+    <link rel="stylesheet" href="styles.css?v=2.4">
 
     <style>
         .footer { background: #0d1b3e; }
@@ -108,7 +108,7 @@
         .btn-primary:hover { background: #c9a227; color: #1a2b5f !important; }
         .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 
-        /* Video Hero Background */
+        /* Hero Video Background */
         .hero {
             position: relative;
             overflow: hidden;
@@ -153,8 +153,23 @@
             z-index: 3;
         }
 
-        /* Video Section Backgrounds (Features & CTA) */
-        .section-video-bg {
+        /* Features Video Background - LIGHTER overlay for clearer video */
+        .features {
+            position: relative;
+            overflow: hidden;
+        }
+        .features-fallback-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('team-working-modern-professional-office.webp');
+            background-size: cover;
+            background-position: center;
+            z-index: 0;
+        }
+        .features-video-bg {
             position: absolute;
             top: 0;
             left: 0;
@@ -162,37 +177,62 @@
             height: 100%;
             object-fit: cover;
             object-position: center;
-            z-index: 0;
+            z-index: 1;
+            background: transparent;
         }
-        .section-fallback-bg {
+        .features-video-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            background: linear-gradient(135deg, rgba(13,27,62,0.35) 0%, rgba(26,43,95,0.30) 50%, rgba(13,27,62,0.40) 100%);
+            z-index: 2;
+        }
+        .features .container {
+            position: relative;
+            z-index: 3;
+        }
+
+        /* CTA Video Background - EVEN LIGHTER overlay for clearest video */
+        .cta-section {
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-fallback-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('confident-candidate-preparing.webp');
             background-size: cover;
             background-position: center;
-            z-index: -1;
+            z-index: 0;
         }
-        /* Lighter overlay for Features section (clearer video visibility) */
-        .features .video-overlay {
+        .cta-video-bg {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(13,27,62,0.55) 0%, rgba(26,43,95,0.50) 50%, rgba(13,27,62,0.60) 100%);
-            z-index: 0;
+            object-fit: cover;
+            object-position: center;
+            z-index: 1;
+            background: transparent;
         }
-        /* Lighter overlay for CTA section (clearer video visibility) */
-        .cta-section .video-overlay {
+        .cta-video-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(13,27,62,0.45) 0%, rgba(26,43,95,0.40) 50%, rgba(13,27,62,0.50) 100%);
-            z-index: 0;
+            background: linear-gradient(135deg, rgba(13,27,62,0.25) 0%, rgba(26,43,95,0.20) 50%, rgba(13,27,62,0.30) 100%);
+            z-index: 2;
+        }
+        .cta-section .container {
+            position: relative;
+            z-index: 3;
         }
     </style>
 
@@ -226,7 +266,7 @@
     <main id="main-content">
 
         <section class="hero">
-            <!-- Fallback Background Image (visible if video fails) -->
+            <!-- Fallback Background Image -->
             <div class="hero-fallback-bg"></div>
             <!-- Video Background -->
             <video class="hero-video-bg"
@@ -257,16 +297,16 @@
 
         <section class="features">
             <!-- Fallback Background Image -->
-            <div class="section-fallback-bg" style="background-image: url('https://images.unsplash.com/photo-1497366811353-6870744d04b2?q=60&w=1920&fm=webp&auto=format&fit=crop');"></div>
-            <!-- Video Background -->
-            <video class="section-video-bg"
+            <div class="features-fallback-bg"></div>
+            <!-- Video Background (using hero-video.mp4) -->
+            <video class="features-video-bg"
                    id="featuresVideo"
                    autoplay loop muted playsinline
                    preload="auto"
-                   poster="https://images.unsplash.com/photo-1497366811353-6870744d04b2?q=60&w=1920&fm=webp&auto=format&fit=crop">
-                <source src="https://videos.pexels.com/video-files/3994361/3994361-hd_1920_1080_24fps.mp4" type="video/mp4">
+                   poster="team-working-modern-professional-office.webp">
+                <source src="hero-video.mp4" type="video/mp4">
             </video>
-            <div class="video-overlay"></div>
+            <div class="features-video-overlay"></div>
             <div class="container">
                 <div class="section-header">
                     <h2>Why Choose Talent Loop</h2>
@@ -322,16 +362,16 @@
 
         <section class="cta-section">
             <!-- Fallback Background Image -->
-            <div class="section-fallback-bg" style="background-image: url('https://images.unsplash.com/photo-1557682250-33bd709cbe85?q=60&w=1920&fm=webp&auto=format&fit=crop');"></div>
-            <!-- Video Background -->
-            <video class="section-video-bg"
+            <div class="cta-fallback-bg"></div>
+            <!-- Video Background (using hero-video.mp4) -->
+            <video class="cta-video-bg"
                    id="ctaVideo"
                    autoplay loop muted playsinline
                    preload="auto"
-                   poster="https://images.unsplash.com/photo-1557682250-33bd709cbe85?q=60&w=1920&fm=webp&auto=format&fit=crop">
-                <source src="https://videos.pexels.com/video-files/3130032/3130032-hd_1920_1080_24fps.mp4" type="video/mp4">
+                   poster="confident-candidate-preparing.webp">
+                <source src="hero-video.mp4" type="video/mp4">
             </video>
-            <div class="video-overlay"></div>
+            <div class="cta-video-overlay"></div>
             <div class="container">
                 <div class="cta-content">
                     <h2>Ready to Take the Next Step?</h2>
@@ -401,73 +441,58 @@
     <!-- Video Fallback Script for All Sections -->
     <script>
         (function() {
-            // Helper function to setup video with fallback
-            function setupVideoWithFallback(videoId) {
+            function setupVideoWithFallback(videoId, fallbackSelector) {
                 var video = document.getElementById(videoId);
+                var fallback = document.querySelector(fallbackSelector);
                 if (!video) return;
 
-                var videoTimeout;
                 var videoLoaded = false;
-
-                function showFallback() {
-                    if (!videoLoaded) {
+                var videoTimeout = setTimeout(function() {
+                    if (!videoLoaded && video) {
                         video.style.display = 'none';
                     }
-                }
+                }, 8000);
 
-                // Set a timeout to show fallback if video doesn't load within 10 seconds
-                videoTimeout = setTimeout(showFallback, 10000);
-
-                // Listen for successful video load and play
                 video.addEventListener('loadeddata', function() {
                     videoLoaded = true;
                     clearTimeout(videoTimeout);
-                    video.classList.add('loaded');
                 });
 
                 video.addEventListener('playing', function() {
                     videoLoaded = true;
                     clearTimeout(videoTimeout);
-                    video.classList.add('loaded');
                 });
 
-                // Handle video errors
                 video.addEventListener('error', function() {
                     clearTimeout(videoTimeout);
-                    showFallback();
+                    video.style.display = 'none';
                 });
 
-                // Handle stalled video (network issues)
                 video.addEventListener('stalled', function() {
                     setTimeout(function() {
                         if (!videoLoaded) {
-                            showFallback();
+                            video.style.display = 'none';
                         }
                     }, 3000);
                 });
 
-                // Check if video can play through
                 video.addEventListener('canplaythrough', function() {
                     videoLoaded = true;
                     clearTimeout(videoTimeout);
-                    video.classList.add('loaded');
                 });
 
-                // Force play attempt (handles autoplay restrictions)
                 var playPromise = video.play();
                 if (playPromise !== undefined) {
-                    playPromise.catch(function(error) {
-                        // Autoplay was prevented, show fallback
+                    playPromise.catch(function() {
                         clearTimeout(videoTimeout);
-                        showFallback();
+                        video.style.display = 'none';
                     });
                 }
             }
 
-            // Setup all videos
-            setupVideoWithFallback('heroVideo');
-            setupVideoWithFallback('featuresVideo');
-            setupVideoWithFallback('ctaVideo');
+            setupVideoWithFallback('heroVideo', '.hero-fallback-bg');
+            setupVideoWithFallback('featuresVideo', '.features-fallback-bg');
+            setupVideoWithFallback('ctaVideo', '.cta-fallback-bg');
         })();
     </script>
 </body>
