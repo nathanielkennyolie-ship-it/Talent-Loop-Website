@@ -117,25 +117,24 @@
         .hero .scroll-indicator { position: relative; z-index: 3; }
 
         /* YOUTUBE IFRAME BACKGROUND
-           The IFrame API creates <iframe> inside .yt-bg-wrapper.
-           We size it to cover the section like object-fit:cover on a 16:9 video. */
+           The IFrame API injects inline width/height attributes on the created iframe.
+           !important is required to override those inline attribute styles. */
         .yt-bg-wrapper {
             position: absolute; top: 0; left: 0;
             width: 100%; height: 100%;
             overflow: hidden; z-index: 1; pointer-events: none;
         }
         .yt-bg-wrapper iframe {
-            position: absolute;
-            top: 50%; left: 50%;
-            /* 100vw wide at 16:9 gives correct height; vh-based min-width
-               kicks in when the section is taller than 56.25vw */
-            width: 100vw;
-            height: 56.25vw;
-            min-height: 100%;
-            min-width: 177.78vh;
-            transform: translate(-50%, -50%);
+            position: absolute !important;
+            top: 50% !important;
+            left: 50% !important;
+            width: 100vw !important;
+            height: 56.25vw !important;
+            min-height: 100% !important;
+            min-width: 177.78vh !important;
+            transform: translate(-50%, -50%) !important;
+            border: 0 !important;
             pointer-events: none;
-            border: 0;
         }
 
         /* FEATURES */
@@ -167,19 +166,16 @@
         .cta-section .container { position: relative; z-index: 3; }
     </style>
 
-    <!--
-        YouTube IFrame API callback must be on window before the API script loads.
-        We define it here in the <head> so it's available immediately.
-    -->
     <script>
-        // onYouTubeIframeAPIReady is the required global callback name for the API.
         window.onYouTubeIframeAPIReady = function() {
             createYTBackground('featuresYTBg', 'qz9ADlOqqs8');
-            createYTBackground('ctaYTBg', '128T8OCgI7U');
+            createYTBackground('ctaYTBg', 'ZscqQenZ-Tk');
         };
 
         function createYTBackground(containerId, videoId) {
             new YT.Player(containerId, {
+                width: '1920',
+                height: '1080',
                 videoId: videoId,
                 playerVars: {
                     autoplay: 1,
@@ -193,21 +189,19 @@
                     modestbranding: 1,
                     playsinline: 1,
                     iv_load_policy: 3,
-                    fs: 0
+                    fs: 0,
+                    origin: 'https://talent-loop.org'
                 },
                 events: {
                     onReady: function(e) {
-                        // Explicitly mute then play — more reliable than url params alone
                         e.target.mute();
                         e.target.playVideo();
                     },
                     onStateChange: function(e) {
-                        // Manual loop fallback: restart when video ends
                         if (e.data === YT.PlayerState.ENDED) {
                             e.target.seekTo(0);
                             e.target.playVideo();
                         }
-                        // If somehow paused (e.g. browser throttled), resume
                         if (e.data === YT.PlayerState.PAUSED) {
                             setTimeout(function() { e.target.playVideo(); }, 200);
                         }
@@ -272,7 +266,6 @@
         <section class="features" id="featuresSection">
             <div class="features-fallback-bg"></div>
             <div class="yt-bg-wrapper">
-                <!-- IFrame API replaces this div with a YouTube iframe -->
                 <div id="featuresYTBg"></div>
             </div>
             <div class="video-overlay"></div>
@@ -334,7 +327,6 @@
         <section class="cta-section" id="ctaSection">
             <div class="cta-fallback-bg"></div>
             <div class="yt-bg-wrapper">
-                <!-- IFrame API replaces this div with a YouTube iframe -->
                 <div id="ctaYTBg"></div>
             </div>
             <div class="video-overlay"></div>
