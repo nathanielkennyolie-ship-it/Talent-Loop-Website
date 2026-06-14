@@ -385,7 +385,7 @@ a:hover {
    FOOTER
    ================================ */
 .footer {
-    background-color: #007BFF;
+    background-color: #0d1b3e;
     color: #fff;
     padding: 4rem 0 2rem;
 }
@@ -402,7 +402,7 @@ a:hover {
 }
 
 .footer p {
-    color: rgba(255,255,255,0.9);
+    color: #b8c4e0;
 }
 
 .footer-col h3,
@@ -424,26 +424,30 @@ a:hover {
 }
 
 .footer-col a {
-    color: rgba(255,255,255,0.9);
+    color: #b8c4e0;
 }
 
 .footer-col a:hover {
-    color: #fff;
+    color: #D4AF37;
 }
 
 .footer-contact p {
-    color: rgba(255,255,255,0.9);
+    color: #b8c4e0;
     margin-bottom: 0.4rem;
+}
+
+.footer-contact strong {
+    color: #fff;
 }
 
 .footer-bottom {
     text-align: center;
     padding-top: 2rem;
-    border-top: 1px solid rgba(255,255,255,0.2);
+    border-top: 1px solid rgba(255,255,255,0.15);
 }
 
 .footer-bottom p {
-    color: rgba(255,255,255,0.8);
+    color: #b8c4e0;
     margin: 0;
 }
 
@@ -454,12 +458,12 @@ a:hover {
 }
 
 .social-links a {
-    color: rgba(255,255,255,0.9);
+    color: #b8c4e0;
     font-size: 1.2rem;
 }
 
 .social-links a:hover {
-    color: #fff;
+    color: #D4AF37;
 }
 
 /* ================================
@@ -541,7 +545,7 @@ a:hover {
 
 .form-group small {
     display: block;
-    color: #999;
+    color: #767676;
     font-size: 0.8rem;
     margin-top: 0.3rem;
 }
@@ -705,7 +709,7 @@ a:hover {
 
 .intro-text {
     text-align: center;
-    color: #666;
+    color: #555;
     margin-bottom: 2rem;
     font-size: 1rem;
     line-height: 1.6;
@@ -777,7 +781,7 @@ a:hover {
 .progress-text {
     text-align: center;
     font-size: 0.875rem;
-    color: #888;
+    color: #767676;
     margin-bottom: 2rem;
 }
 
@@ -851,7 +855,7 @@ a:hover {
 
 .option-desc {
     font-size: 0.85rem;
-    color: #777;
+    color: #666;
     line-height: 1.4;
 }
 
@@ -922,7 +926,7 @@ a:hover {
 
 .verification-note {
     font-size: 0.85rem;
-    color: #666;
+    color: #555;
     margin: 0;
 }
 
@@ -1028,7 +1032,7 @@ a:hover {
     right: 1.25rem;
     font-size: 1.5rem;
     cursor: pointer;
-    color: #999;
+    color: #595959;
     line-height: 1;
     transition: color 0.2s;
 }
@@ -1158,7 +1162,7 @@ a:hover {
 }
 
 .member-bio {
-    color: #666;
+    color: #555;
     font-size: 0.9rem;
     line-height: 1.5;
 }
@@ -1218,7 +1222,7 @@ a:hover {
 
 .testimonial-author-info p {
     font-size: 0.85rem;
-    color: #777;
+    color: #666;
     margin: 0;
 }
 
@@ -1294,8 +1298,6 @@ a:hover {
    RESPONSIVE
    ================================ */
 @media (max-width: 768px) {
-    /* Hero image served by <picture> element — see index.html */
-
     /* Mobile nav */
     .hamburger {
         display: flex;
