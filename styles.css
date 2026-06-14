@@ -292,25 +292,9 @@ a:hover {
     color: #fff;
 }
 
-.features::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-image: url('https://images.unsplash.com/photo-1497366811353-6870744d04b2?q=60&w=1920&fm=webp&auto=format&fit=crop');
-    background-size: cover;
-    background-position: center;
-    /* FIX: was background-attachment: fixed — causes massive mobile repaint */
-    background-attachment: scroll;
-    z-index: -1;
-    will-change: transform;
-}
-
-.features::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-color: rgba(0,0,0,0.7);
-    z-index: -1;
+.features .section-header {
+    position: relative;
+    z-index: 2;
 }
 
 .feature-grid {
@@ -318,7 +302,7 @@ a:hover {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
     position: relative;
-    z-index: 1;
+    z-index: 2;
 }
 
 .feature-card {
@@ -339,7 +323,6 @@ a:hover {
     background-image: url('https://images.unsplash.com/photo-1557682250-33bd709cbe85?q=60&w=1920&fm=webp&auto=format&fit=crop');
     background-size: cover;
     background-position: center;
-    /* FIX: was background-attachment: fixed */
     background-attachment: scroll;
     z-index: -1;
     will-change: transform;
@@ -381,14 +364,14 @@ a:hover {
 }
 
 .cta-section p {
-    color: rgba(255,255,255,0.9);
+    color: rgba(255,255,255,0.95);
     font-size: 1.1rem;
     margin-bottom: 2rem;
 }
 
 .cta-content {
     position: relative;
-    z-index: 1;
+    z-index: 2;
 }
 
 .cta-content h2 {
@@ -396,27 +379,6 @@ a:hover {
     font-size: 2.5rem;
     margin-bottom: 1rem;
     color: #fff;
-}
-
-.cta-section::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-image: url('https://images.unsplash.com/photo-1497366811353-6870744d04b2?q=60&w=1920&fm=webp&auto=format&fit=crop');
-    background-size: cover;
-    background-position: center;
-    /* FIX: was background-attachment: fixed */
-    background-attachment: scroll;
-    z-index: -1;
-    will-change: transform;
-}
-
-.cta-section::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-color: rgba(0,0,0,0.7);
-    z-index: -1;
 }
 
 /* ================================
@@ -1390,14 +1352,9 @@ a:hover {
     .modal-content { padding: 1.75rem 1.5rem; }
     .modal-actions { flex-direction: column; }
 
-    /* FIX: Completely disable fixed backgrounds on mobile
-       background-attachment:fixed forces full-page repaints on scroll
-       which destroys LCP and Speed Index on mobile */
-    .features::before,
-    .stats::before,
-    .cta-section::before {
-        background-attachment: scroll;
-        background-size: cover;
+    /* Video backgrounds handled by inline video elements */
+    .section-video-bg {
+        object-fit: cover;
     }
 }
 
