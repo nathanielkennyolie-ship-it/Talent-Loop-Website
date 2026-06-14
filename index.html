@@ -93,7 +93,6 @@
 
         /* =============================================
            HERO SECTION - Smooth video loading
-           FIX: Background color prevents flash before image/video loads
            ============================================= */
         .hero {
             position: relative;
@@ -144,8 +143,7 @@
         .hero .scroll-indicator { position: relative; z-index: 3; }
 
         /* =============================================
-           FEATURES SECTION - Darker overlay for readability
-           FIX: Increased overlay opacity from 0.35-0.40 to 0.70-0.80
+           FEATURES SECTION
            ============================================= */
         .features {
             position: relative;
@@ -177,7 +175,6 @@
         .features-video-bg.playing {
             opacity: 1;
         }
-        /* FIX: Darker overlay for better text readability on bright backgrounds */
         .features .video-overlay {
             position: absolute;
             top: 0;
@@ -190,8 +187,7 @@
         .features .container { position: relative; z-index: 3; }
 
         /* =============================================
-           CTA SECTION - Darker overlay for readability
-           FIX: Increased overlay opacity from 0.25-0.30 to 0.70-0.80
+           CTA SECTION
            ============================================= */
         .cta-section {
             position: relative;
@@ -223,7 +219,6 @@
         .cta-video-bg.playing {
             opacity: 1;
         }
-        /* FIX: Darker overlay for better text readability on bright backgrounds */
         .cta-section .video-overlay {
             position: absolute;
             top: 0;
@@ -288,12 +283,11 @@
             </div>
         </section>
 
-        <!-- FEATURES SECTION - Different Video -->
-        <!-- FIX: Using smaller 1080p video instead of UHD 2560x1440 for better loading -->
+        <!-- FEATURES SECTION -->
         <section class="features" id="featuresSection">
             <div class="features-fallback-bg"></div>
-            <video class="features-video-bg" id="featuresVideo" loop muted playsinline preload="auto" crossorigin="anonymous">
-                <source src="https://videos.pexels.com/video-files/7642379/7642379-hd_1920_1080_30fps.mp4" type="video/mp4">
+            <video class="features-video-bg" id="featuresVideo" loop muted playsinline preload="auto">
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-open-office-space-914-large.mp4" type="video/mp4">
             </video>
             <div class="video-overlay"></div>
             <div class="container">
@@ -350,12 +344,11 @@
             </div>
         </section>
 
-        <!-- CTA SECTION - Different Video -->
-        <!-- FIX: Using smaller 1080p video instead of UHD 2560x1440 for better loading -->
+        <!-- CTA SECTION -->
         <section class="cta-section" id="ctaSection">
             <div class="cta-fallback-bg"></div>
-            <video class="cta-video-bg" id="ctaVideo" loop muted playsinline preload="auto" crossorigin="anonymous">
-                <source src="https://videos.pexels.com/video-files/7982093/7982093-hd_1920_1080_25fps.mp4" type="video/mp4">
+            <video class="cta-video-bg" id="ctaVideo" loop muted playsinline preload="auto">
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-business-people-at-work-meeting-4809-large.mp4" type="video/mp4">
             </video>
             <div class="video-overlay"></div>
             <div class="container">
@@ -424,20 +417,17 @@
     </footer>
 
     <script src="script.js?v=2.1"></script>
-    <!-- FIX: Optimized Video Loading Script with Intersection Observer -->
+    <!-- Optimized Video Loading Script with Intersection Observer -->
     <script>
         (function() {
             'use strict';
             
-            // FIX: Hero section - show fallback image initially, hide when video plays
             var heroFallback = document.getElementById('heroFallback');
             
-            // Show fallback image immediately for smooth initial load
             if (heroFallback) {
                 heroFallback.classList.add('visible');
             }
 
-            // Setup hero video with fallback handling
             function setupHeroVideo() {
                 var video = document.getElementById('heroVideo');
                 var fallback = document.getElementById('heroFallback');
@@ -469,7 +459,6 @@
                     }
                 });
 
-                // Try to play immediately (hero is always visible on load)
                 var playPromise = video.play();
                 if (playPromise !== undefined) {
                     playPromise.catch(function(e) {
@@ -478,15 +467,10 @@
                 }
             }
 
-            // FIX: Setup lazy-loaded videos with Intersection Observer
-            // This ensures videos only load and play when visible
             function setupLazyVideo(videoId, sectionId) {
                 var video = document.getElementById(videoId);
                 var section = document.getElementById(sectionId);
-                if (!video || !section) {
-                    console.log('Video or section not found:', videoId, sectionId);
-                    return;
-                }
+                if (!video || !section) return;
 
                 var videoPlaying = false;
                 var hasAttemptedPlay = false;
@@ -495,7 +479,6 @@
                     if (videoPlaying) return;
                     videoPlaying = true;
                     video.classList.add('playing');
-                    console.log('Video playing:', videoId);
                 }
 
                 function playVideo() {
@@ -503,15 +486,12 @@
                     hasAttemptedPlay = true;
 
                     video.play().then(function() {
-                        console.log('Video autoplay success:', videoId);
+                        // playing
                     }).catch(function(e) {
-                        console.log('Video autoplay blocked, retrying...', videoId, e);
-                        // Retry on user interaction is handled by scroll
                         hasAttemptedPlay = false;
                     });
                 }
 
-                // Listen for video events
                 video.addEventListener('playing', onVideoPlay);
                 video.addEventListener('canplaythrough', function() {
                     if (!videoPlaying) {
@@ -521,15 +501,12 @@
 
                 video.addEventListener('error', function(e) {
                     console.error('Video loading error:', videoId, e);
-                    // Fallback stays visible via CSS
                 });
 
-                // FIX: Use Intersection Observer to play video when section is visible
                 if ('IntersectionObserver' in window) {
                     var observer = new IntersectionObserver(function(entries) {
                         entries.forEach(function(entry) {
                             if (entry.isIntersecting && !videoPlaying) {
-                                // Load video if not already loading
                                 if (video.readyState === 0) {
                                     video.load();
                                 }
@@ -542,18 +519,15 @@
                     });
                     observer.observe(section);
                 } else {
-                    // Fallback for older browsers - just try to play
                     video.load();
                     playVideo();
                 }
             }
 
-            // Initialize all videos
             setupHeroVideo();
             setupLazyVideo('featuresVideo', 'featuresSection');
             setupLazyVideo('ctaVideo', 'ctaSection');
 
-            // FIX: Also attempt play on scroll as fallback
             var scrollAttempts = 0;
             var maxScrollAttempts = 5;
             
@@ -577,7 +551,6 @@
             }
             
             window.addEventListener('scroll', attemptPlayOnScroll, { passive: true });
-            // Initial attempt after page load
             setTimeout(attemptPlayOnScroll, 1000);
         })();
     </script>
