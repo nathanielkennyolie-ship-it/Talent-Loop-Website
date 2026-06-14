@@ -283,6 +283,7 @@ a:hover {
 /* Features */
 .features {
     color: #fff;
+    background: linear-gradient(135deg, #1a2b5f 0%, #0d1b3e 100%);
 }
 
 .features .section-header h2,
@@ -292,25 +293,9 @@ a:hover {
     color: #fff;
 }
 
-.features::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-image: url('https://images.unsplash.com/photo-1497366811353-6870744d04b2?q=60&w=1920&fm=webp&auto=format&fit=crop');
-    background-size: cover;
-    background-position: center;
-    /* FIX: was background-attachment: fixed — causes massive mobile repaint */
-    background-attachment: scroll;
-    z-index: -1;
-    will-change: transform;
-}
-
+.features::before,
 .features::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-color: rgba(0,0,0,0.7);
-    z-index: -1;
+    content: none;
 }
 
 .feature-grid {
@@ -332,25 +317,13 @@ a:hover {
 }
 
 /* Stats */
-.stats::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-image: url('https://images.unsplash.com/photo-1557682250-33bd709cbe85?q=60&w=1920&fm=webp&auto=format&fit=crop');
-    background-size: cover;
-    background-position: center;
-    /* FIX: was background-attachment: fixed */
-    background-attachment: scroll;
-    z-index: -1;
-    will-change: transform;
+.stats {
+    background: linear-gradient(180deg, #0d1b3e 0%, #162040 100%);
 }
 
+.stats::before,
 .stats::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-color: rgba(0,0,0,0.6);
-    z-index: -1;
+    content: none;
 }
 
 .stats-grid {
@@ -378,6 +351,7 @@ a:hover {
 .cta-section {
     color: #fff;
     text-align: center;
+    background: linear-gradient(135deg, #1a2b5f 0%, #0d1b3e 100%);
 }
 
 .cta-section p {
@@ -398,25 +372,9 @@ a:hover {
     color: #fff;
 }
 
-.cta-section::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-image: url('https://images.unsplash.com/photo-1497366811353-6870744d04b2?q=60&w=1920&fm=webp&auto=format&fit=crop');
-    background-size: cover;
-    background-position: center;
-    /* FIX: was background-attachment: fixed */
-    background-attachment: scroll;
-    z-index: -1;
-    will-change: transform;
-}
-
+.cta-section::before,
 .cta-section::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-color: rgba(0,0,0,0.7);
-    z-index: -1;
+    content: none;
 }
 
 /* ================================
@@ -1389,16 +1347,6 @@ a:hover {
     .contact-form-container { padding: 1.5rem; }
     .modal-content { padding: 1.75rem 1.5rem; }
     .modal-actions { flex-direction: column; }
-
-    /* FIX: Completely disable fixed backgrounds on mobile
-       background-attachment:fixed forces full-page repaints on scroll
-       which destroys LCP and Speed Index on mobile */
-    .features::before,
-    .stats::before,
-    .cta-section::before {
-        background-attachment: scroll;
-        background-size: cover;
-    }
 }
 
 @media (max-width: 480px) {
