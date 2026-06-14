@@ -42,16 +42,8 @@
       "foundingDate": "2015",
       "email": "info@talent-loop.org",
       "contactPoint": [
-        {
-          "@type": "ContactPoint",
-          "email": "jobs@talent-loop.org",
-          "contactType": "Job Seekers"
-        },
-        {
-          "@type": "ContactPoint",
-          "email": "careers@talent-loop.org",
-          "contactType": "Employers"
-        }
+        {"@type": "ContactPoint", "email": "jobs@talent-loop.org", "contactType": "Job Seekers"},
+        {"@type": "ContactPoint", "email": "careers@talent-loop.org", "contactType": "Employers"}
       ],
       "sameAs": [
         "https://www.linkedin.com/company/talentloop-official/",
@@ -61,36 +53,29 @@
     }
     </script>
 
-    <!-- WebSite Schema (enables Google Sitelinks Search Box) -->
+    <!-- WebSite Schema -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "Talent Loop",
-      "url": "https://talent-loop.org"
-    }
+    {"@context": "https://schema.org", "@type": "WebSite", "name": "Talent Loop", "url": "https://talent-loop.org"}
     </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght=400;500;600;700&display=swap" rel="stylesheet"></noscript>
 
     <style>
         body { font-family: Georgia, 'Times New Roman', serif; }
-        .logo-text, h1, h2, h3, h4, h5, h6,
-        .hero-title, .section-header h2, .post-title,
-        .page-title, .question-title {
+        .logo-text, h1, h2, h3, h4, h5, h6, .hero-title, .section-header h2, .post-title, .page-title, .question-title {
             font-family: Georgia, 'Times New Roman', serif;
         }
     </style>
 
-    <link rel="preload" as="image" fetchpriority="high"
-          href="hero-bg.webp"
-          imagesrcset="hero-bg-mobile.webp 768w, hero-bg.webp 1280w"
-          imagesizes="100vw">
+    <!-- Preload hero image for instant display -->
+    <link rel="preload" as="image" href="hero-bg.webp" fetchpriority="high">
+    <link rel="preload" as="image" href="team-working-modern-professional-office.webp">
+    <link rel="preload" as="image" href="confident-candidate-preparing.webp">
 
-    <link rel="stylesheet" href="styles.css?v=2.4">
+    <link rel="stylesheet" href="styles.css?v=2.5">
 
     <style>
         .footer { background: #0d1b3e; }
@@ -108,7 +93,9 @@
         .btn-primary:hover { background: #c9a227; color: #1a2b5f !important; }
         .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 
-        /* Hero Video Background */
+        /* =============================================
+           HERO SECTION - Lighter overlay for clarity
+           ============================================= */
         .hero {
             position: relative;
             overflow: hidden;
@@ -131,29 +118,29 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center;
+            object-position: center center;
             z-index: 1;
-            background: transparent;
+            opacity: 0;
+            transition: opacity 0.5s ease;
         }
-        .hero .image-overlay {
+        .hero-video-bg.playing {
+            opacity: 1;
+        }
+        .hero .video-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, rgba(26,43,95,0.82), rgba(13,27,62,0.72), rgba(26,43,95,0.88));
+            background: linear-gradient(135deg, rgba(13,27,62,0.30) 0%, rgba(26,43,95,0.25) 50%, rgba(13,27,62,0.35) 100%);
             z-index: 2;
         }
-        .hero .hero-content {
-            position: relative;
-            z-index: 3;
-        }
-        .hero .scroll-indicator {
-            position: relative;
-            z-index: 3;
-        }
+        .hero .hero-content { position: relative; z-index: 3; }
+        .hero .scroll-indicator { position: relative; z-index: 3; }
 
-        /* Features Video Background - LIGHTER overlay for clearer video */
+        /* =============================================
+           FEATURES SECTION - Different Video
+           ============================================= */
         .features {
             position: relative;
             overflow: hidden;
@@ -176,11 +163,15 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center;
+            object-position: center top;
             z-index: 1;
-            background: transparent;
+            opacity: 0;
+            transition: opacity 0.5s ease;
         }
-        .features-video-overlay {
+        .features-video-bg.playing {
+            opacity: 1;
+        }
+        .features .video-overlay {
             position: absolute;
             top: 0;
             left: 0;
@@ -189,12 +180,11 @@
             background: linear-gradient(135deg, rgba(13,27,62,0.35) 0%, rgba(26,43,95,0.30) 50%, rgba(13,27,62,0.40) 100%);
             z-index: 2;
         }
-        .features .container {
-            position: relative;
-            z-index: 3;
-        }
+        .features .container { position: relative; z-index: 3; }
 
-        /* CTA Video Background - EVEN LIGHTER overlay for clearest video */
+        /* =============================================
+           CTA SECTION - Different Video
+           ============================================= */
         .cta-section {
             position: relative;
             overflow: hidden;
@@ -217,11 +207,15 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center;
+            object-position: center center;
             z-index: 1;
-            background: transparent;
+            opacity: 0;
+            transition: opacity 0.5s ease;
         }
-        .cta-video-overlay {
+        .cta-video-bg.playing {
+            opacity: 1;
+        }
+        .cta .video-overlay {
             position: absolute;
             top: 0;
             left: 0;
@@ -230,10 +224,7 @@
             background: linear-gradient(135deg, rgba(13,27,62,0.25) 0%, rgba(26,43,95,0.20) 50%, rgba(13,27,62,0.30) 100%);
             z-index: 2;
         }
-        .cta-section .container {
-            position: relative;
-            z-index: 3;
-        }
+        .cta-section .container { position: relative; z-index: 3; }
     </style>
 
 </head>
@@ -256,27 +247,20 @@
                 <li><a href="/assessment" class="cta-link">Take Assessment</a></li>
             </ul>
             <div class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
+                <span></span><span></span><span></span>
             </div>
         </div>
     </nav>
 
     <main id="main-content">
 
+        <!-- HERO SECTION -->
         <section class="hero">
-            <!-- Fallback Background Image -->
             <div class="hero-fallback-bg"></div>
-            <!-- Video Background -->
-            <video class="hero-video-bg"
-                   id="heroVideo"
-                   autoplay loop muted playsinline
-                   preload="auto"
-                   poster="hero-bg.webp">
+            <video class="hero-video-bg" id="heroVideo" autoplay loop muted playsinline preload="auto" poster="hero-bg.webp">
                 <source src="hero-video.mp4" type="video/mp4">
             </video>
-            <div class="image-overlay"></div>
+            <div class="video-overlay"></div>
             <div class="hero-content">
                 <h1 class="hero-title">
                     <span class="sr-only">Talent Loop — </span>
@@ -295,18 +279,14 @@
             </div>
         </section>
 
+        <!-- FEATURES SECTION - Different Video -->
         <section class="features">
-            <!-- Fallback Background Image -->
             <div class="features-fallback-bg"></div>
-            <!-- Video Background (using hero-video.mp4) -->
-            <video class="features-video-bg"
-                   id="featuresVideo"
-                   autoplay loop muted playsinline
-                   preload="auto"
-                   poster="team-working-modern-professional-office.webp">
-                <source src="hero-video.mp4" type="video/mp4">
+            <video class="features-video-bg" id="featuresVideo" autoplay loop muted playsinline preload="auto" poster="team-working-modern-professional-office.webp">
+                <source src="https://videos.pexels.com/video-files/7642379/7642379-uhd_2560_1440_30fps.mp4" type="video/mp4">
+                <source src="https://cdn.coverr.co/videos/coverr-team-working-on-a-project.mp4" type="video/mp4">
             </video>
-            <div class="features-video-overlay"></div>
+            <div class="video-overlay"></div>
             <div class="container">
                 <div class="section-header">
                     <h2>Why Choose Talent Loop</h2>
@@ -337,6 +317,7 @@
             </div>
         </section>
 
+        <!-- STATS SECTION -->
         <section class="stats">
             <div class="container">
                 <div class="stats-grid">
@@ -360,18 +341,14 @@
             </div>
         </section>
 
+        <!-- CTA SECTION - Different Video -->
         <section class="cta-section">
-            <!-- Fallback Background Image -->
             <div class="cta-fallback-bg"></div>
-            <!-- Video Background (using hero-video.mp4) -->
-            <video class="cta-video-bg"
-                   id="ctaVideo"
-                   autoplay loop muted playsinline
-                   preload="auto"
-                   poster="confident-candidate-preparing.webp">
-                <source src="hero-video.mp4" type="video/mp4">
+            <video class="cta-video-bg" id="ctaVideo" autoplay loop muted playsinline preload="auto" poster="confident-candidate-preparing.webp">
+                <source src="https://videos.pexels.com/video-files/7982093/7982093-uhd_2560_1440_25fps.mp4" type="video/mp4">
+                <source src="https://cdn.coverr.co/videos/coverr-woman-working-on-a-laptop.mp4" type="video/mp4">
             </video>
-            <div class="cta-video-overlay"></div>
+            <div class="video-overlay"></div>
             <div class="container">
                 <div class="cta-content">
                     <h2>Ready to Take the Next Step?</h2>
@@ -438,61 +415,48 @@
     </footer>
 
     <script src="script.js?v=2.1"></script>
-    <!-- Video Fallback Script for All Sections -->
+    <!-- Optimized Video Loading Script -->
     <script>
         (function() {
-            function setupVideoWithFallback(videoId, fallbackSelector) {
+            function setupVideoWithFallback(videoId, videoClass) {
                 var video = document.getElementById(videoId);
-                var fallback = document.querySelector(fallbackSelector);
                 if (!video) return;
 
-                var videoLoaded = false;
-                var videoTimeout = setTimeout(function() {
-                    if (!videoLoaded && video) {
-                        video.style.display = 'none';
-                    }
-                }, 8000);
+                var loaded = false;
+                var timeout = setTimeout(function() {
+                    if (!loaded) video.style.display = 'none';
+                }, 5000);
 
-                video.addEventListener('loadeddata', function() {
-                    videoLoaded = true;
-                    clearTimeout(videoTimeout);
-                });
+                // Add playing class to fade in video smoothly
+                function onPlay() {
+                    loaded = true;
+                    clearTimeout(timeout);
+                    video.classList.add('playing');
+                }
 
-                video.addEventListener('playing', function() {
-                    videoLoaded = true;
-                    clearTimeout(videoTimeout);
-                });
+                video.addEventListener('playing', onPlay);
+                video.addEventListener('loadeddata', onPlay);
+                video.addEventListener('canplay', onPlay);
 
                 video.addEventListener('error', function() {
-                    clearTimeout(videoTimeout);
+                    clearTimeout(timeout);
                     video.style.display = 'none';
                 });
 
-                video.addEventListener('stalled', function() {
-                    setTimeout(function() {
-                        if (!videoLoaded) {
-                            video.style.display = 'none';
-                        }
-                    }, 3000);
-                });
-
-                video.addEventListener('canplaythrough', function() {
-                    videoLoaded = true;
-                    clearTimeout(videoTimeout);
-                });
-
-                var playPromise = video.play();
-                if (playPromise !== undefined) {
-                    playPromise.catch(function() {
-                        clearTimeout(videoTimeout);
+                // Try to play immediately
+                var promise = video.play();
+                if (promise !== undefined) {
+                    promise.catch(function() {
+                        clearTimeout(timeout);
                         video.style.display = 'none';
                     });
                 }
             }
 
-            setupVideoWithFallback('heroVideo', '.hero-fallback-bg');
-            setupVideoWithFallback('featuresVideo', '.features-fallback-bg');
-            setupVideoWithFallback('ctaVideo', '.cta-fallback-bg');
+            // Setup all videos
+            setupVideoWithFallback('heroVideo');
+            setupVideoWithFallback('featuresVideo');
+            setupVideoWithFallback('ctaVideo');
         })();
     </script>
 </body>
