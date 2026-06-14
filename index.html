@@ -116,24 +116,24 @@
         .hero .hero-content { position: relative; z-index: 3; }
         .hero .scroll-indicator { position: relative; z-index: 3; }
 
-        /* YOUTUBE IFRAME BACKGROUND
-           The IFrame API injects inline width/height attributes on the created iframe.
-           !important is required to override those inline attribute styles. */
+        /* YOUTUBE IFRAME BACKGROUND — plain iframe, no JS API */
         .yt-bg-wrapper {
             position: absolute; top: 0; left: 0;
             width: 100%; height: 100%;
             overflow: hidden; z-index: 1; pointer-events: none;
         }
+        /* Scale the 16:9 iframe to cover any section size like object-fit:cover */
         .yt-bg-wrapper iframe {
-            position: absolute !important;
-            top: 50% !important;
-            left: 50% !important;
-            width: 100vw !important;
-            height: 56.25vw !important;
-            min-height: 100% !important;
-            min-width: 177.78vh !important;
-            transform: translate(-50%, -50%) !important;
-            border: 0 !important;
+            position: absolute;
+            top: 50%; left: 50%;
+            /* Width-based sizing: 100vw wide means height = 56.25vw for 16:9 */
+            width: 100vw;
+            height: 56.25vw;
+            /* Height-based sizing takes over when section is taller than 56.25vw */
+            min-height: 100%;
+            min-width: 177.78vh;
+            transform: translate(-50%, -50%);
+            border: 0;
             pointer-events: none;
         }
 
@@ -165,51 +165,6 @@
         }
         .cta-section .container { position: relative; z-index: 3; }
     </style>
-
-    <script>
-        window.onYouTubeIframeAPIReady = function() {
-            createYTBackground('featuresYTBg', 'qz9ADlOqqs8');
-            createYTBackground('ctaYTBg', 'ZscqQenZ-Tk');
-        };
-
-        function createYTBackground(containerId, videoId) {
-            new YT.Player(containerId, {
-                width: '1920',
-                height: '1080',
-                videoId: videoId,
-                playerVars: {
-                    autoplay: 1,
-                    mute: 1,
-                    loop: 1,
-                    playlist: videoId,
-                    controls: 0,
-                    disablekb: 1,
-                    rel: 0,
-                    showinfo: 0,
-                    modestbranding: 1,
-                    playsinline: 1,
-                    iv_load_policy: 3,
-                    fs: 0,
-                    origin: 'https://talent-loop.org'
-                },
-                events: {
-                    onReady: function(e) {
-                        e.target.mute();
-                        e.target.playVideo();
-                    },
-                    onStateChange: function(e) {
-                        if (e.data === YT.PlayerState.ENDED) {
-                            e.target.seekTo(0);
-                            e.target.playVideo();
-                        }
-                        if (e.data === YT.PlayerState.PAUSED) {
-                            setTimeout(function() { e.target.playVideo(); }, 200);
-                        }
-                    }
-                }
-            });
-        }
-    </script>
 </head>
 <body>
     <a href="#main-content" class="skip-link" style="position:absolute;left:-9999px;top:0;z-index:9999;padding:0.5rem 1rem;background:#1a2b5f;color:#fff;font-weight:700;border-radius:0 0 6px 0;">Skip to main content</a>
@@ -266,7 +221,14 @@
         <section class="features" id="featuresSection">
             <div class="features-fallback-bg"></div>
             <div class="yt-bg-wrapper">
-                <div id="featuresYTBg"></div>
+                <iframe
+                    src="https://www.youtube.com/embed/qz9ADlOqqs8?autoplay=1&mute=1&loop=1&playlist=qz9ADlOqqs8&controls=0&disablekb=1&rel=0&showinfo=0&modestbranding=1&playsinline=1&iv_load_policy=3&fs=0&origin=https://talent-loop.org"
+                    title="Office background video"
+                    frameborder="0"
+                    allow="autoplay; encrypted-media"
+                    allowfullscreen
+                    loading="lazy"
+                ></iframe>
             </div>
             <div class="video-overlay"></div>
             <div class="container">
@@ -327,7 +289,14 @@
         <section class="cta-section" id="ctaSection">
             <div class="cta-fallback-bg"></div>
             <div class="yt-bg-wrapper">
-                <div id="ctaYTBg"></div>
+                <iframe
+                    src="https://www.youtube.com/embed/ZscqQenZ-Tk?autoplay=1&mute=1&loop=1&playlist=ZscqQenZ-Tk&controls=0&disablekb=1&rel=0&showinfo=0&modestbranding=1&playsinline=1&iv_load_policy=3&fs=0&origin=https://talent-loop.org"
+                    title="Business meeting background video"
+                    frameborder="0"
+                    allow="autoplay; encrypted-media"
+                    allowfullscreen
+                    loading="lazy"
+                ></iframe>
             </div>
             <div class="video-overlay"></div>
             <div class="container">
@@ -426,8 +395,5 @@
             }
         })();
     </script>
-
-    <!-- Load YouTube IFrame API — triggers window.onYouTubeIframeAPIReady defined in <head> -->
-    <script src="https://www.youtube.com/iframe_api"></script>
 </body>
 </html>
