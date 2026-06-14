@@ -70,12 +70,10 @@
         }
     </style>
 
-    <!-- Preload hero image for instant display -->
-    <link rel="preload" as="image" href="hero-bg.webp" fetchpriority="high">
-    <link rel="preload" as="image" href="team-working-modern-professional-office.webp">
-    <link rel="preload" as="image" href="confident-candidate-preparing.webp">
+    <!-- FIX: Preload hero video for instant playback - prevents image flash before video -->
+    <link rel="preload" as="video" href="hero-video.mp4" fetchpriority="high">
 
-    <link rel="stylesheet" href="styles.css?v=2.5">
+    <link rel="stylesheet" href="styles.css?v=2.6">
 
     <style>
         .footer { background: #0d1b3e; }
@@ -94,11 +92,13 @@
         .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 
         /* =============================================
-           HERO SECTION - Lighter overlay for clarity
+           HERO SECTION - Smooth video loading
+           FIX: Background color prevents flash before image/video loads
            ============================================= */
         .hero {
             position: relative;
             overflow: hidden;
+            background: linear-gradient(135deg, #0d1b3e 0%, #1a2b5f 50%, #0d1b3e 100%);
         }
         .hero-fallback-bg {
             position: absolute;
@@ -110,6 +110,11 @@
             background-size: cover;
             background-position: center;
             z-index: 0;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .hero-fallback-bg.visible {
+            opacity: 1;
         }
         .hero-video-bg {
             position: absolute;
@@ -132,14 +137,15 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(13,27,62,0.30) 0%, rgba(26,43,95,0.25) 50%, rgba(13,27,62,0.35) 100%);
+            background: linear-gradient(135deg, rgba(13,27,62,0.45) 0%, rgba(26,43,95,0.40) 50%, rgba(13,27,62,0.50) 100%);
             z-index: 2;
         }
         .hero .hero-content { position: relative; z-index: 3; }
         .hero .scroll-indicator { position: relative; z-index: 3; }
 
         /* =============================================
-           FEATURES SECTION - Different Video
+           FEATURES SECTION - Darker overlay for readability
+           FIX: Increased overlay opacity from 0.35-0.40 to 0.70-0.80
            ============================================= */
         .features {
             position: relative;
@@ -171,19 +177,21 @@
         .features-video-bg.playing {
             opacity: 1;
         }
+        /* FIX: Darker overlay for better text readability on bright backgrounds */
         .features .video-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(13,27,62,0.35) 0%, rgba(26,43,95,0.30) 50%, rgba(13,27,62,0.40) 100%);
+            background: linear-gradient(135deg, rgba(13,27,62,0.75) 0%, rgba(26,43,95,0.70) 50%, rgba(13,27,62,0.80) 100%);
             z-index: 2;
         }
         .features .container { position: relative; z-index: 3; }
 
         /* =============================================
-           CTA SECTION - Different Video
+           CTA SECTION - Darker overlay for readability
+           FIX: Increased overlay opacity from 0.25-0.30 to 0.70-0.80
            ============================================= */
         .cta-section {
             position: relative;
@@ -215,13 +223,14 @@
         .cta-video-bg.playing {
             opacity: 1;
         }
-        .cta .video-overlay {
+        /* FIX: Darker overlay for better text readability on bright backgrounds */
+        .cta-section .video-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(13,27,62,0.25) 0%, rgba(26,43,95,0.20) 50%, rgba(13,27,62,0.30) 100%);
+            background: linear-gradient(135deg, rgba(13,27,62,0.75) 0%, rgba(26,43,95,0.70) 50%, rgba(13,27,62,0.80) 100%);
             z-index: 2;
         }
         .cta-section .container { position: relative; z-index: 3; }
@@ -256,8 +265,8 @@
 
         <!-- HERO SECTION -->
         <section class="hero">
-            <div class="hero-fallback-bg"></div>
-            <video class="hero-video-bg" id="heroVideo" autoplay loop muted playsinline preload="auto" poster="hero-bg.webp">
+            <div class="hero-fallback-bg" id="heroFallback"></div>
+            <video class="hero-video-bg" id="heroVideo" autoplay loop muted playsinline preload="auto">
                 <source src="hero-video.mp4" type="video/mp4">
             </video>
             <div class="video-overlay"></div>
@@ -282,9 +291,8 @@
         <!-- FEATURES SECTION - Different Video -->
         <section class="features">
             <div class="features-fallback-bg"></div>
-            <video class="features-video-bg" id="featuresVideo" autoplay loop muted playsinline preload="auto" poster="team-working-modern-professional-office.webp">
+            <video class="features-video-bg" id="featuresVideo" autoplay loop muted playsinline preload="auto">
                 <source src="https://videos.pexels.com/video-files/7642379/7642379-uhd_2560_1440_30fps.mp4" type="video/mp4">
-                <source src="https://cdn.coverr.co/videos/coverr-team-working-on-a-project.mp4" type="video/mp4">
             </video>
             <div class="video-overlay"></div>
             <div class="container">
@@ -344,9 +352,8 @@
         <!-- CTA SECTION - Different Video -->
         <section class="cta-section">
             <div class="cta-fallback-bg"></div>
-            <video class="cta-video-bg" id="ctaVideo" autoplay loop muted playsinline preload="auto" poster="confident-candidate-preparing.webp">
+            <video class="cta-video-bg" id="ctaVideo" autoplay loop muted playsinline preload="auto">
                 <source src="https://videos.pexels.com/video-files/7982093/7982093-uhd_2560_1440_25fps.mp4" type="video/mp4">
-                <source src="https://cdn.coverr.co/videos/coverr-woman-working-on-a-laptop.mp4" type="video/mp4">
             </video>
             <div class="video-overlay"></div>
             <div class="container">
@@ -415,48 +422,98 @@
     </footer>
 
     <script src="script.js?v=2.1"></script>
-    <!-- Optimized Video Loading Script -->
+    <!-- FIX: Optimized Video Loading Script -->
     <script>
         (function() {
-            function setupVideoWithFallback(videoId, videoClass) {
+            // FIX: Hero section - show fallback image initially, hide when video plays
+            // This prevents the flash of background before video loads
+            var heroFallback = document.getElementById('heroFallback');
+            var heroVideo = document.getElementById('heroVideo');
+            
+            // Show fallback image immediately for smooth initial load
+            if (heroFallback) {
+                heroFallback.classList.add('visible');
+            }
+
+            // Setup video with smooth fade-in transition
+            function setupHeroVideo(fallbackId, videoId) {
                 var video = document.getElementById(videoId);
+                var fallback = document.getElementById(fallbackId);
                 if (!video) return;
 
-                var loaded = false;
-                var timeout = setTimeout(function() {
-                    if (!loaded) video.style.display = 'none';
-                }, 5000);
+                var videoPlaying = false;
 
-                // Add playing class to fade in video smoothly
-                function onPlay() {
-                    loaded = true;
-                    clearTimeout(timeout);
+                // Handle video playing - fade in video, fade out fallback
+                function onVideoPlay() {
+                    if (videoPlaying) return;
+                    videoPlaying = true;
                     video.classList.add('playing');
+                    if (fallback) {
+                        fallback.style.opacity = '0';
+                        setTimeout(function() {
+                            fallback.style.display = 'none';
+                        }, 300);
+                    }
                 }
 
-                video.addEventListener('playing', onPlay);
-                video.addEventListener('loadeddata', onPlay);
-                video.addEventListener('canplay', onPlay);
+                // Listen for video events
+                video.addEventListener('playing', onVideoPlay);
+                video.addEventListener('canplay', onVideoPlay);
+                video.addEventListener('loadeddata', onVideoPlay);
 
+                // Handle video error - keep fallback visible
                 video.addEventListener('error', function() {
-                    clearTimeout(timeout);
-                    video.style.display = 'none';
+                    video.style.opacity = '0';
+                    if (fallback) {
+                        fallback.style.display = 'block';
+                        fallback.style.opacity = '1';
+                    }
                 });
 
                 // Try to play immediately
-                var promise = video.play();
-                if (promise !== undefined) {
-                    promise.catch(function() {
-                        clearTimeout(timeout);
-                        video.style.display = 'none';
+                var playPromise = video.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(function() {
+                        // Autoplay prevented, fallback stays visible
                     });
                 }
             }
 
-            // Setup all videos
-            setupVideoWithFallback('heroVideo');
-            setupVideoWithFallback('featuresVideo');
-            setupVideoWithFallback('ctaVideo');
+            // Setup videos for sections without fallback control
+            function setupVideo(videoId) {
+                var video = document.getElementById(videoId);
+                if (!video) return;
+
+                var videoPlaying = false;
+
+                function onVideoPlay() {
+                    if (videoPlaying) return;
+                    videoPlaying = true;
+                    video.classList.add('playing');
+                }
+
+                video.addEventListener('playing', onVideoPlay);
+                video.addEventListener('canplay', onVideoPlay);
+                video.addEventListener('loadeddata', onVideoPlay);
+
+                video.addEventListener('error', function() {
+                    video.style.opacity = '0';
+                });
+
+                var playPromise = video.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(function() {
+                        // Autoplay prevented
+                    });
+                }
+            }
+
+            // Setup hero video with special fallback handling
+            setupHeroVideo('heroFallback', 'heroVideo');
+            
+            // Setup other section videos
+            setupVideo('featuresVideo');
+            setupVideo('ctaVideo');
         })();
     </script>
 </body>
