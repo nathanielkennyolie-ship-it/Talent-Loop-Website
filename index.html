@@ -73,7 +73,7 @@
     <!-- FIX: Preload hero video for instant playback - prevents image flash before video -->
     <link rel="preload" as="video" href="hero-video.mp4" fetchpriority="high">
 
-    <link rel="stylesheet" href="styles.css?v=2.6">
+    <link rel="stylesheet" href="styles.css?v=2.7">
 
     <style>
         .footer { background: #0d1b3e; }
@@ -289,10 +289,11 @@
         </section>
 
         <!-- FEATURES SECTION - Different Video -->
-        <section class="features">
+        <!-- FIX: Using smaller 1080p video instead of UHD 2560x1440 for better loading -->
+        <section class="features" id="featuresSection">
             <div class="features-fallback-bg"></div>
-            <video class="features-video-bg" id="featuresVideo" autoplay loop muted playsinline preload="auto">
-                <source src="https://videos.pexels.com/video-files/7642379/7642379-uhd_2560_1440_30fps.mp4" type="video/mp4">
+            <video class="features-video-bg" id="featuresVideo" loop muted playsinline preload="auto" crossorigin="anonymous">
+                <source src="https://videos.pexels.com/video-files/7642379/7642379-hd_1920_1080_30fps.mp4" type="video/mp4">
             </video>
             <div class="video-overlay"></div>
             <div class="container">
@@ -350,10 +351,11 @@
         </section>
 
         <!-- CTA SECTION - Different Video -->
-        <section class="cta-section">
+        <!-- FIX: Using smaller 1080p video instead of UHD 2560x1440 for better loading -->
+        <section class="cta-section" id="ctaSection">
             <div class="cta-fallback-bg"></div>
-            <video class="cta-video-bg" id="ctaVideo" autoplay loop muted playsinline preload="auto">
-                <source src="https://videos.pexels.com/video-files/7982093/7982093-uhd_2560_1440_25fps.mp4" type="video/mp4">
+            <video class="cta-video-bg" id="ctaVideo" loop muted playsinline preload="auto" crossorigin="anonymous">
+                <source src="https://videos.pexels.com/video-files/7982093/7982093-hd_1920_1080_25fps.mp4" type="video/mp4">
             </video>
             <div class="video-overlay"></div>
             <div class="container">
@@ -422,28 +424,27 @@
     </footer>
 
     <script src="script.js?v=2.1"></script>
-    <!-- FIX: Optimized Video Loading Script -->
+    <!-- FIX: Optimized Video Loading Script with Intersection Observer -->
     <script>
         (function() {
+            'use strict';
+            
             // FIX: Hero section - show fallback image initially, hide when video plays
-            // This prevents the flash of background before video loads
             var heroFallback = document.getElementById('heroFallback');
-            var heroVideo = document.getElementById('heroVideo');
             
             // Show fallback image immediately for smooth initial load
             if (heroFallback) {
                 heroFallback.classList.add('visible');
             }
 
-            // Setup video with smooth fade-in transition
-            function setupHeroVideo(fallbackId, videoId) {
-                var video = document.getElementById(videoId);
-                var fallback = document.getElementById(fallbackId);
+            // Setup hero video with fallback handling
+            function setupHeroVideo() {
+                var video = document.getElementById('heroVideo');
+                var fallback = document.getElementById('heroFallback');
                 if (!video) return;
 
                 var videoPlaying = false;
 
-                // Handle video playing - fade in video, fade out fallback
                 function onVideoPlay() {
                     if (videoPlaying) return;
                     videoPlaying = true;
@@ -456,64 +457,128 @@
                     }
                 }
 
-                // Listen for video events
                 video.addEventListener('playing', onVideoPlay);
                 video.addEventListener('canplay', onVideoPlay);
                 video.addEventListener('loadeddata', onVideoPlay);
 
-                // Handle video error - keep fallback visible
-                video.addEventListener('error', function() {
-                    video.style.opacity = '0';
+                video.addEventListener('error', function(e) {
+                    console.error('Hero video error:', e);
                     if (fallback) {
                         fallback.style.display = 'block';
                         fallback.style.opacity = '1';
                     }
                 });
 
-                // Try to play immediately
+                // Try to play immediately (hero is always visible on load)
                 var playPromise = video.play();
                 if (playPromise !== undefined) {
-                    playPromise.catch(function() {
-                        // Autoplay prevented, fallback stays visible
+                    playPromise.catch(function(e) {
+                        console.log('Hero autoplay prevented:', e);
                     });
                 }
             }
 
-            // Setup videos for sections without fallback control
-            function setupVideo(videoId) {
+            // FIX: Setup lazy-loaded videos with Intersection Observer
+            // This ensures videos only load and play when visible
+            function setupLazyVideo(videoId, sectionId) {
                 var video = document.getElementById(videoId);
-                if (!video) return;
+                var section = document.getElementById(sectionId);
+                if (!video || !section) {
+                    console.log('Video or section not found:', videoId, sectionId);
+                    return;
+                }
 
                 var videoPlaying = false;
+                var hasAttemptedPlay = false;
 
                 function onVideoPlay() {
                     if (videoPlaying) return;
                     videoPlaying = true;
                     video.classList.add('playing');
+                    console.log('Video playing:', videoId);
                 }
 
-                video.addEventListener('playing', onVideoPlay);
-                video.addEventListener('canplay', onVideoPlay);
-                video.addEventListener('loadeddata', onVideoPlay);
+                function playVideo() {
+                    if (hasAttemptedPlay) return;
+                    hasAttemptedPlay = true;
 
-                video.addEventListener('error', function() {
-                    video.style.opacity = '0';
+                    video.play().then(function() {
+                        console.log('Video autoplay success:', videoId);
+                    }).catch(function(e) {
+                        console.log('Video autoplay blocked, retrying...', videoId, e);
+                        // Retry on user interaction is handled by scroll
+                        hasAttemptedPlay = false;
+                    });
+                }
+
+                // Listen for video events
+                video.addEventListener('playing', onVideoPlay);
+                video.addEventListener('canplaythrough', function() {
+                    if (!videoPlaying) {
+                        playVideo();
+                    }
                 });
 
-                var playPromise = video.play();
-                if (playPromise !== undefined) {
-                    playPromise.catch(function() {
-                        // Autoplay prevented
+                video.addEventListener('error', function(e) {
+                    console.error('Video loading error:', videoId, e);
+                    // Fallback stays visible via CSS
+                });
+
+                // FIX: Use Intersection Observer to play video when section is visible
+                if ('IntersectionObserver' in window) {
+                    var observer = new IntersectionObserver(function(entries) {
+                        entries.forEach(function(entry) {
+                            if (entry.isIntersecting && !videoPlaying) {
+                                // Load video if not already loading
+                                if (video.readyState === 0) {
+                                    video.load();
+                                }
+                                playVideo();
+                            }
+                        });
+                    }, {
+                        threshold: 0.1,
+                        rootMargin: '100px'
                     });
+                    observer.observe(section);
+                } else {
+                    // Fallback for older browsers - just try to play
+                    video.load();
+                    playVideo();
                 }
             }
 
-            // Setup hero video with special fallback handling
-            setupHeroVideo('heroFallback', 'heroVideo');
+            // Initialize all videos
+            setupHeroVideo();
+            setupLazyVideo('featuresVideo', 'featuresSection');
+            setupLazyVideo('ctaVideo', 'ctaSection');
+
+            // FIX: Also attempt play on scroll as fallback
+            var scrollAttempts = 0;
+            var maxScrollAttempts = 5;
             
-            // Setup other section videos
-            setupVideo('featuresVideo');
-            setupVideo('ctaVideo');
+            function attemptPlayOnScroll() {
+                if (scrollAttempts >= maxScrollAttempts) {
+                    window.removeEventListener('scroll', attemptPlayOnScroll);
+                    return;
+                }
+                
+                scrollAttempts++;
+                
+                var featuresVideo = document.getElementById('featuresVideo');
+                var ctaVideo = document.getElementById('ctaVideo');
+                
+                if (featuresVideo && featuresVideo.paused && featuresVideo.readyState >= 2) {
+                    featuresVideo.play().catch(function(){});
+                }
+                if (ctaVideo && ctaVideo.paused && ctaVideo.readyState >= 2) {
+                    ctaVideo.play().catch(function(){});
+                }
+            }
+            
+            window.addEventListener('scroll', attemptPlayOnScroll, { passive: true });
+            // Initial attempt after page load
+            setTimeout(attemptPlayOnScroll, 1000);
         })();
     </script>
 </body>
