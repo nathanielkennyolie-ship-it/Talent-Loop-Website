@@ -179,6 +179,7 @@
     .video-wrap { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 10px; margin: 1.8em 0 0.5em; background: linear-gradient(135deg, #0d1b3e 0%, #1a3568 50%, #0a1428 100%); box-shadow: 0 8px 30px rgba(0,0,0,0.25); cursor: pointer; transition: box-shadow 0.2s; }
     .video-wrap:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.35); }
     .video-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; border-radius: 10px; z-index: 5; }
+    .video-wrap .yt-thumb-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 10px; z-index: 1; }
     .video-wrap .yt-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; z-index: 4; padding: 20px; border-radius: 10px; background: rgba(0,0,0,0.32); transition: background 0.2s; }
     .video-wrap:hover .yt-overlay { background: rgba(0,0,0,0.18); }
     .video-wrap .yt-play-btn { width: 76px; height: 76px; background: rgba(255,0,0,0.92); border-radius: 16px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 24px rgba(0,0,0,0.5); transition: transform 0.18s ease, background 0.18s ease; flex-shrink: 0; position: relative; z-index: 2; border: none; cursor: pointer; }
@@ -188,12 +189,12 @@
     .video-wrap .yt-label strong { display: block; color: #fff; font-size: 1rem; font-weight: 700; margin-bottom: 3px; text-shadow: 0 2px 6px rgba(0,0,0,0.8); }
     .video-wrap .yt-hint { font-size: 0.7rem; color: rgba(255,255,255,0.75); letter-spacing: 1.2px; text-transform: uppercase; position: relative; z-index: 2; }
     .video-wrap::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #ff9900, #D4AF37); z-index: 6; border-radius: 10px 10px 0 0; }
-    .video-wrap.loading .yt-play-btn, .video-wrap.loading .yt-label, .video-wrap.loading .yt-hint { display: none; }
+    .video-wrap.loading .yt-play-btn, .video-wrap.loading .yt-label, .video-wrap.loading .yt-hint, .video-wrap.loading .yt-thumb-img { display: none; }
     .video-wrap.loading .yt-overlay { background: rgba(0,0,0,0.55); cursor: wait; }
     .video-wrap .yt-spinner { display: none; width: 46px; height: 46px; border: 4px solid rgba(255,255,255,0.12); border-top-color: #ff9900; border-radius: 50%; animation: yt-spin 0.75s linear infinite; position: relative; z-index: 2; }
     .video-wrap.loading .yt-spinner { display: block; }
     @keyframes yt-spin { to { transform: rotate(360deg); } }
-    .video-wrap.playing .yt-overlay, .video-wrap.playing::before { display: none; }
+    .video-wrap.playing .yt-overlay, .video-wrap.playing .yt-thumb-img, .video-wrap.playing::before { display: none; }
     .author-card { display: flex; align-items: center; gap: 16px; background: #f7f7f7; border: 1px solid #e2e2e2; border-radius: 10px; padding: 16px 20px; margin-bottom: 36px; }
     .author-photo { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid #D4AF37; }
     .author-info .name { font-weight: 700; font-size: 0.95rem; color: #0d1b3e; }
@@ -452,7 +453,7 @@
         <div class="yt-overlay">
           <button class="yt-play-btn" aria-label="Play salary negotiation evidence-based tips video"></button>
           <div class="yt-label"><strong>How to Negotiate a Higher Salary: 3 Evidence-Based Tips</strong>Master negotiation with strategies backed by LinkedIn data</div>
-          <div class="yt-hint" aria-hidden="true">▶ Click to play</div>
+          <div class="yt-hint" aria-hidden="true">Click to play</div>
           <div class="yt-spinner" aria-hidden="true"></div>
         </div>
       </div>
@@ -588,7 +589,7 @@
         <div class="yt-overlay">
           <button class="yt-play-btn" aria-label="Play anchoring bias in negotiations video"></button>
           <div class="yt-label"><strong>The Anchoring Bias: Why The First Offer Matters</strong>Understanding anchoring and cognitive bias in negotiations</div>
-          <div class="yt-hint" aria-hidden="true">▶ Click to play</div>
+          <div class="yt-hint" aria-hidden="true">Click to play</div>
           <div class="yt-spinner" aria-hidden="true"></div>
         </div>
       </div>
@@ -694,7 +695,7 @@
         <div class="yt-overlay">
           <button class="yt-play-btn" aria-label="Play salary negotiation strategies video"></button>
           <div class="yt-label"><strong>3 Salary Negotiation Tips For 2025</strong>More strategies to strengthen your negotiation position</div>
-          <div class="yt-hint" aria-hidden="true">▶ Click to play</div>
+          <div class="yt-hint" aria-hidden="true">Click to play</div>
           <div class="yt-spinner" aria-hidden="true"></div>
         </div>
       </div>
@@ -859,7 +860,7 @@
     });
   })();
 
-  // YouTube lazy-load
+  // YouTube lazy-load with thumbnail display
   (function() {
     document.querySelectorAll('.video-wrap').forEach(function(wrap) {
       var videoId = wrap.dataset.videoid;
@@ -872,7 +873,14 @@
       thumb.alt = title;
       thumb.className = 'yt-thumb-img';
       thumb.loading = 'lazy';
-      thumb.onload = function() { wrap.insertBefore(thumb, wrap.firstChild); wrap.classList.add('has-thumb'); };
+      thumb.onload = function() {
+        wrap.insertBefore(thumb, wrap.firstChild);
+        wrap.classList.add('has-thumb');
+      };
+      // Fallback to hqdefault if maxresdefault doesn't exist
+      thumb.onerror = function() {
+        thumb.src = 'https://img.youtube.com/vi/' + videoId + '/hqdefault.jpg';
+      };
 
       function playVideo() {
         wrap.classList.add('loading');
