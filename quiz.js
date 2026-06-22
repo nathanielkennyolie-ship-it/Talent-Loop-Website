@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
         initEmailJS();
         await initializeDropdowns();
         setupEventListeners();
-        if (window.location.pathname.includes('assessment.html')) {
+        if (window.location.pathname.includes('assessment')) {
             showInitialForm();
         }
     }

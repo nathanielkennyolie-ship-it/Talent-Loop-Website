@@ -30,19 +30,7 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; }
     body { font-family: 'DM Sans', Georgia, serif; color: #2d2d2d; background: #fff; line-height: 1.78; font-size: 16px; margin: 0; }
-    .navbar { background: #0d1b3e; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.3); }
-    .nav-container { max-width: 1160px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 68px; }
-    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .logo-image { height: 40px; width: auto; }
-    .logo-text { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; font-size: 1.25rem; color: #fff; }
-    .nav-menu { list-style: none; display: flex; align-items: center; gap: 4px; margin: 0; padding: 0; }
-    .nav-menu li a { text-decoration: none; color: rgba(255,255,255,0.76); font-size: 0.87rem; font-weight: 500; padding: 7px 13px; border-radius: 6px; transition: background .18s, color .18s; }
-    .nav-menu li a:hover { background: rgba(255,255,255,0.1); color: #fff; }
-    .nav-menu li a.active { color: #fff; font-weight: 700; }
-    .cta-link { background: #D4AF37 !important; color: #1a2b5f !important; font-weight: 800 !important; border-radius: 5px; }
-    .cta-link:hover { background: #c9a227 !important; }
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
-    .hamburger span { display: block; width: 25px; height: 2px; background: #fff; border-radius: 2px; }
+
     .breadcrumb-bar { background: #f7f7f7; border-bottom: 1px solid #e2e2e2; padding: 11px 24px; }
     .breadcrumb-inner { max-width: 860px; margin: 0 auto; font-size: 0.82rem; color: #666; }
     .breadcrumb-inner a { color: #555; text-decoration: underline; text-underline-offset: 2px; }
@@ -194,25 +182,25 @@
 
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
-<nav class="navbar" aria-label="Main navigation">
-  <div class="nav-container">
-    <a href="/" class="logo">
-      <img src="https://talent-loop.org/logo.webp" alt="Talent Loop agency logo" class="logo-image" width="51" height="40">
-      <span class="logo-text">Talent Loop</span>
-    </a>
-    <ul class="nav-menu" id="navMenu">
-      <li><a href="/">Home</a></li>
-      <li><a href="/about">About Us</a></li>
-      <li><a href="/jobs">Jobs</a></li>
-      <li><a href="/testimonials">Testimonials</a></li>
-      <li><a href="/blog" class="active" aria-current="page">Blog</a></li>
-      <li><a href="/contact">Contact</a></li>
-      <li><a href="/assessment" class="cta-link">Take Assessment</a></li>
-    </ul>
-    <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navMenu">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
+<nav class="navbar">
+    <div class="nav-container container">
+        <div class="logo">
+            <img src="/logo.webp" alt="Talent Loop Logo" class="logo-image" width="51" height="40">
+            <span class="logo-text">Talent Loop</span>
+        </div>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/jobs">Jobs</a></li>
+            <li><a href="/testimonials">Testimonials</a></li>
+            <li><a href="/blog" class="active">Blog</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/assessment" class="cta-link">Take Assessment</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
 </nav>
 
 <nav aria-label="Breadcrumb" class="breadcrumb-bar">
