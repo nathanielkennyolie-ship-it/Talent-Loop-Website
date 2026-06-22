@@ -42,7 +42,8 @@
     <link rel="stylesheet" href="../styles.css?v=2.1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
     <style>
         .blog-post-container { max-width: 860px; margin: 6rem auto 0; padding: 2rem; }
         .post-header { margin-bottom: 2rem; }
@@ -110,6 +111,7 @@
     </style>
 </head>
 <body>
+    <a href="#main-content" class="skip-link" style="position:absolute;left:-9999px;top:0;z-index:9999;padding:0.5rem 1rem;background:#1a2b5f;color:#fff;font-weight:700;border-radius:0 0 6px 0;">Skip to main content</a>
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo"><img src="../logo.webp" alt="Talent Loop Logo" class="logo-image"><span class="logo-text">Talent Loop</span></div>
@@ -126,7 +128,7 @@
         </div>
     </nav>
 
-    <main class="blog-post-container">
+    <main class="blog-post-container" id="main-content">
         <article class="blog-post" itemscope itemtype="https://schema.org/Article">
             <header class="post-header">
                 <nav aria-label="Breadcrumb" style="font-size:0.85rem; color:#999; margin-bottom:1rem;">

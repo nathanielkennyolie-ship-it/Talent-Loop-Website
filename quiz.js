@@ -445,7 +445,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function updateProgress() {
-        if (progressFill) progressFill.style.width = ((currentQuestion -1) / (totalQuestions) * 100) + '%';
+        if (progressFill) progressFill.style.width = ((currentQuestion) / (totalQuestions) * 100) + '%';
     }
 
     function validateQuestion(questionNumber) {
