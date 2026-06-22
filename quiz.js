@@ -47,31 +47,43 @@ document.addEventListener('DOMContentLoaded', function() {
     // ================================
     // EMAILJS INTEGRATION
     // ================================
+    let emailjsReady = false;
+
     function initEmailJS() {
-        let attempts = 0;
-        const tryInit = setInterval(() => {
-            attempts++;
+        if (typeof emailjs !== 'undefined') {
+            emailjs.init('bxxx6SAVqvCeW_bdO');
+            emailjsReady = true;
+            console.log('EmailJS initialised successfully');
+            return;
+        }
+        const checkLoaded = () => {
             if (typeof emailjs !== 'undefined') {
                 emailjs.init('bxxx6SAVqvCeW_bdO');
+                emailjsReady = true;
                 console.log('EmailJS initialised successfully');
-                clearInterval(tryInit);
-            } else if (attempts >= 10) {
-                console.warn('EmailJS SDK failed to load after 10 attempts');
-                clearInterval(tryInit);
+            } else {
+                setTimeout(checkLoaded, 300);
             }
-        }, 500);
+        };
+        setTimeout(checkLoaded, 300);
+    }
+
+    function waitForEmailJS(timeout) {
+        return new Promise(resolve => {
+            if (emailjsReady) { resolve(true); return; }
+            const start = Date.now();
+            const check = () => {
+                if (emailjsReady) { resolve(true); return; }
+                if (Date.now() - start >= timeout) { resolve(false); return; }
+                setTimeout(check, 200);
+            };
+            setTimeout(check, 200);
+        });
     }
 
     async function sendAssessmentEmails(contact, isPriority) {
-        // Wait for EmailJS
-        let waited = 0;
-        while (typeof emailjs === 'undefined' && waited < 5000) {
-            await new Promise(r => setTimeout(r, 200));
-            waited += 200;
-        }
-        if (typeof emailjs === 'undefined') {
-            console.warn('EmailJS not loaded after waiting');
-        }
+        const loaded = await waitForEmailJS(5000);
+        if (!loaded) console.warn('EmailJS not loaded after waiting');
 
         const params = {
             to_email:   contact.email      || '',
@@ -238,8 +250,21 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    function getCountryCode(countryName) {
+        const map = {
+            'United States': 'us', 'Canada': 'ca', 'United Kingdom': 'gb', 'Australia': 'au',
+            'Nigeria': 'ng', 'Ghana': 'gh', 'Kenya': 'ke', 'South Africa': 'za',
+            'India': 'in', 'Philippines': 'ph', 'Germany': 'de', 'France': 'fr',
+            'Spain': 'es', 'Italy': 'it', 'Netherlands': 'nl', 'Brazil': 'br',
+            'Mexico': 'mx', 'Japan': 'jp', 'China': 'cn', 'Ireland': 'ie'
+        };
+        return map[countryName] || '';
+    }
+
     async function getRealAddressSuggestions(query) {
-        const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&addressdetails=1&limit=5&countrycodes=us`;
+        const cc = getCountryCode(countrySelect ? countrySelect.value : '');
+        const ccParam = cc ? `&countrycodes=${cc}` : '';
+        const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&addressdetails=1&limit=5${ccParam}`;
         try {
             const response = await fetch(url, { headers: { 'User-Agent': 'TalentLoopApp/1.0' } });
             if (!response.ok) throw new Error('Network error');
@@ -270,6 +295,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 e.preventDefault();
                 const formData = new FormData(contactInfoForm);
                 contactInfo = Object.fromEntries(formData.entries());
+                const resumeFile = document.getElementById('resume');
+                if (resumeFile && resumeFile.files && resumeFile.files[0]) {
+                    contactInfo.resume_filename = resumeFile.files[0].name;
+                    contactInfo.resume_size = resumeFile.files[0].size;
+                }
                 personalInfoForm.style.display = 'none';
                 assessmentIntro.style.display = 'block';
                 window.scrollTo({ top: 0, behavior: 'smooth' });
