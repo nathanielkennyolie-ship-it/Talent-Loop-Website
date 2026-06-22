@@ -42,8 +42,8 @@
       "name": "Talent Loop",
       "logo": { "@type": "ImageObject", "url": "https://talent-loop.org/logo.webp" }
     },
-    "datePublished": "2025-04-09",
-    "dateModified": "2026-04-21",
+    "datePublished": "2026-04-09",
+    "dateModified": "2026-06-22",
     "url": "https://talent-loop.org/blog/working-at-netflix-career-guide",
     "image": "https://talent-loop.org/netflix-headquarters-los-gatos.webp",
     "mainEntityOfPage": { "@type": "WebPage", "@id": "https://talent-loop.org/blog/working-at-netflix-career-guide" },
@@ -120,7 +120,6 @@
     "url": "https://talent-loop.org/about#nathaniel-kenny-olie",
     "jobTitle": "CEO & Founder",
     "image": "https://talent-loop.org/Kenny.webp",
-    "email": "nathanielkenny@talent-loop.org",
     "worksFor": {
       "@type": "Organization",
       "name": "Talent Loop",
@@ -242,11 +241,20 @@
     .social-links { display: flex; gap: 8px; margin-top: 14px; }
     .social-links a { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; background: rgba(255,255,255,0.1); color: #fff; border-radius: 6px; text-decoration: none; font-size: 0.8rem; font-weight: 700; transition: background .18s; }
     .social-links a:hover { background: #D4AF37; color: #1a2b5f; }
+    .skip-link { position: absolute; left: -9999px; top: 0; z-index: 9999; padding: 0.5rem 1rem; background: #1a2b5f; color: #fff; font-weight: 700; border-radius: 0 0 6px 0; }
+    .skip-link:focus { left: 0; }
+    .video-facade { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 10px; margin: 1.8em 0 0.5em; background: #000; cursor: pointer; }
+    .video-facade img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 10px; }
+    .video-facade .play-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 68px; height: 68px; background: rgba(0,0,0,0.7); border: 3px solid #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: background .2s; }
+    .video-facade .play-btn::after { content: ''; display: block; width: 0; height: 0; border-style: solid; border-width: 12px 0 12px 20px; border-color: transparent transparent transparent #fff; margin-left: 4px; }
+    .video-facade:hover .play-btn { background: #D4AF37; border-color: #D4AF37; }
     @media (max-width: 768px) { .nav-menu { display: none; } .hamburger { display: flex; } .footer-grid { grid-template-columns: 1fr 1fr; } .footer-grid > *:first-child { grid-column: span 2; } }
     @media (max-width: 600px) { .hero { padding: 56px 18px 52px; } .article-body { padding: 40px 18px 60px; } .cta-box { padding: 24px 20px; } .featured-image img { height: 250px; } .salary-table { font-size: 0.82rem; } .salary-table th, .salary-table td { padding: 8px 10px; } }
   </style>
 </head>
 <body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
 
 <nav class="navbar">
     <div class="nav-container container">
@@ -270,9 +278,9 @@
 </nav>
 
 <nav class="breadcrumb" aria-label="breadcrumb">
-  <a href="https://talent-loop.org">Home</a>
+  <a href="/">Home</a>
   <span>›</span>
-  <a href="https://talent-loop.org/blog">Career Blog</a>
+  <a href="/blog">Career Blog</a>
   <span>›</span>
   Working at Netflix 2026
 </nav>
@@ -456,14 +464,9 @@
 
     <div style="margin: 1.8em 0 0.5em;">
       <h4 style="font-family:'DM Sans',sans-serif; font-size:0.88rem; font-weight:600; color:var(--muted); margin-bottom:10px;">🎥 Watch: Reed Hastings on Building Netflix's Culture</h4>
-      <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:8px;">
-        <iframe src="https://www.youtube-nocookie.com/embed/SmZzcV0a2CY"
-                title="Reed Hastings discusses Netflix culture memo, talent density and the Keeper Test"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-                style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;border-radius:8px;"
-                loading="lazy">
-        </iframe>
+      <div class="video-facade" data-id="SmZzcV0a2CY" role="button" tabindex="0" aria-label="Play video">
+        <img src="https://img.youtube.com/vi/SmZzcV0a2CY/maxresdefault.jpg" alt="" loading="lazy" width="820" height="462">
+        <div class="play-btn" aria-hidden="true"></div>
       </div>
       <p style="color:var(--muted); font-size:0.9rem; margin-top:8px;">Reed Hastings discusses talent density, the Keeper Test, and the philosophy behind Netflix's famous culture memo.</p>
     </div>
@@ -581,31 +584,31 @@
     <section class="faq-section" id="faq">
       <h2>Frequently Asked Questions: Working at Netflix</h2>
       <div class="faq-item" itemscope itemtype="https://schema.org/Question">
-        <div class="faq-q" itemprop="name">What is it like to work at Netflix in 2026?<span class="faq-icon">+</span></div>
+        <button class="faq-q" itemprop="name" aria-expanded="false">What is it like to work at Netflix in 2026?<span class="faq-icon">+</span></button>
         <div class="faq-a" itemscope itemtype="https://schema.org/Answer" itemprop="acceptedAnswer">
           <span itemprop="text">Working at Netflix in 2026 means operating in a high-autonomy, high-accountability environment built around its famous Culture Memo. Netflix prizes people over process — there are no set vacation days and minimal rules. Employees are expected to exercise judgment independently and are evaluated through the Keeper Test. Glassdoor rates Netflix 4.3 out of 5, with 85% of employees saying they would recommend it to a friend.</span>
         </div>
       </div>
       <div class="faq-item" itemscope itemtype="https://schema.org/Question">
-        <div class="faq-q" itemprop="name">What does Netflix pay its employees in 2026?<span class="faq-icon">+</span></div>
+        <button class="faq-q" itemprop="name" aria-expanded="false">What does Netflix pay its employees in 2026?<span class="faq-icon">+</span></button>
         <div class="faq-a" itemscope itemtype="https://schema.org/Answer" itemprop="acceptedAnswer">
           <span itemprop="text">Netflix pays at the top of each employee's personal market rather than using fixed salary bands. Engineering and product roles range from $70,000 for entry-level positions to over $500,000 for senior leaders. AI and machine learning specialists can earn total compensation exceeding $700,000. Employees choose their split between base salary and stock options annually.</span>
         </div>
       </div>
       <div class="faq-item" itemscope itemtype="https://schema.org/Question">
-        <div class="faq-q" itemprop="name">What is the Netflix Keeper Test?<span class="faq-icon">+</span></div>
+        <button class="faq-q" itemprop="name" aria-expanded="false">What is the Netflix Keeper Test?<span class="faq-icon">+</span></button>
         <div class="faq-a" itemscope itemtype="https://schema.org/Answer" itemprop="acceptedAnswer">
           <span itemprop="text">The Netflix Keeper Test is a talent management concept where managers regularly ask themselves: 'If this person said they were leaving tomorrow, would I fight hard to keep them?' If the answer is no, Netflix's position is to part ways quickly with generous severance rather than tolerate underperformance. It is part of Netflix's 'dream team' philosophy — maintaining a team where every member is genuinely exceptional.</span>
         </div>
       </div>
       <div class="faq-item" itemscope itemtype="https://schema.org/Question">
-        <div class="faq-q" itemprop="name">What departments does Netflix hire for?<span class="faq-icon">+</span></div>
+        <button class="faq-q" itemprop="name" aria-expanded="false">What departments does Netflix hire for?<span class="faq-icon">+</span></button>
         <div class="faq-a" itemscope itemtype="https://schema.org/Answer" itemprop="acceptedAnswer">
           <span itemprop="text">Netflix hires across Engineering (backend, frontend, ML, infrastructure, games), Product &amp; Design, Content &amp; Creative, Data Science &amp; Analytics, Marketing, Finance &amp; Strategy, Legal &amp; Policy, and Talent &amp; HR. The company runs a graduate programme that typically opens in mid-August each year. Netflix also has a rapidly growing Games division building titles and infrastructure for its gaming initiative.</span>
         </div>
       </div>
       <div class="faq-item" itemscope itemtype="https://schema.org/Question">
-        <div class="faq-q" itemprop="name">How do I get hired at Netflix in 2026?<span class="faq-icon">+</span></div>
+        <button class="faq-q" itemprop="name" aria-expanded="false">How do I get hired at Netflix in 2026?<span class="faq-icon">+</span></button>
         <div class="faq-a" itemscope itemtype="https://schema.org/Answer" itemprop="acceptedAnswer">
           <span itemprop="text">To get hired at Netflix in 2026: (1) Read the Netflix Culture Memo fully and ensure you can demonstrate its values in your work history. (2) Build deep expertise in your specific domain — Netflix values mastery over generalism. (3) Prepare behavioural examples using the STAR format that show individual ownership and measurable impact. (4) Show comfort with ambiguity and direct, candid communication. (5) Use job aggregators to find roles early before high-volume applications arrive.</span>
         </div>
@@ -622,14 +625,9 @@
 
     <div style="margin:1.8em 0;">
       <h4 style="font-family:'DM Sans',sans-serif; font-size:0.88rem; font-weight:600; color:var(--muted); margin-bottom:10px;">🎥 Watch: How to Get a Job at Netflix (2026 Guide)</h4>
-      <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:8px;">
-        <iframe src="https://www.youtube-nocookie.com/embed/WiI2mZifhqY"
-                title="How to get a job at Netflix in 2026 — recruiter tips and remote career guide"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-                style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;border-radius:8px;"
-                loading="lazy">
-        </iframe>
+      <div class="video-facade" data-id="WiI2mZifhqY" role="button" tabindex="0" aria-label="Play video">
+        <img src="https://img.youtube.com/vi/WiI2mZifhqY/maxresdefault.jpg" alt="" loading="lazy" width="820" height="462">
+        <div class="play-btn" aria-hidden="true"></div>
       </div>
       <p style="color:var(--muted); font-size:0.9rem; margin-top:8px;">A tech recruiter breaks down exactly how people land high-paying jobs at Netflix, including remote positions and culture memo alignment.</p>
     </div>
@@ -705,6 +703,27 @@
 </footer>
 
 <script src="../script.js?v=2.2"></script>
+<script>
+document.querySelectorAll('.video-facade').forEach(function(el) {
+  el.addEventListener('click', function() {
+    var id = this.dataset.id;
+    var iframe = document.createElement('iframe');
+    iframe.setAttribute('src', 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0');
+    iframe.setAttribute('title', 'YouTube video player');
+    iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+    iframe.setAttribute('allowfullscreen', '');
+    iframe.style.position = 'absolute';
+    iframe.style.top = '0';
+    iframe.style.left = '0';
+    iframe.style.width = '100%';
+    iframe.style.height = '100%';
+    iframe.style.border = '0';
+    iframe.style.borderRadius = '10px';
+    this.innerHTML = '';
+    this.appendChild(iframe);
+  });
+});
+</script>
 <script>
   const hamburger = document.getElementById('hamburger');
   const navMenu   = document.getElementById('navMenu');

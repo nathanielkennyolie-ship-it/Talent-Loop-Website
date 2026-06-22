@@ -20,7 +20,6 @@
   <meta name="twitter:description" content="Honest guide to Amazon culture, pay, Bar Raiser interviews, and which divisions are hiring in 2026." />
   <meta name="twitter:image" content="https://talent-loop.org/amazon-spheres-seattle.webp" />
 
-  <!-- FIX: Preload hero image to reduce LCP on mobile -->
   <link rel="preload" as="image" href="https://talent-loop.org/amazon-spheres-seattle.webp" fetchpriority="high">
 
   <script type="application/ld+json">
@@ -123,7 +122,6 @@
     "url": "https://talent-loop.org/about#nathaniel-kenny-olie",
     "jobTitle": "CEO & Founder",
     "image": "https://talent-loop.org/Kenny.webp",
-    "email": "nathanielkenny@talent-loop.org",
     "worksFor": {
       "@type": "Organization",
       "name": "Talent Loop",
@@ -153,13 +151,11 @@
     .post-wrap { max-width: 860px; margin: 0 auto; padding: 0 24px 80px; }
     .post-label { display: inline-block; background: #D4AF37; color: #1a2b5f; font-size: 0.72rem; font-weight: 800; letter-spacing: 1.3px; text-transform: uppercase; padding: 4px 13px; border-radius: 4px; margin-top: 40px; margin-bottom: 18px; }
     .post-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(1.85rem, 4vw, 2.7rem); font-weight: 800; line-height: 1.2; color: #0d1b3e; margin-bottom: 14px; }
-    /* FIX: post-subtitle italic border-left — ensure sufficient contrast on text */
     .post-subtitle { font-size: 1.08rem; color: #444; line-height: 1.65; margin-bottom: 22px; font-style: italic; border-left: 3px solid #D4AF37; padding-left: 16px; }
     .post-meta { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; font-size: 0.84rem; color: #555; margin-bottom: 28px; padding-bottom: 22px; border-bottom: 2px solid #e2e2e2; }
     .post-hero { width: 100%; border-radius: 10px; overflow: hidden; margin-bottom: 10px; height: 440px; position: relative; background: #0d1b3e; }
     .post-hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .post-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(13,27,62,0.5) 0%, transparent 55%); }
-    /* FIX: media-caption — boosted from #999 to #666 for contrast ratio compliance */
     .media-caption { font-size: 0.79rem; color: #666; text-align: center; font-style: italic; margin: 0 0 28px; }
     .post-img { width: 100%; border-radius: 10px; overflow: hidden; margin: 1.8em 0 0.5em; }
     .post-img img { width: 100%; height: 340px; object-fit: cover; display: block; border-radius: 10px; transition: transform .4s ease; }
@@ -177,10 +173,8 @@
     .video-wrap .yt-play-btn { width: 76px; height: 76px; background: rgba(255,0,0,0.92); border-radius: 16px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 24px rgba(0,0,0,0.5); transition: transform 0.18s ease, background 0.18s ease; flex-shrink: 0; position: relative; z-index: 2; border: none; cursor: pointer; }
     .video-wrap:hover .yt-play-btn { transform: scale(1.1); background: #ff0000; box-shadow: 0 6px 32px rgba(255,0,0,0.55); }
     .video-wrap .yt-play-btn::after { content: ''; display: block; width: 0; height: 0; border-style: solid; border-width: 13px 0 13px 26px; border-color: transparent transparent transparent #fff; margin-left: 6px; }
-    /* FIX: yt-label color boosted from rgba(255,255,255,0.9) to #fff for contrast */
     .video-wrap .yt-label { color: #fff; font-size: 0.84rem; font-weight: 500; text-align: center; max-width: 500px; line-height: 1.5; position: relative; z-index: 2; text-shadow: 0 1px 4px rgba(0,0,0,0.7); }
     .video-wrap .yt-label strong { display: block; color: #fff; font-size: 1rem; font-weight: 700; margin-bottom: 3px; text-shadow: 0 2px 6px rgba(0,0,0,0.8); }
-    /* FIX: yt-hint color boosted from rgba(255,255,255,0.5) — kept as decorative helper text, acceptable */
     .video-wrap .yt-hint { font-size: 0.7rem; color: rgba(255,255,255,0.75); letter-spacing: 1.2px; text-transform: uppercase; position: relative; z-index: 2; }
     .video-wrap::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #ff9900, #D4AF37); z-index: 6; border-radius: 10px 10px 0 0; }
     .video-wrap.loading .yt-play-btn, .video-wrap.loading .yt-label, .video-wrap.loading .yt-hint { display: none; }
@@ -192,19 +186,15 @@
     .author-card { display: flex; align-items: center; gap: 16px; background: #f7f7f7; border: 1px solid #e2e2e2; border-radius: 10px; padding: 16px 20px; margin-bottom: 36px; }
     .author-photo { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid #D4AF37; }
     .author-info .name { font-weight: 700; font-size: 0.95rem; color: #0d1b3e; }
-    /* FIX: author title color was #D4AF37 on #f7f7f7 bg — insufficient contrast. Darkened to #8a6e00 */
     .author-info .title { font-size: 0.8rem; color: #8a6e00; font-weight: 600; margin-bottom: 2px; }
-    /* FIX: author bio color #888 on #f7f7f7 — boosted to #666 for 4.5:1 compliance */
     .author-info .bio { font-size: 0.78rem; color: #666; line-height: 1.45; }
     .post-body { font-size: 1rem; line-height: 1.85; }
     .post-body p { margin-bottom: 1.3em; }
-    /* FIX: h2 heading hierarchy — changed all to h2, keeping styles */
     .post-body h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.55rem; font-weight: 700; color: #0d1b3e; margin: 2.4em 0 0.7em; padding-top: 1em; border-top: 2px solid #e2e2e2; line-height: 1.3; }
     .post-body h2.first-h2 { border-top: none; padding-top: 0; margin-top: 0; }
     .post-body strong { color: #0d1b3e; font-weight: 700; }
     .post-body ul, .post-body ol { margin: 0 0 1.3em 1.4em; }
     .post-body li { margin-bottom: 0.45em; }
-    /* FIX: body links — color was #1a5fa0, add underline always (was only offset) for color-blind users */
     .post-body a { color: #1a5fa0; text-decoration: underline; text-underline-offset: 3px; }
     .post-body a:hover { color: #0d3d70; }
     .post-body blockquote { border-left: 4px solid #D4AF37; margin: 1.8em 0; padding: 14px 22px; background: #fffbf0; border-radius: 0 10px 10px 0; font-style: italic; font-size: 1.02rem; color: #1a2b5f; }
@@ -212,10 +202,8 @@
     .stats-bar { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: #e2e2e2; border: 1px solid #e2e2e2; border-radius: 10px; overflow: hidden; margin: 2em 0; }
     .stat-block { background: #f7f7f7; text-align: center; padding: 18px 8px; }
     .stat-block .sn { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: #8a6e00; display: block; }
-    /* FIX: stat label color #888 on #f7f7f7 — boosted to #666 */
     .stat-block .sl { font-size: 0.73rem; color: #666; text-transform: uppercase; letter-spacing: 0.6px; font-weight: 500; }
     .toc-box { background: #f7f7f7; border: 1px solid #e2e2e2; border-radius: 10px; padding: 22px 26px; margin: 2em 0; }
-    /* FIX: toc h2 — was h4, changed to h2 in HTML for proper heading hierarchy */
     .toc-box .toc-heading { font-family: 'Playfair Display', serif; font-size: 1rem; color: #0d1b3e; margin-bottom: 12px; font-weight: 700; }
     .toc-box ol { margin: 0; padding-left: 18px; }
     .toc-box ol li { margin-bottom: 6px; font-size: 0.91rem; }
@@ -223,7 +211,6 @@
     .toc-box ol li a:hover { color: #8a6e00; }
     .cta-box { background: linear-gradient(135deg, #0d1b3e 0%, #1a3a5c 100%); border-radius: 10px; padding: 28px 32px; margin: 2em 0; color: #fff; }
     .cta-box .cta-label { font-size: 0.71rem; text-transform: uppercase; letter-spacing: 1.4px; color: #D4AF37; font-weight: 700; margin-bottom: 7px; }
-    /* FIX: cta-box h2 — was h3, updated to h2 in HTML */
     .cta-box h2 { font-family: 'Playfair Display', serif; font-size: 1.28rem; color: #fff; margin-bottom: 8px; border: none !important; padding: 0 !important; margin-top: 0 !important; }
     .cta-box p { color: rgba(255,255,255,0.9); font-size: 0.93rem; margin-bottom: 18px; }
     .btn-gold { display: inline-block; background: #D4AF37; color: #1a2b5f; text-decoration: none; font-weight: 800; padding: 12px 24px; border-radius: 7px; font-size: 0.95rem; transition: background .18s, transform .15s; }
@@ -232,13 +219,10 @@
     .dept-card { background: #f7f7f7; border: 1px solid #e2e2e2; border-radius: 10px; padding: 15px 17px; border-top: 3px solid #D4AF37; }
     .dept-card .di { font-size: 1.3rem; margin-bottom: 6px; }
     .dept-card .dn { font-weight: 700; font-size: 0.88rem; color: #0d1b3e; margin-bottom: 4px; }
-    /* FIX: dept-card desc color #666 on #f7f7f7 — 4.5:1 compliant */
     .dept-card .dd { font-size: 0.78rem; color: #555; line-height: 1.5; }
     .lp-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(165px,1fr)); gap: 9px; margin: 1.3em 0 1.8em; }
     .lp-card { background: #f7f7f7; border: 1px solid #e2e2e2; border-radius: 8px; padding: 12px 15px; }
-    /* FIX: LP card name was #c9a227 on #f7f7f7 — insufficient. Changed to #8a6e00 for compliance */
     .lp-card .ln { font-weight: 700; font-size: 0.84rem; color: #8a6e00; margin-bottom: 3px; }
-    /* FIX: LP desc #666 → #555 for better ratio */
     .lp-card .ld { font-size: 0.78rem; color: #555; line-height: 1.45; }
     .salary-table { width: 100%; border-collapse: collapse; margin: 1.3em 0 1.8em; font-size: 0.91rem; }
     .salary-table caption { text-align: left; font-size: 0.82rem; color: #555; padding-bottom: 8px; }
@@ -264,23 +248,19 @@
     .faq-section h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.55rem; font-weight: 700; color: #0d1b3e; margin-bottom: 1em; padding-top: 1em; border-top: 2px solid #e2e2e2; }
     .faq-item { border: 1px solid #e2e2e2; border-radius: 10px; margin-bottom: 12px; overflow: hidden; }
     .faq-q { background: #f7f7f7; padding: 16px 20px; font-weight: 700; font-size: 0.97rem; color: #0d1b3e; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; border: none; width: 100%; text-align: left; }
-    /* FIX: faq-icon color was #D4AF37 on #f7f7f7 bg — changed to #8a6e00 for contrast */
     .faq-q .faq-icon { font-size: 1.3rem; color: #8a6e00; font-weight: 400; flex-shrink: 0; margin-left: 12px; transition: transform 0.25s ease; }
     .faq-q.open .faq-icon { transform: rotate(45deg); }
     .faq-a { padding: 0 20px; font-size: 0.94rem; line-height: 1.75; color: #333; border-top: 1px solid #e2e2e2; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; }
     .faq-a.open { max-height: 600px; padding: 16px 20px; }
     .final-cta { background: linear-gradient(135deg, #0d1b3e 0%, #1a3a5c 100%); border-radius: 10px; padding: 38px; text-align: center; margin: 2.8em 0 0; }
-    /* FIX: final-cta h2 — was styled via .post-body h2 override which added border. Ensured override */
     .final-cta h2 { font-family: 'Playfair Display', serif; font-size: 1.7rem; color: #fff; margin-bottom: 10px; border: none !important; padding: 0 !important; margin-top: 0 !important; }
     .final-cta p { color: rgba(255,255,255,0.9); font-size: 1.01rem; margin-bottom: 20px; }
     .final-cta .btn-gold { font-size: 1rem; padding: 14px 32px; }
     .related-box { background: #f7f7f7; border: 1px solid #e2e2e2; border-radius: 10px; padding: 24px 28px; margin: 2.8em 0; }
-    /* FIX: related-box heading — was h3 after h2s; ensure correct nesting in markup */
     .related-box h2 { font-family: 'Playfair Display', serif; font-size: 1.06rem; color: #0d1b3e; margin-bottom: 14px; border: none !important; padding: 0 !important; margin-top: 0 !important; }
     .related-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(182px,1fr)); gap: 11px; }
     .related-item { background: #fff; border: 1px solid #e2e2e2; border-radius: 9px; padding: 14px 16px; text-decoration: none; transition: box-shadow .2s, transform .15s; display: block; }
     .related-item:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.09); transform: translateY(-2px); }
-    /* FIX: ri-label color was #c9a227 on white — insufficient contrast. Changed to #8a6e00 */
     .related-item .ri-label { font-size: 0.69rem; text-transform: uppercase; letter-spacing: 1px; color: #8a6e00; font-weight: 700; margin-bottom: 4px; }
     .related-item .ri-title { font-weight: 600; font-size: 0.85rem; color: #0d1b3e; line-height: 1.4; }
     .footer { background: #0d1b3e; }
@@ -314,7 +294,6 @@
 
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
-<!-- FIX: hamburger changed from div to button for accessible keyboard/ARIA interaction -->
 <nav class="navbar">
     <div class="nav-container container">
         <div class="logo">
@@ -357,7 +336,6 @@
     <span>✍️ By <a href="/about#nathaniel-kenny-olie" style="color:#1a5fa0; text-decoration:underline;">Nathaniel Kenny Olie</a></span>
   </div>
 
-  <!-- FIX: fetchpriority="high" + loading="eager" confirmed. width/height set for layout stability (CLS) -->
   <div class="post-hero">
     <img src="https://talent-loop.org/amazon-spheres-seattle.webp"
          alt="Amazon Spheres headquarters building in Seattle Washington — working at Amazon US 2026"
@@ -367,7 +345,6 @@
   <p class="media-caption">Amazon's Spheres in Seattle — the home base of one of the most demanding and career-defining employers in the world.</p>
 
   <div class="author-card" id="nathaniel-kenny-olie">
-    <!-- FIX: loading="lazy" + explicit width/height on author photo -->
     <img src="https://talent-loop.org/Kenny.webp"
          alt="Nathaniel Kenny Olie — CEO and Founder of Talent Loop"
          class="author-photo" width="56" height="56" loading="lazy">
@@ -386,17 +363,14 @@
 
     <div class="cta-box">
       <div class="cta-label">Ready to Explore Roles?</div>
-      <!-- FIX: was h3, changed to h2 for correct heading hierarchy after h1 -->
       <h2>Browse Live Amazon US Openings Right Now</h2>
       <p>Our jobs board surfaces active Amazon opportunities across every division — from AWS and Advertising to Prime Video and Health. The best roles move fast, so don't wait around.</p>
-      <!-- FIX: descriptive link text — was "View Amazon Jobs →", updated for SEO audit fix -->
       <a href="https://www.mz1ay3ch.com/CDCH2K3/CM8KX4C/?source_id=Talent%20Loop%20&sub1=BlogPost8"
          class="btn-gold" target="_blank" rel="nofollow sponsored noopener noreferrer"
          aria-label="Browse live Amazon US job openings on our jobs board">Browse Live Amazon US Job Openings →</a>
     </div>
     <p style="font-size:0.82rem; color:#555; margin-top:-24px; margin-bottom:32px;"><em>Disclosure: Some links in this article are affiliate links. Talent Loop may earn a commission if you register through them, at no cost to you.</em></p>
 
-    <!-- FIX: TOC nav — was using h4 inside, changed to h2 for heading sequence. Styled via .toc-heading class -->
     <nav class="toc-box" aria-label="Article contents">
       <h2 class="toc-heading">📋 What's in This Guide</h2>
       <ol>
@@ -413,7 +387,6 @@
 
     <h2 id="story" class="first-h2">How a Garage Startup Became Global Infrastructure</h2>
 
-    <!-- FIX: All below-fold images have loading="lazy" + explicit width/height for CLS elimination -->
     <div class="post-img">
       <img src="https://talent-loop.org/amazon-seattle-campus-towers.webp"
            alt="Amazon Seattle campus modern office towers and skyline view"
@@ -434,7 +407,6 @@
       <div class="stat-block" role="listitem"><span class="sn">3.7/5</span><span class="sl">Glassdoor Rating</span></div>
     </div>
 
-    <!-- FIX: YouTube facade — thumbnails lazy-loaded via JS, no third-party iframe until user clicks -->
     <div class="video-wrap" data-videoid="a9__D53WsUs" data-title="Amazon — Who We Are" role="button" tabindex="0" aria-label="Play video: Amazon — Who We Are">
       <div class="yt-overlay">
         <button class="yt-play-btn" aria-label="Play Amazon company overview video"></button>
@@ -657,7 +629,6 @@
     <section class="faq-section" id="faq">
       <h2>Frequently Asked Questions: Working at Amazon US</h2>
       <div class="faq-item" itemscope itemtype="https://schema.org/Question">
-        <!-- FIX: faq-q changed from div to button for keyboard accessibility and ARIA compliance -->
         <button class="faq-q" itemprop="name" aria-expanded="false">What is it like to work at Amazon US in 2026?<span class="faq-icon" aria-hidden="true">+</span></button>
         <div class="faq-a" itemscope itemtype="https://schema.org/Answer" itemprop="acceptedAnswer" role="region">
           <span itemprop="text">Working at Amazon US in 2026 is high-accountability and high-autonomy. Amazon operates through 16 Leadership Principles that govern every hiring decision, performance review, and day-to-day meeting. Employees who are self-motivated, data-driven, and comfortable with ownership thrive. Those who need heavy structure or frequent direction typically find the environment challenging. Glassdoor rates Amazon 3.7 out of 5 in 2026.</span>
@@ -707,13 +678,11 @@
     <div class="final-cta">
       <h2>Ready to Find Your Amazon Role?</h2>
       <p>Our <a href="/jobs" style="color:#D4AF37; text-decoration:underline;">jobs board</a> has live Amazon US openings across every division. High-demand roles fill fast — the right opportunity could be live right now.</p>
-      <!-- FIX: descriptive link text -->
       <a href="https://www.mz1ay3ch.com/CDCH2K3/CM8KX4C/?source_id=Talent%20Loop%20&sub1=BlogPost8"
          class="btn-gold" target="_blank" rel="nofollow sponsored noopener noreferrer"
          aria-label="Explore live Amazon US job opportunities on our jobs board">Explore Live Amazon Opportunities →</a>
     </div>
 
-    <!-- FIX: related-box heading changed from h3 to h2 for correct hierarchy -->
     <div class="related-box">
       <h2>📚 More from the Talent Loop Career Blog</h2>
       <div class="related-grid">
@@ -795,7 +764,6 @@
 
 <script src="../script.js?v=2.2"></script>
 <script>
-  // FIX: Hamburger — now a <button>, update aria-expanded on toggle
   const hamburger = document.getElementById('hamburger');
   const navMenu   = document.getElementById('navMenu');
   if (hamburger && navMenu) {
@@ -816,7 +784,6 @@
     });
   }
 
-  // FIX: FAQ — buttons now, update aria-expanded for screen readers
   document.querySelectorAll('.faq-q').forEach(function(btn) {
     btn.addEventListener('click', function() {
       var item   = btn.closest('.faq-item');
@@ -835,7 +802,6 @@
     });
   });
 
-  // FIX: Video facade — keyboard accessible (Enter/Space triggers play on .video-wrap)
   document.querySelectorAll('.video-wrap[data-videoid]').forEach(function(wrap) {
     var videoId = wrap.dataset.videoid;
 
@@ -848,7 +814,6 @@
           thumbEl.className = 'yt-thumb-img';
           thumbEl.alt = '';
           thumbEl.setAttribute('aria-hidden', 'true');
-          // FIX: Lazy-load thumbnail images — they are below fold
           thumbEl.loading = 'lazy';
           thumbEl.width = wrap.offsetWidth || 800;
           thumbEl.height = Math.round((wrap.offsetWidth || 800) * 0.5625);
@@ -887,7 +852,6 @@
     }
 
     wrap.addEventListener('click', activateVideo);
-    // FIX: keyboard activation for video wrappers with tabindex
     wrap.addEventListener('keydown', function(e) {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
@@ -895,7 +859,6 @@
       }
     });
 
-    // FIX: Intercept inner button clicks so they don't double-fire
     var playBtn = wrap.querySelector('.yt-play-btn');
     if (playBtn) {
       playBtn.addEventListener('click', function(e) {
