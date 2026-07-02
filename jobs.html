@@ -12,7 +12,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://talent-loop.org/jobs">
     <meta property="og:site_name" content="Talent Loop">
-    <link rel="stylesheet" href="styles.css?v=2.2">
+    <link rel="stylesheet" href="styles.css?v=3.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -22,9 +22,9 @@
            JOBS PAGE STYLES
            ================================ */
         .jobs-hero {
-            background: linear-gradient(135deg, #1a2b5f 0%, #007BFF 100%);
-            color: #fff;
-            padding: 5rem 0 4rem;
+            background: var(--gradient-navy);
+            color: var(--color-bg-white);
+            padding: var(--space-4xl) 0 var(--space-2xl);
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -50,10 +50,11 @@
             border-radius: 50%;
         }
         .jobs-hero h1 {
-            font-family: 'Playfair Display', serif;
+            font-family: var(--font-heading);
             font-size: 3rem;
             font-weight: 800;
-            margin-bottom: 1rem;
+            margin-bottom: var(--space-md);
+            color: var(--color-bg-white);
             position: relative;
             z-index: 1;
         }
@@ -61,14 +62,14 @@
             font-size: 1.15rem;
             color: rgba(255,255,255,0.9);
             max-width: 600px;
-            margin: 0 auto 2rem;
+            margin: 0 auto var(--space-xl);
             position: relative;
             z-index: 1;
         }
         .jobs-hero-stats {
             display: flex;
             justify-content: center;
-            gap: 3rem;
+            gap: var(--space-2xl);
             position: relative;
             z-index: 1;
             flex-wrap: wrap;
@@ -80,8 +81,8 @@
             display: block;
             font-size: 1.8rem;
             font-weight: 800;
-            color: #D4AF37;
-            font-family: 'Playfair Display', serif;
+            color: var(--color-gold);
+            font-family: var(--font-heading);
         }
         .hero-stat span {
             font-size: 0.85rem;
@@ -90,86 +91,86 @@
 
         /* Filter Bar */
         .jobs-filter-bar {
-            background: #fff;
-            border-bottom: 1px solid #e9ecef;
-            padding: 1.25rem 0;
+            background: var(--color-bg-white);
+            border-bottom: 1px solid var(--color-border-faint);
+            padding: var(--space-lg) 0;
             position: sticky;
-            top: 80px;
+            top: 72px;
             z-index: 100;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            box-shadow: var(--shadow-sm);
         }
         .filter-inner {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: var(--space-md);
             flex-wrap: wrap;
         }
         .filter-label {
             font-size: 0.85rem;
             font-weight: 700;
-            color: #666;
+            color: var(--color-text-muted-3);
             text-transform: uppercase;
             letter-spacing: 0.05em;
             white-space: nowrap;
         }
         .filter-tags {
             display: flex;
-            gap: 0.5rem;
+            gap: var(--space-sm);
             flex-wrap: wrap;
             flex: 1;
         }
         .filter-tag {
             padding: 0.35rem 0.9rem;
-            border-radius: 20px;
-            border: 1.5px solid #dde2ed;
+            border-radius: var(--radius-full);
+            border: 1.5px solid var(--color-border-light);
             font-size: 0.85rem;
             font-weight: 600;
-            color: #555;
+            color: var(--color-text-muted);
             cursor: pointer;
             transition: all 0.2s ease;
-            background: #fff;
+            background: var(--color-bg-white);
         }
         .filter-tag:hover,
         .filter-tag.active {
-            background: #1a2b5f;
-            color: #fff;
-            border-color: #1a2b5f;
+            background: var(--color-navy);
+            color: var(--color-bg-white);
+            border-color: var(--color-navy);
         }
         .filter-tag.active-gold {
-            background: #D4AF37;
-            color: #1a2b5f;
-            border-color: #D4AF37;
+            background: var(--color-gold);
+            color: var(--color-navy);
+            border-color: var(--color-gold);
         }
         .jobs-count {
             margin-left: auto;
             font-size: 0.85rem;
-            color: #888;
+            color: var(--color-text-muted-4);
             white-space: nowrap;
         }
         .jobs-count strong {
-            color: #1a2b5f;
+            color: var(--color-navy);
         }
 
         /* Jobs Section */
         .jobs-section {
-            padding: 3rem 0 5rem;
-            background: #f0f4f8;
+            padding: var(--space-2xl) 0 var(--space-4xl);
+            background: var(--color-bg-assessment);
         }
 
         /* Jobs Grid */
         .jobs-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 1.5rem;
+            gap: var(--space-lg);
         }
 
         /* Job Card */
         .job-card {
-            background: #fff;
-            border-radius: 14px;
+            background: var(--color-bg-white);
+            border-radius: var(--radius-xl);
             padding: 1.75rem;
-            border: 1px solid #e8edf5;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            border: 1px solid var(--color-border-faint);
+            box-shadow: var(--shadow-md);
             transition: transform 0.25s ease, box-shadow 0.25s ease;
             display: flex;
             flex-direction: column;
@@ -183,28 +184,28 @@
             left: 0;
             width: 4px;
             height: 100%;
-            background: #1a2b5f;
-            border-radius: 4px 0 0 4px;
+            background: var(--color-navy);
+            border-radius: var(--radius-sm) 0 0 var(--radius-sm);
         }
         .job-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow-card-hover);
         }
         .job-card.featured::before {
-            background: #D4AF37;
+            background: var(--color-gold);
         }
         .job-card-header {
             display: flex;
             align-items: flex-start;
             justify-content: space-between;
-            margin-bottom: 1rem;
+            margin-bottom: var(--space-md);
             gap: 0.75rem;
         }
         .job-company-logo {
             width: 48px;
             height: 48px;
-            border-radius: 10px;
-            background: linear-gradient(135deg, #1a2b5f, #007BFF);
+            border-radius: var(--radius-md);
+            background: var(--gradient-navy);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -215,22 +216,22 @@
             flex: 1;
         }
         .job-title {
-            font-family: 'Playfair Display', serif;
+            font-family: var(--font-heading);
             font-size: 1.05rem;
             font-weight: 700;
-            color: #1a2b5f;
+            color: var(--color-navy);
             margin-bottom: 0.2rem;
             line-height: 1.3;
         }
         .job-company {
             font-size: 0.85rem;
-            color: #666;
+            color: var(--color-text-muted-3);
             font-weight: 500;
         }
         .job-badge {
             display: inline-block;
             padding: 0.2rem 0.65rem;
-            border-radius: 20px;
+            border-radius: var(--radius-full);
             font-size: 0.72rem;
             font-weight: 700;
             letter-spacing: 0.03em;
@@ -238,42 +239,42 @@
             flex-shrink: 0;
         }
         .badge-featured {
-            background: #fff8e1;
-            color: #9a6e00;
-            border: 1px solid #f0d060;
+            background: var(--color-badge-featured-bg);
+            color: var(--color-badge-featured-text);
+            border: 1px solid var(--color-badge-featured-border);
         }
         .badge-new {
-            background: #e8f5e9;
-            color: #1b5e20;
-            border: 1px solid #a5d6a7;
+            background: var(--color-badge-new-bg);
+            color: var(--color-badge-new-text);
+            border: 1px solid var(--color-badge-new-border);
         }
         .badge-hot {
-            background: #fce4ec;
-            color: #880e4f;
-            border: 1px solid #f48fb1;
+            background: var(--color-badge-hot-bg);
+            color: var(--color-badge-hot-text);
+            border: 1px solid var(--color-badge-hot-border);
         }
 
         .job-meta {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-md);
         }
         .job-meta-tag {
             display: inline-flex;
             align-items: center;
             gap: 0.3rem;
             font-size: 0.8rem;
-            color: #555;
-            background: #f0f4f8;
+            color: var(--color-text-muted);
+            background: var(--color-bg-assessment);
             padding: 0.25rem 0.65rem;
-            border-radius: 20px;
+            border-radius: var(--radius-full);
             font-weight: 500;
         }
 
         .job-description {
             font-size: 0.9rem;
-            color: #666;
+            color: var(--color-text-muted-3);
             line-height: 1.6;
             margin-bottom: 1.25rem;
             flex: 1;
@@ -282,31 +283,31 @@
         .job-salary {
             font-size: 0.95rem;
             font-weight: 700;
-            color: #1a2b5f;
+            color: var(--color-navy);
             margin-bottom: 1.25rem;
         }
         .job-salary span {
-            color: #28A745;
+            color: var(--color-success);
         }
 
         .job-card-footer {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 1rem;
+            gap: var(--space-md);
             padding-top: 1.25rem;
-            border-top: 1px solid #f0f0f0;
+            border-top: 1px solid var(--color-border-divider);
         }
         .job-posted {
             font-size: 0.78rem;
-            color: #aaa;
+            color: var(--color-text-muted-5);
         }
         .btn-apply {
             display: inline-block;
-            background: #1a2b5f;
-            color: #fff !important;
+            background: var(--color-navy);
+            color: var(--color-bg-white) !important;
             padding: 0.55rem 1.4rem;
-            border-radius: 6px;
+            border-radius: var(--radius-sm);
             font-size: 0.88rem;
             font-weight: 700;
             text-decoration: none;
@@ -314,31 +315,31 @@
             white-space: nowrap;
         }
         .btn-apply:hover {
-            background: #D4AF37;
-            color: #1a2b5f !important;
+            background: var(--color-gold);
+            color: var(--color-navy) !important;
         }
         .job-card.featured .btn-apply {
-            background: #D4AF37;
-            color: #1a2b5f !important;
+            background: var(--color-gold);
+            color: var(--color-navy) !important;
         }
         .job-card.featured .btn-apply:hover {
-            background: #c9a227;
+            background: var(--color-gold-hover);
         }
 
         /* CTA Banner */
         .jobs-cta-banner {
-            background: linear-gradient(135deg, #1a2b5f 0%, #007BFF 100%);
-            border-radius: 14px;
+            background: var(--gradient-navy);
+            border-radius: var(--radius-xl);
             padding: 2.5rem 2rem;
             text-align: center;
-            margin-bottom: 2rem;
-            color: #fff;
+            margin-bottom: var(--space-xl);
+            color: var(--color-bg-white);
         }
         .jobs-cta-banner h3 {
-            font-family: 'Playfair Display', serif;
+            font-family: var(--font-heading);
             font-size: 1.6rem;
             margin-bottom: 0.75rem;
-            color: #fff;
+            color: var(--color-bg-white);
         }
         .jobs-cta-banner p {
             color: rgba(255,255,255,0.9);
@@ -347,36 +348,36 @@
         }
         .jobs-cta-banner .btn-cta {
             display: inline-block;
-            background: #D4AF37;
-            color: #1a2b5f !important;
+            background: var(--color-gold);
+            color: var(--color-navy) !important;
             padding: 0.8rem 2rem;
-            border-radius: 6px;
+            border-radius: var(--radius-sm);
             font-weight: 700;
             text-decoration: none;
             font-size: 0.95rem;
             transition: background 0.2s;
         }
         .jobs-cta-banner .btn-cta:hover {
-            background: #c9a227;
+            background: var(--color-gold-hover);
         }
 
         /* No results */
         .no-results {
             grid-column: 1 / -1;
             text-align: center;
-            padding: 4rem 2rem;
-            color: #888;
+            padding: var(--space-4xl) var(--space-xl);
+            color: var(--color-text-muted-4);
             display: none;
         }
         .no-results h3 {
-            font-family: 'Playfair Display', serif;
-            color: #1a2b5f;
-            margin-bottom: 0.5rem;
+            font-family: var(--font-heading);
+            color: var(--color-navy);
+            margin-bottom: var(--space-sm);
         }
 
         @media (max-width: 768px) {
             .jobs-hero h1 { font-size: 2rem; }
-            .jobs-hero-stats { gap: 1.5rem; }
+            .jobs-hero-stats { gap: var(--space-lg); }
             .filter-inner { gap: 0.75rem; }
             .jobs-grid { grid-template-columns: 1fr; }
             .jobs-count { width: 100%; margin-left: 0; }
@@ -384,7 +385,7 @@
     </style>
 </head>
 <body>
-    <a href="#main-content" class="skip-link" style="position:absolute;left:-9999px;top:0;z-index:9999;padding:0.5rem 1rem;background:#1a2b5f;color:#fff;font-weight:700;border-radius:0 0 6px 0;">Skip to main content</a>
+    <a href="#main-content" class="skip-link" style="position:absolute;left:-9999px;top:0;z-index:9999;padding:var(--space-sm) var(--space-md);background:var(--color-navy);color:var(--color-bg-white);font-weight:700;border-radius:0 0 var(--radius-sm) 0;">Skip to main content</a>
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
@@ -469,7 +470,7 @@
             <div class="jobs-grid" id="jobsGrid">
 
                 <!-- Job 1 — Featured -->
-                <div class="job-card featured" data-category="customer-service">
+                <div class="job-card featured reveal reveal-delay-1" data-category="customer-service">
                     <div class="job-card-header">
                         <div class="job-company-logo">🎧</div>
                         <div class="job-header-info">
@@ -492,7 +493,7 @@
                 </div>
 
                 <!-- Job 2 -->
-                <div class="job-card" data-category="data-entry">
+                <div class="job-card reveal reveal-delay-2" data-category="data-entry">
                     <div class="job-card-header">
                         <div class="job-company-logo">📊</div>
                         <div class="job-header-info">
@@ -515,7 +516,7 @@
                 </div>
 
                 <!-- Job 3 -->
-                <div class="job-card" data-category="marketing">
+                <div class="job-card reveal reveal-delay-3" data-category="marketing">
                     <div class="job-card-header">
                         <div class="job-company-logo">📱</div>
                         <div class="job-header-info">
@@ -538,7 +539,7 @@
                 </div>
 
                 <!-- Job 4 -->
-                <div class="job-card" data-category="sales">
+                <div class="job-card reveal reveal-delay-4" data-category="sales">
                     <div class="job-card-header">
                         <div class="job-company-logo">💼</div>
                         <div class="job-header-info">
@@ -561,7 +562,7 @@
                 </div>
 
                 <!-- Job 5 -->
-                <div class="job-card" data-category="customer-service">
+                <div class="job-card featured reveal reveal-delay-1" data-category="customer-service">
                     <div class="job-card-header">
                         <div class="job-company-logo">💬</div>
                         <div class="job-header-info">
@@ -584,7 +585,7 @@
                 </div>
 
                 <!-- Job 6 -->
-                <div class="job-card" data-category="tech">
+                <div class="job-card reveal reveal-delay-2" data-category="tech">
                     <div class="job-card-header">
                         <div class="job-company-logo">💻</div>
                         <div class="job-header-info">
@@ -607,7 +608,7 @@
                 </div>
 
                 <!-- Job 7 -->
-                <div class="job-card" data-category="data-entry">
+                <div class="job-card reveal reveal-delay-3" data-category="data-entry">
                     <div class="job-card-header">
                         <div class="job-company-logo">🗂️</div>
                         <div class="job-header-info">
@@ -630,7 +631,7 @@
                 </div>
 
                 <!-- Job 8 -->
-                <div class="job-card" data-category="marketing">
+                <div class="job-card featured reveal reveal-delay-4" data-category="marketing">
                     <div class="job-card-header">
                         <div class="job-company-logo">✍️</div>
                         <div class="job-header-info">
@@ -653,7 +654,7 @@
                 </div>
 
                 <!-- Job 9 -->
-                <div class="job-card" data-category="finance">
+                <div class="job-card reveal reveal-delay-1" data-category="finance">
                     <div class="job-card-header">
                         <div class="job-company-logo">💰</div>
                         <div class="job-header-info">
@@ -676,7 +677,7 @@
                 </div>
 
                 <!-- Job 10 -->
-                <div class="job-card" data-category="sales">
+                <div class="job-card reveal reveal-delay-2" data-category="sales">
                     <div class="job-card-header">
                         <div class="job-company-logo">🤝</div>
                         <div class="job-header-info">
@@ -699,7 +700,7 @@
                 </div>
 
                 <!-- Job 11 -->
-                <div class="job-card" data-category="tech">
+                <div class="job-card reveal reveal-delay-3" data-category="tech">
                     <div class="job-card-header">
                         <div class="job-company-logo">🔧</div>
                         <div class="job-header-info">
@@ -722,7 +723,7 @@
                 </div>
 
                 <!-- Job 12 -->
-                <div class="job-card featured" data-category="customer-service">
+                <div class="job-card featured reveal reveal-delay-4" data-category="customer-service">
                     <div class="job-card-header">
                         <div class="job-company-logo">🌐</div>
                         <div class="job-header-info">
@@ -748,7 +749,7 @@
                 <div class="no-results" id="noResults">
                     <h3>No positions in this category right now</h3>
                     <p>New roles are added weekly. Take our assessment and we'll notify you when a match becomes available.</p>
-                    <a href="/assessment" class="btn btn-primary" style="margin-top:1rem;">Set Up Job Alerts</a>
+                    <a href="/assessment" class="btn btn-primary" style="margin-top:var(--space-md);">Set Up Job Alerts</a>
                 </div>
 
             </div>
@@ -798,8 +799,8 @@
                         <a href="https://x.com/talent_loop/" aria-label="Twitter" target="_blank" rel="noopener noreferrer">𝕏</a>
                         <a href="https://www.instagram.com/talent.loop.officials/" aria-label="Instagram" target="_blank" rel="noopener noreferrer">ig</a>
                     </div>
-                    <p style="margin-top:1rem;font-size:0.9rem;">
-                        <a href="https://talent-loop.org" style="color:#b8c4e0;">www.talent-loop.org</a>
+                    <p style="margin-top:var(--space-md);font-size:0.9rem;">
+                        <a href="https://talent-loop.org" style="color:var(--color-text-on-navy);">www.talent-loop.org</a>
                     </p>
                 </div>
             </div>
@@ -809,7 +810,7 @@
         </div>
     </footer>
 
-    <script src="script.js?v=2.1"></script>
+    <script src="script.js?v=3.0"></script>
     <script>
         // Filter functionality
         const filterTags = document.querySelectorAll('.filter-tag');

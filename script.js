@@ -1,9 +1,4 @@
-// ================================
-// Talent Loop - Main JavaScript
-// ================================
-
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Script loaded!');
 
     // ================================
     // MOBILE NAVIGATION
@@ -25,6 +20,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 spans[2].style.transform = 'none';
             }
         });
+
+        // Close mobile menu on link click
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                const spans = hamburger.querySelectorAll('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            });
+        });
     }
 
     // ================================
@@ -38,7 +44,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function startCounter(el) {
-        // Find the label — look in the parent .stat-item
         const statItem  = el.closest('.stat-item');
         const labelEl   = statItem ? statItem.querySelector('.stat-label') : null;
         const labelText = labelEl ? labelEl.textContent : '';
@@ -47,13 +52,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (isNaN(target)) return;
 
-        const duration  = 2000; // ms
-        const frameRate = 16;   // ~60fps
+        const duration  = 2000;
+        const frameRate = 16;
         const steps     = duration / frameRate;
         const increment = target / steps;
         let current     = 0;
 
-        // Set initial display so user sees something immediately
         el.textContent = '0' + suffix;
 
         const timer = setInterval(() => {
@@ -66,14 +70,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }, frameRate);
     }
 
-    // Use IntersectionObserver — fires when 30% of .stats section is visible
     const statsSection = document.querySelector('.stats');
     if (statsSection) {
         const counterObserver = new IntersectionObserver((entries, obs) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const counters = entry.target.querySelectorAll('.stat-number[data-target]');
-                    console.log('Stats visible — found', counters.length, 'counters');
                     counters.forEach(startCounter);
                     obs.unobserve(entry.target);
                 }
@@ -81,8 +83,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }, { threshold: 0.3 });
 
         counterObserver.observe(statsSection);
-    } else {
-        console.warn('No .stats section found on this page');
     }
 
     // ================================
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const navbar = document.querySelector('.navbar');
         if (navbar) {
             navbar.style.boxShadow = window.scrollY > 100
-                ? '0 4px 16px rgba(0,0,0,0.1)'
+                ? '0 4px 20px rgba(0,0,0,0.08)'
                 : '0 2px 4px rgba(0,0,0,0.05)';
         }
     });
@@ -129,25 +129,21 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // ================================
-    // FADE-IN ANIMATION
+    // SCROLL REVEAL ANIMATION
     // ================================
-    const fadeElements = document.querySelectorAll('.feature-card, .blog-card, .value-item, .team-member');
-    if (fadeElements.length > 0) {
-        const fadeObserver = new IntersectionObserver((entries) => {
+    const revealElements = document.querySelectorAll('.reveal');
+    if (revealElements.length > 0) {
+        const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                    fadeObserver.unobserve(entry.target);
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.1 });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-        fadeElements.forEach(element => {
-            element.style.opacity = '0';
-            element.style.transform = 'translateY(30px)';
-            element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            fadeObserver.observe(element);
+        revealElements.forEach(element => {
+            revealObserver.observe(element);
         });
     }
 });

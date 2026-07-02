@@ -1,13 +1,13 @@
 .address-suggestions {
     position: absolute;
-    border: 1px solid #ddd;
+    border: 1px solid var(--color-border-light, #dde2ed);
     border-top: none;
     z-index: 99;
     top: 100%;
     left: 0;
     right: 0;
-    background-color: #fff;
-    border-radius: 0 0 8px 8px;
+    background-color: var(--color-bg-white, #fff);
+    border-radius: 0 0 var(--radius-md, 8px) var(--radius-md, 8px);
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
@@ -16,13 +16,13 @@
     padding: 12px 16px;
     cursor: pointer;
     font-size: 0.95rem;
-    color: #333;
+    color: var(--color-text-dark, #333);
 }
 
 .suggestion-item:hover {
-    background-color: #f0f0f0;
+    background-color: var(--color-bg-light, #f5f5f5);
 }
 
 .suggestion-item strong {
-    color: var(--primary-color);
+    color: var(--color-navy, #1a2b5f);
 }

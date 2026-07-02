@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="canonical" href="https://talent-loop.org/assessment">
     <title>Career Assessment - Talent Loop</title>
-    <link rel="stylesheet" href="styles.css?v=2.1">
-    <link rel="stylesheet" href="address_autocomplete.css?v=2.1">
+    <link rel="stylesheet" href="styles.css?v=3.0">
+    <link rel="stylesheet" href="address_autocomplete.css?v=3.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -15,18 +15,18 @@
         .affiliate-section {
             margin-top: 2.5rem;
             padding: 2rem;
-            background: #f8f9ff;
+            background: var(--color-bg-light-alt);
             border-radius: 12px;
-            border: 1px solid #e0e4f0;
+            border: 1px solid var(--color-border-light);
         }
         .affiliate-section h3 {
             font-size: 1.3rem;
-            color: #1a2340;
+            color: var(--color-navy);
             margin-bottom: 0.5rem;
             font-family: 'Playfair Display', serif;
         }
         .affiliate-section p {
-            color: #555;
+            color: var(--color-text-muted);
             font-size: 0.95rem;
             margin-bottom: 1.5rem;
         }
@@ -36,10 +36,10 @@
             gap: 1rem;
         }
         .affiliate-card {
-            background: #fff;
+            background: var(--color-bg-white);
             border-radius: 10px;
             padding: 1.25rem;
-            border: 1px solid #e0e4f0;
+            border: 1px solid var(--color-border-light);
             text-align: center;
             transition: box-shadow 0.2s;
         }
@@ -52,18 +52,18 @@
         }
         .affiliate-card h4 {
             font-size: 1rem;
-            color: #1a2340;
+            color: var(--color-navy);
             margin-bottom: 0.4rem;
         }
         .affiliate-card p {
             font-size: 0.85rem;
-            color: #666;
+            color: var(--color-text-muted);
             margin-bottom: 1rem;
         }
         .affiliate-card .btn-affiliate {
             display: inline-block;
-            background: #2c4ecf;
-            color: #fff;
+            background: var(--color-affiliate-btn);
+            color: var(--color-bg-white);
             padding: 0.6rem 1.2rem;
             border-radius: 6px;
             text-decoration: none;
@@ -72,17 +72,17 @@
             transition: background 0.2s;
         }
         .affiliate-card .btn-affiliate:hover {
-            background: #1a3ab8;
+            background: var(--color-affiliate-btn-hover);
         }
         .affiliate-card .btn-affiliate.green {
-            background: #1a8a4a;
+            background: var(--color-affiliate-btn-green);
         }
         .affiliate-card .btn-affiliate.green:hover {
-            background: #146b39;
+            background: var(--color-affiliate-btn-green-hover);
         }
         .affiliate-disclosure {
             font-size: 0.78rem;
-            color: #999;
+            color: var(--color-text-muted);
             margin-top: 1rem;
             text-align: center;
         }
@@ -90,7 +90,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <a href="#main-content" class="skip-link" style="position:absolute;left:-9999px;top:0;z-index:9999;padding:0.5rem 1rem;background:#1a2b5f;color:#fff;font-weight:700;border-radius:0 0 6px 0;">Skip to main content</a>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
@@ -384,7 +384,7 @@
             <div class="footer-grid">
                 <div class="footer-col">
                     <div class="footer-logo logo">
-                        <img src="logo.webp" alt="Talent Loop Logo" class="logo-image">
+                        <img src="logo.webp" alt="Talent Loop Logo" class="logo-image" width="51" height="40" loading="lazy">
                         <span class="logo-text">Talent Loop</span>
                     </div>
                     <p>Bridging the gap between talent and opportunity since 2015.</p>
@@ -396,7 +396,7 @@
                     </div>
                 </div>
                 <div class="footer-col">
-                    <h4>Quick Links</h4>
+                    <h3>Quick Links</h3>
                     <ul>
                         <li><a href="/">Home</a></li>
                         <li><a href="/about">About Us</a></li>
@@ -408,7 +408,7 @@
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h4>Legal</h4>
+                    <h3>Legal</h3>
                     <ul>
                         <li><a href="/privacy">Privacy Policy</a></li>
                         <li><a href="/legal">Terms &amp; Conditions</a></li>
@@ -416,14 +416,14 @@
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h4>Connect With Us</h4>
+                    <h3>Connect With Us</h3>
                     <div class="social-links">
                         <a href="https://www.linkedin.com/company/talentloop-official/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">in</a>
-                        <a href="https://x.com/talent_loop/" aria-label="Twitter" target="_blank" rel="noopener noreferrer">𝕏</a>
+                        <a href="https://x.com/talent_loop/" aria-label="Twitter / X" target="_blank" rel="noopener noreferrer">𝕏</a>
                         <a href="https://www.instagram.com/talent.loop.officials/" aria-label="Instagram" target="_blank" rel="noopener noreferrer">ig</a>
                     </div>
-                    <p style="margin-top: 1rem; font-size: 0.9rem;">
-                        <a href="https://talent-loop.org" style="color: #b8c4e0;">www.talent-loop.org</a>
+                    <p style="margin-top: var(--space-md); font-size: 0.9rem;">
+                        <a href="https://talent-loop.org" style="color: var(--color-text-on-navy);">www.talent-loop.org</a>
                     </p>
                 </div>
             </div>
@@ -433,7 +433,7 @@
         </div>
     </footer>
 
-    <script src="script.js?v=2.1"></script>
-    <script src="quiz.js?v=2.1"></script>
+    <script src="script.js?v=3.0"></script>
+    <script src="quiz.js?v=3.0"></script>
 </body>
 </html>

@@ -6,22 +6,22 @@
     <link rel="canonical" href="https://talent-loop.org/blog">
     <title>Blog & Career Resources - Talent Loop</title>
     <meta name="description" content="Explore career advice, job search tips, interview strategies, and workplace insights from Talent Loop's recruitment experts.">
-    <link rel="stylesheet" href="styles.css?v=2.1">
+    <link rel="stylesheet" href="styles.css?v=3.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
     <style>
         .blog-hero {
-            background: linear-gradient(135deg, #1a2b5f 0%, #0d1b3e 100%);
-            color: white;
-            padding: 5rem 2rem 3rem;
+            background: var(--gradient-navy);
+            color: var(--color-bg-white);
+            padding: var(--space-4xl) var(--space-xl) var(--space-2xl);
             text-align: center;
         }
         .blog-hero h1 {
-            font-family: 'Playfair Display', serif;
+            font-family: var(--font-heading);
             font-size: 3rem;
-            margin-bottom: 1rem;
+            margin-bottom: var(--space-md);
         }
         .blog-hero p {
             font-size: 1.1rem;
@@ -32,25 +32,25 @@
         .blog-index {
             max-width: 1100px;
             margin: 0 auto;
-            padding: 4rem 2rem;
+            padding: var(--space-3xl) var(--space-xl);
         }
         .blog-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 2rem;
+            gap: var(--space-xl);
         }
         .blog-card {
-            background: #fff;
-            border-radius: 12px;
+            background: var(--color-bg-white);
+            border-radius: var(--radius-lg);
             overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: var(--shadow-md);
+            transition: transform var(--transition-base), box-shadow var(--transition-base);
             display: flex;
             flex-direction: column;
         }
         .blog-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.14);
+            box-shadow: var(--shadow-card-hover);
         }
         .blog-card-image-link {
             display: block;
@@ -60,66 +60,66 @@
             width: 100%;
             height: 210px;
             object-fit: cover;
-            transition: transform 0.3s ease;
+            transition: transform var(--transition-base);
             display: block;
         }
         .blog-card-image-link:hover .blog-card-image {
             transform: scale(1.04);
         }
         .blog-card-body {
-            padding: 1.5rem;
+            padding: var(--space-lg);
             flex: 1;
             display: flex;
             flex-direction: column;
         }
         .blog-card-meta {
             font-size: 0.82rem;
-            color: #888;
+            color: var(--color-text-muted-4);
             margin-bottom: 0.6rem;
             text-transform: uppercase;
             letter-spacing: 0.04em;
         }
         .blog-card-meta span {
-            color: #1a2b5f;
+            color: var(--color-navy);
             font-weight: 600;
         }
         .blog-card h2 {
-            font-family: 'Playfair Display', serif;
+            font-family: var(--font-heading);
             font-size: 1.25rem;
-            color: #1a2b5f;
+            color: var(--color-navy);
             margin-bottom: 0.75rem;
             line-height: 1.4;
         }
         .blog-card h2 a {
-            color: #1a2b5f;
+            color: var(--color-navy);
             text-decoration: none;
-            transition: color 0.2s ease;
+            transition: color var(--transition-fast);
         }
         .blog-card h2 a:hover {
-            color: #007BFF;
+            color: var(--color-link);
         }
         .blog-card p {
             font-size: 0.95rem;
-            color: #555;
+            color: var(--color-text-muted);
             line-height: 1.7;
             flex: 1;
             margin-bottom: 1.25rem;
         }
         .read-more-btn {
             display: inline-block;
-            background: #1a2b5f;
-            color: #fff;
+            background: var(--color-navy);
+            color: var(--color-bg-white);
             padding: 0.55rem 1.25rem;
-            border-radius: 6px;
+            border-radius: var(--radius-sm);
             font-size: 0.9rem;
             font-weight: 600;
             text-decoration: none;
             align-self: flex-start;
-            transition: background 0.2s ease;
+            transition: background var(--transition-fast);
         }
         .read-more-btn:hover {
-            background: #D4AF37;
-            color: #1a2b5f;
+            background: var(--color-gold);
+            color: var(--color-navy);
         }
         @media (max-width: 600px) {
             .blog-hero h1 { font-size: 2rem; }
@@ -128,7 +128,7 @@
     </style>
 </head>
 <body>
-    <a href="#main-content" class="skip-link" style="position:absolute;left:-9999px;top:0;z-index:9999;padding:0.5rem 1rem;background:#1a2b5f;color:#fff;font-weight:700;border-radius:0 0 6px 0;">Skip to main content</a>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
@@ -161,7 +161,7 @@
         <div class="blog-grid">
 
             <!-- ── POST 8 — Amazon (newest, shown first) ── -->
-            <article class="blog-card">
+            <article class="blog-card reveal reveal-delay-1">
                 <a href="/blog/working-at-amazon-us-2026" class="blog-card-image-link">
                     <img class="blog-card-image"
                          src="https://images.unsplash.com/photo-1523474253046-8cd2748b5fd2?w=640&q=80"
@@ -176,7 +176,7 @@
             </article>
 
             <!-- ── POST 7 — Netflix ── -->
-            <article class="blog-card">
+            <article class="blog-card reveal reveal-delay-2">
                 <a href="/blog/working-at-netflix-career-guide" class="blog-card-image-link">
                     <img class="blog-card-image" src="netflix-careers-guide-2025.webp" alt="Netflix headquarters building and company culture">
                 </a>
@@ -189,7 +189,7 @@
             </article>
 
             <!-- ── POST 1 — Interview Mastery ── -->
-            <article class="blog-card">
+            <article class="blog-card reveal reveal-delay-3">
                 <a href="/blog/job-interview-tips-2026" class="blog-card-image-link">
                     <img class="blog-card-image" src="hero-interview-2026.webp" alt="Candidate in a panel job interview with two interviewers">
                 </a>
@@ -202,7 +202,7 @@
             </article>
 
             <!-- ── POST 2 — Hidden Job Market ── -->
-            <article class="blog-card">
+            <article class="blog-card reveal reveal-delay-4">
                 <a href="/blog/hidden-job-market-guide" class="blog-card-image-link">
                     <img class="blog-card-image" src="hidden-job-market-unadvertised-opportunities-2024.webp" alt="Professional discovering hidden job market opportunities through networking">
                 </a>
@@ -215,7 +215,7 @@
             </article>
 
             <!-- ── POST 3 — LinkedIn ── -->
-            <article class="blog-card">
+            <article class="blog-card reveal reveal-delay-1">
                 <a href="/blog/linkedin-profile-optimization-recruiters" class="blog-card-image-link">
                     <img class="blog-card-image" src="linkedin-profile-optimization-job-search-2024.webp" alt="LinkedIn profile optimization for job search">
                 </a>
@@ -228,7 +228,7 @@
             </article>
 
             <!-- ── POST 4 — Salary Negotiation ── -->
-            <article class="blog-card">
+            <article class="blog-card reveal reveal-delay-2">
                 <a href="/blog/salary-negotiation-guide-2026" class="blog-card-image-link">
                     <img class="blog-card-image" src="salary-negotiation-job-offer-2026.webp" alt="Professional confidently negotiating salary with hiring manager">
                 </a>
@@ -241,7 +241,7 @@
             </article>
 
             <!-- ── POST 5 — In-Demand Skills ── -->
-            <article class="blog-card">
+            <article class="blog-card reveal reveal-delay-3">
                 <a href="/blog/in-demand-skills-2026" class="blog-card-image-link">
                     <img class="blog-card-image" src="in-demand-skills-2026-career.webp" alt="In-demand skills for 2026 career development">
                 </a>
@@ -254,7 +254,7 @@
             </article>
 
             <!-- ── POST 6 — Hybrid Work ── -->
-            <article class="blog-card">
+            <article class="blog-card reveal reveal-delay-4">
                 <a href="/blog/hybrid-work-guide-2026" class="blog-card-image-link">
                     <img class="blog-card-image" src="hybrid-work-environment-2026.webp" alt="Professional working in a hybrid office environment">
                 </a>
@@ -312,8 +312,8 @@
                         <a href="https://x.com/talent_loop/" aria-label="Twitter" target="_blank" rel="noopener noreferrer">𝕏</a>
                         <a href="https://www.instagram.com/talent.loop.officials/" aria-label="Instagram" target="_blank" rel="noopener noreferrer">ig</a>
                     </div>
-                    <p style="margin-top: 1rem; font-size: 0.9rem;">
-                        <a href="https://talent-loop.org" style="color: #b8c4e0;">www.talent-loop.org</a>
+                    <p style="margin-top: var(--space-md); font-size: 0.9rem;">
+                        <a href="https://talent-loop.org" style="color: var(--color-text-on-navy);">www.talent-loop.org</a>
                     </p>
                 </div>
             </div>
@@ -323,6 +323,6 @@
         </div>
     </footer>
 
-    <script src="script.js?v=2.1"></script>
+    <script src="script.js?v=3.0"></script>
 </body>
 </html>

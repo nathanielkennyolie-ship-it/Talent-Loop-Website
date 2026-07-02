@@ -71,100 +71,116 @@
     }
     </script>
 
-    <!-- Preload hero image: two separate tags so media query (not DPR) controls which file loads -->
+    <!-- Preload hero image -->
     <link rel="preload" as="image" fetchpriority="high" href="hero-bg-mobile.webp" media="(max-width: 768px)">
     <link rel="preload" as="image" fetchpriority="high" href="hero-bg.webp" media="(min-width: 769px)">
 
-    <!-- Critical path CSS inlined — covers navbar + hero (everything above the fold).
-         styles.css is loaded async below so it never blocks first paint. -->
+    <!-- Critical path CSS -->
     <style>
       *,*::before,*::after{box-sizing:border-box}
-      body{font-family:Georgia,'Times New Roman',serif;line-height:1.6;color:#495057;background-color:#FDFDFD;margin:0}
-      .container{max-width:1200px;margin:0 auto;padding:0 2rem}
-      a{color:#007BFF;text-decoration:none;transition:color .3s ease}
-      a:hover{color:#0056b3}
+      :root{--font-heading:'Playfair Display',Georgia,serif;--font-body:'DM Sans',sans-serif;--color-navy:#1a2b5f;--color-navy-dark:#0d1b3e;--color-gold:#D4AF37;--color-gold-hover:#c9a227;--color-link:#0055CC;--color-text-body:#495057;--color-text-dark:#333;--color-text-on-navy:#b8c4e0;--color-bg-base:#FDFDFD;--color-bg-white:#fff;--color-bg-light:#f5f5f5;--gradient-navy:linear-gradient(135deg,var(--color-navy) 0%,var(--color-navy-dark) 100%);--radius-sm:5px;--radius-md:8px;--radius-lg:12px;--radius-xl:16px;--radius-full:99px;--space-xs:.25rem;--space-sm:.5rem;--space-md:1rem;--space-lg:1.5rem;--space-xl:2rem;--space-2xl:3rem}
+      body{font-family:var(--font-body);line-height:1.7;color:var(--color-text-body);background-color:var(--color-bg-base);margin:0;-webkit-font-smoothing:antialiased}
+      .container{max-width:1200px;margin:0 auto;padding:0 var(--space-xl)}
+      a{color:var(--color-link);text-decoration:none;transition:color .3s ease}
+      a:hover{color:#003d99}
 
       /* ---- Navbar ---- */
-      .navbar{background-color:#fff;box-shadow:0 2px 4px rgba(0,0,0,.05);position:sticky;top:0;z-index:1000}
-      .nav-container{display:flex;justify-content:space-between;align-items:center;height:80px;position:relative}
-      .logo{display:flex;align-items:center}
-      .logo-image{height:40px;width:51px;margin-right:.5rem}
-      .logo-text{font-family:Georgia,'Times New Roman',serif;font-size:1.5rem;font-weight:700;color:#333}
-      .nav-menu{list-style:none;display:flex;margin:0;padding:0}
-      .nav-menu li{margin-left:2rem}
-      .nav-menu a{color:#333;font-weight:500;text-decoration:none;transition:color .3s ease}
-      .nav-menu a.active,.nav-menu a:hover{color:#007BFF}
-      .cta-link{background:#D4AF37;color:#1a2b5f!important;padding:.4rem 1rem;border-radius:5px;font-weight:700;transition:background .3s ease}
-      .cta-link:hover{background:#c9a227}
-      .hamburger{display:none;flex-direction:column;cursor:pointer;gap:5px;background:none;border:none;padding:0}
-      .hamburger span{display:block;width:25px;height:3px;background:#333;border-radius:3px;transition:all .3s ease}
+      .navbar{background-color:var(--color-bg-white);box-shadow:0 2px 4px rgba(0,0,0,.05);position:sticky;top:0;z-index:1000}
+      .nav-container{display:flex;justify-content:space-between;align-items:center;height:72px;position:relative}
+      .logo{display:flex;align-items:center;gap:var(--space-sm)}
+      .logo-image{height:40px;width:51px}
+      .logo-text{font-family:var(--font-heading);font-size:1.4rem;font-weight:700;color:var(--color-text-dark)}
+      .nav-menu{list-style:none;display:flex;margin:0;padding:0;align-items:center;gap:.25rem}
+      .nav-menu a{color:var(--color-text-dark);font-weight:500;font-size:.9rem;padding:.5rem .85rem;border-radius:var(--radius-sm);text-decoration:none;transition:color .3s ease,background .3s ease}
+      .nav-menu a.active,.nav-menu a:hover{color:var(--color-link);background:rgba(0,85,204,.06)}
+      .cta-link{background:var(--color-gold);color:var(--color-navy)!important;padding:.55rem 1.2rem;border-radius:var(--radius-sm);font-weight:700;font-size:.9rem;transition:background .3s ease}
+      .cta-link:hover{background:var(--color-gold-hover);color:var(--color-navy)!important}
+      .hamburger{display:none;flex-direction:column;cursor:pointer;gap:5px;background:none;border:none;padding:var(--space-sm)}
+      .hamburger span{display:block;width:24px;height:2px;background:var(--color-text-dark);border-radius:3px;transition:all .3s ease}
 
       /* ---- Hero ---- */
-      .hero{height:90vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;color:#fff}
+      .hero{min-height:90vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;color:var(--color-bg-white)}
       .image-background{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;overflow:hidden}
-      .hero-content{position:relative;z-index:2}
-      .hero-title{font-family:Georgia,'Times New Roman',serif;font-size:5rem;font-weight:800;margin-bottom:1rem;line-height:1.2}
+      .hero-content{position:relative;z-index:2;padding:0 var(--space-xl)}
+      .hero-title{font-family:var(--font-heading);font-size:clamp(2.5rem,6vw,5rem);font-weight:800;margin-bottom:var(--space-lg);line-height:1.15}
       .title-line{display:block}
       .accent{color:#28A745}
-      .hero-subtitle{font-size:1.5rem;font-weight:400;max-width:600px;margin:0 auto 2rem}
-      .hero-cta{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem}
-      .btn{text-decoration:none;padding:1rem 2rem;border-radius:5px;font-weight:700;transition:all .3s ease;margin:0 .5rem;display:inline-block;cursor:pointer;border:2px solid transparent;font-size:1rem;font-family:Georgia,'Times New Roman',serif}
-      .btn-primary{background:#D4AF37;color:#1a2b5f;border-color:#D4AF37}
-      .btn-primary:hover{background:#c9a227;border-color:#c9a227;color:#1a2b5f}
-      .btn-secondary{background:transparent;color:#fff;border-color:#fff}
-      .btn-secondary:hover{background:#fff;color:#000}
+      .hero-subtitle{font-size:clamp(1rem,2.2vw,1.4rem);font-weight:400;max-width:580px;margin:0 auto var(--space-2xl);opacity:.92}
+      .hero-cta{display:flex;flex-wrap:wrap;justify-content:center;gap:var(--space-md)}
+      .btn{text-decoration:none;padding:.9rem 2rem;border-radius:var(--radius-sm);font-weight:700;transition:all .3s ease;display:inline-block;cursor:pointer;border:2px solid transparent;font-family:var(--font-body);font-size:.95rem;line-height:1.4;text-align:center}
+      .btn-primary{background:var(--color-gold);color:var(--color-navy);border-color:var(--color-gold);box-shadow:0 2px 8px rgba(212,175,55,.25)}
+      .btn-primary:hover{background:var(--color-gold-hover);border-color:var(--color-gold-hover);color:var(--color-navy);box-shadow:0 4px 16px rgba(212,175,55,.35);transform:translateY(-1px)}
+      .btn-secondary{background:transparent;color:var(--color-bg-white);border-color:var(--color-bg-white)}
+      .btn-secondary:hover{background:var(--color-bg-white);color:var(--color-text-dark)}
       .btn-large{padding:1rem 2.5rem;font-size:1.05rem}
-      .scroll-indicator{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;color:rgba(255,255,255,.8);font-size:.85rem;letter-spacing:.05em;z-index:2}
-      .scroll-arrow{width:20px;height:20px;border-right:2px solid rgba(255,255,255,.8);border-bottom:2px solid rgba(255,255,255,.8);transform:rotate(45deg);animation:bounceDown 1.4s infinite}
-      @keyframes bounceDown{0%,100%{transform:rotate(45deg) translateY(0)}50%{transform:rotate(45deg) translateY(5px)}}
+      .scroll-indicator{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:var(--space-sm);color:rgba(255,255,255,.7);font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;z-index:2}
+      .scroll-arrow{width:18px;height:18px;border-right:2px solid rgba(255,255,255,.7);border-bottom:2px solid rgba(255,255,255,.7);transform:rotate(45deg);animation:bounceDown 1.6s infinite}
+      @keyframes bounceDown{0%,100%{transform:rotate(45deg) translateY(0)}50%{transform:rotate(45deg) translateY(6px)}}
       .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
-      /* ---- Below-fold section backgrounds (prevents white flash on scroll) ---- */
-      .features{padding:6rem 0;position:relative;overflow:hidden;color:#fff;background:linear-gradient(135deg,#1a2b5f 0%,#0d1b3e 100%)}
+      /* ---- Below-fold section backgrounds ---- */
+      .features{padding:var(--space-5xl,6rem) 0;position:relative;overflow:hidden;color:var(--color-bg-white);background:var(--gradient-navy)}
       .features::before,.features::after{content:none}
-      .stats{padding:6rem 0;position:relative;overflow:hidden;background:linear-gradient(180deg,#0d1b3e 0%,#162040 100%)}
+      .stats{padding:var(--space-5xl,6rem) 0;position:relative;overflow:hidden;background:linear-gradient(180deg,var(--color-navy-dark) 0%,#162040 100%)}
       .stats::before,.stats::after{content:none}
-      .cta-section{padding:6rem 0;position:relative;overflow:hidden;color:#fff;text-align:center;background:linear-gradient(135deg,#1a2b5f 0%,#0d1b3e 100%)}
+      .cta-section{padding:var(--space-5xl,6rem) 0;position:relative;overflow:hidden;color:var(--color-bg-white);text-align:center;background:var(--gradient-navy)}
       .cta-section::before,.cta-section::after{content:none}
-      .footer{background:#0d1b3e;color:#fff;padding:4rem 0 2rem}
-      .footer .logo-text{color:#fff}
-      .footer p,.footer-bottom p{color:#d0d8f0}
-      .footer h3,.footer h4{color:#fff;font-family:Georgia,'Times New Roman',serif;font-size:1.25rem;margin-bottom:1rem}
+      .footer{background:var(--color-navy-dark);color:var(--color-bg-white);padding:var(--space-4xl,4rem) 0 var(--space-xl,2rem)}
+      .footer .logo-text{color:var(--color-bg-white)}
+      .footer p,.footer-bottom p{color:var(--color-text-on-navy)}
+      .footer h3,.footer h4{color:var(--color-bg-white);font-family:var(--font-heading);font-size:1.1rem;margin-bottom:var(--space-md)}
       .footer ul{list-style:none;padding:0;margin:0}
       .footer ul li{margin-bottom:.5rem}
-      .footer-col a{color:#b8c4e0;text-decoration:none}
-      .footer-col a:hover{color:#D4AF37}
-      .footer-contact p{color:#b8c4e0;margin-bottom:.4rem}
-      .footer-contact strong{color:#fff}
-      .footer-bottom{border-top:1px solid rgba(255,255,255,.15);padding-top:1.5rem;margin-top:2rem;text-align:center}
-      .footer-bottom p{color:#b8c4e0;margin:0}
-      .stat-number{font-size:3.5rem;font-weight:700;color:#fff}
-      .stat-label{font-size:1.1rem;color:rgba(255,255,255,.9);margin-top:.25rem}
-      .cta-content h2{font-family:Georgia,'Times New Roman',serif;font-size:2.5rem;margin-bottom:1rem;color:#fff}
-      .cta-section p{color:rgba(255,255,255,.9);font-size:1.1rem;margin-bottom:2rem}
+      .footer-col a{color:var(--color-text-on-navy);text-decoration:none}
+      .footer-col a:hover{color:var(--color-gold)}
+      .footer-contact p{color:var(--color-text-on-navy);margin-bottom:.3rem}
+      .footer-contact strong{color:var(--color-bg-white)}
+      .footer-bottom{border-top:1px solid rgba(255,255,255,.12);padding-top:var(--space-xl);margin-top:var(--space-xl);text-align:center}
+      .footer-bottom p{color:var(--color-text-on-navy);margin:0}
+      .stat-number{font-size:clamp(2.5rem,4vw,3.5rem);font-weight:700;color:var(--color-bg-white);font-family:var(--font-heading)}
+      .stat-label{font-size:clamp(.9rem,1.1vw,1.05rem);color:rgba(255,255,255,.85);margin-top:var(--space-xs)}
+      .cta-content h2{font-family:var(--font-heading);font-size:clamp(2rem,3.5vw,2.5rem);margin-bottom:var(--space-md);color:var(--color-bg-white)}
+      .cta-section p{color:rgba(255,255,255,.9);font-size:1.1rem;margin-bottom:var(--space-xl)}
+      .section-header{text-align:center;margin-bottom:var(--space-2xl);position:relative;z-index:1}
+      .section-header h2{font-family:var(--font-heading);font-size:clamp(2rem,3.5vw,var(--space-2xl));color:var(--color-bg-white);margin-bottom:var(--space-md)}
+      .section-header p{font-size:1.1rem;color:rgba(255,255,255,.85);max-width:600px;margin:0 auto;line-height:1.7}
+      .feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:var(--space-xl);position:relative;z-index:1}
+      .feature-card{text-align:center;padding:var(--space-xl) var(--space-lg);border-radius:var(--radius-lg);background:rgba(255,255,255,.06);transition:transform .3s ease,background .3s ease}
+      .feature-card:hover{transform:translateY(-4px);background:rgba(255,255,255,.1)}
+      .feature-icon{font-size:2.8rem;margin-bottom:var(--space-md);color:var(--color-bg-white);display:block}
+      .feature-card h3{font-family:var(--font-heading);font-size:1.25rem;margin-bottom:var(--space-sm);color:var(--color-bg-white)}
+      .feature-card p{font-size:.92rem;line-height:1.65;color:rgba(255,255,255,.85)}
+      .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-xl);text-align:center;position:relative;z-index:1}
 
-      /* ---- Mobile nav + hero responsive ---- */
+      /* ---- Mobile ---- */
       @media(max-width:768px){
         .hamburger{display:flex}
-        .nav-menu{display:none;flex-direction:column;position:absolute;top:80px;left:0;right:0;background:#fff;box-shadow:0 4px 12px rgba(0,0,0,.12);padding:1rem 0;z-index:999}
+        .nav-menu{display:none;flex-direction:column;position:absolute;top:72px;left:0;right:0;background:var(--color-bg-white);box-shadow:0 4px 16px rgba(0,0,0,.12);padding:var(--space-sm) 0;z-index:999}
         .nav-menu.active{display:flex}
         .nav-menu li{margin:0}
-        .nav-menu li a{display:block;padding:.75rem 2rem;border-bottom:1px solid #f0f0f0}
-        .hero-title{font-size:3rem}
-        .stats-grid{grid-template-columns:repeat(2,1fr)}
+        .nav-menu li a{display:block;padding:.75rem var(--space-xl);border-bottom:1px solid #f0f0f0;border-radius:0}
+        .nav-menu li:last-child a{border-bottom:none}
+        .nav-menu .cta-link{margin:var(--space-sm) var(--space-xl);text-align:center}
+        .hero-title{font-size:clamp(2.2rem,8vw,3rem)}
+        .stats-grid{grid-template-columns:repeat(2,1fr);gap:var(--space-lg)}
+        .features,.stats,.cta-section{padding:var(--space-2xl) 0}
       }
       @media(max-width:480px){
-        .hero-title{font-size:2.2rem}
+        .hero-title{font-size:2rem}
+        .hero{min-height:85vh}
+        .nav-container{height:64px}
+        .logo-text{font-size:1.2rem}
+        .logo-image{height:32px;width:41px}
       }
     </style>
 
-    <!-- Full stylesheet loaded async — never blocks render -->
-    <link rel="stylesheet" href="styles.css?v=2.4" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="styles.css?v=2.4"></noscript>
+    <!-- Full stylesheet loaded async -->
+    <link rel="stylesheet" href="styles.css?v=3.0" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="styles.css?v=3.0"></noscript>
 
 </head>
 <body>
-    <a href="#main-content" class="skip-link" style="position:absolute;left:-9999px;top:0;z-index:9999;padding:0.5rem 1rem;background:#1a2b5f;color:#fff;font-weight:700;border-radius:0 0 6px 0;">Skip to main content</a>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <nav class="navbar">
         <div class="nav-container">
@@ -200,11 +216,11 @@
                          style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block;"
                          fetchpriority="high" loading="eager" width="768" height="432">
                 </picture>
-                <div class="image-overlay" style="position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:1;"></div>
+                <div class="image-overlay"></div>
             </div>
             <div class="hero-content">
                 <h1 class="hero-title">
-                    <span class="sr-only">Talent Loop &mdash; </span>
+                    <span class="sr-only">Talent Loop — </span>
                     <span class="title-line">Elevate Your</span>
                     <span class="title-line accent">Career Journey</span>
                 </h1>
@@ -224,26 +240,26 @@
             <div class="container">
                 <div class="section-header">
                     <h2>Why Choose Talent Loop</h2>
-                    <p>We&#8217;re not just another recruitment agency. We&#8217;re your strategic partner in career advancement.</p>
+                    <p>We're not just another recruitment agency. We're your strategic partner in career advancement.</p>
                 </div>
                 <div class="feature-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">&#127919;</div>
+                    <div class="feature-card reveal reveal-delay-1">
+                        <span class="feature-icon" aria-hidden="true">&#127919;</span>
                         <h3>Targeted Matching</h3>
                         <p>Our advanced algorithm pairs you with positions that align with your skills, experience, and career goals.</p>
                     </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">&#127942;</div>
+                    <div class="feature-card reveal reveal-delay-2">
+                        <span class="feature-icon" aria-hidden="true">&#127942;</span>
                         <h3>Premium Opportunities</h3>
                         <p>Access exclusive job openings from Fortune 500 companies and innovative startups.</p>
                     </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">&#9889;</div>
+                    <div class="feature-card reveal reveal-delay-3">
+                        <span class="feature-icon" aria-hidden="true">&#9889;</span>
                         <h3>Fast-Track Process</h3>
                         <p>Priority candidates get verified through our trusted partner and move to the top of the queue.</p>
                     </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">&#128188;</div>
+                    <div class="feature-card reveal reveal-delay-4">
+                        <span class="feature-icon" aria-hidden="true">&#128188;</span>
                         <h3>Expert Guidance</h3>
                         <p>Dedicated career consultants provide personalized support throughout your job search journey.</p>
                     </div>
@@ -326,11 +342,11 @@
                     <h3>Connect With Us</h3>
                     <div class="social-links">
                         <a href="https://www.linkedin.com/company/talentloop-official/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">in</a>
-                        <a href="https://x.com/talent_loop/" aria-label="Twitter / X" target="_blank" rel="noopener noreferrer">&#120143;</a>
+                        <a href="https://x.com/talent_loop/" aria-label="Twitter / X" target="_blank" rel="noopener noreferrer">𝕏</a>
                         <a href="https://www.instagram.com/talent.loop.officials/" aria-label="Instagram" target="_blank" rel="noopener noreferrer">ig</a>
                     </div>
-                    <p style="margin-top:1rem;font-size:.9rem;">
-                        <a href="https://talent-loop.org" style="color:#b8c4e0;">www.talent-loop.org</a>
+                    <p style="margin-top:var(--space-md);font-size:.9rem;">
+                        <a href="https://talent-loop.org" style="color:var(--color-text-on-navy);">www.talent-loop.org</a>
                     </p>
                 </div>
             </div>
@@ -340,6 +356,6 @@
         </div>
     </footer>
 
-    <script src="script.js?v=2.1"></script>
+    <script src="script.js?v=3.0"></script>
 </body>
 </html>
