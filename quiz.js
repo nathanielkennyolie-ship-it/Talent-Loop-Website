@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const submitBtn = document.getElementById('submitBtn');
     const progressFill = document.getElementById('progressFill');
     const currentQuestionSpan = document.getElementById('currentQuestion');
+    const validationMessage = document.getElementById('validationMessage');
     const addressInput = document.getElementById('address');
     const addressSuggestions = document.getElementById('addressSuggestions');
     const cityInput = document.getElementById('city');
@@ -53,14 +54,12 @@ document.addEventListener('DOMContentLoaded', function() {
         if (typeof emailjs !== 'undefined') {
             emailjs.init('bxxx6SAVqvCeW_bdO');
             emailjsReady = true;
-            console.log('EmailJS initialised successfully');
             return;
         }
         const checkLoaded = () => {
             if (typeof emailjs !== 'undefined') {
                 emailjs.init('bxxx6SAVqvCeW_bdO');
                 emailjsReady = true;
-                console.log('EmailJS initialised successfully');
             } else {
                 setTimeout(checkLoaded, 300);
             }
@@ -83,7 +82,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     async function sendAssessmentEmails(contact, isPriority) {
         const loaded = await waitForEmailJS(5000);
-        if (!loaded) console.warn('EmailJS not loaded after waiting');
 
         const params = {
             to_email:   contact.email      || '',
@@ -97,8 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Email 1 - Immediate (DIRECT to N8N, no CORS proxy)
         try {
-            console.log('Sending Email 1 to N8N...');
-            const response = await fetch(N8N_WEBHOOK_URL, {
+            await fetch(N8N_WEBHOOK_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -107,17 +104,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     email_type: 'email_1_immediate'
                 })
             });
-            console.log('Email 1 response status:', response.status);
-            const responseText = await response.text();
-            console.log('Email 1 response body:', responseText);
         } catch (err) {
-            console.warn('Email 1 N8N failed:', err);
+            // Email 1 failed silently
         }
 
         // Email 2 - Delayed (DIRECT to N8N, no CORS proxy)
         try {
-            console.log('Sending Email 2 to N8N...');
-            const response = await fetch(N8N_WEBHOOK_URL, {
+            await fetch(N8N_WEBHOOK_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -128,16 +121,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     email_type:  'email_2_delayed'
                 })
             });
-            console.log('Email 2 response status:', response.status);
-            const responseText = await response.text();
-            console.log('Email 2 response body:', responseText);
         } catch (err) {
-            console.warn('Email 2 N8N failed:', err);
+            // Email 2 failed silently
         }
     }
 
     const statesByCountry = {
-        'United States': ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming']
+        'United States': ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'],
+        'Canada': ['Alberta', 'British Columbia', 'Manitoba', 'New Brunswick', 'Newfoundland and Labrador', 'Nova Scotia', 'Ontario', 'Prince Edward Island', 'Quebec', 'Saskatchewan', 'Northwest Territories', 'Nunavut', 'Yukon'],
+        'United Kingdom': ['England', 'Northern Ireland', 'Scotland', 'Wales'],
+        'Australia': ['Australian Capital Territory', 'New South Wales', 'Northern Territory', 'Queensland', 'South Australia', 'Tasmania', 'Victoria', 'Western Australia']
     };
 
     // ================================
@@ -277,11 +270,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     city: addr.city || addr.town || addr.village || '',
                     state: addr.state || '',
                     postcode: addr.postcode || '',
-                    formatted: [fullStreet, addr.city, addr.state, addr.postcode].filter(Boolean).join(', ')
+                    formatted: [fullStreet, addr.city || addr.town || addr.village || '', addr.state, addr.postcode].filter(Boolean).join(', ')
                 };
             });
         } catch (error) {
-            console.error('Error fetching address suggestions:', error);
             return [];
         }
     }
@@ -317,9 +309,13 @@ document.addEventListener('DOMContentLoaded', function() {
         if (nextBtn) {
             nextBtn.addEventListener('click', function() {
                 if (validateQuestion(currentQuestion)) {
+                    if (validationMessage) validationMessage.style.display = 'none';
                     showQuestion(currentQuestion + 1);
                 } else {
-                    alert('Please select an answer.');
+                    if (validationMessage) {
+                        validationMessage.textContent = 'Please select an answer before proceeding.';
+                        validationMessage.style.display = 'block';
+                    }
                 }
             });
         }
@@ -334,9 +330,13 @@ document.addEventListener('DOMContentLoaded', function() {
             assessmentForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 if (validateQuestion(totalQuestions)) {
+                    if (validationMessage) validationMessage.style.display = 'none';
                     completeAssessment();
                 } else {
-                    alert('Please make a selection for the final question.');
+                    if (validationMessage) {
+                        validationMessage.textContent = 'Please make a selection for the final question.';
+                        validationMessage.style.display = 'block';
+                    }
                 }
             });
         }
@@ -391,7 +391,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const suggestions = await getRealAddressSuggestions(query);
                 if (addressSuggestions) {
                     addressSuggestions.innerHTML = suggestions.map(s => 
-                        `<div class="suggestion-item" data-address='${JSON.stringify(s)}'>${s.formatted}</div>`
+                        `<div class="suggestion-item" data-address='${JSON.stringify(s).replace(/'/g, '&#39;')}'>${s.formatted}</div>`
                     ).join('');
                     addressSuggestions.style.display = 'block';
                 }
@@ -430,6 +430,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function showQuestion(num) {
         currentQuestion = num;
+        if (validationMessage) validationMessage.style.display = 'none';
         document.querySelectorAll('.question-slide').forEach(s => s.classList.remove('active'));
         const slide = document.querySelector(`[data-question="${num}"]`);
         if (slide) {

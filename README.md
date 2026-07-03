@@ -16,7 +16,7 @@ All issues have been resolved:
 
 1. **assessment.html** - Updated HTML with proper field order
 2. **quiz.js** - Fixed JavaScript with address autocomplete
-3. **address-autocomplete.css** - Styling for address suggestions dropdown
+3. **address_autocomplete.css** - Styling for address suggestions dropdown
 
 ---
 
@@ -27,14 +27,14 @@ All issues have been resolved:
 Add this line in the `<head>` section of your `assessment.html`:
 
 ```html
-<link rel="stylesheet" href="address-autocomplete.css">
+<link rel="stylesheet" href="address_autocomplete.css">
 ```
 
 It should go right after your main `styles.css`:
 
 ```html
 <link rel="stylesheet" href="styles.css">
-<link rel="stylesheet" href="address-autocomplete.css">
+<link rel="stylesheet" href="address_autocomplete.css">
 ```
 
 ### Step 2: Upload Files to GitHub
@@ -42,7 +42,7 @@ It should go right after your main `styles.css`:
 Replace your existing files with these new ones:
 - `assessment.html` → Replace old version
 - `quiz.js` → Replace old version  
-- `address-autocomplete.css` → New file (add it)
+- `address_autocomplete.css` → New file (add it)
 
 ### Step 3: Test the Form
 
@@ -82,7 +82,7 @@ All fields can still be edited manually if needed.
 ## 🔧 Troubleshooting
 
 ### Issue: Address suggestions not appearing
-**Solution:** Make sure you've added the `address-autocomplete.css` file and linked it in your HTML.
+**Solution:** Make sure you've added the `address_autocomplete.css` file and linked it in your HTML.
 
 ### Issue: CORS errors in browser console
 **Solution:** This shouldn't happen with Nominatim, but if it does, make sure you're testing on a live server (not file:// protocol).
