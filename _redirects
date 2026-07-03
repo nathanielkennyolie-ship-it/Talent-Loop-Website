@@ -1,15 +1,3 @@
-# ── Rewrites: serve .html content at clean URLs ──────────────────────────────
-/                    /index.html              200
-/about               /about.html              200
-/jobs                /jobs.html               200
-/blog                /blog.html               200
-/assessment          /assessment.html         200
-/testimonials        /testimonials.html       200
-/contact             /contact.html            200
-/privacy             /privacy.html            200
-/legal               /legal.html              200
-/blog/*              /blog/:splat.html        200
-
 # ── Old numbered blog_post slugs → new /blog/ folder URLs ──────────────────
 /blog_post_1            /blog/job-interview-tips-2026                   301!
 /blog_post_1.html       /blog/job-interview-tips-2026                   301!
