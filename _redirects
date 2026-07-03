@@ -39,17 +39,6 @@
 /blog-post-8            /blog/working-at-amazon-us-2026                 301!
 /blog-post-8.html       /blog/working-at-amazon-us-2026                 301!
 
-# ── Static pages: strip .html extension ─────────────────────────────────────
-/index.html             /                                               301!
-/legal.html             /legal                                          301!
-/privacy.html           /privacy                                        301!
-/about.html             /about                                          301!
-/jobs.html              /jobs                                           301!
-/blog.html              /blog                                           301!
-/contact.html           /contact                                        301!
-/assessment.html        /assessment                                     301!
-/testimonials.html      /testimonials                                   301!
-
 # ── Stale blog slugs Google crawled ─────────────────────────────────────────
 /blog/netflix-careers-guide    /blog/working-at-netflix-career-guide   301!
 

@@ -1,27 +1,21 @@
 export async function onRequest(context) {
-  const { request, next, env } = context;
+  const { request, next } = context;
   const url = new URL(request.url);
   const path = url.pathname;
 
-  const pageMap = {
-    '/about': '/about.html',
-    '/jobs': '/jobs.html',
-    '/blog': '/blog.html',
-    '/assessment': '/assessment.html',
-    '/contact': '/contact.html',
-    '/testimonials': '/testimonials.html',
-    '/legal': '/legal.html',
-    '/privacy': '/privacy.html',
-  };
+  const pageMap = [
+    '/about', '/jobs', '/blog', '/assessment',
+    '/contact', '/testimonials', '/legal', '/privacy',
+  ];
 
-  if (pageMap[path]) {
-    return env.ASSETS.fetch(new URL(pageMap[path], url));
+  if (pageMap.includes(path)) {
+    url.pathname = path + '.html';
+    return next(new Request(url.toString(), request));
   }
 
   if (path.startsWith('/blog/') && !path.endsWith('.html')) {
-    const assetUrl = new URL(path + '.html', url);
-    const resp = await env.ASSETS.fetch(new Request(assetUrl, request));
-    if (resp.status !== 404) return resp;
+    url.pathname = path + '.html';
+    return next(new Request(url.toString(), request));
   }
 
   return next();
