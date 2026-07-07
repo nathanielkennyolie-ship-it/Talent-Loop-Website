@@ -24,25 +24,25 @@
     <meta name="twitter:description" content="Take the free Talent Loop career assessment to discover your ideal career path and unlock premium job opportunities.">
     <meta name="twitter:image" content="https://talent-loop.org/hero-bg.webp">
 
-    <link rel="stylesheet" href="styles.css?v=3.0">
-    <link rel="stylesheet" href="address_autocomplete.css?v=3.0">
+    <link rel="stylesheet" href="styles.css?v=4.0">
+    <link rel="stylesheet" href="address_autocomplete.css?v=4.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         .affiliate-section {
             margin-top: 2.5rem;
             padding: 2rem;
-            background: var(--color-bg-light-alt);
-            border-radius: 12px;
-            border: 1px solid var(--color-border-light);
+            background: var(--glass-bg);
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            backdrop-filter: blur(var(--glass-blur));
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--glass-border);
         }
         .affiliate-section h3 {
             font-size: 1.3rem;
-            color: var(--color-navy);
+            color: var(--color-text-dark);
             margin-bottom: 0.5rem;
-            font-family: 'Playfair Display', serif;
         }
         .affiliate-section p {
             color: var(--color-text-muted);
@@ -55,8 +55,9 @@
             gap: 1rem;
         }
         .affiliate-card {
-            background: var(--color-bg-white);
-            border-radius: 10px;
+            background: rgba(15,23,42,0.5);
+            border: 1px solid var(--color-border-light);
+            border-radius: var(--radius-lg);
             padding: 1.25rem;
             border: 1px solid var(--color-border-light);
             text-align: center;
@@ -109,27 +110,27 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <a href="#" class="skip-link" onclick="document.getElementById('main-content')?.focus();return false">Skip to main content</a>
-    <nav class="navbar">
+    <a href="#main-content" class="sr-only" style="position:absolute;left:-9999px;top:0;z-index:9999;padding:0.75rem 1.5rem;background:var(--color-gold);color:var(--color-navy-dark);font-weight:700;border-radius:0 0 var(--radius-sm) 0;font-size:0.9rem;width:auto;height:auto;overflow:visible;clip:auto">Skip to main content</a>
+    <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <div class="logo">
-                <img src="logo.webp" alt="Talent Loop Logo" class="logo-image" width="51" height="40">
+            <a href="/" class="logo" aria-label="Talent Loop Home">
+                <img src="logo.webp" alt="" class="logo-image" width="46" height="36">
                 <span class="logo-text">Talent Loop</span>
-            </div>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="/">Home</a></li>
-                <li><a href="/about">About Us</a></li>
-                <li><a href="/jobs">Jobs</a></li>
-                <li><a href="/testimonials">Testimonials</a></li>
-                <li><a href="/blog">Blog</a></li>
-                <li><a href="/contact">Contact</a></li>
-                <li><a href="/assessment" class="cta-link active">Take Assessment</a></li>
+            </a>
+            <ul class="nav-menu" id="navMenu" role="list">
+                <li role="listitem"><a href="/">Home</a></li>
+                <li role="listitem"><a href="/about">About Us</a></li>
+                <li role="listitem"><a href="/jobs">Jobs</a></li>
+                <li role="listitem"><a href="/testimonials">Testimonials</a></li>
+                <li role="listitem"><a href="/blog">Blog</a></li>
+                <li role="listitem"><a href="/contact">Contact</a></li>
+                <li role="listitem"><a href="/assessment" class="cta-link">Get Started</a></li>
             </ul>
-            <div class="hamburger" id="hamburger">
+            <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </button>
         </div>
     </nav>
 
@@ -453,7 +454,7 @@
         </div>
     </footer>
 
-    <script src="script.js?v=3.0"></script>
-    <script src="quiz.js?v=3.0"></script>
+    <script src="script.js?v=4.0"></script>
+    <script src="quiz.js?v=4.0"></script>
 </body>
 </html>
