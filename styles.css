@@ -114,9 +114,9 @@ h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);color:var(--color-text-dark);l
 .nav-menu a::after{content:'';position:absolute;bottom:2px;left:50%;transform:translateX(-50%) scaleX(0);width:60%;height:2px;background:var(--color-gold);border-radius:var(--radius-full);transition:transform var(--transition-base)}
 .nav-menu a.active,.nav-menu a:hover{color:var(--color-text-dark);background:rgba(161,98,7,0.08)}
 .nav-menu a.active::after,.nav-menu a:hover::after{transform:translateX(-50%) scaleX(1)}
-.cta-link{background:linear-gradient(135deg,var(--color-gold),var(--color-gold-hover))!important;color:var(--color-navy-dark)!important;padding:0.6rem 1.4rem!important;border-radius:var(--radius-full)!important;font-weight:700!important;font-size:0.88rem!important;box-shadow:var(--shadow-glow-gold);transition:all var(--transition-base)!important}
+.cta-link{background:linear-gradient(135deg,var(--color-gold),var(--color-gold-hover))!important;color:var(--color-text-dark)!important;padding:0.6rem 1.4rem!important;border-radius:var(--radius-full)!important;font-weight:700!important;font-size:0.88rem!important;box-shadow:var(--shadow-glow-gold);transition:all var(--transition-base)!important}
 .cta-link::after{display:none!important}
-.cta-link:hover{transform:translateY(-2px);box-shadow:0 0 40px rgba(161,98,7,0.3)!important;color:var(--color-navy-dark)!important}
+.cta-link:hover{transform:translateY(-2px);box-shadow:0 0 40px rgba(161,98,7,0.3)!important;color:var(--color-text-dark)!important}
 .hamburger{display:none;flex-direction:column;cursor:pointer;gap:5px;background:none;border:none;padding:var(--space-sm);z-index:3}
 .hamburger span{display:block;width:26px;height:2px;background:var(--color-text-dark);border-radius:3px;transition:all var(--transition-base)}
 
@@ -132,8 +132,8 @@ h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);color:var(--color-text-dark);l
 .hero-subtitle{font-size:clamp(1.05rem,1.8vw,1.3rem);font-weight:400;max-width:640px;margin:0 auto var(--space-2xl);color:var(--color-text-body);line-height:1.7}
 .hero-cta{display:flex;flex-wrap:wrap;justify-content:center;gap:var(--space-md)}
 .btn{text-decoration:none;padding:0.9rem 2.2rem;border-radius:var(--radius-full);font-weight:600;transition:all var(--transition-base);display:inline-flex;align-items:center;gap:var(--space-sm);cursor:pointer;border:none;font-family:var(--font-body);font-size:0.95rem;line-height:1.4;text-align:center;position:relative;overflow:hidden}
-.btn-primary{background:linear-gradient(135deg,var(--color-gold),var(--color-gold-hover));color:var(--color-navy-dark);box-shadow:var(--shadow-glow-gold)}
-.btn-primary:hover{transform:translateY(-3px);box-shadow:0 0 50px rgba(161,98,7,0.35);color:var(--color-navy-dark)}
+.btn-primary{background:linear-gradient(135deg,var(--color-gold),var(--color-gold-hover));color:var(--color-text-dark);box-shadow:var(--shadow-glow-gold)}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 0 50px rgba(161,98,7,0.35);color:var(--color-text-dark)}
 .btn-secondary{background:var(--glass-bg);-webkit-backdrop-filter:blur(var(--glass-blur));backdrop-filter:blur(var(--glass-blur));color:var(--color-text-dark);border:1px solid var(--glass-border)}
 .btn-secondary:hover{background:rgba(148,163,184,0.15);transform:translateY(-3px);color:var(--color-text-dark)}
 .btn-large{padding:1.1rem 2.8rem;font-size:1.05rem}
@@ -328,8 +328,8 @@ h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);color:var(--color-text-dark);l
 .job-salary span{color:var(--color-gold-light)}
 .job-card-footer{display:flex;align-items:center;justify-content:space-between;gap:var(--space-md);padding-top:1.25rem;border-top:1px solid var(--color-border-divider)}
 .job-posted{font-size:0.76rem;color:var(--color-text-muted-2)}
-.btn-apply{display:inline-block;background:linear-gradient(135deg,var(--color-gold),var(--color-gold-hover));color:var(--color-navy-dark)!important;padding:0.55rem 1.4rem;border-radius:var(--radius-full);font-size:0.85rem;font-weight:700;text-decoration:none;transition:all var(--transition-fast);white-space:nowrap}
-.btn-apply:hover{transform:translateY(-2px);box-shadow:0 0 30px rgba(161,98,7,0.25);color:var(--color-navy-dark)!important}
+.btn-apply{display:inline-block;background:linear-gradient(135deg,var(--color-gold),var(--color-gold-hover));color:var(--color-text-dark)!important;padding:0.55rem 1.4rem;border-radius:var(--radius-full);font-size:0.85rem;font-weight:700;text-decoration:none;transition:all var(--transition-fast);white-space:nowrap}
+.btn-apply:hover{transform:translateY(-2px);box-shadow:0 0 30px rgba(161,98,7,0.25);color:var(--color-text-dark)!important}
 .jobs-cta-banner{background:var(--gradient-navy);border:1px solid var(--glass-border);border-radius:var(--radius-xl);padding:2.5rem 2rem;text-align:center;margin-bottom:var(--space-xl);position:relative;overflow:hidden}
 .jobs-cta-banner::before{content:'';position:absolute;top:-50%;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(161,98,7,0.06) 0%,transparent 60%);pointer-events:none}
 .jobs-cta-banner h3{font-size:1.5rem;margin-bottom:0.75rem;position:relative;z-index:1}
