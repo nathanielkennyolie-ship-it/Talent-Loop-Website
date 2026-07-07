@@ -4,7 +4,7 @@
   --color-navy-mid: #1E293B;
   --color-navy-light: #334155;
   --gradient-navy: linear-gradient(135deg, #0F172A 0%, #020617 100%);
-  --gradient-hero: linear-gradient(135deg, #0F172A 0%, #1E3A8A 50%, #020617 100%);
+  --gradient-hero: linear-gradient(135deg, #0F172A 0%, #020617 100%);
   --gradient-glow: radial-gradient(ellipse at 50% 0%, rgba(161,98,7,0.15) 0%, transparent 60%);
 
   --color-gold: #A16207;
@@ -129,7 +129,7 @@ h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);color:var(--color-text-dark);l
 .hero-badge{display:inline-block;padding:0.4rem 1.2rem;border-radius:var(--radius-full);background:rgba(161,98,7,0.12);border:1px solid rgba(161,98,7,0.25);color:var(--color-gold-light);font-size:0.8rem;font-weight:600;letter-spacing:0.06em;margin-bottom:var(--space-xl);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 .hero-title{font-size:clamp(3rem,7vw,6rem);font-weight:800;letter-spacing:-0.03em;line-height:1.05;margin-bottom:var(--space-lg);color:var(--color-text-dark)}
 .hero-title .gradient-line{display:block;background:linear-gradient(135deg,var(--color-gold-light),var(--color-gold),#F59E0B);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero-subtitle{font-size:clamp(1.05rem,1.8vw,1.3rem);font-weight:400;max-width:640px;margin:0 auto var(--space-2xl);color:var(--color-text-muted);line-height:1.7}
+.hero-subtitle{font-size:clamp(1.05rem,1.8vw,1.3rem);font-weight:400;max-width:640px;margin:0 auto var(--space-2xl);color:var(--color-text-body);line-height:1.7}
 .hero-cta{display:flex;flex-wrap:wrap;justify-content:center;gap:var(--space-md)}
 .btn{text-decoration:none;padding:0.9rem 2.2rem;border-radius:var(--radius-full);font-weight:600;transition:all var(--transition-base);display:inline-flex;align-items:center;gap:var(--space-sm);cursor:pointer;border:none;font-family:var(--font-body);font-size:0.95rem;line-height:1.4;text-align:center;position:relative;overflow:hidden}
 .btn-primary{background:linear-gradient(135deg,var(--color-gold),var(--color-gold-hover));color:var(--color-navy-dark);box-shadow:var(--shadow-glow-gold)}
