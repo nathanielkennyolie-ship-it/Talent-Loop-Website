@@ -63,8 +63,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=optional" rel="stylesheet" media="print" onload="this.media='all';this.onload=null">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=optional" rel="stylesheet"></noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all';this.onload=null">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
 
     
 
@@ -861,7 +861,7 @@ h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);color:var(--color-text-dark);l
 
     <script src="script.js?v=4.0"></script>
     <script>
-      (function(){var c=document.getElementById('floatingDots');if(!c)return;var f=document.createDocumentFragment();for(var i=0;i<10;i++){var d=document.createElement('div');d.className='dot';d.style.cssText='left:'+(Math.random()*100)+'%;top:'+(Math.random()*100)+'%;animation:dotFade '+(4+Math.random()*6)+'s ease-in-out '+(Math.random()*8)+'s infinite;width:'+(2+Math.random()*3)+'px;height:'+(2+Math.random()*3)+'px;will-change:transform,opacity';f.appendChild(d)}c.appendChild(f)})();
+      (function(){function init(){var c=document.getElementById('floatingDots');if(!c)return;var f=document.createDocumentFragment();for(var i=0;i<10;i++){var d=document.createElement('div');d.className='dot';d.style.cssText='left:'+(Math.random()*100)+'%;top:'+(Math.random()*100)+'%;animation:dotFade '+(4+Math.random()*6)+'s ease-in-out '+(Math.random()*8)+'s infinite;width:'+(2+Math.random()*3)+'px;height:'+(2+Math.random()*3)+'px;will-change:transform,opacity';f.appendChild(d)}c.appendChild(f)}'requestIdleCallback'in window?requestIdleCallback(init,{timeout:1000}):(window.requestAnimationFrame||function(fn){setTimeout(fn,0)})(init)})();
     </script>
 </body>
 </html>
