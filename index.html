@@ -60,9 +60,16 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap">
+    <link rel="preload" as="style" href="styles.css?v=4.0">
+    <link rel="preload" as="image" href="hero-bg.webp" fetchpriority="high">
 
-    <link rel="stylesheet" href="styles.css?v=4.0">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all';this.onload=null">
+    <link rel="stylesheet" href="styles.css?v=4.0" media="print" onload="this.media='all';this.onload=null">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="styles.css?v=4.0">
+    </noscript>
 
     <style>
       .hero-canvas-frame{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;overflow:hidden;pointer-events:none}
@@ -74,7 +81,7 @@
       .orb-3{width:300px;height:300px;background:rgba(161,98,7,0.04);top:40%;left:50%;animation:orbFloat 20s ease-in-out infinite 5s}
       @keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(30px,-40px) scale(1.1)}66%{transform:translate(-20px,30px) scale(0.95)}}
       .floating-dots{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
-      .dot{position:absolute;width:3px;height:3px;background:var(--color-gold);border-radius:50%;opacity:0}
+      .dot{position:absolute;width:3px;height:3px;background:var(--color-gold);border-radius:50%;opacity:0;will-change:transform,opacity}
       @keyframes dotFade{0%,100%{opacity:0;transform:translateY(0) scale(0)}50%{opacity:0.4;transform:translateY(-30px) scale(1)}}
 
       .hero-shimmer{position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.015),transparent);animation:shimmerSweep 8s ease-in-out infinite;pointer-events:none;z-index:1}
@@ -87,7 +94,7 @@
       .process-step{text-align:center;position:relative}
       .process-step:not(:last-child)::after{content:'';position:absolute;top:2rem;left:60%;width:80%;height:1px;background:linear-gradient(90deg,var(--color-gold),transparent);opacity:0.3}
       .step-number{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--color-gold),var(--color-gold-hover));color:var(--color-navy-dark);font-weight:800;font-size:1.1rem;display:flex;align-items:center;justify-content:center;margin:0 auto var(--space-md);font-family:var(--font-heading)}
-      .process-step h4{font-size:1rem;margin-bottom:var(--space-sm)}
+      .process-step h3{font-size:1rem;margin-bottom:var(--space-sm)}
       .process-step p{font-size:0.85rem;color:var(--color-text-muted);line-height:1.6;margin:0}
 
       .partner-logos{display:flex;justify-content:center;align-items:center;gap:var(--space-2xl);flex-wrap:wrap;opacity:0.3;margin-top:var(--space-2xl)}
@@ -123,7 +130,7 @@
     <main id="main-content">
         <section class="hero" id="hero">
             <div class="hero-canvas-frame">
-                <picture style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;">
+                <picture style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;contain:layout paint;">
                     <source media="(max-width: 768px)" srcset="hero-bg-mobile.webp">
                     <source media="(min-width: 769px)" srcset="hero-bg.webp">
                     <img src="hero-bg-mobile.webp" alt="" aria-hidden="true"
@@ -222,30 +229,31 @@
                 <div class="process-steps">
                     <div class="process-step reveal reveal-delay-1">
                         <div class="step-number">1</div>
-                        <h4>Take Assessment</h4>
+                        <h3>Take Assessment</h3>
                         <p>Complete our comprehensive career assessment to help us understand your strengths and goals.</p>
                     </div>
                     <div class="process-step reveal reveal-delay-2">
                         <div class="step-number">2</div>
-                        <h4>Get Matched</h4>
+                        <h3>Get Matched</h3>
                         <p>Our AI matches you with curated roles from our network of 500+ partner companies.</p>
                     </div>
                     <div class="process-step reveal reveal-delay-3">
                         <div class="step-number">3</div>
-                        <h4>Connect &amp; Interview</h4>
+                        <h3>Connect &amp; Interview</h3>
                         <p>Connect directly with hiring managers and get priority interview scheduling.</p>
                     </div>
                     <div class="process-step reveal reveal-delay-4">
                         <div class="step-number">4</div>
-                        <h4>Land Your Role</h4>
+                        <h3>Land Your Role</h3>
                         <p>Receive and negotiate offers with support from our career consultants.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="section section-mid" id="stats">
+        <section class="section section-mid" id="stats" aria-label="Company statistics">
             <div class="container">
+                <h2 class="sr-only">Talent Loop by the Numbers</h2>
                 <div class="stats-grid">
                     <div class="stat-item reveal reveal-delay-1">
                         <div class="stat-number" data-target="15000">0</div>

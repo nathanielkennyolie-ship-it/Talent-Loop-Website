@@ -22,7 +22,7 @@
   --color-text-body: #E2E8F0;
   --color-text-dark: #F8FAFC;
   --color-text-muted: #94A3B8;
-  --color-text-muted-2: #64748B;
+  --color-text-muted-2: #8896A6;
   --color-text-on-navy: #94A3B8;
 
   --color-bg-base: #0F172A;
@@ -121,7 +121,7 @@ h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);color:var(--color-text-dark);l
 .hamburger span{display:block;width:26px;height:2px;background:var(--color-text-dark);border-radius:3px;transition:all var(--transition-base)}
 
 /* Hero */
-.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;background:var(--gradient-hero)}
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;background:var(--gradient-hero);contain:layout paint}
 .hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:var(--gradient-glow);pointer-events:none;z-index:1}
 .hero-canvas{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
 .hero-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:radial-gradient(ellipse at center,transparent 0%,rgba(2,6,23,0.6) 100%);z-index:1;pointer-events:none}
@@ -143,7 +143,7 @@ h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);color:var(--color-text-dark);l
 @keyframes bounceDown{0%,100%{transform:rotate(45deg) translateY(0)}50%{transform:rotate(45deg) translateY(8px)}}
 
 /* Floating 3D Particles */
-.floating-particle{position:absolute;border-radius:50%;pointer-events:none;z-index:0;opacity:0.15}
+.floating-particle{position:absolute;border-radius:50%;pointer-events:none;z-index:0;opacity:0.15;will-change:transform}
 .particle-1{width:4px;height:4px;background:var(--color-gold-light);animation:float1 20s infinite}
 .particle-2{width:6px;height:6px;background:var(--color-blue-light);animation:float2 25s infinite}
 .particle-3{width:3px;height:3px;background:#fff;animation:float3 18s infinite}
