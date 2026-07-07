@@ -41,8 +41,8 @@
   --color-success-text: #86EFAC;
   --color-star: #FBBF24;
 
-  --font-heading: 'Playfair Display', Georgia, serif;
-  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: 'Playfair Display Fallback', 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter Fallback', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
   --space-xs: 0.25rem;
