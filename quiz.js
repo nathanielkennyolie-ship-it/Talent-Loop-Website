@@ -476,24 +476,24 @@ document.addEventListener('DOMContentLoaded', function() {
             window.open(AMERICANCAREERGUIDE_URL, '_blank');
             msg.innerHTML = `
                 <div class="priority-badge">⚡ Priority Status Activated!</div>
-                <p style="margin-top: 1.5rem; font-size: 1.2rem;"><strong>Congratulations!</strong> Your profile is in the priority queue.</p>
-                <div style="background: #e7f3ff; padding: 2rem; border-radius: 12px; margin: 2rem 0; border-left: 4px solid var(--primary-color);">
-                    <h3 style="color: var(--primary-color); margin-bottom: 1rem;">Next Steps:</h3>
-                    <ol style="text-align: left; margin-left: 1.5rem; line-height: 1.8;">
+                <p style="margin-top: 1.5rem; font-size: 1.15rem; color: var(--color-text-dark);"><strong>Congratulations!</strong> Your profile is in the priority queue.</p>
+                <div style="background: rgba(148,163,184,0.06); padding: 2rem; border-radius: 16px; margin: 2rem 0; border-left: 4px solid var(--color-gold);">
+                    <h3 style="color: var(--color-text-dark); margin-bottom: 1rem;">Next Steps:</h3>
+                    <ol style="text-align: left; margin-left: 1.5rem; line-height: 1.8; color: var(--color-text-muted);">
                         <li>A new window has opened for <strong>TheAmericanCareerGuide-Super Jobs</strong> — discover top job opportunities matched to your profile.</li>
                         <li>Browse and apply to positions that fit your skills and goals.</li>
                         <li>Once complete, expect priority matches from our team within <strong>24 hours</strong>.</li>
                     </ol>
                 </div>
-                <p><strong>Didn't see the window?</strong> 
-                <a href="${AMERICANCAREERGUIDE_URL}" target="_blank" rel="nofollow sponsored" style="color: var(--primary-color); text-decoration: underline;">Click here to open TheAmericanCareerGuide-Super Jobs</a></p>
+                <p style="color: var(--color-text-muted);"><strong>Didn't see the window?</strong> 
+                <a href="${AMERICANCAREERGUIDE_URL}" target="_blank" rel="nofollow sponsored" style="color: var(--color-link); text-decoration: underline;">Click here to open TheAmericanCareerGuide-Super Jobs</a></p>
             `;
         } else {
             msg.innerHTML = `
-                <p style="font-size: 1.2rem;"><strong>Thank you for completing the assessment!</strong></p>
-                <div style="background: #f8f9fa; padding: 2rem; border-radius: 12px; margin: 2rem 0; border-left: 4px solid #6c757d;">
-                    <h3 style="color: #343a40; margin-bottom: 1rem;">What Happens Next:</h3>
-                    <ul style="text-align: left; margin-left: 1.5rem; color: #495057; line-height: 1.8;">
+                <p style="font-size: 1.15rem; color: var(--color-text-dark);"><strong>Thank you for completing the assessment!</strong></p>
+                <div style="background: rgba(148,163,184,0.06); padding: 2rem; border-radius: 16px; margin: 2rem 0; border-left: 4px solid var(--color-text-muted-2);">
+                    <h3 style="color: var(--color-text-dark); margin-bottom: 1rem;">What Happens Next:</h3>
+                    <ul style="text-align: left; margin-left: 1.5rem; color: var(--color-text-muted); line-height: 1.8;">
                         <li>Your application is in our standard candidate pool.</li>
                         <li>Our team will review your profile and contact you with any potential matches within <strong>7-10 business days.</strong></li>
                     </ul>
