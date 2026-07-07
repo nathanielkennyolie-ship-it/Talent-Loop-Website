@@ -49,24 +49,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const labelText = labelEl ? labelEl.textContent : '';
     const suffix = getSuffix(labelText);
     const target = parseInt(el.getAttribute('data-target'), 10);
-    if (isNaN(target)) return;
+    if (isNaN(target) || target === 0) return;
 
-    const duration = 2000;
-    const frameRate = 16;
-    const steps = duration / frameRate;
-    const increment = target / steps;
-    let current = 0;
-
+    el.style.minWidth = el.offsetWidth + 'px';
     el.textContent = '0' + suffix;
 
-    const timer = setInterval(() => {
-      current += increment;
-      if (current >= target) {
-        current = target;
-        clearInterval(timer);
-      }
-      el.textContent = Math.floor(current).toLocaleString() + suffix;
-    }, frameRate);
+    const duration = 1200;
+    let start = null;
+
+    const step = (timestamp) => {
+      if (!start) start = timestamp;
+      const progress = Math.min((timestamp - start) / duration, 1);
+      const current = Math.floor(progress * target);
+      el.textContent = current.toLocaleString() + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+    };
+
+    requestAnimationFrame(step);
   };
 
   const statsSection = document.getElementById('stats');

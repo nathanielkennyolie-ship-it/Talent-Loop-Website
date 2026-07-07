@@ -60,16 +60,10 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap">
-    <link rel="preload" as="style" href="styles.css?v=4.0">
     <link rel="preload" as="image" href="hero-bg.webp" fetchpriority="high">
 
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all';this.onload=null">
-    <link rel="stylesheet" href="styles.css?v=4.0" media="print" onload="this.media='all';this.onload=null">
-    <noscript>
-        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="styles.css?v=4.0">
-    </noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=4.0">
 
     <style>
       .hero-canvas-frame{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;overflow:hidden;pointer-events:none}
@@ -80,8 +74,8 @@
       .orb-2{width:400px;height:400px;background:rgba(3,105,161,0.05);bottom:-10%;left:-5%;animation:orbFloat 30s ease-in-out infinite reverse}
       .orb-3{width:300px;height:300px;background:rgba(161,98,7,0.04);top:40%;left:50%;animation:orbFloat 20s ease-in-out infinite 5s}
       @keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(30px,-40px) scale(1.1)}66%{transform:translate(-20px,30px) scale(0.95)}}
-      .floating-dots{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
-      .dot{position:absolute;width:3px;height:3px;background:var(--color-gold);border-radius:50%;opacity:0;will-change:transform,opacity}
+      .floating-dots{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;contain:strict}
+      .dot{position:absolute;border-radius:50%;background:var(--color-gold);opacity:0;will-change:transform,opacity}
       @keyframes dotFade{0%,100%{opacity:0;transform:translateY(0) scale(0)}50%{opacity:0.4;transform:translateY(-30px) scale(1)}}
 
       .hero-shimmer{position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.015),transparent);animation:shimmerSweep 8s ease-in-out infinite;pointer-events:none;z-index:1}
@@ -318,7 +312,7 @@
                     </div>
                 </div>
                 <div class="footer-col">
-                    <h4>Quick Links</h4>
+                    <h3>Quick Links</h3>
                     <ul>
                         <li><a href="/">Home</a></li>
                         <li><a href="/about">About Us</a></li>
@@ -330,7 +324,7 @@
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h4>Resources</h4>
+                    <h3>Resources</h3>
                     <ul>
                         <li><a href="/blog/job-interview-tips-2026">Interview Tips</a></li>
                         <li><a href="/blog/salary-negotiation-guide-2026">Salary Guide</a></li>
@@ -341,7 +335,7 @@
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h4>Connect With Us</h4>
+                    <h3>Connect With Us</h3>
                     <div class="social-links">
                         <a href="https://www.linkedin.com/company/talentloop-official/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">in</a>
                         <a href="https://x.com/talent_loop/" aria-label="Twitter / X" target="_blank" rel="noopener noreferrer">𝕏</a>
@@ -360,19 +354,7 @@
 
     <script src="script.js?v=4.0"></script>
     <script>
-      const dotsContainer = document.getElementById('floatingDots');
-      if (dotsContainer) {
-        for (let i = 0; i < 30; i++) {
-          const dot = document.createElement('div');
-          dot.className = 'dot';
-          dot.style.left = Math.random() * 100 + '%';
-          dot.style.top = Math.random() * 100 + '%';
-          dot.style.animation = `dotFade ${4 + Math.random() * 6}s ease-in-out ${Math.random() * 8}s infinite`;
-          dot.style.width = (2 + Math.random() * 3) + 'px';
-          dot.style.height = dot.style.width;
-          dotsContainer.appendChild(dot);
-        }
-      }
+      (function(){var c=document.getElementById('floatingDots');if(!c)return;var f=document.createDocumentFragment();for(var i=0;i<10;i++){var d=document.createElement('div');d.className='dot';d.style.cssText='left:'+(Math.random()*100)+'%;top:'+(Math.random()*100)+'%;animation:dotFade '+(4+Math.random()*6)+'s ease-in-out '+(Math.random()*8)+'s infinite;width:'+(2+Math.random()*3)+'px;height:'+(2+Math.random()*3)+'px;will-change:transform,opacity';f.appendChild(d)}c.appendChild(f)})();
     </script>
 </body>
 </html>

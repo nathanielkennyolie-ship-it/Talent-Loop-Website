@@ -22,7 +22,7 @@
   --color-text-body: #E2E8F0;
   --color-text-dark: #F8FAFC;
   --color-text-muted: #94A3B8;
-  --color-text-muted-2: #8896A6;
+  --color-text-muted-2: #A0AEC0;
   --color-text-on-navy: #94A3B8;
 
   --color-bg-base: #0F172A;
@@ -138,8 +138,8 @@ h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);color:var(--color-text-dark);l
 .btn-secondary:hover{background:rgba(148,163,184,0.15);transform:translateY(-3px);color:var(--color-text-dark)}
 .btn-large{padding:1.1rem 2.8rem;font-size:1.05rem}
 
-.scroll-indicator{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:var(--space-sm);color:var(--color-text-muted-2);font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;z-index:2;opacity:0.6;transition:opacity var(--transition-slow)}
-.scroll-arrow{width:16px;height:16px;border-right:2px solid var(--color-text-muted-2);border-bottom:2px solid var(--color-text-muted-2);transform:rotate(45deg);animation:bounceDown 2s infinite}
+.scroll-indicator{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:var(--space-sm);color:var(--color-text-muted);font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;z-index:2;opacity:0.6;transition:opacity var(--transition-slow)}
+.scroll-arrow{width:16px;height:16px;border-right:2px solid var(--color-text-muted);border-bottom:2px solid var(--color-text-muted);transform:rotate(45deg);animation:bounceDown 2s infinite}
 @keyframes bounceDown{0%,100%{transform:rotate(45deg) translateY(0)}50%{transform:rotate(45deg) translateY(8px)}}
 
 /* Floating 3D Particles */
