@@ -1,3 +1,5 @@
+@font-face{font-family:'Inter Fallback';src:local('Arial');size-adjust:107.06%;ascent-override:90.49%;descent-override:22.56%;line-gap-override:0%;font-display:swap}
+@font-face{font-family:'Playfair Display Fallback';src:local('Georgia');ascent-override:108.2%;descent-override:25.1%;line-gap-override:0%;font-display:swap}
 :root {
   --color-navy: #0F172A;
   --color-navy-dark: #020617;
@@ -40,9 +42,9 @@
   --color-success-bg: rgba(22,163,74,0.1);
   --color-success-text: #86EFAC;
   --color-star: #FBBF24;
+  --font-heading: 'Playfair Display', 'Playfair Display Fallback', Georgia, serif;
 
-  --font-heading: 'Playfair Display Fallback', 'Playfair Display', Georgia, serif;
-  --font-body: 'Inter Fallback', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Inter', 'Inter Fallback', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
   --space-xs: 0.25rem;
