@@ -32,13 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // NAVBAR SCROLL EFFECT
   // ================================
   const navbar = document.querySelector('.navbar');
-  if (navbar) {
-    const updateNavbar = () => {
-      navbar.classList.toggle('scrolled', window.scrollY > 50);
-    };
-    updateNavbar();
-    window.addEventListener('scroll', updateNavbar, { passive: true });
-  }
 
   // ================================
   // STAT COUNTER ANIMATION

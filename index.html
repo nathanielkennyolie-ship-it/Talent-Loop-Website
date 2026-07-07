@@ -123,6 +123,13 @@
     <main id="main-content">
         <section class="hero" id="hero">
             <div class="hero-canvas-frame">
+                <picture style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;">
+                    <source media="(max-width: 768px)" srcset="hero-bg-mobile.webp">
+                    <source media="(min-width: 769px)" srcset="hero-bg.webp">
+                    <img src="hero-bg-mobile.webp" alt="" aria-hidden="true"
+                         style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block;"
+                         fetchpriority="high" loading="eager" width="768" height="432">
+                </picture>
                 <div class="hero-geo-grid"></div>
                 <div class="hero-orb orb-1"></div>
                 <div class="hero-orb orb-2"></div>

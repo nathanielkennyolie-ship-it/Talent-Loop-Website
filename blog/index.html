@@ -29,23 +29,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        .blog-hero {
-            background: var(--gradient-navy);
-            color: var(--color-bg-white);
-            padding: var(--space-4xl) var(--space-xl) var(--space-2xl);
-            text-align: center;
-        }
-        .blog-hero h1 {
-            font-family: var(--font-heading);
-            font-size: 3rem;
-            margin-bottom: var(--space-md);
-        }
-        .blog-hero p {
-            font-size: 1.1rem;
-            opacity: 0.85;
-            max-width: 600px;
-            margin: 0 auto;
-        }
         .blog-index {
             max-width: 1100px;
             margin: 0 auto;
@@ -57,17 +40,20 @@
             gap: var(--space-xl);
         }
         .blog-card {
-            background: var(--color-bg-white);
-            border-radius: var(--radius-lg);
+            background: var(--glass-bg);
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-xl);
             overflow: hidden;
-            box-shadow: var(--shadow-md);
             transition: transform var(--transition-base), box-shadow var(--transition-base);
             display: flex;
             flex-direction: column;
         }
         .blog-card:hover {
             transform: translateY(-5px);
-            box-shadow: var(--shadow-card-hover);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(161,98,7,0.2);
         }
         .blog-card-image-link {
             display: block;
@@ -91,32 +77,32 @@
         }
         .blog-card-meta {
             font-size: 0.82rem;
-            color: var(--color-text-muted-4);
+            color: var(--color-text-muted-2);
             margin-bottom: 0.6rem;
             text-transform: uppercase;
             letter-spacing: 0.04em;
         }
         .blog-card-meta span {
-            color: var(--color-navy);
+            color: var(--color-gold-light);
             font-weight: 600;
         }
         .blog-card h2 {
             font-family: var(--font-heading);
             font-size: 1.25rem;
-            color: var(--color-navy);
+            color: var(--color-text-dark);
             margin-bottom: 0.75rem;
             line-height: 1.4;
         }
         .blog-card h2 a {
-            color: var(--color-navy);
+            color: var(--color-text-dark);
             text-decoration: none;
             transition: color var(--transition-fast);
         }
         .blog-card h2 a:hover {
-            color: var(--color-link);
+            color: var(--color-gold-light);
         }
         .blog-card p {
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             color: var(--color-text-muted);
             line-height: 1.7;
             flex: 1;
@@ -124,19 +110,24 @@
         }
         .read-more-btn {
             display: inline-block;
-            background: var(--color-navy);
-            color: var(--color-bg-white);
-            padding: 0.55rem 1.25rem;
-            border-radius: var(--radius-sm);
-            font-size: 0.9rem;
-            font-weight: 600;
+            background: linear-gradient(135deg, var(--color-gold), var(--color-gold-hover));
+            color: var(--color-navy-dark);
+            padding: 0.55rem 1.4rem;
+            border-radius: var(--radius-full);
+            font-size: 0.88rem;
+            font-weight: 700;
             text-decoration: none;
             align-self: flex-start;
-            transition: background var(--transition-fast);
+            transition: all var(--transition-fast);
         }
         .read-more-btn:hover {
-            background: var(--color-gold);
-            color: var(--color-navy);
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(161,98,7,0.25);
+            color: var(--color-navy-dark);
+        }
+        .blog-section {
+            background: var(--color-bg-base);
+            padding: var(--space-5xl) 0;
         }
         @media (max-width: 600px) {
             .blog-hero h1 { font-size: 2rem; }
@@ -169,13 +160,17 @@
         </div>
     </nav>
 
-    <section class="blog-hero">
-        <h1>Career Resources & Insights</h1>
-        <p>Expert advice on job searching, interviews, salary negotiation, and career development — all from our recruitment specialists.</p>
+    <section class="page-hero" id="main-content">
+        <div class="container">
+            <h1 class="page-title">Career Resources & Insights</h1>
+            <p class="page-subtitle">Expert advice on job searching, interviews, salary negotiation, and career development — all from our recruitment specialists.</p>
+        </div>
     </section>
 
-    <main class="blog-index" id="main-content">
-        <div class="blog-grid">
+    <section class="blog-section">
+        <div class="container">
+            <div class="blog-index">
+                <div class="blog-grid">
 
             <!-- ── POST 8 — Amazon (newest, shown first) ── -->
             <article class="blog-card reveal reveal-delay-1">
@@ -284,7 +279,9 @@
             </article>
 
         </div>
-    </main>
+            </div>
+        </div>
+    </section>
 
     <footer class="footer">
         <div class="container">
